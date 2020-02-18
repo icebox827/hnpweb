@@ -826,3 +826,17 @@ function the7_update_791_db_version() {
 function the7_update_800_db_version() {
 	The7_Install::update_db_version( '8.0.0' );
 }
+
+/**
+ * Bump db version.
+ */
+function the7_update_810_db_version() {
+	The7_Install::update_db_version( '8.1.0' );
+}
+
+/**
+ * Bump db version.
+ */
+function the7_update_820_db_version() {
+	The7_Install::update_db_version( '8.2.0' );
+}

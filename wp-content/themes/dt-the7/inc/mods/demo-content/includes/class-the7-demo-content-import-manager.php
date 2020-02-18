@@ -666,6 +666,129 @@ If the problem persists, please don\'t hesitate to contact our <a href="%s" targ
 		}
 	}
 
+	public function import_elementor_settings() {
+		$site_meta = $this->get_site_meta();
+
+		if ( empty( $site_meta['elementor'] ) ) {
+			return;
+		}
+
+		$elementor_settings_to_import = array(
+			'elementor_scheme_color',
+			'elementor_scheme_typography',
+			'elementor_scheme_color-picker',
+			'elementor_cpt_support',
+			'elementor_disable_color_schemes',
+			'elementor_disable_typography_schemes',
+			'elementor_viewport_lg',
+			'elementor_viewport_md',
+		);
+
+		if ( class_exists( 'Elementor\Core\Settings\General\Model' ) ) {
+			$model_controls = Elementor\Core\Settings\General\Model::get_controls_list();
+
+			foreach ( $model_controls as $tab_name => $sections ) {
+
+				foreach ( $sections as $section_name => $section_data ) {
+
+					foreach ( $section_data['controls'] as $control_name => $control_data ) {
+						$elementor_settings_to_import[] = $control_name;
+					}
+				}
+			}
+		}
+
+		$elementor_settings_to_import = array_unique( $elementor_settings_to_import );
+		foreach ( $elementor_settings_to_import as $elementor_setting ) {
+			if ( isset( $site_meta['elementor'][ $elementor_setting ] ) ) {
+				update_option( $elementor_setting, $site_meta['elementor'][ $elementor_setting ] );
+			} else {
+				delete_option( $elementor_setting );
+			}
+		}
+
+		Elementor\Plugin::$instance->files_manager->clear_cache();
+	}
+
+	public function import_tinvwl_settings() {
+		$site_meta = $this->get_site_meta();
+
+		if ( empty( $site_meta['ti_wish_list_settings'] ) ) {
+			return;
+		}
+
+		if ( ! class_exists( 'TInvWL_Admin_Settings_General' ) || ! defined( 'TINVWL_PREFIX' ) ) {
+			return;
+		}
+
+		$ti_settings_object = TInvWL_Admin_Settings_General::instance();
+		$ti_settings_declaration = (array) $ti_settings_object->constructor_data();
+		$settings_to_import      = $site_meta['ti_wish_list_settings'];
+		foreach ( $ti_settings_declaration as $settings_group ) {
+			$option_id = TINVWL_PREFIX . '-' . $settings_group['id'];
+			if ( array_key_exists( $option_id, $settings_to_import ) ) {
+				update_option( $option_id, $settings_to_import[ $option_id ] );
+			}
+		}
+	}
+
+	public function import_woocommerce_settings() {
+		$site_meta = $this->get_site_meta();
+
+		if ( empty( $site_meta['woocommerce'] ) ) {
+			return;
+		}
+
+		if ( ! function_exists( 'WC' ) ) {
+			return;
+		}
+
+		$woocommerce_meta = (array) $site_meta['woocommerce'];
+
+		$woocommerce_page_settings = wp_parse_args(
+			$woocommerce_meta,
+			array(
+				'woocommerce_shop_page_id'      => false,
+				'woocommerce_cart_page_id'      => false,
+				'woocommerce_checkout_page_id'  => false,
+				'woocommerce_myaccount_page_id' => false,
+				'woocommerce_terms_page_id'     => false,
+			)
+		);
+		foreach ( $woocommerce_page_settings as $opt_id => $post_id ) {
+			if ( ! $post_id ) {
+				continue;
+			}
+
+			$imported_post_id = $this->importer_get_processed_post( $post_id );
+			if ( $imported_post_id ) {
+				$post_id = $imported_post_id;
+			}
+
+			update_option( $opt_id, $post_id );
+		}
+
+		$wc_image_settings = array(
+			'woocommerce_single_image_width',
+			'woocommerce_thumbnail_image_width',
+			'woocommerce_thumbnail_cropping',
+			'woocommerce_thumbnail_cropping_custom_width',
+			'woocommerce_thumbnail_cropping_custom_height',
+		);
+
+		$options_to_export = [];
+		foreach ( $wc_image_settings as $wc_option ) {
+			if ( isset( $woocommerce_meta[ $wc_option ] ) ) {
+				update_option( $wc_option, $woocommerce_meta[ $wc_option ] );
+			}
+		}
+
+		// Clear any unwanted data and flush rules.
+		update_option( 'woocommerce_queue_flush_rewrite_rules', 'yes' );
+		WC()->query->init_query_vars();
+		WC()->query->add_endpoints();
+	}
+
 	/**
 	 * @return bool
 	 */

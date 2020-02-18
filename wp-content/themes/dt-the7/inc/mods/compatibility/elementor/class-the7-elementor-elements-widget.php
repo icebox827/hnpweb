@@ -969,13 +969,12 @@ class The7_Elementor_Elements_Widget extends The7_Elementor_Widget_Base {
 		$this->add_control(
 			'post_content',
 			[
-				'label'   => __( 'Content or excerpt', 'the7mk2' ),
+				'label'   => __( 'Excerpt', 'the7mk2' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'show_excerpt',
 				'options' => [
-					'off'          => 'Off',
-					'show_excerpt' => 'Excerpt',
-					'show_content' => 'Content',
+					'off'          => 'Hide',
+					'show_excerpt' => 'Show',
 				],
 			]
 		);
@@ -2109,17 +2108,13 @@ class The7_Elementor_Elements_Widget extends The7_Elementor_Widget_Base {
 
 		$post_back = $post;
 
-		if ( 'show_content' === $settings['post_content'] ) {
-			$excerpt = apply_filters( 'the_content', get_the_content( '' ) );
-		} else {
-			$excerpt = get_the_excerpt();
+		$excerpt = get_the_excerpt();
 
-			if ( $settings['excerpt_words_limit'] ) {
-				$excerpt = wp_trim_words( $excerpt, absint( $settings['excerpt_words_limit'] ) );
-			}
-
-			$excerpt = apply_filters( 'the_excerpt', $excerpt );
+		if ( $settings['excerpt_words_limit'] ) {
+			$excerpt = wp_trim_words( $excerpt, absint( $settings['excerpt_words_limit'] ) );
 		}
+
+		$excerpt = apply_filters( 'the_excerpt', $excerpt );
 
 		// Restore original post in case some shortcode in the content will change it globally.
 		$post = $post_back;

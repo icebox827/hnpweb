@@ -800,7 +800,7 @@ function optionsframework_sanitize_options_values( $options, $values, $defaults_
 		$id = preg_replace( '/(\W!-)/', '', strtolower( $option['id'] ) );
 
 		// Set checkbox to false if it wasn't sent in the $_POST
-		if ( ! isset( $values[ $id ] ) && in_array( $option['type'], array( 'checkbox', 'switch' ), true ) ) {
+		if ( ! isset( $values[ $id ] ) && in_array( $option['type'], array( 'checkbox', 'switch', 'multi_select' ), true ) ) {
 			$values[ $id ] = false;
 		}
 

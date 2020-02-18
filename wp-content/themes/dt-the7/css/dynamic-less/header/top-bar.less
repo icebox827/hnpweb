@@ -22,6 +22,16 @@
 .top-bar {
 	min-height: @top-bar-height;
 	padding: @top-bar-padding-top @top-bar-padding-right @top-bar-padding-bottom @top-bar-padding-left;
+	.masthead:not(.side-header):not(.side-header-menu-icon) & {
+		max-width: calc(@content-width);
+		.header-width (@content-width);
+		margin: 0 auto;
+	}
+	
+	.masthead:not(.side-header).full-width &,
+	.masthead.side-header-menu-icon {
+		max-width: 100%;
+	}
 }
 /*Top bar font color*/
 .top-bar,

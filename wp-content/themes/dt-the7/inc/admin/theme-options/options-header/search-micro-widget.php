@@ -38,7 +38,7 @@ $options['header-elements-search-icon'] = array(
 	'std'        => 'custom',
 	'options'    => array(
 		'disabled' => _x( 'Disabled', 'theme-options', 'the7mk2' ),
-		'custom'   => _x( 'Custom', 'theme-options', 'the7mk2' ),
+		'custom'   => _x( 'Enabled', 'theme-options', 'the7mk2' ),
 	),
 	'dependency' => array(
 		array(

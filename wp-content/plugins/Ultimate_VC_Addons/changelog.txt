@@ -1,3 +1,9 @@
+3.19.2 - 03 Feb 2020
+- Improvement: Hardened the security of the plugin.
+
+3.19.1 - 22 Jan 2020
+- Security Fix: Cross-site scripting (XSS) vulnerability.
+
 3.19.0 - 30 July 2019
 - New: Introducing Dual Color Heading Element.
 - Improvement: Added the Extra class option for the Hotspot item.

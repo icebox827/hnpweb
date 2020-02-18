@@ -1,15 +1,22 @@
 <?php
 /**
- * Header them options.
+ * Header layout theme options.
  *
  * @package The7
  */
 
 defined( 'ABSPATH' ) || exit;
 
-$options[] = array( 'name' => _x( 'Layout', 'theme-options', 'the7mk2' ), 'type' => 'heading', 'id' => 'layout' );
+$options[] = array(
+	'name' => _x( 'Layout', 'theme-options', 'the7mk2' ),
+	'type' => 'heading',
+	'id'   => 'layout',
+);
 
-$options[] = array( 'name' => _x( 'Layout', 'theme-options', 'the7mk2' ), 'type' => 'block' );
+$options[] = array(
+	'name' => _x( 'Layout', 'theme-options', 'the7mk2' ),
+	'type' => 'block',
+);
 
 $options['header-layout'] = array(
 	'id'        => 'header-layout',
@@ -85,13 +92,32 @@ $options['header-classic-height'] = array(
 
 $options['header-classic-side-padding'] = array(
 	'id'     => 'header-classic-side-padding',
-	'name'   => _x( 'Header padding', 'theme-options', 'the7mk2' ),
+	'name'   => _x( 'Header paddings', 'theme-options', 'the7mk2' ),
 	'type'   => 'spacing',
 	'std'    => '30px 30px',
 	'units'  => 'px|%',
 	'fields' => array(
 		_x( 'Left', 'theme-options', 'the7mk2' ),
 		_x( 'Right', 'theme-options', 'the7mk2' ),
+	),
+);
+$options['header-classic-switch_paddings'] = array(
+	'name'  => _x( 'Mobile breakpoint', 'theme-options', 'the7mk2' ),
+	'id'    => 'header-classic-switch_paddings',
+	'type'  => 'number',
+	'std'   => '0px',
+	'units' => 'px',
+);
+
+$options['header-classic_mobile_paddings'] = array(
+	'name'   => _x( 'Mobile paddings', 'theme-options', 'the7mk2' ),
+	'id'     => 'header-classic_mobile_paddings',
+	'type'   => 'spacing',
+	'std'    => '0px 0px',
+	'units'  => 'px|%',
+	'fields' => array(
+		_x( 'Right', 'theme-options', 'the7mk2' ),
+		_x( 'Left', 'theme-options', 'the7mk2' ),
 	),
 );
 
@@ -189,13 +215,32 @@ $options['header-inline-height'] = array(
 
 $options['header-inline-side-padding'] = array(
 	'id'     => 'header-inline-side-padding',
-	'name'   => _x( 'Header padding', 'theme-options', 'the7mk2' ),
+	'name'   => _x( 'Header paddings', 'theme-options', 'the7mk2' ),
 	'type'   => 'spacing',
 	'std'    => '30px 30px',
 	'units'  => 'px|%',
 	'fields' => array(
 		_x( 'Left', 'theme-options', 'the7mk2' ),
 		_x( 'Right', 'theme-options', 'the7mk2' ),
+	),
+);
+$options['header-inline-switch_paddings'] = array(
+	'name'  => _x( 'Mobile breakpoint', 'theme-options', 'the7mk2' ),
+	'id'    => 'header-inline-switch_paddings',
+	'type'  => 'number',
+	'std'   => '0px',
+	'units' => 'px',
+);
+
+$options['header-inline_mobile_paddings'] = array(
+	'name'   => _x( 'Mobile paddings', 'theme-options', 'the7mk2' ),
+	'id'     => 'header-inline_mobile_paddings',
+	'type'   => 'spacing',
+	'std'    => '0px 0px',
+	'units'  => 'px|%',
+	'fields' => array(
+		_x( 'Right', 'theme-options', 'the7mk2' ),
+		_x( 'Left', 'theme-options', 'the7mk2' ),
 	),
 );
 
@@ -280,13 +325,32 @@ $options['header-split-height'] = array(
 
 $options['header-split-side-padding'] = array(
 	'id'     => 'header-split-side-padding',
-	'name'   => _x( 'Header padding', 'theme-options', 'the7mk2' ),
+	'name'   => _x( 'Header paddings', 'theme-options', 'the7mk2' ),
 	'type'   => 'spacing',
 	'std'    => '30px 30px',
 	'units'  => 'px|%',
 	'fields' => array(
 		_x( 'Left', 'theme-options', 'the7mk2' ),
 		_x( 'Right', 'theme-options', 'the7mk2' ),
+	),
+);
+$options['header-split-switch_paddings'] = array(
+	'name'  => _x( 'Mobile breakpoint', 'theme-options', 'the7mk2' ),
+	'id'    => 'header-split-switch_paddings',
+	'type'  => 'number',
+	'std'   => '0px',
+	'units' => 'px',
+);
+
+$options['header-split_mobile_paddings'] = array(
+	'name'   => _x( 'Mobile paddings', 'theme-options', 'the7mk2' ),
+	'id'     => 'header-split_mobile_paddings',
+	'type'   => 'spacing',
+	'std'    => '0px 0px',
+	'units'  => 'px|%',
+	'fields' => array(
+		_x( 'Right', 'theme-options', 'the7mk2' ),
+		_x( 'Left', 'theme-options', 'the7mk2' ),
 	),
 );
 
@@ -428,6 +492,25 @@ $options['header-top_line-side-padding'] = array(
 	'fields' => array(
 		_x( 'Left', 'theme-options', 'the7mk2' ),
 		_x( 'Right', 'theme-options', 'the7mk2' ),
+	),
+);
+$options['header-top_line-switch_paddings'] = array(
+	'name'  => _x( 'Mobile breakpoint', 'theme-options', 'the7mk2' ),
+	'id'    => 'header-top_line-switch_paddings',
+	'type'  => 'number',
+	'std'   => '0px',
+	'units' => 'px',
+);
+
+$options['header-top_line_mobile_paddings'] = array(
+	'name'   => _x( 'Mobile paddings', 'theme-options', 'the7mk2' ),
+	'id'     => 'header-top_line_mobile_paddings',
+	'type'   => 'spacing',
+	'std'    => '0px 0px',
+	'units'  => 'px|%',
+	'fields' => array(
+		_x( 'Right', 'theme-options', 'the7mk2' ),
+		_x( 'Left', 'theme-options', 'the7mk2' ),
 	),
 );
 
@@ -602,7 +685,10 @@ $options[] = array(
 /**
  * Side on click header.
  */
-$options[] = array( 'type' => 'js_hide_begin', 'class' => 'header-layout header-layout-side-navigation-settings' );
+$options[] = array(
+	'type'  => 'js_hide_begin',
+	'class' => 'header-layout header-layout-side-navigation-settings',
+);
 
 $options['header_navigation'] = array(
 	'id'        => 'header_navigation',
@@ -626,7 +712,10 @@ $options['header_navigation'] = array(
 	),
 );
 
-$options[] = array( 'type' => 'js_hide_begin', 'class' => 'header_navigation slide_out_navigation_options' );
+$options[] = array(
+	'type'  => 'js_hide_begin',
+	'class' => 'header_navigation slide_out_navigation_options',
+);
 
 $options[] = array( 'type' => 'divider' );
 
@@ -700,7 +789,10 @@ $options[] = array( 'type' => 'js_hide_end' );
 /**
  * Overlay navigation.
  */
-$options[] = array( 'type' => 'js_hide_begin', 'class' => 'header_navigation header-layout-overlay-settings' );
+$options[] = array(
+	'type'  => 'js_hide_begin',
+	'class' => 'header_navigation header-layout-overlay-settings',
+);
 
 $options[] = array( 'type' => 'divider' );
 
@@ -1366,7 +1458,10 @@ $options['top_bar-custom-icon-size'] = array(
 	'type'    => 'slider',
 	'id'      => 'top_bar-custom-icon-size',
 	'std'     => 16,
-	'options' => array( 'min' => 9, 'max' => 120 ),
+	'options' => array(
+		'min' => 9,
+		'max' => 120,
+	),
 );
 
 $options['top_bar-custom-icon-color'] = array(
@@ -1404,7 +1499,10 @@ $options['header-mobile-microwidgets-custom-icon-size'] = array(
 	'type'    => 'slider',
 	'id'      => 'header-mobile-microwidgets-custom-icon-size',
 	'std'     => 16,
-	'options' => array( 'min' => 9, 'max' => 120 ),
+	'options' => array(
+		'min' => 9,
+		'max' => 120,
+	),
 );
 
 $options['header-mobile-microwidgets-custom-icon-color'] = array(
@@ -1443,7 +1541,10 @@ $options['menu-mobile-microwidgets-custom-icon-size'] = array(
 	'type'    => 'slider',
 	'id'      => 'menu-mobile-microwidgets-custom-icon-size',
 	'std'     => 16,
-	'options' => array( 'min' => 9, 'max' => 120 ),
+	'options' => array(
+		'min' => 9,
+		'max' => 120,
+	),
 );
 
 $options['menu-mobile-microwidgets-custom-icon-color'] = array(
@@ -1455,16 +1556,15 @@ $options['menu-mobile-microwidgets-custom-icon-color'] = array(
 );
 
 // Micro-widgets.
-
 $options['header-before-elements-placeholder'] = array();
 
-include dirname( __FILE__ ) . '/options-header/search-micro-widget.php';
-include dirname( __FILE__ ) . '/options-header/multipurpose-micro-widgets.php';
-include dirname( __FILE__ ) . '/options-header/login-micro-widget.php';
-include dirname( __FILE__ ) . '/options-header/button-micro-widgets.php';
-include dirname( __FILE__ ) . '/options-header/text-micro-widgets.php';
-include dirname( __FILE__ ) . '/options-header/menu-micro-widgets.php';
-include dirname( __FILE__ ) . '/options-header/social-icons-micro-widget.php';
+require dirname( __FILE__ ) . '/options-header/search-micro-widget.php';
+require dirname( __FILE__ ) . '/options-header/multipurpose-micro-widgets.php';
+require dirname( __FILE__ ) . '/options-header/login-micro-widget.php';
+require dirname( __FILE__ ) . '/options-header/button-micro-widgets.php';
+require dirname( __FILE__ ) . '/options-header/text-micro-widgets.php';
+require dirname( __FILE__ ) . '/options-header/menu-micro-widgets.php';
+require dirname( __FILE__ ) . '/options-header/social-icons-micro-widget.php';
 
 $options[] = array(
 	'name' => _x( 'Top bar', 'theme-options', 'the7mk2' ),
@@ -1472,9 +1572,11 @@ $options[] = array(
 	'id'   => 'topbar',
 );
 
-$options[] = array( 'name' => _x( 'Top bar background', 'theme-options', 'the7mk2' ), 'type' => 'block' );
+$options[] = array(
+	'name' => _x( 'Layout', 'theme-options', 'the7mk2' ),
+	'type' => 'block',
+);
 
-// if not disabled
 $options['top-bar-height'] = array(
 	'id'    => 'top-bar-height',
 	'name'  => _x( 'Top bar height', 'theme-options', 'the7mk2' ),
@@ -1487,7 +1589,7 @@ $options['top_bar-padding'] = array(
 	'name'   => _x( 'Top bar paddings', 'theme-options', 'the7mk2' ),
 	'id'     => 'top_bar-padding',
 	'type'   => 'spacing',
-	'std'    => '0px 0px 0px 0px',
+	'std'    => '0px 50px 0px 50px',
 	'units'  => 'px|%',
 	'fields' => array(
 		_x( 'Top', 'theme-options', 'the7mk2' ),
@@ -1495,6 +1597,32 @@ $options['top_bar-padding'] = array(
 		_x( 'Bottom', 'theme-options', 'the7mk2' ),
 		_x( 'Left', 'theme-options', 'the7mk2' ),
 	),
+);
+$options['top_bar-switch_paddings'] = array(
+	'name'  => _x( 'Mobile breakpoint', 'theme-options', 'the7mk2' ),
+	'id'    => 'top_bar-switch_paddings',
+	'type'  => 'number',
+	'std'   => '600px',
+	'units' => 'px',
+);
+
+$options['top_bar_mobile_paddings'] = array(
+	'name'   => _x( 'Mobile paddings', 'theme-options', 'the7mk2' ),
+	'id'     => 'top_bar_mobile_paddings',
+	'type'   => 'spacing',
+	'std'    => '0px 20px 0px 20px',
+	'units'  => 'px|%',
+	'fields' => array(
+		_x( 'Top', 'theme-options', 'the7mk2' ),
+		_x( 'Right', 'theme-options', 'the7mk2' ),
+		_x( 'Bottom', 'theme-options', 'the7mk2' ),
+		_x( 'Left', 'theme-options', 'the7mk2' ),
+	),
+);
+
+$options[] = array(
+	'name' => _x( 'Background', 'theme-options', 'the7mk2' ),
+	'type' => 'block',
 );
 
 $options['top_bar-bg-color'] = array(
@@ -1594,9 +1722,16 @@ $options['top_bar-line-in-transparent-header'] = array(
 	),
 );
 
-$options[] = array( 'name' => _x( 'Header', 'theme-options', 'the7mk2' ), 'type' => 'heading', 'id' => 'header' );
+$options[] = array(
+	'name' => _x( 'Header', 'theme-options', 'the7mk2' ),
+	'type' => 'heading',
+	'id'   => 'header',
+);
 
-$options[] = array( 'name' => _x( 'Navigation area appearance', 'theme-options', 'the7mk2' ), 'type' => 'block' );
+$options[] = array(
+	'name' => _x( 'Navigation area appearance', 'theme-options', 'the7mk2' ),
+	'type' => 'block',
+);
 
 $options['header-bg-color'] = array(
 	'id'   => 'header-bg-color',
@@ -1898,7 +2033,10 @@ $options['header-menu_icon-bg-border-radius'] = array(
 
 $options[] = array( 'type' => 'divider' );
 
-$options[] = array( 'name' => _x( '"Open menu" button', 'theme-options', 'the7mk2' ), 'type' => 'title' );
+$options[] = array(
+	'name' => _x( '"Open menu" button', 'theme-options', 'the7mk2' ),
+	'type' => 'title',
+);
 
 $options['header-menu_icon-color'] = array(
 	'id'   => 'header-menu_icon-color',
@@ -1923,7 +2061,10 @@ $options['header-menu_icon-margin'] = array(
 
 $options[] = array( 'type' => 'divider' );
 
-$options[] = array( 'name' => _x( '"Close menu" button', 'theme-options', 'the7mk2' ), 'type' => 'title' );
+$options[] = array(
+	'name' => _x( '"Close menu" button', 'theme-options', 'the7mk2' ),
+	'type' => 'title',
+);
 
 $options['header-menu_icon-hover-color'] = array(
 	'id'   => 'header-menu_icon-hover-color',
@@ -2014,11 +2155,21 @@ $options['header-slide_out-overlay-bg-opacity'] = array(
 	),
 );
 
-$options[] = array( 'name' => _x( 'Menu', 'theme-options', 'the7mk2' ), 'type' => 'heading', 'id' => 'menu' );
+$options[] = array(
+	'name' => _x( 'Menu', 'theme-options', 'the7mk2' ),
+	'type' => 'heading',
+	'id'   => 'menu',
+);
 
-$options[] = array( 'name' => _x( 'Menu font', 'theme-options', 'the7mk2' ), 'type' => 'block' );
+$options[] = array(
+	'name' => _x( 'Menu font', 'theme-options', 'the7mk2' ),
+	'type' => 'block',
+);
 
-$options[] = array( 'name' => _x( 'Menu', 'theme-options', 'the7mk2' ), 'type' => 'title' );
+$options[] = array(
+	'name' => _x( 'Menu', 'theme-options', 'the7mk2' ),
+	'type' => 'title',
+);
 
 $options['header-menu-typography'] = array(
 	'id'   => 'header-menu-typography',
@@ -2035,7 +2186,10 @@ $options['header-menu-icon-size'] = array(
 	'name'     => _x( 'Icons size', 'theme-options', 'the7mk2' ),
 	'type'     => 'slider',
 	'std'      => 16,
-	'options'  => array( 'min' => 1, 'max' => 120 ),
+	'options'  => array(
+		'min' => 1,
+		'max' => 120,
+	),
 	'sanitize' => 'font_size',
 );
 
@@ -2060,7 +2214,10 @@ $options['header-menu-submenu-parent_is_clickable'] = array(
 
 $options[] = array( 'type' => 'divider' );
 
-$options[] = array( 'name' => _x( 'Description below menu items', 'theme-options', 'the7mk2' ), 'type' => 'title' );
+$options[] = array(
+	'name' => _x( 'Description below menu items', 'theme-options', 'the7mk2' ),
+	'type' => 'title',
+);
 
 $options['header-menu-subtitle-typography'] = array(
 	'id'   => 'header-menu-subtitle-typography',
@@ -2073,7 +2230,10 @@ $options['header-menu-subtitle-typography'] = array(
 
 $options[] = array( 'type' => 'divider' );
 
-$options[] = array( 'name' => _x( 'Font colors', 'theme-options', 'the7mk2' ), 'type' => 'title' );
+$options[] = array(
+	'name' => _x( 'Font colors', 'theme-options', 'the7mk2' ),
+	'type' => 'title',
+);
 
 $options['header-menu-font-color'] = array(
 	'id'   => 'header-menu-font-color',
@@ -2160,7 +2320,10 @@ $options['header-menu-active_item-font-gradient'] = array(
 
 $options[] = array( 'type' => 'divider' );
 
-$options[] = array( 'name' => _x( 'Menu items margin & padding', 'theme-options', 'the7mk2' ), 'type' => 'title' );
+$options[] = array(
+	'name' => _x( 'Menu items margin & padding', 'theme-options', 'the7mk2' ),
+	'type' => 'title',
+);
 
 $options['header-menu-item-padding'] = array(
 	'id'   => 'header-menu-item-padding',
@@ -2176,7 +2339,11 @@ $options['header-menu-item-margin'] = array(
 	'std'  => '0px 0px 0px 0px',
 );
 
-$options[] = array( 'type' => 'js_hide_begin', 'class' => 'menu-top-headers-indention', 'hidden_by_default' => false );
+$options[] = array(
+	'type'              => 'js_hide_begin',
+	'class'             => 'menu-top-headers-indention',
+	'hidden_by_default' => false,
+);
 
 $options['header-menu-item-surround_margins-style'] = array(
 	'id'      => 'header-menu-item-surround_margins-style',
@@ -2240,7 +2407,10 @@ $options['header-menu-decoration-other-links-is_justified'] = array(
 
 $options[] = array( 'type' => 'js_hide_end' );
 
-$options[] = array( 'name' => _x( 'Dividers', 'theme-options', 'the7mk2' ), 'type' => 'block' );
+$options[] = array(
+	'name' => _x( 'Dividers', 'theme-options', 'the7mk2' ),
+	'type' => 'block',
+);
 
 $options['header-menu-show_dividers'] = array(
 	'id'        => 'header-menu-show_dividers',
@@ -2353,7 +2523,10 @@ $options['header-menu-decoration-style'] = array(
 	),
 );
 
-$options[] = array( 'type' => 'js_hide_begin', 'class' => 'header-menu-decoration-style decoration-underline' );
+$options[] = array(
+	'type'  => 'js_hide_begin',
+	'class' => 'header-menu-decoration-style decoration-underline',
+);
 
 $options['header-menu-decoration-underline-direction'] = array(
 	'id'      => 'header-menu-decoration-underline-direction',
@@ -2430,11 +2603,17 @@ $options['header-menu-decoration-underline-line_size'] = array(
 
 $options[] = array( 'type' => 'js_hide_end' );
 
-$options[] = array( 'type' => 'js_hide_begin', 'class' => 'header-menu-decoration-style decoration-other' );
+$options[] = array(
+	'type'  => 'js_hide_begin',
+	'class' => 'header-menu-decoration-style decoration-other',
+);
 
 $options[] = array( 'type' => 'divider' );
 
-$options[] = array( 'name' => _x( 'Hover', 'theme-options', 'the7mk2' ), 'type' => 'title' );
+$options[] = array(
+	'name' => _x( 'Hover', 'theme-options', 'the7mk2' ),
+	'type' => 'title',
+);
 
 $options['header-menu-decoration-other-hover-style'] = array(
 	'id'      => 'header-menu-decoration-other-hover-style',
@@ -2578,7 +2757,10 @@ $options[] = array( 'type' => 'js_hide_end' );
 
 $options[] = array( 'type' => 'divider' );
 
-$options[] = array( 'name' => _x( 'Active', 'theme-options', 'the7mk2' ), 'type' => 'title' );
+$options[] = array(
+	'name' => _x( 'Active', 'theme-options', 'the7mk2' ),
+	'type' => 'title',
+);
 
 $options['header-menu-decoration-other-active-style'] = array(
 	'id'      => 'header-menu-decoration-other-active-style',
@@ -2726,7 +2908,10 @@ $options['header-menu-decoration-other-border-radius'] = array(
 	'type'    => 'slider',
 	'divider' => 'top',
 	'std'     => 0,
-	'options' => array( 'min' => 0, 'max' => 120 ),
+	'options' => array(
+		'min' => 0,
+		'max' => 120,
+	),
 );
 
 $options['header-menu-decoration-other-line_size'] = array(
@@ -2740,7 +2925,11 @@ $options['header-menu-decoration-other-line_size'] = array(
 
 $options[] = array( 'type' => 'js_hide_end' );
 
-$options[] = array( 'name' => _x( 'Submenu', 'theme-options', 'the7mk2' ), 'type' => 'heading', 'id' => 'submenu' );
+$options[] = array(
+	'name' => _x( 'Submenu', 'theme-options', 'the7mk2' ),
+	'type' => 'heading',
+	'id'   => 'submenu',
+);
 
 $options[] = array(
 	'name'       => _x( 'Submenu for side & overlay navigation', 'theme-options', 'the7mk2' ),
@@ -2837,9 +3026,15 @@ $options['header-menu-submenu-bg-padding'] = array(
 	'units' => 'px',
 );
 
-$options[] = array( 'name' => _x( 'Submenu items', 'theme-options', 'the7mk2' ), 'type' => 'block' );
+$options[] = array(
+	'name' => _x( 'Submenu items', 'theme-options', 'the7mk2' ),
+	'type' => 'block',
+);
 
-$options[] = array( 'name' => _x( 'Submenu font & icon size', 'theme-options', 'the7mk2' ), 'type' => 'title' );
+$options[] = array(
+	'name' => _x( 'Submenu font & icon size', 'theme-options', 'the7mk2' ),
+	'type' => 'title',
+);
 
 $options['header-menu-submenu-typography'] = array(
 	'id'   => 'header-menu-submenu-typography',
@@ -2856,7 +3051,10 @@ $options['header-menu-submenu-icon-size'] = array(
 	'name'    => _x( 'Icon size', 'theme-options', 'the7mk2' ),
 	'type'    => 'slider',
 	'std'     => 14,
-	'options' => array( 'min' => 8, 'max' => 50 ),
+	'options' => array(
+		'min' => 8,
+		'max' => 50,
+	),
 );
 
 $options['header-menu-submenu-show_next_lvl_icons'] = array(
@@ -2873,7 +3071,10 @@ $options['header-menu-submenu-show_next_lvl_icons'] = array(
 
 $options[] = array( 'type' => 'divider' );
 
-$options[] = array( 'name' => _x( 'Description below submenu items', 'theme-options', 'the7mk2' ), 'type' => 'title' );
+$options[] = array(
+	'name' => _x( 'Description below submenu items', 'theme-options', 'the7mk2' ),
+	'type' => 'title',
+);
 
 $options['header-menu-submenu-subtitle-typography'] = array(
 	'id'   => 'header-menu-submenu-subtitle-typography',
@@ -2976,7 +3177,10 @@ $options['header-menu-submenu-active-font-gradient'] = array(
 
 $options[] = array( 'type' => 'divider' );
 
-$options[] = array( 'name' => _x( 'Submenu items margin & padding', 'theme-options', 'the7mk2' ), 'type' => 'title' );
+$options[] = array(
+	'name' => _x( 'Submenu items margin & padding', 'theme-options', 'the7mk2' ),
+	'type' => 'title',
+);
 
 $options['header-menu-submenu-item-padding'] = array(
 	'id'   => 'header-menu-submenu-item-padding',
@@ -3435,7 +3639,7 @@ $options[] = array(
 );
 
 $options[] = array(
-	'name' => _x( 'First header switch point (tablet)', 'theme-options', 'the7mk2' ),
+	'name' => _x( 'Tablet breakpoint', 'theme-options', 'the7mk2' ),
 	'type' => 'block',
 );
 
@@ -3445,9 +3649,9 @@ presscore_options_apply_template(
 	'header-mobile-first_switch',
 	array(
 		'after'  => array(
-			'std'  => '1024',
+			'std'  => '1024px',
 			'desc' => _x(
-				'To skip this switch point set the same value as for the second (phone) point.',
+				'To skip this breakpoint, set the same value as in the phone breakpoint.',
 				'theme-options',
 				'the7mk2'
 			),
@@ -3479,7 +3683,7 @@ presscore_options_apply_template(
 );
 
 $options[] = array(
-	'name' => _x( 'Second header switch point (phone)', 'theme-options', 'the7mk2' ),
+	'name' => _x( 'Phone breakpoint', 'theme-options', 'the7mk2' ),
 	'type' => 'block',
 );
 
@@ -3489,8 +3693,8 @@ presscore_options_apply_template(
 	'header-mobile-second_switch',
 	array(
 		'after'  => array(
-			'std'  => '760',
-			'desc' => _x( 'To skip this switch point set it to 0.', 'theme-options', 'the7mk2' ),
+			'std'  => '760px',
+			'desc' => _x( 'To skip this breakpoint, set it to 0.', 'theme-options', 'the7mk2' ),
 		),
 		'height' => array( 'std' => '100' ),
 		'layout' => array(
@@ -3518,9 +3722,15 @@ presscore_options_apply_template(
 	)
 );
 
-$options[] = array( 'name' => _x( 'Mobile header', 'theme-options', 'the7mk2' ), 'type' => 'block' );
+$options[] = array(
+	'name' => _x( 'Mobile header', 'theme-options', 'the7mk2' ),
+	'type' => 'block',
+);
 
-$options[] = array( 'name' => _x( 'Header background', 'theme-options', 'the7mk2' ), 'type' => 'title' );
+$options[] = array(
+	'name' => _x( 'Header background', 'theme-options', 'the7mk2' ),
+	'type' => 'title',
+);
 
 $options['header-mobile-header-bg-color'] = array(
 	'id'   => 'header-mobile-header-bg-color',
@@ -3531,7 +3741,10 @@ $options['header-mobile-header-bg-color'] = array(
 
 $options[] = array( 'type' => 'divider' );
 
-$options[] = array( 'name' => _x( 'Menu icon (hamburger)', 'theme-options', 'the7mk2' ), 'type' => 'title' );
+$options[] = array(
+	'name' => _x( 'Menu icon (hamburger)', 'theme-options', 'the7mk2' ),
+	'type' => 'title',
+);
 
 $options['header-mobile-menu_icon-size'] = array(
 	'id'      => 'header-mobile-menu_icon-size',
@@ -3602,7 +3815,10 @@ $options['header-mobile-menu_icon-bg-border-radius'] = array(
 	),
 );
 
-$options[] = array( 'name' => _x( 'Floating mobile header', 'theme-options', 'the7mk2' ), 'type' => 'block' );
+$options[] = array(
+	'name' => _x( 'Floating mobile header', 'theme-options', 'the7mk2' ),
+	'type' => 'block',
+);
 
 $options['header-mobile-floating_navigation'] = array(
 	'id'      => 'header-mobile-floating_navigation',
@@ -3626,7 +3842,10 @@ $options['header-mobile-floating_navigation'] = array(
 	'class'   => 'small',
 );
 
-$options[] = array( 'name' => _x( 'Mobile navigation area', 'theme-options', 'the7mk2' ), 'type' => 'block' );
+$options[] = array(
+	'name' => _x( 'Mobile navigation area', 'theme-options', 'the7mk2' ),
+	'type' => 'block',
+);
 
 $options[] = array(
 	'name' => _x( 'Menu font', 'theme-options', 'the7mk2' ),
@@ -3645,7 +3864,10 @@ $options['header-mobile-menu-typography'] = array(
 
 $options[] = array( 'type' => 'divider' );
 
-$options[] = array( 'name' => _x( 'Submenu font', 'theme-options', 'the7mk2' ), 'type' => 'title' );
+$options[] = array(
+	'name' => _x( 'Submenu font', 'theme-options', 'the7mk2' ),
+	'type' => 'title',
+);
 
 $options['header-mobile-submenu-typography'] = array(
 	'id'   => 'header-mobile-submenu-typography',
@@ -3659,7 +3881,10 @@ $options['header-mobile-submenu-typography'] = array(
 
 $options[] = array( 'type' => 'divider' );
 
-$options[] = array( 'name' => _x( 'Font color', 'theme-options', 'the7mk2' ), 'type' => 'title' );
+$options[] = array(
+	'name' => _x( 'Font color', 'theme-options', 'the7mk2' ),
+	'type' => 'title',
+);
 
 $options['header-mobile-menu-font-color'] = array(
 	'id'   => 'header-mobile-menu-font-color',
@@ -3708,7 +3933,10 @@ $options['header-mobile-menu-font-hover-gradient'] = array(
 
 $options[] = array( 'type' => 'divider' );
 
-$options[] = array( 'name' => _x( 'Menu background', 'theme-options', 'the7mk2' ), 'type' => 'title' );
+$options[] = array(
+	'name' => _x( 'Menu background', 'theme-options', 'the7mk2' ),
+	'type' => 'title',
+);
 
 $options['header-mobile-menu-bg-color'] = array(
 	'id'   => 'header-mobile-menu-bg-color',
@@ -3741,7 +3969,10 @@ $options['header-mobile-menu-bg-width'] = array(
 
 $options[] = array( 'type' => 'divider' );
 
-$options[] = array( 'name' => _x( 'Mobile menu position', 'theme-options', 'the7mk2' ), 'type' => 'title' );
+$options[] = array(
+	'name' => _x( 'Mobile menu position', 'theme-options', 'the7mk2' ),
+	'type' => 'title',
+);
 
 $options['header-mobile-menu-align'] = array(
 	'id'      => 'header-mobile-menu-align',

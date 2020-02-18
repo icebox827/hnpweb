@@ -279,7 +279,7 @@ if ( ! class_exists( 'DT_Shortcode_PortfolioMasonry', false ) ):
 
 				$post_media = '';
 				$target = '';
-				if ( $config->get( 'follow_external_link' ) ) {
+				if ( $config->get( 'follow_external_link' ) && $config->get( 'post.buttons.link.enabled' ) ) {
 					$follow_link = $config->get( 'post.buttons.link.url' );
 					$target      = $config->get( 'post.buttons.link.target_blank' );
 				} else {

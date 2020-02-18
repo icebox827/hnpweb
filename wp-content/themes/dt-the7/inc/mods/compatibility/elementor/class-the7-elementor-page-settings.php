@@ -34,7 +34,7 @@ class The7_Elementor_Page_Settings {
 	 */
 	public function bootstrap() {
 		$this->sections = $this->get_sections();
-		$controls = [ [] ];
+		$controls       = [ [] ];
 		foreach ( $this->sections as $section ) {
 			if ( ! empty( $section['controls'] ) ) {
 				$controls[] = $section['controls'];
@@ -157,24 +157,29 @@ class The7_Elementor_Page_Settings {
 	 * @param int   $post_id Post ID.
 	 * @param array $control Elementor controls array.
 	 *
-	 * @return string|null
+	 * @return string
 	 */
 	public function get_alpha_color_post_meta( $post_id, $control ) {
 		if ( ! isset( $control['meta']['color'], $control['meta']['opacity'] ) ) {
-			return null;
+			return $control['args']['default'];
 		}
 
-		$color   = get_post_meta( $post_id, $control['meta']['color'], true );
-		$opacity = get_post_meta( $post_id, $control['meta']['opacity'], true );
+		$color      = get_post_meta( $post_id, $control['meta']['color'], true );
+		$opacity    = get_post_meta( $post_id, $control['meta']['opacity'], true );
+		$rgba_color = dt_stylesheet_color_hex2rgba( $color, $opacity );
 
-		return dt_stylesheet_color_hex2rgba( $color, $opacity );
+		if ( ! $rgba_color ) {
+			$rgba_color = $control['args']['default'];
+		}
+
+		return $rgba_color;
 	}
 
 	public function get_page_margin_post_meta( $post_id, $control ) {
 		$margin = get_post_meta( $post_id, $control['meta'], true );
 		preg_match( '/([-0-9]*)(.*)/', $margin, $matches );
 		list( $_, $size, $unit ) = $matches;
-		$unit = $unit ?: 'px';
+		$unit                    = $unit ?: 'px';
 
 		return compact( 'size', 'unit' );
 	}
@@ -238,7 +243,7 @@ class The7_Elementor_Page_Settings {
 					'tab'   => Controls_Manager::TAB_SETTINGS,
 				],
 				'controls' => [
-					'the7_document_title' => [
+					'the7_document_title'                 => [
 						'meta' => '_dt_header_title',
 						'args' => [
 							'label'     => __( 'Page title', 'the7mk2' ),
@@ -296,7 +301,7 @@ class The7_Elementor_Page_Settings {
 						'args'    => [
 							'label'     => __( 'Top bar color', 'the7mk2' ),
 							'type'      => Controls_Manager::COLOR,
-							'default'   => '#ffffff',
+							'default'   => 'rgba(255,255,255,0.25)',
 							'separator' => 'none',
 							'condition' => [
 								'the7_document_title' => 'disabled',
@@ -314,7 +319,7 @@ class The7_Elementor_Page_Settings {
 						'args'    => [
 							'label'     => __( 'Transparent background color', 'the7mk2' ),
 							'type'      => Controls_Manager::COLOR,
-							'default'   => '#000000',
+							'default'   => 'rgba(0,0,0,0.5)',
 							'separator' => 'none',
 							'condition' => [
 								'the7_document_title' => 'disabled',
@@ -393,18 +398,18 @@ class The7_Elementor_Page_Settings {
 					],
 				],
 			],
-			'the7_document_margins' => [
+			'the7_document_margins'       => [
 				'args'     => [
-					'label' => __( 'Page Margins', 'the7mk2' ),
+					'label' => __( 'Page Paddings', 'the7mk2' ),
 					'tab'   => Controls_Manager::TAB_SETTINGS,
 				],
 				'controls' => [
-					'the7_document_margin_top' => [
+					'the7_document_margin_top'    => [
 						'meta'    => '_dt_page_overrides_top_margin',
 						'on_save' => [ $this, 'update_page_margin_post_meta' ],
 						'on_read' => [ $this, 'get_page_margin_post_meta' ],
 						'args'    => [
-							'label'      => __( 'Top margin', 'the7mk2' ),
+							'label'      => __( 'Top padding', 'the7mk2' ),
 							'type'       => Controls_Manager::SLIDER,
 							'default'    => [
 								'unit' => 'px',
@@ -417,7 +422,7 @@ class The7_Elementor_Page_Settings {
 									'max'  => 1000,
 									'step' => 1,
 								],
-								'%' => [
+								'%'  => [
 									'min'  => 0,
 									'max'  => 100,
 									'step' => 1,
@@ -425,12 +430,12 @@ class The7_Elementor_Page_Settings {
 							],
 						],
 					],
-					'the7_document_margin_right' => [
+					'the7_document_margin_right'  => [
 						'meta'    => '_dt_page_overrides_right_margin',
 						'on_save' => [ $this, 'update_page_margin_post_meta' ],
 						'on_read' => [ $this, 'get_page_margin_post_meta' ],
 						'args'    => [
-							'label'      => __( 'Right margin', 'the7mk2' ),
+							'label'      => __( 'Right padding', 'the7mk2' ),
 							'type'       => Controls_Manager::SLIDER,
 							'default'    => [
 								'unit' => 'px',
@@ -443,7 +448,7 @@ class The7_Elementor_Page_Settings {
 									'max'  => 1000,
 									'step' => 1,
 								],
-								'%' => [
+								'%'  => [
 									'min'  => 0,
 									'max'  => 100,
 									'step' => 1,
@@ -456,7 +461,7 @@ class The7_Elementor_Page_Settings {
 						'on_save' => [ $this, 'update_page_margin_post_meta' ],
 						'on_read' => [ $this, 'get_page_margin_post_meta' ],
 						'args'    => [
-							'label'      => __( 'Bottom margin', 'the7mk2' ),
+							'label'      => __( 'Bottom padding', 'the7mk2' ),
 							'type'       => Controls_Manager::SLIDER,
 							'default'    => [
 								'unit' => 'px',
@@ -469,7 +474,7 @@ class The7_Elementor_Page_Settings {
 									'max'  => 1000,
 									'step' => 1,
 								],
-								'%' => [
+								'%'  => [
 									'min'  => 0,
 									'max'  => 100,
 									'step' => 1,
@@ -477,12 +482,12 @@ class The7_Elementor_Page_Settings {
 							],
 						],
 					],
-					'the7_document_margin_left' => [
+					'the7_document_margin_left'   => [
 						'meta'    => '_dt_page_overrides_left_margin',
 						'on_save' => [ $this, 'update_page_margin_post_meta' ],
 						'on_read' => [ $this, 'get_page_margin_post_meta' ],
 						'args'    => [
-							'label'      => __( 'Left margin', 'the7mk2' ),
+							'label'      => __( 'Left padding', 'the7mk2' ),
 							'type'       => Controls_Manager::SLIDER,
 							'default'    => [
 								'unit' => 'px',
@@ -495,7 +500,7 @@ class The7_Elementor_Page_Settings {
 									'max'  => 1000,
 									'step' => 1,
 								],
-								'%' => [
+								'%'  => [
 									'min'  => 0,
 									'max'  => 100,
 									'step' => 1,

@@ -259,6 +259,17 @@ $DT_META_BOXES['dt_page_box-fancy_header_options'] = array(
 			'std'  => '#222222',
 		),
 		array(
+			'name'        => _x( 'Background image origin', 'backend metabox', 'the7mk2' ),
+			'id'          => "{$prefix}bg_image_origin",
+			'type'        => 'radio',
+			'std'         => 'custom',
+			'hide_fields' => array( 'featured_image' => array( "{$prefix}bg_image" ) ),
+			'options'     => array(
+				'custom'         => _x( 'Custom', 'backend metabox', 'the7mk2' ),
+				'featured_image' => _x( 'Fatured Image', 'backend metabox', 'the7mk2' ),
+			),
+		),
+		array(
 			'name'             => _x( 'Background image', 'backend metabox', 'the7mk2' ),
 			'id'               => "{$prefix}bg_image",
 			'type'             => 'image_advanced_mk2',

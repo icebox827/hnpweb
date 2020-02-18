@@ -34,5 +34,16 @@ class The7_Elementor_Compatibility {
 
 		$widgets = new The7_Elementor_Widgets();
 		$widgets->bootstrap();
+
+		if ( defined( 'ELEMENTOR_PRO_VERSION' ) ) {
+			$this->bootstrap_pro();
+		}
+	}
+
+	protected function bootstrap_pro() {
+		require_once __DIR__ . '/pro/class-the7-elementor-theme-builder-adapter.php';
+
+		$theme_builder_adapter = new \The7\Adapters\Elementor\Pro\The7_Elementor_Theme_Builder_Adapter();
+		$theme_builder_adapter->bootstrap();
 	}
 }

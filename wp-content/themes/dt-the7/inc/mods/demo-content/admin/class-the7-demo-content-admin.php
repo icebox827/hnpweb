@@ -271,6 +271,18 @@ class The7_Demo_Content_Admin {
 				$import_manager->import_ultimate_addons_settings();
 				$import_manager->import_ultimate_addons_icon_fonts();
 				$import_manager->import_the7_fontawesome();
+
+				if ( class_exists( 'Elementor\Plugin' ) ) {
+					$import_manager->import_elementor_settings();
+				}
+
+				if ( defined( 'TINVWL_FVERSION' ) ) {
+					$import_manager->import_tinvwl_settings();
+				}
+
+				if ( the7_demo_content_wc_is_active() ) {
+					$import_manager->import_woocommerce_settings();
+				}
 				break;
 			case 'import_rev_sliders':
 				$import_manager->import_rev_sliders();

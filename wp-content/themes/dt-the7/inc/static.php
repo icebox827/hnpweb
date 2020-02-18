@@ -567,7 +567,9 @@ if ( ! function_exists( 'presscore_body_class' ) ) :
 		if ( 'gradient' === $config->get( 'template.accent.color.mode' ) ) {
 			$classes[] = 'accent-gradient';
 		}
-
+		if ( $config->get( 'page.bg' ) ) {
+			$classes[] = 'fixed-page-bg';
+		}
 		$classes[] = 'srcset-enabled';
 
 		switch ( $config->get( 'buttons.style' ) ) {
@@ -844,17 +846,20 @@ if ( ! function_exists( 'presscore_enqueue_web_fonts' ) ) :
 				continue;
 			}
 
-			$font_obj = new Presscore_Web_Font( $font_family );
+			$font_obj = new The7_Web_Font( $font_family );
+			$font_obj->add_weight( '400' );
 			$font_obj->add_weight( '600' );
 			$font_obj->add_weight( '700' );
 
-			$fonts[] = (string) $font_obj;
+			$fonts[] = $font_obj;
 		}
 
-		$fonts_compressor = new Presscore_Web_Fonts_Compressor();
-		$compressed_fonts = $fonts_compressor->compress_fonts( $fonts );
+		$fonts_compressor = new The7_Web_Fonts_Compressor( $fonts );
+		if ( The7_Admin_Dashboard_Settings::get( 'web-fonts-display-swap' ) ) {
+			$fonts_compressor->add_display_prop( 'swap' );
+		}
 
-		wp_enqueue_style( 'dt-web-fonts', dt_make_web_font_uri( $compressed_fonts ), false, THE7_VERSION );
+		wp_enqueue_style( 'dt-web-fonts', $fonts_compressor->compress_to_url(), false, null );
 	}
 
 endif;

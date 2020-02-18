@@ -1,16 +1,20 @@
 <?php
 /**
- * Footer.
+ * Footer theme options.
  */
 
-// File Security Check
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+defined( 'ABSPATH' ) || exit;
 
-$options[] = array( 'name' => _x( 'Footer', 'theme-options', 'the7mk2' ), 'type' => 'heading', 'id' => 'footer' );
+$options[] = array(
+	'name' => _x( 'Footer', 'theme-options', 'the7mk2' ),
+	'type' => 'heading',
+	'id'   => 'footer',
+);
 
-$options[] = array( 'name' => _x( 'Footer style', 'theme-options', 'the7mk2' ), 'type' => 'block' );
+$options[] = array(
+	'name' => _x( 'Footer style', 'theme-options', 'the7mk2' ),
+	'type' => 'block',
+);
 
 $options['footer-style'] = array(
 	'name'    => _x( 'Footer background &amp; lines', 'theme-options', 'the7mk2' ),
@@ -129,7 +133,10 @@ $options['footer-slide-out-mode'] = array(
 	),
 );
 
-$options[] = array( 'name' => _x( 'Footer font color', 'theme-options', 'the7mk2' ), 'type' => 'block' );
+$options[] = array(
+	'name' => _x( 'Footer font color', 'theme-options', 'the7mk2' ),
+	'type' => 'block',
+);
 
 $options['footer-headers_color'] = array(
 	'name' => _x( 'Headings color', 'theme-options', 'the7mk2' ),
@@ -154,13 +161,16 @@ $options['footer-accent_text_color'] = array(
 	'desc'     => _x( 'Leave empty to use default accent color.', 'theme-options', 'the7mk2' ),
 );
 
-$options[] = array( 'name' => _x( 'Footer layout', 'theme-options', 'the7mk2' ), 'type' => 'block' );
+$options[] = array(
+	'name' => _x( 'Footer layout', 'theme-options', 'the7mk2' ),
+	'type' => 'block',
+);
 
 $options['footer-padding'] = array(
-	'name'   => _x( 'Padding', 'theme-options', 'the7mk2' ),
+	'name'   => _x( 'Paddings', 'theme-options', 'the7mk2' ),
 	'id'     => 'footer-padding',
 	'type'   => 'spacing',
-	'std'    => '50px 0px 50px 0px',
+	'std'    => '50px 50px 50px 50px',
 	'units'  => 'px|%',
 	'fields' => array(
 		_x( 'Top', 'theme-options', 'the7mk2' ),
@@ -168,6 +178,36 @@ $options['footer-padding'] = array(
 		_x( 'Bottom', 'theme-options', 'the7mk2' ),
 		_x( 'Left', 'theme-options', 'the7mk2' ),
 	),
+);
+
+$options['footer-collapse_after'] = array(
+	'name'  => _x( 'Mobile breakpoint', 'theme-options', 'the7mk2' ),
+	'id'    => 'footer-collapse_after',
+	'std'   => '760px',
+	'type'  => 'number',
+	'units' => 'px',
+);
+
+
+$options['footer-mobile_padding'] = array(
+	'name'   => _x( 'Mobile paddings', 'theme-options', 'the7mk2' ),
+	'id'     => 'footer-mobile_padding',
+	'type'   => 'spacing',
+	'std'    => '50px 20px 50px 20px',
+	'units'  => 'px|%',
+	'fields' => array(
+		_x( 'Top', 'theme-options', 'the7mk2' ),
+		_x( 'Right', 'theme-options', 'the7mk2' ),
+		_x( 'Bottom', 'theme-options', 'the7mk2' ),
+		_x( 'Left', 'theme-options', 'the7mk2' ),
+	),
+);
+$options['footer-collapse_columns_after'] = array(
+	'name'  => _x( 'Collapse columns after', 'theme-options', 'the7mk2' ),
+	'id'    => 'footer-collapse_columns_after',
+	'std'   => '760px',
+	'type'  => 'number',
+	'units' => 'px',
 );
 
 $options[] = array( 'type' => 'divider' );
@@ -193,15 +233,6 @@ $options['footer-layout'] = array(
 
 $options[] = array( 'type' => 'divider' );
 
-$options['footer-collapse_after'] = array(
-	'name'  => _x( 'Collapse to one column after', 'theme-options', 'the7mk2' ),
-	'desc'  => _x( "Won't have any effect if responsiveness is disabled.", 'theme-options', 'the7mk2' ),
-	'id'    => 'footer-collapse_after',
-	'std'   => '760px',
-	'type'  => 'number',
-	'units' => 'px',
-);
-
 $options['footer-is_fullwidth'] = array(
 	'id'      => 'footer-is_fullwidth',
 	'name'    => _x( 'Full width', 'theme-options', 'the7mk2' ),
@@ -226,7 +257,10 @@ $options[] = array(
 	'id'   => 'bottom-bar',
 );
 
-$options[] = array( 'name' => _x( 'Bottom bar style', 'theme-options', 'the7mk2' ), 'type' => 'block' );
+$options[] = array(
+	'name' => _x( 'Bottom bar style', 'theme-options', 'the7mk2' ),
+	'type' => 'block',
+);
 
 $options['bottom_bar-enabled'] = array(
 	'name'    => _x( 'Bottom bar', 'theme-options', 'the7mk2' ),
@@ -290,7 +324,10 @@ $options['bottom_bar-bg_image'] = array(
 	),
 );
 
-$options[] = array( 'name' => _x( 'Bottom bar layout', 'theme-options', 'the7mk2' ), 'type' => 'block' );
+$options[] = array(
+	'name' => _x( 'Bottom bar layout', 'theme-options', 'the7mk2' ),
+	'type' => 'block',
+);
 
 $options['bottom_bar-layout'] = array(
 	'name'    => _x( 'Layout', 'theme-options', 'the7mk2' ),
@@ -336,16 +373,17 @@ $options['bottom_bar-padding'] = array(
 	),
 );
 
-$options['bottom_bar-collapse_after'] = array(
-	'name'    => _x( 'Enable bottom bar responsive layout after', 'theme-options', 'the7mk2' ),
+$options['bottom_bar-collapse_after']      = array(
+	'name'    => _x( 'Mobile breakpoint', 'theme-options', 'the7mk2' ),
 	'id'      => 'bottom_bar-collapse_after',
 	'std'     => '990px',
 	'type'    => 'number',
 	'units'   => 'px',
 	'divider' => 'top',
 );
+
 $options['bottom_bar-menu-collapse_after'] = array(
-	'name'    => _x( 'Enable custom menu responsive layout after', 'theme-options', 'the7mk2' ),
+	'name'    => _x( 'Custom menu mobile breakpoint', 'theme-options', 'the7mk2' ),
 	'id'      => 'bottom_bar-menu-collapse_after',
 	'std'     => '778px',
 	'type'    => 'number',
@@ -353,7 +391,10 @@ $options['bottom_bar-menu-collapse_after'] = array(
 	'divider' => 'top',
 );
 
-$options[] = array( 'name' => _x( 'Bottom bar font color', 'theme-options', 'the7mk2' ), 'type' => 'block' );
+$options[] = array(
+	'name' => _x( 'Bottom bar font color', 'theme-options', 'the7mk2' ),
+	'type' => 'block',
+);
 
 $options['bottom_bar-color'] = array(
 	'name' => _x( 'Font color', 'theme-options', 'the7mk2' ),
@@ -362,10 +403,18 @@ $options['bottom_bar-color'] = array(
 	'type' => 'color',
 );
 
-$options[] = array( 'name' => _x( 'Text area', 'theme-options', 'the7mk2' ), 'type' => 'block' );
+$options[] = array(
+	'name' => _x( 'Text area', 'theme-options', 'the7mk2' ),
+	'type' => 'block',
+);
 
 $options['bottom_bar-text'] = array(
 	'name'     => _x( 'Text area', 'theme-options', 'the7mk2' ),
+	'desc'     => _x(
+		'You can use the [dt_year] shortcode to display the current year dynamically.',
+		'theme-options',
+		'the7mk2'
+	),
 	'id'       => 'bottom_bar-text',
 	'std'      => false,
 	'type'     => 'textarea',

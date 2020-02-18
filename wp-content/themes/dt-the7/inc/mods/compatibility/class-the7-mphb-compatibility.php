@@ -35,8 +35,8 @@ class The7_MPHB_Compatibility {
 		add_action( 'mphb_render_single_room_type_after_reservation_form', array( $this, 'single_template_close_wrap' ), 11 );
 
 		// Move facilities outside of attributes list.
-		remove_action( 'mphb_render_single_room_type_attributes', array( '\MPHB\Views\SingleRoomTypeView', 'renderFacilities' ), 30 );
-		add_action( 'mphb_render_single_room_type_metas', array( '\MPHB\Views\SingleRoomTypeView', 'renderFacilities' ), 35 );
+		remove_action( 'mphb_render_single_room_type_attributes', array( '\MPHB\Views\SingleRoomTypeView', 'renderFacilities' ), 40 );
+		add_action( 'mphb_render_single_room_type_metas', array( '\MPHB\Views\SingleRoomTypeView', 'renderFacilities' ), 45 );
 
 		// Make separate list from facilities.
 		remove_action( 'mphb_render_single_room_type_before_facilities', array( '\MPHB\Views\SingleRoomTypeView', '_renderFacilitiesListItemOpen' ), 10 );

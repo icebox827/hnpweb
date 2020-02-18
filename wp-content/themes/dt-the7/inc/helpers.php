@@ -350,7 +350,7 @@ if ( ! function_exists( 'presscore_get_category_list' ) ) :
 			$config         = presscore_config();
 			$filter_request = $config->get( 'request_display' );
 			if ( $filter_request === null ) {
-				$filter_request           = $config->get( 'display' );
+				$filter_request           = (array) $config->get( 'display' );
 				$filter_request['select'] = 'all';
 			}
 

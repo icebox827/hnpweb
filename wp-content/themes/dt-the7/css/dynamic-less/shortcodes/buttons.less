@@ -148,13 +148,9 @@ input[type="submit"]:not([name="update_cart"]),
 
 	/*material style*/
 	.btn-shadow & {
-		-webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12);
 		box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12);
-		
-		-webkit-transition: -webkit-box-shadow 0.2s ease-out, opacity 0.45s;
 		transition: box-shadow 0.2s ease-out, opacity 0.45s;
 		&:hover {
-			-webkit-box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
 			box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
 		}
 	}
@@ -225,6 +221,7 @@ input[type="submit"]:not([name="update_cart"]),
 		color: @dt-btn-hover-color;
 		border-color: @dt-btn-border-hover-color;
 		.stripe &,
+		& *,
 		.sidebar &,
 		.sidebar .widget &,
 		.sidebar-content .widget &,
@@ -232,7 +229,8 @@ input[type="submit"]:not([name="update_cart"]),
 			color: @dt-btn-hover-color;
 			.custom-mixin-footer-with-accent-color (@dt-btn-hover-color, @widget-footer-accent-color);
 		}
-		#page & {
+		#page &,
+		.tinv-modal & {
 			background: @dt-btn-hover-bg-color;
 			.background-gradient (@startColor: @dt-btn-hover-bg-color, @endColor: @dt-btn-hover-bg-color-2);
 		}
@@ -244,7 +242,9 @@ input[type="submit"]:not([name="update_cart"]),
 		color: @dt-btn-hover-color;
 	}
 }
-
+button.button.tinvwl-add-to-cart:hover > * {
+	color: inherit;
+}
 /* # DT Custom buttons
 ================================================== */
 

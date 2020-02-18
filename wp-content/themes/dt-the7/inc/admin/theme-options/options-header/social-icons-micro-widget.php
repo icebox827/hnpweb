@@ -63,9 +63,9 @@ $options[] = array( 'name' => _x( 'Normal', 'theme-options', 'the7mk2' ), 'type'
 $options['header-elements-soc_icons-color'] = array(
 	'id'       => 'header-elements-soc_icons-color',
 	'name'     => _x( 'Icons color', 'theme-options', 'the7mk2' ),
-	'type'     => 'color',
+	'type'     => 'alpha_color',
 	'std'      => '#fff',
-	'sanitize' => 'empty_color',
+	'sanitize' => 'empty_alpha_color',
 	'desc'     => _x( 'Leave empty to use accent color', 'theme-options', 'the7mk2' ),
 );
 
@@ -140,8 +140,8 @@ $options['header-elements-soc_icons-hover-color'] = array(
 	'id'       => 'header-elements-soc_icons-hover-color',
 	'name'     => _x( 'Icons hover', 'theme-options', 'the7mk2' ),
 	'std'      => '#fff',
-	'type'     => 'color',
-	'sanitize' => 'empty_color',
+	'type'     => 'alpha_color',
+	'sanitize' => 'empty_alpha_color',
 	'desc'     => _x( 'Leave empty to use accent color', 'theme-options', 'the7mk2' ),
 );
 

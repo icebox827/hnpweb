@@ -21,7 +21,7 @@ if ( ! class_exists( 'Presscore_Modules_TGMPAModule', false ) ) :
 		public static function execute() {
 			if ( defined( 'WP_CLI' ) && WP_CLI ) {
 				include dirname( __FILE__ ) . '/class-tgm-plugin-activation.php';
-			} elseif ( ! defined( 'DOING_AJAX' ) && is_admin() ) {
+			} elseif ( is_admin() ) {
 				self::init_the7_tgmpa();
 			} else {
 				return;
@@ -208,9 +208,8 @@ if ( ! class_exists( 'Presscore_Modules_TGMPAModule', false ) ) :
 		protected static function inject_plugins_update_information( $transient ) {
 			global $the7_tgmpa;
 
-			if ( ! $the7_tgmpa && class_exists( 'Presscore_Modules_TGMPAModule' ) ) {
-				Presscore_Modules_TGMPAModule::init_the7_tgmpa();
-				Presscore_Modules_TGMPAModule::register_plugins_action();
+			if ( ! $the7_tgmpa ) {
+				return $transient;
 			}
 
 			if ( ! is_object( $transient ) ) {

@@ -69,7 +69,6 @@ require_once PRESSCORE_DIR . '/deprecated-functions.php';
 require_once PRESSCORE_EXTENSIONS_DIR . '/core-functions.php';
 require_once PRESSCORE_EXTENSIONS_DIR . '/stylesheet-functions.php';
 require_once PRESSCORE_EXTENSIONS_DIR . '/dt-pagination.php';
-require_once PRESSCORE_EXTENSIONS_DIR . '/presscore-web-fonts-compressor.php';
 
 require_once PRESSCORE_DIR . '/vendor/lessphp/the7_lessc.inc.php';
 require_once PRESSCORE_EXTENSIONS_DIR . '/less-vars/less-functions.php';

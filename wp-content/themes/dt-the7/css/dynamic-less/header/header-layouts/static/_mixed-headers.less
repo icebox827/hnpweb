@@ -23,7 +23,6 @@
 	position: fixed;
 	top: 0;
 	width: 100%;
-	-webkit-transition: background  0.35s ease;
 	transition: background  0.35s ease;
 	-webkit-transform: translateZ(0);
 	transform: translateZ(0);
@@ -32,7 +31,6 @@
 		top: 32px;
 	}
 	&:not(.mixed-floating-top-bar) {
-		-webkit-transition: background  0.35s ease, top  0.35s ease;
 		transition: background  0.35s ease, top  0.35s ease;
 	}
 }
@@ -40,6 +38,11 @@
 	-webkit-transform: translateZ(0);
 	transform: translateZ(0);
 	-webkit-backface-visibility: hidden;
+}
+.transparent:not(.photo-scroller-album):not(.phantom-sticky) .mixed-header.side-header-h-stroke:not(.sticky-top-line-on) {
+	position: absolute;
+	width: 100%;
+	z-index: 102;
 }
 .admin-bar.transparent:not(.photo-scroller-album):not(.phantom-sticky) .sticky-top-line:not(.masthead-mobile-header) {
 	top: 32px;
@@ -239,7 +242,6 @@
 	.side-header {
 		.sticky-header.slide-header-animation & {
 			z-index: 9402;
-			-webkit-transition: -webkit-transform  0.5s ease;
 			transition: transform  0.5s ease;
 		}
 		.sticky-header.fade-header-animation & {
@@ -249,12 +251,10 @@
 	/*Animation: fade*/
 
 	.sticky-header.fade-header-animation .closed-header .side-header {
-		-webkit-animation: opacity-lat-rev 0.8s ease 0ms 1 normal both;
 		animation: opacity-lat-rev 0.8s ease 0ms 1 normal both;
 	}
 
 	.sticky-header.fade-header-animation .show-header .side-header {
-		-webkit-animation: opacity-lat 0.8s ease 0ms 1 normal both;
 		animation: opacity-lat 0.8s ease 0ms 1 normal both;
 	}
 	/*Animation: slide*/
@@ -262,38 +262,26 @@
 		left: 0;
 	}
 	.sticky-header.header-side-left.slide-header-animation .side-header {
-		-webkit-transform: translate3d(-100%, 0, 0);
-		-ms-transform: translateX(-100%);
 		transform: translate3d(-100%, 0, 0);
 		.rtl& {
-			-webkit-transform: translate3d(100%, 0, 0);
-			-ms-transform: translateX(100%);
 			transform: translate3d(100%, 0, 0);
 		}
 	}
 	.sticky-header.header-side-left.slide-header-animation .show-header .side-header {
-		-webkit-transform: translate3d(0, 0, 0);
-		-ms-transform: translateX(0);
 		transform: translate3d(0, 0, 0);
 
 	}
 	.sticky-header.header-side-right.slide-header-animation .side-header {
 		right: 0 !important;
 		left: auto;
-		-webkit-transform: translate3d(100%, 0, 0);
-		-ms-transform: translateX(100%);
 		transform: translate3d(100%, 0, 0);
 		.rtl& {
 			right: auto !important;
 			left: 0;
-			-webkit-transform: translate3d(-100%, 0, 0);
-			-ms-transform: translateX(-100%);
 			transform: translate3d(-100%, 0, 0);
 		}
 	}
 	.sticky-header.header-side-right.slide-header-animation .show-header .side-header {
-		-webkit-transform: translate3d(0, 0, 0);
-		-ms-transform: translateX(0);
 		transform: translate3d(0, 0, 0);
 	}
 	/*Animation: move*/
@@ -317,20 +305,12 @@
 		opacity: 0;
 		visibility: hidden;
 		z-index: 9401;
-		// -webkit-transition: opacity 0.4s;
-		// transition: opacity 0.4s;
-	}
-	.sticky-header-overlay.active {
-		// opacity: 1;
-		// visibility: visible;
 	}
 	.sticky-header-overlay:not(.active) {
-		-webkit-animation: opacity-lat-rev 0.8s ease 0ms 1 normal both;
 		animation: opacity-lat-rev 0.8s ease 0ms 1 normal both;
 	}
 
 	.sticky-header-overlay.active {
-		-webkit-animation: opacity-lat 0.8s ease 0ms 1 normal both;
 		animation: opacity-lat 0.8s ease 0ms 1 normal both;
 	}
 
@@ -358,7 +338,6 @@
 		padding: 0;
 		cursor: pointer;
 		z-index: 500;
-		-webkit-transition: margin 0.5s ease;
 		transition: margin 0.5s ease;
 	}
 		.menu-toggle > a {
@@ -486,20 +465,16 @@
 
 
 .overlay-navigation .closed-header .side-header {
-	-webkit-animation: opacity-lat-rev 0.8s ease 0ms 1 normal both;
 	animation: opacity-lat-rev 0.8s ease 0ms 1 normal both;
 }
 
 .overlay-navigation .show-header .side-header {
-	-webkit-animation: opacity-lat 0.8s ease 0ms 1 normal both;
 	animation: opacity-lat 0.8s ease 0ms 1 normal both;
 }
 
 .menu-toggle {
 	.header-side-left .side-header &,
 	.header-side-right .side-header & {
-		-ms-transform: translateX(0);
-		-webkit-transform: translateX(0);
 		transform: translateX(0);
 	}
 	.side-header & {
@@ -512,20 +487,7 @@
 	}
 }
 /*Phantom sticky*/
-@-webkit-keyframes opacity-lat-rev {
-  0% {
-	opacity: 1;
-	visibility: visible;
-  }
-  30% {
-	opacity: 0;
-	visibility: hidden;
-  }
-  100% {
-	opacity: 0;
-	visibility: hidden;
-  }
-}
+
 @keyframes opacity-lat-rev {
   0% {
 	opacity: 1;
@@ -541,20 +503,7 @@
   }
 }
 
-@-webkit-keyframes opacity-lat {
-  0% {
-	opacity: 0;
-	visibility: hidden;
-  }
-  70% {
-	opacity: 1;
-	visibility: visible;
-  }
-  100% {
-	opacity: 1;
-	visibility: visible;
-  }
-}
+
 
 @keyframes opacity-lat {
   0% {

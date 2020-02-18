@@ -139,14 +139,11 @@
 		    left: 0;
 		    width: 240px;
 		    opacity: 0;
-		    
-			-webkit-box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.20);
-			box-shadow:			0px 0px 4px rgba(0, 0, 0, 0.20);
+			box-shadow:	0px 0px 4px rgba(0, 0, 0, 0.20);
 		    & > li {
 		    	position: relative;
 		    	display: block;
 			    padding: 0 10px;
-			    -webkit-box-sizing: border-box;
 			    box-sizing: border-box;
 			    &:first-child {
 				    padding-top: 10px;
@@ -179,7 +176,6 @@
 		}
 		.mini-nav .mini-sub-nav {
 			background: #fff;
-			-webkit-box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.20);
 			box-shadow:			0px 0px 4px rgba(0, 0, 0, 0.20);
 		}
 	
@@ -188,11 +184,6 @@
 		.mini-nav .mini-sub-nav li.has-children > a:after {
 			color: #222222;
 		}
-		// .mini-nav .mini-sub-nav > li.act > a,
-		// .mini-nav .mini-sub-nav > li:not(.act):hover > a {
-		// 	background: fade(#222222, 7%);
-		// }
-
 			.mini-nav .customSelect,
 			.menu-select select {
 				border: none;
@@ -497,7 +488,6 @@
 					text-align: center;
 					opacity: 0;
 					visibility: hidden;
-					-webkit-transition: opacity .55s ease;
 					transition: opacity .55s ease;
 					&.open {
 						opacity: 1;
@@ -515,7 +505,7 @@
 				    width: 34px;
 				    height: 34px;
 				    color:#fff;
-				    font-size: 34px;
+				    font-size: 30px;
 				}
 				.overlay-search-microwidget > i:hover {
 					cursor: pointer;
@@ -545,7 +535,6 @@
 				overflow: hidden;
 			}
 			.animate-search-width input.field {
-				-webkit-transition: width .55s ease;
 				transition: width .55s ease;
 			}
 			.animate-search-width .search-icon  {
@@ -595,7 +584,6 @@
 		.accent-gradient .masthead .soc-ico.gradient-bg.hover-custom-bg a:hover,
 		.masthead .soc-ico.hover-accent-bg a:hover,
 		.masthead .soc-ico.hover-disabled-bg a:hover {
-			-webkit-box-shadow: none;
 			box-shadow:			none;
 		}
 	/* Mini widgets : end */
@@ -676,26 +664,20 @@
 			width: 22px;
 			height: 2px;
 			content: '';
-			-webkit-transform-origin: 1.5px center;
 			transform-origin: 1.5px center;
-			-webkit-transition: transform 0.3s;
 			transition: transform 0.3s;
 			.menu-toggle.active .lines-button.x &,
 			.hide-overlay.active .lines-button.x & {
-				-webkit-transform-origin: 50% 50%;
 				transform-origin: 50% 50%;
 				top: 0;
-				-webkit-transition: -webkit-transform .1s ease;
 				transition: transform .1s ease;
 			}
 		}
 		.lines:before {
 			top: 7px;
 			.menu-toggle:not(.active) .lines-button:hover & {
-				-webkit-transform: translateY(-2px);
 				transform: translateY(-2px);
 				.large-menu-icon & {
-					-webkit-transform: translateY(-3px);
 					transform: translateY(-3px);
 				}
 			}
@@ -703,10 +685,8 @@
 		.lines:after {
 			top: -7px;
 			.menu-toggle:not(.active) .lines-button:hover & {
-				-webkit-transform: translateY(2px);
 				transform: translateY(2px);
 				.large-menu-icon & {
-					-webkit-transform: translateY(3px);
 					transform: translateY(3px);
 				}
 			}
@@ -715,34 +695,22 @@
 	.lines:before {
 		.menu-toggle.active .lines-button.x &,
 		.hide-overlay.active .lines-button.x & {
-			-ms-transform: rotate3d(0, 0, 1, 45deg);
-			-webkit-transform: rotate3d(0, 0, 1, 45deg);
 			transform: rotate3d(0, 0, 1, 45deg);
-
-			-webkit-transition: -webkit-transform .2s ease;
 			transition: transform .2s ease;
 		}
 		.menu-toggle.active:hover .lines-button.x &,
 		.hide-overlay.active:hover .lines-button.x & {
-			-ms-transform: rotate3d(0, 0, 1, 0deg);
-			-webkit-transform: rotate3d(0, 0, 1, 0deg);
 			transform: rotate3d(0, 0, 1, 0deg);
 		}
 	}
 	.lines:after {
 		.menu-toggle.active .lines-button.x &,
 		.hide-overlay.active .lines-button.x & {
-			-ms-transform: rotate3d(0, 0, 1, -45deg);
-			-webkit-transform: rotate3d(0, 0, 1, -45deg);
 			transform: rotate3d(0, 0, 1, -45deg);
-			
-			-webkit-transition: -webkit-transform .2s ease;
 			transition: transform .2s ease;
 		}
 		.menu-toggle.active:hover .lines-button.x &,
 		.hide-overlay.active:hover .lines-button.x & {
-			-ms-transform: rotate3d(0, 0, 1, 0deg);
-			-webkit-transform: rotate3d(0, 0, 1, 0deg);
 			transform: rotate3d(0, 0, 1, 0deg);
 		}
 	}
@@ -782,13 +750,10 @@
 			height: 100%;
 			content: "";
 			opacity: 0;
-			-webkit-border-radius: inherit;
 			border-radius: inherit;
-			-webkit-transition: opacity 0.150s linear;
 			transition: opacity 0.150s linear;
 			-webkit-backface-visibility: hidden;
 			.disable-animation-bg& {
-				-webkit-transition: none;
 				transition: none;
 			}
 		}

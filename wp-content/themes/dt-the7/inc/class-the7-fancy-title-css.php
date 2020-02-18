@@ -66,8 +66,13 @@ class The7_Fancy_Title_CSS {
 
 		$less_vars->add_keyword( 'fancy-header-bg-size', $bg_image_size );
 
+		if ( get_post_meta( $post_id, '_dt_fancy_header_bg_image_origin', true ) === 'featured_image' ) {
+			$bg_image_id = get_post_thumbnail_id( $post_id );
+		} else {
+			$bg_image_id = current( (array) get_post_meta( $post_id, '_dt_fancy_header_bg_image', true ) );
+		}
+
 		$bg_image_url = '';
-		$bg_image_id  = current( (array) get_post_meta( $post_id, '_dt_fancy_header_bg_image', true ) );
 		if ( $bg_image_id ) {
 			$bg_image_parts = wp_get_attachment_image_src( $bg_image_id, 'full' );
 			if ( ! empty( $bg_image_parts[0] ) ) {

@@ -131,6 +131,7 @@ if ( ! function_exists( 'presscore_config_populate_archive_vars' ) ) :
 		$config->set( 'all_the_same_width', true );
 		$config->set( 'item_padding', 10 );
 
+
 		if ( is_home() ) {
 			$config->set( 'sidebar_position', 'right' );
 			$config->set( 'footer_show', true );
@@ -703,6 +704,8 @@ if ( ! function_exists( 'presscore_config_get_theme_option' ) ) :
 
 		$config->set( 'template.footer.layout', of_get_option( 'footer-layout', '1/4+1/4+1/4+1/4' ) );
 		$config->set( 'template.footer.decoration', of_get_option( 'footer-decoration', 'none' ) );
+
+		$config->set( 'page.bg', of_get_option( 'general-bg_fixed' ) );
 
 		// bottom bar
 		$config->set( 'template.bottom_bar.enabled', of_get_option( 'bottom_bar-enabled' ) );

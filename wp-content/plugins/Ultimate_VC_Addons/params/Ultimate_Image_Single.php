@@ -58,10 +58,10 @@ if(!class_exists('Ult_Image_Single'))
       
       check_ajax_referer( 'uavc-get-attachment-url-nonce', 'security' );
 
-      $id = $_POST['attach_id'];
+      $id = intval( $_POST['attach_id'] );
       $thumb = wp_get_attachment_image_src( $id, 'thumbnail' );
       //echo json_encode( $thumb );
-      echo $thumb[0];
+      echo reset( $thumb );
 
       die();
     }

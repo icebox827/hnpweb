@@ -21,34 +21,22 @@
 	padding: 30px 30px 0;
 	.box-sizing (border-box);
 	background-color: grey;
-	-ms-transition: -ms-transform  0.5s ease;
-	-webkit-transition: -webkit-transform  0.5s ease;
 	transition: transform  0.5s ease;
-	-ms-transform: translate3d(-100%, 0, 0);
-	-webkit-transform: translate3d(-100%, 0, 0);
 	transform: translate3d(-100%, 0, 0);
 	.show-mobile-header & {
-		-webkit-transform: translate3d(0, 0, 0);
 		transform: translate3d(0, 0, 0);
 	}
 	.right-mobile-menu & {
 		right: 0;
-		-ms-transform: translate3d(100%, 0, 0);
-		-webkit-transform: translate3d(100%, 0, 0);
 		transform: translate3d(100%, 0, 0);
-		-ms-transition: right  0.5s ease;
-		-webkit-transition: right  0.5s ease;
 		transition: right  0.5s ease;
 	}
 	.admin-bar & {
 		padding-top: 62px;
 	}
-	// .is-iOS &,
-	// .mobile-true & {
 		overflow: hidden;
 		overflow-y: auto;
 		-webkit-overflow-scrolling: touch;
-	//}
 }
 	.mobile-header-scrollbar-wrap:not(.mCustomScrollbar) {
 		position: relative;
@@ -77,7 +65,6 @@
 	height: 100%;
 	opacity: 0;
 	visibility: hidden;
-	-webkit-transition: all 0.4s;
 	transition: all 0.4s;
 }
 
@@ -101,7 +88,6 @@
 	opacity: 1;
 }
 	.dt-mobile-menu-icon.floating-btn .lines {
-		-webkit-border-radius: 0;
 		border-radius: 0;
 	}
 	.medium-mobile-menu-icon .mobile-header-bar .dt-mobile-menu-icon {
@@ -185,15 +171,10 @@
 				  	font-style: normal;
 				}
 			}
-			//.mobile-main-nav > li.has-children > a:after,
 			.mobile-main-nav .next-level-button {
-				-webkit-transition: -webkit-transform 0.3s ease-out;
 				transition: transform 0.3s ease-out;
 			}
-			//.mobile-main-nav > li.has-children.open-sub > a.act:after,
 			.mobile-main-nav li.has-children.open-sub > .next-level-button {
-				-ms-transform: rotate(45deg);
-				-webkit-transform: rotate(45deg);
 				transform: rotate(45deg);
 			}
 				.mobile-main-nav .menu-item a i {
@@ -246,13 +227,9 @@
 					margin: 0;
 				}
 				.mobile-main-nav .sub-nav .next-level-button {
-					-webkit-transition: -webkit-transform 0.3s ease-out;
 					transition: transform 0.3s ease-out;
 				}
-				//.mobile-main-nav .sub-nav li.has-children.open-sub > a.act:after,
 				.mobile-main-nav .sub-nav li.has-children.open-sub > .next-level-button {
-					-ms-transform: rotate(45deg);
-					-webkit-transform: rotate(45deg);
 					transform: rotate(45deg);
 				}
 	/* ====================== lines button ==================================================*/
@@ -285,10 +262,8 @@
 		left: -50px;
 		z-index: 9999;
 		opacity: 0;
-		-webkit-transition: opacity 0.2s ease;
 		transition: opacity 0.2s ease;
-			-webkit-transition-delay: 0.5s;
-			transition-delay: 0.5s;
+		transition-delay: 0.5s;
 
 		.admin-bar & {
 			top: 32px;
@@ -320,53 +295,39 @@
 		position: absolute;
 		left: 0;
 		content: '';
-		-webkit-transform-origin: 1.5px center;
 		transform-origin: 1.5px center;
-		-webkit-transition: top 0.3s;
 		transition: top 0.3s;
 	}
 
 	.dt-mobile-menu-icon:hover .lines:before {
-		-webkit-transform: translateY(-2px);
 		transform: translateY(-2px);
 	}
 	.dt-mobile-menu-icon:hover .lines:after {
-		-webkit-transform: translateY(2px);
 		transform: translateY(2px);
 	}
 	.dt-close-mobile-menu-icon span:before,
 	.dt-close-mobile-menu-icon span:after {
-		-webkit-transform-origin: 50% 50%;
 		transform-origin: 50% 50%;
 		top: 50%;
 		left: 50%;
 		margin: -1px 0 0 -11px;
 		width: 22px;
-		-webkit-transition: -webkit-transform .1s ease;
 		transition: transform .1s ease;
 	
 	}
 	span:before {
 		.dt-close-mobile-menu-icon & {
-			-ms-transform: rotate3d(0, 0, 1, 45deg);
-			-webkit-transform: rotate3d(0, 0, 1, 45deg);
 			transform: rotate3d(0, 0, 1, 45deg);
 		}
 		.dt-close-mobile-menu-icon:hover & {
-			-ms-transform: rotate3d(0, 0, 1, 0deg);
-			-webkit-transform: rotate3d(0, 0, 1, 0deg);
 			transform: rotate3d(0, 0, 1, 0deg);
 		}
 	}
 	span:after {
 		.dt-close-mobile-menu-icon & {
-			-ms-transform: rotate3d(0, 0, 1, -45deg);
-			-webkit-transform: rotate3d(0, 0, 1, -45deg);
 			transform: rotate3d(0, 0, 1, -45deg);
 		}
 		.dt-close-mobile-menu-icon:hover & {
-			-ms-transform: rotate3d(0, 0, 1, 0deg);
-			-webkit-transform: rotate3d(0, 0, 1, 0deg);
 			transform: rotate3d(0, 0, 1, 0deg);
 		}
 	}

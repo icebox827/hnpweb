@@ -483,34 +483,48 @@ if ( ! function_exists( 'presscore_top_bar_contact_element' ) ) :
 	 * @since 1.0.0
 	 */
 	function presscore_top_bar_contact_element( $el ) {
-		$el_id = 'header-elements-contact-' . $el;
-		$caption = of_get_option( $el_id . '-caption' );
+		$option_name = 'header-elements-contact-' . $el;
 
-		if ( $caption ) {
-			$class = array( 'mini-contacts ' . $el );
+		$icon = '';
+		if ( of_get_option( $option_name . '-icon' ) == 'custom' ) {
+			$icon = '<i class=" ' . of_get_option( $option_name . '-custom-icon' ) . '"></i>';
+		}
 
-			if ( ! of_get_option( $el_id . '-icon', true ) ) {
-				$class[] = 'mini-icon-off';
-			}
-			$widget_icon = "";
+		$caption = (string) of_get_option( $option_name . '-caption' );
 
-			$class = presscore_get_mini_widget_class( $el_id, $class );
+		if ( ! $icon && ! $caption ) {
+			return;
+		}
 
-			$widget_target = '';
-			if ( of_get_option( $el_id . '-target' ) ) {
-				$widget_target = 'target="_blank"';
-			}
-			$widget_link = of_get_option( $el_id . '-url' ) ? of_get_option( $el_id . '-url' ) : '';
+		$classes = array( 'mini-contacts ' . $el );
 
-			if(of_get_option( $el_id . '-icon') == 'custom'){
-				$widget_icon = '<i class=" ' . of_get_option( $el_id . '-custom-icon' ) . '"></i>';
-			}
+		if ( ! of_get_option( $option_name . '-icon', true ) ) {
+			$classes[] = 'mini-icon-off';
+		}
 
-			if($widget_link){
-				echo '<a href="' . esc_attr( $widget_link ) . '"  class="' . implode( ' ', $class ) . '">' . $widget_icon .  $caption . '</a>';
-			}else{
-				echo '<span class="' . implode( ' ', $class ) . '">' . $widget_icon .  $caption . '</span>';
-			}
+		$classes = presscore_get_mini_widget_class( $option_name, $classes );
+		$class = implode( ' ', $classes );
+
+		$href = of_get_option( $option_name . '-url' );
+		if ( $href ) {
+			$target = '';
+//			if ( of_get_option( $option_name . '-target' ) ) {
+//				$target = ' target="_blank"';
+//			}
+
+			printf(
+				'<a href="%s" class="%s" %s>%s</a>',
+				esc_attr( $href ),
+				esc_attr( $class ),
+				$target,
+				$icon . $caption
+			);
+		} else {
+			printf(
+				'<span class="%s">%s</span>',
+				esc_attr( $class ),
+				$icon . $caption
+			);
 		}
 	}
 

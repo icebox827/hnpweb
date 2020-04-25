@@ -1019,10 +1019,10 @@ function optionsframework_save_options_via_ajax() {
         $admin_dynamic_css = presscore_get_admin_dynamic_stylesheets_list();
 
 	    presscore_regenerate_dynamic_css( array_merge( $dynamic_css, $admin_dynamic_css ) );
+	    do_action( 'optionsframework_options_saved' );
     } catch ( Exception $e ) {
         wp_send_json_error( array( 'msg' => $e->getMessage() ) );
     }
-
 	wp_send_json_success( array( 'msg' => 'Options saved!' ) );
 }
 

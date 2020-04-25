@@ -23,6 +23,14 @@ $rs_global_settings		 = $rsaf->get_global_settings();
 $rs_notices				 = $rsaf->add_notices();
 $rs_color_picker_presets = RSColorpicker::get_color_presets();
 $rs_compression			 = $rsaf->compression_settings();
+$rs_backend_fonts		 = $rsaf->get_font_familys();
+$rs_new_addon_counter	 = get_option('rs-addons-counter', false);
+$rs_new_addon_counter	 = ($rs_new_addon_counter === false) ? count($rs_addons) : $rs_new_addon_counter;
+$rs_new_temp_counter	 = get_option('rs-templates-counter', false);
+if($rs_new_temp_counter === false){
+	$_rs_tmplts			 = get_option('rs-templates', array());
+	$rs_new_temp_counter = (isset($_rs_tmplts['slider'])) ? count($_rs_tmplts['slider']) : $rs_new_temp_counter;
+}
 $rs_global_sizes		 = array(
 	'd' => $rsaf->get_val($rs_global_settings, array('size', 'desktop'), '1240'),
 	'n' => $rsaf->get_val($rs_global_settings, array('size', 'notebook'), '1024'),
@@ -91,6 +99,10 @@ if(version_compare(RS_REVISION, $rs_show_updated, '>')){
 	RVS.ENV.img_sizes		= jQuery.parseJSON(<?php echo $rsaf->json_encode_client_side($rs_added_image_sizes); ?>);
 	RVS.ENV.create_img_meta	= <?php echo (!empty($rs_image_meta_todo)) ? 'true' : 'false'; ?>;
 	RVS.ENV.notices			= <?php echo (!empty($rs_notices)) ? 'jQuery.parseJSON('. $rsaf->json_encode_client_side($rs_notices) .')' : '[]'; ?>;
+	RVS.ENV.selling			= <?php echo ($rsaf->get_addition('selling') === true) ? 'true' : 'false'; ?>;
+	RVS.ENV.newAddonsAmount = '<?php echo $rs_new_addon_counter; ?>';
+	RVS.ENV.newTemplatesAmount = '<?php echo $rs_new_temp_counter; ?>';
+	
 	<?php
 	if($rs_slider_update_needed == true){
 	?>
@@ -118,6 +130,17 @@ if(version_compare(RS_REVISION, $rs_show_updated, '>')){
 </script>
 <?php
 do_action('revslider_header_content', $rsaf);
+?>
+
+<?php
+//add custom fonts that have backend set to true
+if(!empty($rs_backend_fonts)){
+	foreach($rs_backend_fonts as $rs_bf){
+		if($rs_bf['type'] === 'custom' && isset($rs_bf['url']) && isset($rs_bf['backend']) && $rs_bf['backend'] === true){
+			echo '<link href="'.esc_html($rs_bf['url']).'" rel="stylesheet" property="stylesheet" media="all" type="text/css" >'."\n";
+		}
+	}
+}
 ?>
 
 <?php

@@ -23,10 +23,10 @@
 define( 'DB_NAME', 'hnpweb' );
 
 /** MySQL database username */
-define( 'DB_USER', 'coordo' );
+define( 'DB_USER', 'root' );
 
 /** MySQL database password */
-define( 'DB_PASSWORD', 'K00rdPNH1995' );
+define( 'DB_PASSWORD', '' );
 
 /** MySQL hostname */
 define( 'DB_HOST', 'localhost' );

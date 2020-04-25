@@ -61,6 +61,7 @@
 .mixin-custom-settings() when (ispixel(@btn-border-radius)) {
   border-radius: @btn-border-radius;
   font-size: @btn-font-size;
+  line-height: @btn-font-size + 2;
 
   .mixin-shadow-style();
   .mixin-3d-style(@btn-bg-color, @btn-bg-color-hover);

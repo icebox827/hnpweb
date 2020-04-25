@@ -408,14 +408,7 @@ if(!defined('ABSPATH')) exit();
 	<!-- LAYER POSITION CONTAINER -->
 	<div class="form_collector layer_settings_collector" data-type="layersconfig" data-pcontainer="#layer_settings" data-offset="#rev_builder_wrapper">
 		<div id="form_layer_position"  class="formcontainer form_menu_inside collapsed" data-select="#gst_layer_2" data-unselect=".layer_submodule_trigger">			
-			<div class="form_inner open _shfc_ _nsfr_ _nsfa_ _nsft_ _nsfb_ _nsfsvg_">
-				<div class="collapsable">
-					<row class="direktrow">
-							<labelhalf><i class="material-icons vmi">sms_failed</i></labelhalf>
-							<contenthalf><div class="function_info"><?php _e('No options available for your current selection.', 'revslider');?></div></contenthalf>
-						</row>
-				</div>
-			</div>
+			
 
 			<!-- LAYER POSITION basic -->
 			<div id="form_layerposition_basic" class="form_inner open _nsfc_">
@@ -573,11 +566,11 @@ if(!defined('ABSPATH')) exit();
 			<!-- LAYER STYLE BACKGROUND -->
 			<div id="form_layerstyle_bg" class="form_inner open _nsfv_">
 				<div class="form_inner_header"><i class="material-icons">color_lens</i><?php _e('Background', 'revslider');?></div>
-				<div class="collapsable">
+				<div class="collapsable">					
 					<div class="__idle__"><label_a><?php _e('BG Color', 'revslider');?></label_a><input type="text" data-editing="Layer BG Color" name="layerBGColor" id="layerBGColor" class="my-color-field layerinput easyinit" data-visible="true" data-r="idle.backgroundColor" value="transparent"></div>
 					<div class="_ltsel_bgcolor"><label_a><?php _e('BG in Frame', 'revslider');?></label_a><input type="text" data-editing="Frame BG Color Animation" name="frameBGColorAnimationDouble" id="frameBGColorAnimationDouble" class="my-color-field layerinput easyinit" data-visible="true" data-r="#frame#.bgcolor.backgroundColor" value="transparent"></div>
 					<div class="div15"></div>
-					<row class="direktrow __idle__ _nsfi_ _nsfv_">
+					<row class="direktrow __idle__ _nsfi_ _nsfv_">						
 						<onelong><label_a><?php _e('BG Image', 'revslider');?></label_a><div class="miniprevimage_wrap"><i class="material-icons">filter_hdr</i><div id="layer_bg_image" data-showadvbg="#layer_bg_adv_settings"></div><div data-evt="updatelayerbgimage" data-r="idle.backgroundImage" data-rid="idle.backgroundImageId" data-lib="idle.bgimagelib" data-default="" class="resettodefault basic_action_button callEventButton layerinput onlyicon"><i class="material-icons">close</i></div></div></onelong>
 						<oneshort>
 							<div data-evt="updatelayerbgimage" data-r="idle.backgroundImage" data-rid="idle.backgroundImageId" data-lib="idle.bgimagelib" data-sty="behavior.imageSourceType" class="getImageFromMediaLibrary basic_action_button callEventButton layerinput"><i class="material-icons">style</i><?php _e('Media', 'revslider');?></div>
@@ -585,11 +578,18 @@ if(!defined('ABSPATH')) exit();
 						</oneshort>
 					</row>
 
+
 					<!-- USED LIBRARY TYPE-->
 					<div style="display:none"><label_a class="singlerow"><?php _e('Used Library', 'revslider');?></label_a><select class="layerinput easyinit" data-r="idle.bgimagelib" data-show="#layerbg_srctype_*val*" data-hide=".layerbg_srctype_all" data-showprio="show"><option value="">Nothing</option><option value="objectlibrary">Objectlibrary</option><option value="medialibrary">MediaLibrary</option></select></div>
+
 					<!-- SIZE / SRC PICKER FOR CURRENT USED LIBRARY TYPE-->
 					<div id="layerbg_srctype_objectlibrary" class="layerbg_srctype_all"><label_a class="singlerow"><?php _e('Image Size', 'revslider');?></label_a><select class="layerinput tos2 nosearchbox easyinit" data-evt="getNewImageSize" data-evtparam="bg.object" data-r="behavior.imageSourceType"><option value="100" selected="selected"><?php _e("Original", 'revslider');?></option><option value="75" selected="selected"><?php _e("Large", 'revslider');?></option><option value="50" selected="selected"><?php _e("Medium", 'revslider');?></option><option value="25" selected="selected"><?php _e("Small", 'revslider');?></option><option value="10" selected="selected"><?php _e("Extra Small", 'revslider');?></option></select></div>
 					<div id="layerbg_srctype_medialibrary" class="layerbg_srctype_all"><label_a class="singlerow"><?php _e('Source Type', 'revslider');?></label_a><select class="layerinput tos2 nosearchbox easyinit" data-evt="getNewImageSize" data-evtparam="bg.media" data-r="behavior.imageSourceType"><option value="auto" selected="selected"><?php _e("Default Setting", 'revslider');?></option><?php foreach ($img_sizes as $imghandle => $imgSize) { echo '<option value="' . $imghandle . '">' . $imgSize . '</option>';}?></select></div>
+
+					
+									
+
+
 
 
 					<div id="layer_bg_adv_settings">
@@ -623,8 +623,14 @@ if(!defined('ABSPATH')) exit();
 								<div class="bgIdleSize_pixel bgIdleSize_perpix"><label_a>PX</label_a><input class="layerinput valueduekeyboard smallinput easyinit" data-allowed=""  data-responsive="false" data-numeric="true" data-r="idle.backgroundSizePix" data-min="0" data-max="2000" type="text"></div>
 							</oneshort>
 						</row>
-
 					</div>
+					<!-- STREAM BASED IMAGE BG -->
+					<div class="__idle__ _nsfi_ _nsfv_">						
+						<div class="div25"></div>
+						<longoption><i class="material-icons">language</i><label_a ><?php _e('Image from Stream if exist', 'revslider');?></label_a><input type="checkbox" class="easyinit layerinput callEvent" data-showhide="#layerbg_srctype_streamlibrary" data-showhidedep="true" data-evt="updatelayerbgimage" data-r="idle.bgFromStream"></longoption>
+						<div class="div5"></div>
+						<div id="layerbg_srctype_streamlibrary"><label_a class="singlerow"><?php _e('Stream Size', 'revslider');?></label_a><select class="layerinput tos2 nosearchbox easyinit"  data-r="behavior.streamSourceType"><option value="auto" selected="selected"><?php _e("Default Setting", 'revslider');?></option><?php foreach ($img_sizes as $imghandle => $imgSize) { echo '<option value="' . $imghandle . '">' . $imgSize . '</option>';}?></select></div>						
+					</div>	
 				</div>
 			</div>
 

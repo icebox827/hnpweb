@@ -61,7 +61,7 @@ class RevSliderFunctionsAdmin extends RevSliderFunctions {
 		
 		if(in_array('moduletemplates', $include) || in_array('all', $include)){
 			if(!isset($object['moduletemplates'])) $object['moduletemplates'] = array();
-			$object['moduletemplates']['items']	= $template->get_tp_template_sliders_for_library();
+			$object['moduletemplates']['items']	= $template->get_tp_template_sliders_for_library($refresh_from_server);
 		}
 		if(in_array('moduletemplateslides', $include) || in_array('all', $include)){
 			if(!isset($object['moduletemplateslides'])) $object['moduletemplateslides'] = array();
@@ -332,7 +332,7 @@ class RevSliderFunctionsAdmin extends RevSliderFunctions {
 	 */
 	public function add_notices(){
 		$_n = array();
-		$notices = get_option('revslider-notices', false);
+		$notices = (array)get_option('revslider-notices', false);
 		
 		if(!empty($notices) && is_array($notices)){
 			$n_discarted = get_option('revslider-notices-dc', array());
@@ -571,27 +571,27 @@ class RevSliderFunctionsAdmin extends RevSliderFunctions {
 	 * Create Multilanguage for JavaScript
 	 */
 	public function get_javascript_multilanguage(){
-		$lang = array(			
-			'editskins' => __('Edit Skin List', 'revslider'),			
-			'globalcoloractive' => __('Color Skin Active', 'revslider'),			
-			'corejs' => __('Core JavaScript', 'revslider'),			
-			'corecss' => __('Core CSS', 'revslider'),			
-			'coretools' => __('Core Tools (GreenSock & Co)', 'revslider'),			
-			'enablecompression' => __('Enable Server Compression', 'revslider'),			
-			'noservercompression' => __('Not Available, read FAQ', 'revslider'),			
-			'servercompression' => __('Serverside Compression', 'revslider'),			
-			'sizeafteroptim' => __('Size after Optimization', 'revslider'),			
-			'chgimgsizesrc' => __('Change Image Size or Src', 'revslider'),			
-			'pickandim' => __('Pick another Dimension', 'revslider'),			
-			'optimize' => __('Optimize', 'revslider'),			
-			'savechanges' => __('Save Changes', 'revslider'),			
-			'applychanges' => __('Apply Changes', 'revslider'),			
-			'suggestion' => __('Suggestion', 'revslider'),			
-			'toosmall' => __('Too Small', 'revslider'),			
-			'standard1x' => __('Standard (1x)', 'revslider'),			
-			'retina2x' => __('Retina (2x)', 'revslider'),			
-			'oversized' => __('Oversized', 'revslider'),			
-			'quality' => __('Quality', 'revslider'),			
+		$lang = array(
+			'editskins' => __('Edit Skin List', 'revslider'),
+			'globalcoloractive' => __('Color Skin Active', 'revslider'),
+			'corejs' => __('Core JavaScript', 'revslider'),
+			'corecss' => __('Core CSS', 'revslider'),
+			'coretools' => __('Core Tools (GreenSock & Co)', 'revslider'),
+			'enablecompression' => __('Enable Server Compression', 'revslider'),
+			'noservercompression' => __('Not Available, read FAQ', 'revslider'),
+			'servercompression' => __('Serverside Compression', 'revslider'),
+			'sizeafteroptim' => __('Size after Optimization', 'revslider'),
+			'chgimgsizesrc' => __('Change Image Size or Src', 'revslider'),
+			'pickandim' => __('Pick another Dimension', 'revslider'),
+			'optimize' => __('Optimize', 'revslider'),
+			'savechanges' => __('Save Changes', 'revslider'),
+			'applychanges' => __('Apply Changes', 'revslider'),
+			'suggestion' => __('Suggestion', 'revslider'),
+			'toosmall' => __('Too Small', 'revslider'),
+			'standard1x' => __('Standard (1x)', 'revslider'),
+			'retina2x' => __('Retina (2x)', 'revslider'),
+			'oversized' => __('Oversized', 'revslider'),
+			'quality' => __('Quality', 'revslider'),
 			'file' => __('File', 'revslider'),
 			'resize' => __('Resize', 'revslider'),
 			'lowquality' => __('Optimized (Low Quality)', 'revslider'),
@@ -773,9 +773,7 @@ class RevSliderFunctionsAdmin extends RevSliderFunctions {
 			'updateNow' => __('Update Now', 'revslider'),
 			'activateToUpdate' => __('Activate To Update', 'revslider'),
 			'activated' => __('Activated', 'revslider'),
-			'notActivated' => __('Not Activated', 'revslider'),
-			'registerCode' => __('Register this Code', 'revslider'),
-			'deregisterCode' => __('Deregister this Code', 'revslider'),
+			'notActivated' => __('Not Activated', 'revslider'),			
 			'embedingLine1' => __('Standard Module Embedding', 'revslider'),
 			'embedingLine2' => __('For the <b>pages and posts</b> editor insert the Shortcode:', 'revslider'),
 			'embedingLine2a' => __('To Use it as <b>Modal</b> on <b>pages and posts</b> editor insert the Shortcode:', 'revslider'),
@@ -1001,13 +999,7 @@ class RevSliderFunctionsAdmin extends RevSliderFunctions {
 			'deletingslider' => __('Deleting Slider', 'revslider'),
 			'active_sr_tmp_obl' => __('Template & Object Library', 'revslider'),
 			'active_sr_inst_upd' => __('Instant Updates', 'revslider'),
-			'active_sr_one_on_one' => __('1on1 Support', 'revslider'),
-			'getlicensekey' => __('Get a Purchase Code', 'revslider'),
-			'ihavelicensekey' => __('I have a Purchase Code', 'revslider'),
-			'active_sr_to_access' => __('Register Slider Revolution<br>to Unlock Premium Features', 'revslider'),
-			'active_sr_plg_activ' => __('Register Purchase Code', 'revslider'),
-			'onepurchasekey' => __('1 Purchase Code per Website!', 'revslider'),
-			'onepurchasekey_info' => __('If you want to use your purchase code on<br>another domain, please deregister it first or', 'revslider'),
+			'active_sr_one_on_one' => __('1on1 Support', 'revslider'),			
 			'parallaxsettoenabled' => __('Parallax is now generally Enabled', 'revslider'),
 			'timelinescrollsettoenabled' => __('Scroll Based Timeline is now generally Enabled', 'revslider'),
 			'feffectscrollsettoenabled' => __('Filter Effect Scroll is now generally Enabled', 'revslider'),
@@ -1020,7 +1012,29 @@ class RevSliderFunctionsAdmin extends RevSliderFunctions {
 			'quickcontenteditor' => __('Quick Content Editor', 'revslider'),
 			'module' => __('Module', 'revslider'),
 			'quickstyleeditor' => __('Quick Style Editor', 'revslider'),
-			'all' => __('All', 'revslider')
+			'all' => __('All', 'revslider'),
+			'active_sr_to_access' => __('Register Slider Revolution<br>to Unlock Premium Features', 'revslider'),
+			'membersarea' => __('Members Area', 'revslider'),
+			'onelicensekey' => __('1 License Key per Website!', 'revslider'),
+			'onepurchasekey' => __('1 Purchase Code per Website!', 'revslider'),
+			'onelicensekey_info' => __('If you want to use your license key on another domain, please<br> deregister it in the members area or use a different key.', 'revslider'),
+			'onepurchasekey_info' => __('If you want to use your purchase code on<br>another domain, please deregister it first or', 'revslider'),
+			'registeredlicensekey' => __('Registered License Key', 'revslider'),
+			'registeredpurchasecode' => __('Registered Purchase Code', 'revslider'),
+			'registerlicensekey' => __('Register License Key', 'revslider'),
+			'registerpurchasecode' => __('Register Purchase Code', 'revslider'),
+			'registerCode' => __('Register this Code', 'revslider'),
+			'registerKey' => __('Register this License Key', 'revslider'),
+			'deregisterCode' => __('Deregister this Code', 'revslider'),
+			'deregisterKey' => __('Deregister this License Key', 'revslider'),
+			'active_sr_plg_activ' => __('Register Purchase Code', 'revslider'),
+			'active_sr_plg_activ_key' => __('Register License Key', 'revslider'),
+			'getpurchasecode' => __('Get a Purchase Code', 'revslider'),
+			'getlicensekey' => __('Licensing Options', 'revslider'),
+			'ihavepurchasecode' => __('I have a Purchase Code', 'revslider'),
+			'ihavelicensekey' => __('I have a License Key', 'revslider'),
+			'enterlicensekey' => __('Enter License Key', 'revslider'),
+			'enterpurchasecode' => __('Enter Purchase Code', 'revslider')
 			
 		);
 

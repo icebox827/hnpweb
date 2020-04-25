@@ -782,10 +782,16 @@ if(!defined('ABSPATH')) exit();
 				<div class="form_inner_header"><i class="material-icons">pan_tool</i><?php _e('Touch', 'revslider');?></div>
 				<!--<div class="form_intoaccordion" data-trigger="#sr_na_thumb_11"><i class="material-icons">arrow_drop_down</i></div>				-->
 				<div class="collapsable" style="display:block;padding-bottom:0px">
-					<longoption><i class="material-icons"></i><label_a><?php _e('Mobile Swipe Enabled', 'revslider');?></label_a><input type="checkbox"  id="sr_usetouch" class="sliderinput easyinit" data-r="nav.swipe.set"/></longoption>
-					<longoption><i class="material-icons"></i><label_a><?php _e('Desktop Swipe Enabled', 'revslider');?></label_a><input type="checkbox"  id="sr_usetouchdesktop" class="sliderinput easyinit" data-r="nav.swipe.setOnDesktop"/></longoption>
+					<div class="carouselunavailable standardavailable sceneavailable">
+						<longoption><i class="material-icons"></i><label_a><?php _e('Mobile Swipe Enabled', 'revslider');?></label_a><input type="checkbox"  id="sr_usetouch" class="sliderinput easyinit" data-r="nav.swipe.set"/></longoption>
+						<longoption><i class="material-icons"></i><label_a><?php _e('Desktop Swipe Enabled', 'revslider');?></label_a><input type="checkbox"  id="sr_usetouchdesktop" class="sliderinput easyinit" data-r="nav.swipe.setOnDesktop"/></longoption>
+					</div>
+					<div class="carouselavailable standardunavailable sceneunavailable">
+						<longoption><i class="material-icons"></i><label_a><?php _e('Mobile Carousel Swipe', 'revslider');?></label_a><input type="checkbox"  id="sr_usetouch" class="sliderinput easyinit" data-r="nav.swipe.setMobileCarousel"/></longoption>
+						<longoption><i class="material-icons"></i><label_a><?php _e('Desktop Carousel Swipe', 'revslider');?></label_a><input type="checkbox"  id="sr_usetouch" class="sliderinput easyinit" data-r="nav.swipe.setDesktopCarousel"/></longoption>
+					</div>
 					<longoption><i class="material-icons"></i><label_a><?php _e('Block Scroll', 'revslider');?></label_a><input type="checkbox"  id="sr_blockDragVertical" class="sliderinput easyinit" data-r="nav.swipe.blockDragVertical"/></longoption>
-					<div class="div15"></div>
+					<div class="div15"></div>					
 					<label_a><?php _e('Velocity', 'revslider');?></label_a><input class="sliderinput valueduekeyboard smallinput easyinit"  data-r="nav.swipe.velocity" data-min="0" data-max="75" type="text" id="nav_swipe_velocity" ><span class="linebreak"></span>
 					<label_a><?php _e('Min. Finger', 'revslider');?></label_a><input class="sliderinput valueduekeyboard smallinput easyinit"  data-r="nav.swipe.minTouch" data-min="0" data-max="10" type="text" id="nav_swipe_minTouch" ><span class="linebreak"></span>
 					<div class="div15"></div>

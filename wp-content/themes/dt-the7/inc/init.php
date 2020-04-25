@@ -132,7 +132,6 @@ if ( is_admin() ) {
 	require_once locate_template( 'inc/admin/load-meta-boxes.php' );
 
 	The7_Theme_Auto_Deactivation::add_hooks();
-	The7_Fancy_Title_CSS::bootstrap();
 } else {
 	$fa_enqueue_optimizer = new The7_FontAwesome_Enqueue_Optimizer();
 	$fa_enqueue_optimizer->run();

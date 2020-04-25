@@ -87,7 +87,7 @@ class RevSliderShortcodeWizard extends RevSliderFunctions {
 			wp_enqueue_script('revbuilder-utils', RS_PLUGIN_URL . 'admin/assets/js/plugins/utils.min.js', array('jquery','wp-color-picker'), RS_REVISION, false);
 		}
 
-		wp_enqueue_script('tp-tools', RS_PLUGIN_URL . 'public/assets/js/revolution.tools.min.js', array('jquery'), RS_REVISION, true);
+		wp_enqueue_script('tp-tools', RS_PLUGIN_URL . 'public/assets/js/rbtools.min.js', array('jquery'), RS_REVISION, true);
 
 		// object library translations
 		wp_localize_script('revbuilder-utils', 'RVS_LANG', array(			
@@ -179,18 +179,32 @@ class RevSliderShortcodeWizard extends RevSliderFunctions {
 			'creationascending' => __('Creation Ascending', 'revslider'),
 			'sortbytitle' => __('Sort by Title', 'revslider'),
 			'titledescending' => __('Title Descending', 'revslider'),
-			'active_sr_to_access' => __('Register Slider Revolution<br>to Unlock Premium Features', 'revslider'),
-			'active_sr_plg_activ' => __('Register Purchase Code', 'revslider'),
-			'onepurchasekey' => __('1 Purchase Code per Website!', 'revslider'),
-			'onepurchasekey_info' => __('If you want to use your purchase code on<br>another domain, please deregister it first or', 'revslider'),
+			'active_sr_to_access' => __('Register Slider Revolution<br>to Unlock Premium Features', 'revslider'),				
 			'addons' => __('Add-Ons', 'revslider'),
 			'active_sr_tmp_obl' => __('Template & Object Library', 'revslider'),
 			'active_sr_inst_upd' => __('Instant Updates', 'revslider'),
-			'active_sr_one_on_one' => __('1on1 Support', 'revslider'),
-			'getlicensekey' => __('Get a Purchase Code', 'revslider'),
-			'ihavelicensekey' => __('I have a Purchase Code', 'revslider'),
+			'active_sr_one_on_one' => __('1on1 Support', 'revslider'),			
+			'membersarea' => __('Members Area', 'revslider'),
+			'onelicensekey' => __('1 License Key per Website!', 'revslider'),
+			'onepurchasekey' => __('1 Purchase Code per Website!', 'revslider'),
+			'onelicensekey_info' => __('If you want to use your license key on another domain, please<br> deregister it in the members area or use a different key.', 'revslider'),
+			'onepurchasekey_info' => __('If you want to use your purchase code on<br>another domain, please deregister it first or', 'revslider'),
+			'registeredlicensekey' => __('Registered License Key', 'revslider'),
+			'registeredpurchasecode' => __('Registered Purchase Code', 'revslider'),
+			'registerlicensekey' => __('Register License Key', 'revslider'),
+			'registerpurchasecode' => __('Register Purchase Code', 'revslider'),
 			'registerCode' => __('Register this Code', 'revslider'),
-			'deregisterCode' => __('Deregister this Code', 'revslider')
+			'registerKey' => __('Register this License Key', 'revslider'),
+			'deregisterCode' => __('Deregister this Code', 'revslider'),
+			'deregisterKey' => __('Deregister this License Key', 'revslider'),
+			'active_sr_plg_activ' => __('Register Purchase Code', 'revslider'),
+			'active_sr_plg_activ_key' => __('Register License Key', 'revslider'),
+			'getpurchasecode' => __('Get a Purchase Code', 'revslider'),
+			'getlicensekey' => __('Licensing Options', 'revslider'),
+			'ihavepurchasecode' => __('I have a Purchase Code', 'revslider'),
+			'ihavelicensekey' => __('I have a License Key', 'revslider'),
+			'enterlicensekey' => __('Enter License Key', 'revslider'),
+			'enterpurchasecode' => __('Enter Purchase Code', 'revslider')
 
 		));
 
@@ -212,13 +226,14 @@ class RevSliderShortcodeWizard extends RevSliderFunctions {
 			var RS_DEFALIAS,
 				RS_SHORTCODE_FAV;
 
-			RVS.ENV.plugin_url = '<?php echo RS_PLUGIN_URL; ?>';
-			RVS.ENV.plugin_dir = 'revslider';
-			RVS.ENV.admin_url = '<?php echo admin_url('admin.php?page=revslider'); ?>';
-			RVS.ENV.nonce = '<?php echo wp_create_nonce('revslider_actions'); ?>';
-			RVS.ENV.activated		= '<?php echo (get_option('revslider-valid', 'false')) == 'true' ? 'true' : 'false'; ?>';
-			RVS.ENV.activated		= RVS.ENV.activated == 'true' || RVS.ENV.activated == true ? true : false;
-
+			RVS.ENV.plugin_url	= '<?php echo RS_PLUGIN_URL; ?>';
+			RVS.ENV.plugin_dir	= 'revslider';
+			RVS.ENV.admin_url	= '<?php echo admin_url('admin.php?page=revslider'); ?>';
+			RVS.ENV.nonce		= '<?php echo wp_create_nonce('revslider_actions'); ?>';
+			RVS.ENV.activated	= '<?php echo (get_option('revslider-valid', 'false')) == 'true' ? 'true' : 'false'; ?>';
+			RVS.ENV.activated	= RVS.ENV.activated == 'true' || RVS.ENV.activated == true ? true : false;
+			RVS.ENV.selling		= <?php echo ($rsaf->get_addition('selling') === true) ? 'true' : 'false'; ?>;
+			
 			window.addEventListener('load', function(){
 				RVS.ENV.output_compress	= <?php echo (!empty($rs_compression)) ? 'jQuery.parseJSON('. $rsaf->json_encode_client_side($rs_compression) .')' : '[]'; ?>;
 				<?php if(!empty($rsa)){ ?>

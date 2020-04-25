@@ -16,7 +16,7 @@ if(!defined('ABSPATH')) exit();
 											data-dim="w:400px;h:120px;"
 											data-border="bow:0px;"
 											data-frame_0="x:left;o:1;"
-											data-frame_1="e:Elastic.easeOut;st:160;sp:2000;sR:160;"
+											data-frame_1="e:elastic.out;st:160;sp:2000;sR:160;"
 											data-frame_999="x:right;o:0;st:a;sp:1000;sR:6840;"
 											style="z-index:5;"
 										><img src="<?php echo RS_PLUGIN_URL;?>admin/views/features/assets/dummy.png" data-ww="400px" data-hh="120px" width="400" height="120" data-lazyload="<?php echo RS_PLUGIN_URL;?>admin/views/features/assets/layers_bg.jpg" data-no-retina> 
@@ -46,8 +46,8 @@ if(!defined('ABSPATH')) exit();
 											data-text="s:25;l:30;fw:700;a:center;"
 											data-border="bow:0px;"
 											data-frame_0="y:-50;"
-											data-frame_1="e:Power4.easeOut;st:160;sp:1000;sR:160;"
-											data-frame_999="y:50;o:0;e:Power4.easeOut;st:a;sp:600;sR:7840;"
+											data-frame_1="e:power4.out;st:160;sp:1000;sR:160;"
+											data-frame_999="y:50;o:0;e:power4.out;st:a;sp:600;sR:7840;"
 											style="z-index:7;font-family:Roboto;"
 										>100+<br/>Premade Layers & Animations 
 										</rs-layer><!--
@@ -61,8 +61,8 @@ if(!defined('ABSPATH')) exit();
 											data-text="s:25;l:30;fw:700;a:center;"
 											data-border="bow:0px;"
 											data-frame_0="y:-50;"
-											data-frame_1="e:Power4.easeOut;st:a;sp:1000;sR:100;"
-											data-frame_999="y:50px;o:0;e:Power4.easeOut;st:a;sp:600;sR:7900;"
+											data-frame_1="e:power4.out;st:a;sp:1000;sR:100;"
+											data-frame_999="y:50px;o:0;e:power4.out;st:a;sp:600;sR:7900;"
 											style="z-index:8;font-family:Roboto;"
 										>Build Content<br/>In Minutes! 
 										</rs-layer><!--
@@ -78,8 +78,8 @@ if(!defined('ABSPATH')) exit();
 											data-padding="r:35;l:35;"
 											data-border="bos:solid;boc:rgba(0,0,0,1);bow:0px;bor:3px,3px,3px,3px;"
 											data-frame_0="y:50;"
-											data-frame_1="e:Power4.easeOut;st:500;sp:1000;sR:500;"
-											data-frame_999="o:0;e:Power4.easeInOut;st:w;sp:1000;sR:7500;"
+											data-frame_1="e:power4.out;st:500;sp:1000;sR:500;"
+											data-frame_999="o:0;e:power4.inOut;st:w;sp:1000;sR:7500;"
 											data-frame_hover="c:rgba(255,255,255,1);bgc:#0a447a;boc:rgba(0,0,0,1);bor:3px,3px,3px,3px;bos:solid;oX:50;oY:50;sp:300;"
 											style="z-index:9;background-color:#006dd2;font-family:Roboto;"
 										>Element Library 

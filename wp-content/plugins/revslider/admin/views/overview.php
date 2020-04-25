@@ -18,6 +18,7 @@ $code			= get_option('revslider-code', '');
 $time			= date('H');
 $timezone		= date('e');/* Set the $timezone variable to become the current timezone */
 $hi				= __('Good Evening ', 'revslider');
+$selling 		= $rsaf->get_addition('selling');
 if($time < '12'){
 	$hi = __('Good Morning ', 'revslider');
 }elseif($time >= '12' && $time < '17'){
@@ -55,19 +56,25 @@ $rs_languages	= $rs_slider->get_available_languages();
 <div id="rs_overview" class="rs_overview _TPRB_">
 	<div id="rsalienfakeplaceholder"></div>
 	<!-- WELCOME TO SLIDER REVOLUTION -->
-	<h2 id="rs_welcome_h2" class="title"><?php echo $hi; echo $current_user->display_name; echo '!'; ?></h2>
-	<h3 id="rs_welcome_h3" class="subtitle"><?php _e('You are running Slider Revolution ', 'revslider'); echo RS_REVISION; ?></h3>
+	<div id="rs_welcome_header_area">
+		<h2 id="rs_welcome_h2" class="title"><?php echo $hi; echo $current_user->display_name; echo '!'; ?></h2>
+		<h3 id="rs_welcome_h3" class="subtitle"><?php _e('You are running Slider Revolution ', 'revslider'); echo RS_REVISION; ?></h3>
+		<?php if ($selling === true) { ?>
+			<a href="https://sliderrevolution.com/members-login/" target="_blank" id="rs_memarea_registered" class="basic_action_button longbutton basic_action_lilabutton"><i class="material-icons">person_outline</i><?php _e('Members Area', 'revslider');?></a>
+			<!-- <a href="https://sliderrevolution.com/members-login/" target="_blank" id="rs_memarea"></a>					  -->
+		<?php } ?>
+	</div>
 
 	<!-- CREATE YOUR SLIDERS -->
 	<div id="add_new_slider_wrap">
 		<div id="new_blank_slider" class="new_slider_block"><i class="material-icons">movie_filter</i><span class="nsb_title"><?php _e('New Blank Module', 'revslider');?></span></div>
-		<?php if(!defined('REVSLIDER_THEME_ACT')) : ?>
-		<div id="new_slider_from_template" class="new_slider_block"><i class="material-icons">style</i><span class="nsb_title"><?php _e('New Module from Template', 'revslider');?></span></div>
-		 <?php endif;?>
+		<?php if(defined('REVSLIDER_THEME_ACT')) : ?> <div style="display: none;"> <?php endif;?>
+		<div id="new_slider_from_template" class="new_slider_block"><i class="material-icons">style</i><span class="nsb_title"><?php _e('New Module from Template', 'revslider');?></span><div id="new_templates_counter" class="new_elements_available">+ 13</div></div>
+			<?php if(defined('REVSLIDER_THEME_ACT')) : ?> </div> <?php endif;?>
 		<div id="new_slider_import" class="new_slider_block"><i class="material-icons">file_upload</i><span class="nsb_title"><?php _e('Manual Import', 'revslider');?></span></div>
-		<?php if(!defined('REVSLIDER_THEME_ACT')) : ?>
-		<div id="add_on_management" class="new_slider_block"><i class="material-icons">extension</i><span class="nsb_title"><?php _e('AddOns', 'revslider');?></span></div>
-        <?php endif;?>
+		<?php if(defined('REVSLIDER_THEME_ACT')) : ?> <div style="display: none;"> <?php endif;?>
+		<div id="add_on_management" class="new_slider_block"><i class="material-icons">extension</i><span class="nsb_title"><?php _e('AddOns', 'revslider');?></span><div id="new_addons_counter" class="new_elements_available">2</div></div>
+		<?php if(defined('REVSLIDER_THEME_ACT')) : ?> </div> <?php endif;?>
 	</div>
 
 	<!--LIST AND FILTER OF EXISTIN SLIDERS-->
@@ -106,13 +113,15 @@ $rs_languages	= $rs_slider->get_available_languages();
 			<h3 class="pli_title"><?php _e('Plugin Updates', 'revslider');?></h3>
 			<grayiconbox><i class="material-icons">flag</i></grayiconbox><div class="pli_twoline"><div class="pli_subtitle"><?php _e('Installed Version', 'revslider');?></div><div class="dynamicval pli_subtitle"><?php echo RS_REVISION; ?></div></div>
 			<div class="div10"></div>
+			<?php if(!defined('REVSLIDER_THEME_ACT')) : ?>
 			<grayiconbox id="available_version_icon"><i class="material-icons">cloud_download</i></grayiconbox><div id="available_version_content" class="pli_twoline"><div class="pli_subtitle"><?php _e('Available Version', 'revslider');?></div><div class="available_latest_version dynamicval pli_subtitle"><?php echo $latest_version; ?></div></div>
 			<darkiconbox id="check_for_updates" class="rfloated"><i class="material-icons">refresh</i></darkiconbox>			
 			<div class="div50"></div>
 			<bluebutton id="updateplugin"><?php _e('Update Now', 'revslider');?></bluebutton>
 			<div class="div75"></div>
 			<h3 class="pli_title"><?php _e('System Requirements', 'revslider');?></h3>
-			<div id="system_requirements">
+			<?php endif;?>
+            <div id="system_requirements">
 				<div id="syscheck_upload_folder_writable" class="system_requirement"><i class="material-icons done_icon">done</i><i class="material-icons warning_icon">warning</i><?php _e('Upload folder writable', 'revslider');?></div>
 				<div id="syscheck_memory_limit" class="system_requirement"><i class="material-icons done_icon">done</i><i class="material-icons warning_icon">warning</i><?php _e('Memory Limit (256M)', 'revslider');?></div>
 				<div id="syscheck_upload_max_filesize" class="system_requirement"><i class="material-icons done_icon">done</i><i class="material-icons warning_icon">warning</i><?php _e('Upload Max. Filesize (256M)', 'revslider');?></div>
@@ -128,28 +137,33 @@ $rs_languages	= $rs_slider->get_available_languages();
 			<div id="plugin_history" class="pli_update_history"><?php echo file_get_contents(RS_PLUGIN_PATH.'release_log.html'); ?></div>
 		</div>
 	</div>
-    <?php if(!defined('REVSLIDER_THEME_ACT')) : ?>
+
 	<div class="div150"></div>
 	<!-- PLUGIN INFORMATIONS -->	
 	<div id="plugin_activation_row" class="plugin_inforow">
 		<!-- PLUGIN UPDATE -->
-		<div id="activation_area" class="pli_left">			
-			<h3 class="pli_title"><?php _e('Register Purchase Code', 'revslider');?></h3>
+		<div id="activation_area" class="pli_left">
+			<h3 id="activateplugintitle" class="pli_title"><?php echo ($selling === true) ? __('Register License Key', 'revslider') : __('Register Purchase Code', 'revslider');?></h3>
 			<row>
 				<onehalf style="padding-right:5px"><div id="activated_ornot_box" class="box_with_icon"><i class="material-icons">done</i><?php _e('Registered', 'revslider');?></div></onehalf>
-				<onehalf style="padding-left:5px"><a target="_blank" href="https://themepunch.com/faq/where-to-find-the-purchase-code/" class="box_with_icon"><i class="material-icons">vpn_key</i><?php _e('Find My Code', 'revslider');?></a></onehalf>
+				<onehalf style="padding-left:5px"><a target="_blank" href="<?php echo ($selling === true) ? 'https://sliderrevolution.com/pricing/' : 'https://themepunch.com/faq/where-to-find-the-purchase-code/'; ?>" class="box_with_icon"><i class="material-icons">vpn_key</i><?php echo ($selling === true) ? __('Find My Key', 'revslider') : __('Find My Code', 'revslider');?></a></onehalf>
 			</row>
 			<div class="div10"></div>
 			<div id="purchasekey_wrap" class="activated">
 				<div id="hide_purchasekey"><?php _e('xxxx xxxx xxxx xxxx', 'revslider');?></div>
-				<input class="codeinput" id="purchasekey" placeholder="<?php _e('Enter Purchase Code', 'revslider');?>"/>			
+				<input class="codeinput" id="purchasekey" placeholder="<?php echo ($selling === true) ? __('Enter License Key', 'revslider') : __('Enter Purchase Code', 'revslider');?>"/>
 			</div>
 			<div class="div25"></div>
-			<bluebutton id="activateplugin"><?php _e('Deregister this Code', 'revslider');?></bluebutton>
+			<bluebutton id="activateplugin"><?php echo ($selling === true) ? __('Deregister this Key', 'revslider') : __('Deregister this Code', 'revslider');?></bluebutton>
 			<div class="div25"></div>
 			<div class="infobox">
-				<div class="bluetitle"><?php _e('1 Purchase Code per Website', 'revslider');?></div>
+				<div class="bluetitle"><?php echo ($selling === true) ? __('1 License Key per Website', 'revslider') : __('1 Purchase Code per Website', 'revslider');?></div>
+				<?php if ($selling === true) { ?>
+				<div class="simpletext"><?php _e('If you want to use Slider Revolution on another domain, please deregister it in the <a href="https://sliderrevolution.com/members-login/" target="_blank">members area</a> or get <a href="https://sliderrevolution.com/pricing/" target="_blank">more license keys</a>', 'revslider');?></div>
+				<?php } else { ?>
 				<div class="simpletext"><?php _e('If you want to use Slider Revolution on another domain, please <a href="https://www.themepunch.com/links/slider_revolution_wordpress_regular_license" target="_blank">purchase another license</a>', 'revslider');?></div>
+				<?php } ?>
+
 			</div>
 		</div>
 		<!-- PLUGIN FEATURES -->
@@ -180,37 +194,37 @@ $rs_languages	= $rs_slider->get_available_languages();
 			</div>
 		</div>
 	</div>
-    <?php endif;?>
+
 	<div class="div150"></div>
 	<div id="plugin_news_row" class="plugin_inforow">
 		<!-- PLUGIN UPDATE -->
 		<div id="cwt_socials" class="pli_left">
-			<h3 class="pli_title"><?php _e('Connect with ThemePunch', 'revslider');?></h3>
-			<a class="cwt_link" target="_blank" href="https://youtube.com/user/ThemePunch"><grayiconbox class="cwt_youtube"></grayiconbox><div class="pli_twoline"><div class="pli_subtitle"><?php _e('Youtube', 'revslider');?></div><div class="dynamicval pli_subtitle">youtube.com/user/ThemePunch</div></div></a>
+			<h3 class="pli_title"><?php _e('Connect with Slider Revolution', 'revslider');?></h3>
+			<a class="cwt_link" target="_blank" href="https://youtube.com/c/sliderrevolution"><grayiconbox class="cwt_youtube"></grayiconbox><div class="pli_twoline"><div class="pli_subtitle"><?php _e('YouTube', 'revslider');?></div><div class="dynamicval pli_subtitle">youtube.com/c/sliderrevolution</div></div></a>
 			<div class="div10"></div>
-			<a class="cwt_link" target="_blank" href="https://twitter.com/themepunch"><grayiconbox class="cwt_twitter"></grayiconbox><div class="pli_twoline"><div class="pli_subtitle"><?php _e('Twitter', 'revslider');?></div><div class="dynamicval pli_subtitle">twitter.com/themepunch</div></div></a>
+			<a class="cwt_link" target="_blank" href="https://twitter.com/revslider"><grayiconbox class="cwt_twitter"></grayiconbox><div class="pli_twoline"><div class="pli_subtitle"><?php _e('Twitter', 'revslider');?></div><div class="dynamicval pli_subtitle">twitter.com/revslider</div></div></a>
 			<div class="div10"></div>
-			<a class="cwt_link" target="_blank" href="https://facebook.com/themepunchofficial"><grayiconbox class="cwt_facebook"></grayiconbox><div class="pli_twoline"><div class="pli_subtitle"><?php _e('Facebook', 'revslider');?></div><div class="dynamicval pli_subtitle">facebook.com/themepunchofficial</div></div></a>
+			<a class="cwt_link" target="_blank" href="https://www.facebook.com/wordpress.slider.revolution"><grayiconbox class="cwt_facebook"></grayiconbox><div class="pli_twoline"><div class="pli_subtitle"><?php _e('Facebook', 'revslider');?></div><div class="dynamicval pli_subtitle">facebook.com/wordpress.slider.revolution</div></div></a>
 			<div class="div10"></div>
-			<a class="cwt_link" target="_blank" href="https://instagram.com/themepunch/"><grayiconbox class="cwt_instagram"></grayiconbox><div class="pli_twoline"><div class="pli_subtitle"><?php _e('Instagram', 'revslider');?></div><div class="dynamicval pli_subtitle">instagram.com/themepunch/</div></div></a>
+			<a class="cwt_link" target="_blank" href="https://instagram.com/sliderrevolution"><grayiconbox class="cwt_instagram"></grayiconbox><div class="pli_twoline"><div class="pli_subtitle"><?php _e('Instagram', 'revslider');?></div><div class="dynamicval pli_subtitle">instagram.com/sliderrevolution</div></div></a>
 			<div class="div10"></div>			
 			<a class="cwt_link" target="_blank" href="https://dribbble.com/themepunch"><grayiconbox class="cwt_dribbble"></grayiconbox><div class="pli_twoline"><div class="pli_subtitle"><?php _e('Dribbble', 'revslider');?></div><div class="dynamicval pli_subtitle">dribbble.com/themepunch</div></div></a>
 			<div class="div100"></div>
 			<h3 class="pli_title"><?php _e('Signup to our Newsletter', 'revslider');?></h3>									
 			<!--<input class="codeinput" id="newsletter_mail" placeholder="<?php _e('Enter your Email', 'revslider');?>"/> id="signuptonewsletter" -->
 			<div class="div25"></div>
-			<a href="https://themepunch.us9.list-manage.com/subscribe?u=a5738148e5ec630766e28de16&id=3e718acc63" target="_blank"><bluebutton ><?php _e('Sign Up', 'revslider');?></bluebutton></a>
+			<a href="https://www.themepunch.com/links/newsletter" target="_blank"><bluebutton ><?php _e('Sign Up', 'revslider');?></bluebutton></a>
 			<div class="div25"></div>
 			<div class="infobox">
 				<div class="bluetitle"><?php _e('Updates, New Products, Spotlights', 'revslider');?></div>
-				<div class="simpletext"><?php _e('Get access to the latest News from ThemePunch. We promise to never send you Spam!', 'revslider');?></div>
+				<div class="simpletext"><?php _e('Get access to the latest News from Slider Revolution. We promise to never send you Spam!', 'revslider');?></div>
 			</div>
 		</div>
 
 		<!-- PLUGIN HISTORY -->
 		<div id="twitter_wrapper" class="pli_right" style="width:100%">
 			<h3 class="pli_title"><?php _e('Whats New?', 'revslider');?></h3>
-			<a id="twitter_timeline" class="twitter-timeline" data-height="750" data-theme="dark" href="https://twitter.com/ThemePunch?include_rtf=false">Tweets Liked by @ThemePunch</a> 
+			<a id="twitter_timeline" class="twitter-timeline" data-height="750" data-theme="dark" href="https://twitter.com/revslider?include_rtf=false">Tweets Liked by @ThemePunch</a>
 
 		</div>
 	</div>

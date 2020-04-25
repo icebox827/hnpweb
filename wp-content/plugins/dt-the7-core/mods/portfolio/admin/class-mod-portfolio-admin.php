@@ -72,6 +72,33 @@ class Presscore_Mod_Portfolio_Admin {
 		$args = apply_filters( "presscore_taxonomy_{$taxonomy}_args", $args );
 
 		register_taxonomy( $taxonomy, array( $post_type ), $args );
+
+		$taxonomy = 'dt_portfolio_tags';
+		$args = array(
+			'labels'                => array(
+				'name'              => _x( 'Portfolio Tags', 'backend portfolio', 'dt-the7-core' ),
+				'singular_name'     => _x( 'Portfolio Tag', 'backend portfolio', 'dt-the7-core' ),
+				'search_items'      => _x( 'Search in Tags', 'backend portfolio', 'dt-the7-core' ),
+				'all_items'         => _x( 'Portfolio Tags', 'backend portfolio', 'dt-the7-core' ),
+				'parent_item'       => _x( 'Parent Portfolio Tag', 'backend portfolio', 'dt-the7-core' ),
+				'parent_item_colon' => _x( 'Parent Portfolio Tag:', 'backend portfolio', 'dt-the7-core' ),
+				'edit_item'         => _x( 'Edit Tag', 'backend portfolio', 'dt-the7-core' ),
+				'update_item'       => _x( 'Update Tag', 'backend portfolio', 'dt-the7-core' ),
+				'add_new_item'      => _x( 'Add New Portfolio Tag', 'backend portfolio', 'dt-the7-core' ),
+				'new_item_name'     => _x( 'New Tag Name', 'backend portfolio', 'dt-the7-core' ),
+				'menu_name'         => _x( 'Portfolio Tags', 'backend portfolio', 'dt-the7-core' )
+			),
+			'hierarchical'          => false,
+			'public'                => true,
+			'show_ui'               => true,
+			'rewrite'               => array( 'slug' => 'project-tag' ),
+			'show_admin_column'		=> true,
+			'show_in_rest'          => true,
+		);
+
+		$args = apply_filters( "presscore_taxonomy_{$taxonomy}_args", $args );
+
+		register_taxonomy( $taxonomy, array( $post_type ), $args );
 	}
 
 	public function add_meta_boxes( $metaboxes ) {

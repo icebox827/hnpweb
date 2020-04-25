@@ -2,7 +2,7 @@
 	display: none;
 }
 //Search form
-.mphb_sc_search-form, {
+.mphb_sc_search-form {
 	.book-form & {
 		display: flex;
 		flex-flow: row wrap;
@@ -25,8 +25,8 @@
 		margin-bottom: 10px;
 	}
 }
-.mphb_sc_search-form input,
-.mphb_sc_search-form select, {
+.mphb_sc_search-form input:not(.elementor-field),
+.mphb_sc_search-form select:not(.elementor-field) {
 	.book-form & {
 		margin-bottom: 0;
 		border: none;
@@ -665,4 +665,9 @@ input[type="submit"] {
 }
 .datepick-popup {
 	box-sizing: border-box;
+}
+.datepick-month-header select:not(.elementor-field), .datepick-month-header input:not(.elementor-field) {
+	border: none;
+	min-width: 65px;
+	margin-bottom: 0;
 }

@@ -26,8 +26,8 @@ img.is-loaded {
 	.justify-content(@justify: center);
 	right: 10px;
 	bottom: 10px;
-	width: 44px;
-	height: 44px;
+	width: 40px;
+	height: 40px;
 	opacity: 0;
 	z-index: -1;
 	filter: alpha(opacity=0);
@@ -508,4 +508,36 @@ body #load.loader-removed {
 /*Recpatha V3 badge*/
 .footer-overlap .grecaptcha-badge {
 	z-index: 103;
+}
+
+.elementor-button,
+.elementor-widget-accordion a,
+.elementor-tab-title a,
+.elementor-tab-title a,
+.elementor-cta,
+.elementor-headline,
+.elementor-widget .elementor-icon-list-item a,
+.elementor-widget-reviews .elementor-testimonial__header,
+.elementor-post-navigation .elementor-post-navigation__link a,
+.elementor-nav-menu--main .elementor-nav-menu a,
+.elementor-price-list .elementor-price-list-item,
+.elementor-blockquote__tweet-button {
+	text-decoration: none;
+}
+.elementor-slideshow__header {
+	box-sizing: border-box;
+}
+
+body.elementor-clear-template #main > .wf-wrap,
+#footer.elementor-footer  > .wf-wrap{
+	width: initial;
+	padding: 0;
+}
+
+body.elementor-clear-template #main,
+#footer.elementor-footer  > .wf-wrap,
+#footer.elementor-footer  > .wf-wrap > .wf-container-footer,
+#footer.elementor-footer  > .wf-wrap > .wf-container-footer > .wf-container{
+	padding: 0;
+	margin: 0;
 }

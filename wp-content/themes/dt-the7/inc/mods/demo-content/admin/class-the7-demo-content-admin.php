@@ -261,6 +261,7 @@ class The7_Demo_Content_Admin {
 				$import_manager->import_post_types();
 				$import_manager->import_wp_settings();
 				$import_manager->import_vc_settings();
+				$import_manager->import_widgets();
 				break;
 			case 'import_attachments':
 				$include_attachments = ( isset( $dummy_list[ $dummy_slug ]['include_attachments'] ) ? (bool) $dummy_list[ $dummy_slug ]['include_attachments'] : false );

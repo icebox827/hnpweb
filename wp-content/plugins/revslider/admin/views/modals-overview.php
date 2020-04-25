@@ -56,6 +56,26 @@ if(!defined('ABSPATH')) exit();
 </div>
 
 
+<!--GLOBAL CUSTOM FONTS MODAL-->
+<div class="_TPRB_ rb-modal-wrapper" data-modal="rbm_globalfontsettings" style="z-index:1000010 !important">
+	<div class="rb-modal-inner">
+		<div class="rb-modal-content">
+			<div id="rbm_globalfontsettings" class="rb_modal form_inner">
+				<div class="rbm_header"><i class="rbm_symbol material-icons">font_download</i><span class="rbm_title"><?php _e('Global Custom Fonts', 'revslider');?></span><i class="rbm_close material-icons">close</i></div>
+				<div class="rbm_content">					
+					<div class="modal_fields_title" style="width:200px;"><?php _e('Font Family Name', 'revslider');?></div><!--
+					--><div class="modal_fields_title" style="width:200px;"><?php _e('Font CSS URL', 'revslider');?></div><!--
+					--><div class="modal_fields_title" style="width:200px;"><?php _e('Available Font Weights', 'revslider');?></div><!--
+					--><div class="modal_fields_title" style="width:75px;margin-left:10px;"><?php _e('Front End', 'revslider');?></div><!--
+					--><div class="modal_fields_title" style="width:75px;"><?php _e('in Editor', 'revslider');?></div>					
+					<div id="global_custom_fonts" style="margin-bottom:10px">
+					</div>	
+					<div id="add_new_custom_font" class="basic_action_button autosize rightbutton"><i class="material-icons">add</i><?php _e('Add Custom Font', 'revslider');?></div>				
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
 <!--GLOBAL SETTINGS MODAL-->
 <div class="_TPRB_ rb-modal-wrapper" data-modal="rbm_globalsettings">
@@ -93,12 +113,13 @@ if(!defined('ABSPATH')) exit();
 									</select><span class="linebreak"></span>
 						<div class="div25"></div>					
 						<label_a><?php _e('Insert scripts in footer', 'revslider');?></label_a><input type="checkbox" class="easyinit globalinput" data-r="globals.script.footer"><span class="linebreak"></span>
-						<label_a><?php _e('Defer JavaScript loading', 'revslider');?></label_a><input type="checkbox" class="easyinit globalinput" data-r="globals.script.defer"><span class="linebreak"></span>
+						<label_a><?php _e('Defer JavaScript loading', 'revslider');?></label_a><input type="checkbox" class="easyinit globalinput" data-r="globals.script.defer"><span class="linebreak"></span>						
 						<label_a><?php _e('3rd Party Lazy Loading Data', 'revslider');?></label_a><input type="text" class="easyinit globalinput"  data-r="globals.lazyloaddata" placeholder="<?php _e('(i.e. lazy-src for WP Rocket)', 'revslider'); ?>"><span class="linebreak"></span>																		
 						<div class="div25"></div>
-						<label_a><?php _e('Fix RevSlider table issues', 'revslider');?></label_a><div id="rs_db_force_create" class="basic_action_button autosize"><i class="material-icons">build</i><?php _e('Force RS DB Creation', 'revslider');?></div>
-						<div class="div25"></div>
-						<label_a><?php _e('Editor High Contrast Mode', 'revslider');?></label_a><input type="checkbox" class="easyinit globalinput callEvent" data-evt="highContrast" data-r="globals.highContrast"><span class="linebreak"></span>
+						<div class="ale_i_title"><?php _e('Miscellaneous', 'revslider');?></div>
+						<hr class="general_hr">						
+						<label_a><?php _e('Fix RevSlider table issues', 'revslider');?></label_a><div id="rs_db_force_create" class="basic_action_button autosize"><i class="material-icons">build</i><?php _e('Force RS DB Creation', 'revslider');?></div>						
+						<label_a><?php _e('Editor High Contrast mode', 'revslider');?></label_a><input type="checkbox" class="easyinit globalinput callEvent" data-evt="highContrast" data-r="globals.highContrast"><span class="linebreak"></span>
 					</div><!--
 					--><div class="rbm_general_half" style="padding-left:20px;">
 						<div class="ale_i_title"><?php _e('Default Layout Grid Breakpoints', 'revslider');?></div>
@@ -110,17 +131,19 @@ if(!defined('ABSPATH')) exit();
 						<div class="div25"></div>
 						<div class="ale_i_title"><?php _e('Fonts', 'revslider');?></div>
 						<hr class="general_hr">
+						<label_a><?php _e('Enable custom font selection in editor', 'revslider');?></label_a><div id="rs_gl_custom_fonts" class="basic_action_button autosize"><i class="material-icons">font_download</i><?php _e('Edit Custom Fonts', 'revslider');?></div>
 						<label_a><?php _e('Disable RS Font Awesome Library', 'revslider');?></label_a><input type="checkbox" class="easyinit globalinput" data-r="globals.fontawesomedisable"><span class="linebreak"></span>					
-						<label_a><?php _e('Optional font loading URL', 'revslider');?></label_a><input type="text" class="easyinit globalinput" data-r="globals.fonturl" placeholder="<?php _e('(ie. http://fonts.useso.com/css?family for chinese Environment)', 'revslider');?>"><span class="linebreak"></span>
-						<label_a><?php _e('Enable google font download', 'revslider');?></label_a><select id="fontdownload" name="fontdownload" data-theme="inmodal" class="globalinput easyinit nosearchbox tos2" data-r="globals.fontdownload">
+						<div class="div25"></div>						
+						<label_a><?php _e('Enable Google Fonts download', 'revslider');?></label_a><select id="fontdownload" name="fontdownload" data-theme="inmodal" class="globalinput easyinit nosearchbox tos2" data-r="globals.fontdownload">
 										<option selected="selected" value="off"><?php _e('Load from Google','revslider');?></option>
 										<option value="preload"><?php _e('Preload from Google', 'revslider');?></option>
 										<option value="disable"><?php _e('Disable, Load on your own', 'revslider');?></option>
 									</select><span class="linebreak"></span>
-						
+						<label_a><?php _e('Optional Google Fonts loading URL', 'revslider');?></label_a><input type="text" class="easyinit globalinput" data-r="globals.fonturl" placeholder="<?php _e('(ie. http://fonts.useso.com/css?family for chinese Environment)', 'revslider');?>"><span class="linebreak"></span>
 						<label_a></label_a><div id="rs_trigger_font_deletion" class="basic_action_button autosize"><i class="material-icons">build</i><?php _e('Update Preload Fonts', 'revslider'); ?></div>
-						<div class="div25"></div>
-						<label_a><?php _e('Enable custom font selection in editor<br><i>Example:CustomA, CustomB</i>', 'revslider');?></label_a><input type="text" class="easyinit globalinput" data-r="globals.customfonts" placeholder="<?php _e('font-family, font-family, ...', 'revslider');?>"><span class="linebreak"></span>
+						
+						
+						<!--<input type="text" class="easyinit globalinput" data-r="globals.customfonts" placeholder="<?php _e('font-family, font-family, ...', 'revslider');?>"><span class="linebreak"></span>-->
 						<!--<div id="general_custom_fonts_list"></div>
 						<label_a></label_a><div class="basic_action_button onlyicon" id="add_custom_global_fonts"><i class="material-icons">add</i></div>		-->
 					</div>

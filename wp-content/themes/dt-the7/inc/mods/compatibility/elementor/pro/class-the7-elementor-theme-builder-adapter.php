@@ -2,10 +2,12 @@
 /**
  * @package The7
  */
+
 namespace The7\Adapters\Elementor\Pro;
 
 use ElementorPro\Modules\ThemeBuilder\Classes\Locations_Manager;
 use ElementorPro\Modules\ThemeBuilder\Module;
+use The7\Adapters\Elementor\Pro;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -13,8 +15,21 @@ class The7_Elementor_Theme_Builder_Adapter {
 
 	public function bootstrap() {
 		// Locations registration fire on priority 99, so we need to override them later.
-		add_action( 'elementor/theme/register_locations', [ $this, 'allow_indepndent_header_and_footer_override' ], 999 );
+		add_action( 'init', [ $this, 'on_elementor_init' ], 1 );
+
+		add_action( 'elementor/theme/register_locations', [
+			$this,
+			'allow_indepndent_header_and_footer_override',
+		], 999 );
 		add_filter( 'theme_mod_custom_logo', [ $this, 'replace_site_logo_with_the_main_logo_from_theme_options' ] );
+	}
+
+	public function on_elementor_init() {
+		require_once __DIR__ . '/modules/theme-support/the7-theme-support.php';
+		new ThemeSupport\The7_Theme_Support();
+
+		require_once __DIR__ . '/modules/dynamic-tags/the7/module.php';
+		new DynamicTags\The7\Module();
 	}
 
 	/**
@@ -51,6 +66,7 @@ class The7_Elementor_Theme_Builder_Adapter {
 			}
 		}
 	}
+
 
 	/**
 	 * @param bool|int $logo_id

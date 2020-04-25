@@ -995,3 +995,60 @@ function dt_get_google_fonts( $font = '', $effect = '' ) {
 	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=<?php echo str_replace( ' ', '+', $font ); ?>">
 	<?php
 }
+
+if ( ! function_exists( 'presscore_main_container_style' ) ) :
+
+	/**
+	 * Print main container inline style if any.
+	 *
+	 * @deprecated 8.4.0
+	 */
+	function presscore_main_container_style() {
+		$config = presscore_config();
+
+		$padding = array(
+			'padding-top'    => $config->get( 'page.top_margin' ),
+			'padding-bottom' => $config->get( 'page.bottom_margin' ),
+		);
+
+		$style = array();
+		foreach ( $padding as $prop => $val ) {
+			if ( $val !== '' ) {
+				if ( ! preg_match( '/.*(px|%)$/', $val ) ) {
+					$val .= 'px';
+				}
+
+				$style[ $prop ] = $val;
+			}
+		}
+
+		echo presscore_get_inline_style_attr( $style );
+	}
+
+endif;
+
+if ( ! function_exists( 'the7_main_container_wrap_style' ) ) {
+
+	/**
+	 * Pront horizontal padding for content area.
+	 *
+	 * @deprecated 8.4.0
+	 */
+	function the7_main_container_wrap_style() {
+		$config = presscore_config();
+
+		$padding = array(
+			'padding-right'  => $config->get( 'page.right_margin' ),
+			'padding-left'   => $config->get( 'page.left_margin' ),
+		);
+
+		$style = array();
+		foreach ( $padding as $prop => $val ) {
+			if ( $val !== '' ) {
+				$style[ $prop ] = $val;
+			}
+		}
+
+		echo presscore_get_inline_style_attr( $style );
+	}
+}

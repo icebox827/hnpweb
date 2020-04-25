@@ -173,7 +173,7 @@ RVS.SC = RVS.SC === undefined ? {} : RVS.SC;
 					QTags.insertContent(RVS.SC.BLOCK.content);				
 				break;
 				case 'gutenberg':					
-					var obj = {slidertitle: RVS.SC.BLOCK.slidertitle, alias: RVS.SC.BLOCK.alias, modal: RVS.SC.BLOCK.modal ,  content: RVS.SC.BLOCK.content , zindex: RVS.SC.BLOCK.zindex};
+					var obj = {slidertitle: RVS.SC.BLOCK.slidertitle, alias: RVS.SC.BLOCK.alias, modal: RVS.SC.BLOCK.modal ,  content: RVS.SC.BLOCK.content , zindex: RVS.SC.BLOCK.zindex};					
 					revslider_react.setState(obj);						
 					revslider_react.props.setAttributes(obj);
 					revslider_react.forceUpdate();

@@ -44,13 +44,13 @@ $hide_tr = 'class="hide-if-js"';
 						</td>
 					</tr>
 					<tr>
-						<td>
-							<label for="the7-web-fonts-display-swap"><?php esc_html_e( 'Set display "swap" for google fonts', 'the7mk2' ); ?></label>
-						</td>
-						<td>
-							<input type="checkbox" id="the7-web-fonts-display-swap" name="the7_dashboard_settings[web-fonts-display-swap]"<?php checked( The7_Admin_Dashboard_Settings::get( 'web-fonts-display-swap' ) ); ?>>
-						</td>
-					</tr>
+                        <td>
+                            <label for="the7-web-fonts-display-swap"><?php esc_html_e( 'Set display "swap" for google fonts', 'the7mk2' ); ?></label>
+                        </td>
+                        <td>
+                            <input type="checkbox" id="the7-web-fonts-display-swap" name="the7_dashboard_settings[web-fonts-display-swap]"<?php checked( The7_Admin_Dashboard_Settings::get( 'web-fonts-display-swap' ) ); ?>>
+                        </td>
+                    </tr>
 					<?php $critical_alerts = The7_Admin_Dashboard_Settings::get( 'critical-alerts' ); ?>
 					<tr>
 						<td>

@@ -5,6 +5,7 @@
 
 namespace The7\Adapters\Elementor;
 
+use Elementor\Plugin;
 use Elementor\Widget_Base;
 use The7\Adapters\Elementor\The7_Elementor_Less_Vars_Decorator;
 use \The7_Less_Compiler;
@@ -25,17 +26,19 @@ abstract class The7_Elementor_Widget_Base extends Widget_Base {
 	}
 
 	protected function print_inline_css() {
-		echo '<style type="text/css">';
-		if ( wp_doing_ajax() ) {
+		if ( Plugin::$instance->editor->is_edit_mode() ) {
 			add_filter( 'dt_of_get_option-general-images_lazy_loading', '__return_false' );
+			echo '<style type="text/css">';
 			echo $this->generate_inline_css();
-		} else {
-			echo $this->get_css();
+			echo '</style>';
 		}
-		echo '</style>';
 	}
 
-	protected function generate_inline_css() {
+	/**
+	 * @return false|string
+	 * @throws \Exception
+	 */
+	public function generate_inline_css() {
 		$less_file = $this->get_less_file_name();
 
 		if ( ! $less_file ) {
@@ -47,38 +50,7 @@ abstract class The7_Elementor_Widget_Base extends Widget_Base {
 		return $lessc->compile_file( $less_file, $this->get_less_imports() );
 	}
 
-	public function save_css( $post_id = null ) {
-		global $post;
-
-		$post_id = $post_id ? $post_id : $post->ID;
-		if ( ! $this->get_css( $post_id ) ) {
-			$widgets_css                    = (array) get_post_meta( $post_id, self::WIDGET_CSS_CACHE_ID, true );
-			$widgets_css[ $this->get_id() ] = $this->generate_inline_css();
-			$widgets_css                    = array_filter( $widgets_css );
-			update_post_meta( $post_id, self::WIDGET_CSS_CACHE_ID, $widgets_css );
-		}
-
-		return true;
-	}
-
-	public function get_css( $post_id = null ) {
-		global $post;
-
-		$post_id     = $post_id ? $post_id : $post->ID;
-		$uid         = $this->get_id();
-		$widgets_css = (array) get_post_meta( $post_id, self::WIDGET_CSS_CACHE_ID, true );
-		if ( ! array_key_exists( $uid, $widgets_css ) ) {
-			return '';
-		}
-
-		return $widgets_css[ $uid ];
-	}
-
-	public static function delete_widgets_css_cache( $post_id ) {
-		delete_post_meta( $post_id, self::WIDGET_CSS_CACHE_ID );
-	}
-
-	/**
+		/**
 	 * Return less import dir.
 	 *
 	 * @return array
@@ -87,6 +59,9 @@ abstract class The7_Elementor_Widget_Base extends Widget_Base {
 		return [ PRESSCORE_THEME_DIR . '/css/dynamic-less/elementor' ];
 	}
 
+	/**
+	 * @return array
+	 */
 	protected function get_less_vars() {
 		$less_vars = new The7_Elementor_Less_Vars_Decorator( the7_get_new_shortcode_less_vars_manager() );
 
@@ -99,25 +74,59 @@ abstract class The7_Elementor_Widget_Base extends Widget_Base {
 		// Do nothing.
 	}
 
+	/**
+	 * @return array
+	 */
 	protected function get_less_imports() {
 		return [];
 	}
 
+	/**
+	 * @return bool|string
+	 */
 	protected function get_less_file_name() {
 		return false;
 	}
 
+	/**
+	 * @param $dim
+	 *
+	 * @return string
+	 */
 	protected function combine_dimensions( $dim ) {
 		$units = $dim['unit'];
 
 		return "{$dim['top']}{$units} {$dim['right']}{$units} {$dim['bottom']}{$units} {$dim['left']}{$units}";
 	}
 
+	/**
+	 * @param array $val
+	 * @param int   $default
+	 *
+	 * @return int|string
+	 */
 	protected function combine_slider_value( $val, $default = 0 ) {
 		if ( empty( $val['size'] ) || ! isset( $val['unit'] ) ) {
 			return $default;
 		}
 
 		return $val['size'] . $val['unit'];
+	}
+
+	/**
+	 * @return false|int
+	 */
+	protected function get_current_post_id() {
+		// Elementor Pro >= 2.9.1
+		if ( class_exists( 'ElementorPro\Core\Utils' ) ) {
+			return \ElementorPro\Core\Utils::get_current_post_id();
+		}
+
+		// Elementor Pro < 2.9.1
+		if ( class_exists( 'ElementorPro\Classes\Utils' ) ) {
+			return \ElementorPro\Classes\Utils::get_current_post_id();
+		}
+
+		return get_the_ID();
 	}
 }

@@ -15,7 +15,7 @@ if(!defined('ABSPATH')) exit();
 											data-dim="w:100px;h:67px;"
 											data-border="bow:0px;"
 											data-frame_0="x:center;y:middle;sX:0;sY:0;"
-											data-frame_1="e:Power4.easeOut;st:100;sp:2000;sR:100;"
+											data-frame_1="e:power4.out;st:100;sp:2000;sR:100;"
 											data-frame_999="x:center;y:middle;sX:0;sY:0;o:0;st:a;sp:1000;sR:6900;"
 											style="z-index:5;"
 										><img src="<?php echo RS_PLUGIN_URL;?>admin/views/features/assets/dummy.png" data-ww="100px" data-hh="67px" width="200" height="133" data-lazyload="<?php echo RS_PLUGIN_URL;?>admin/views/features/assets/addon1.jpg" data-no-retina> 
@@ -30,7 +30,7 @@ if(!defined('ABSPATH')) exit();
 											data-dim="w:100px;h:67px;"
 											data-border="bow:0px;"
 											data-frame_0="x:center;y:middle;sX:0;sY:0;"
-											data-frame_1="e:Power4.easeOut;st:150;sp:2000;sR:150;"
+											data-frame_1="e:power4.out;st:150;sp:2000;sR:150;"
 											data-frame_999="x:center;y:middle;sX:0;sY:0;o:0;st:a;sp:1000;sR:6850;"
 											style="z-index:6;"
 										><img src="<?php echo RS_PLUGIN_URL;?>admin/views/features/assets/dummy.png" data-ww="100px" data-hh="67px" width="200" height="133" data-lazyload="<?php echo RS_PLUGIN_URL;?>admin/views/features/assets/addon2.jpg" data-no-retina> 
@@ -45,7 +45,7 @@ if(!defined('ABSPATH')) exit();
 											data-dim="w:100px;h:67px;"
 											data-border="bow:0px;"
 											data-frame_0="x:center;y:middle;sX:0;sY:0;"
-											data-frame_1="e:Power4.easeOut;st:200;sp:2000;sR:200;"
+											data-frame_1="e:power4.out;st:200;sp:2000;sR:200;"
 											data-frame_999="x:center;y:middle;sX:0;sY:0;o:0;st:a;sp:1000;sR:6800;"
 											style="z-index:7;"
 										><img src="<?php echo RS_PLUGIN_URL;?>admin/views/features/assets/dummy.png" data-ww="100px" data-hh="67px" width="200" height="133" data-lazyload="<?php echo RS_PLUGIN_URL;?>admin/views/features/assets/addon3.jpg" data-no-retina> 
@@ -60,7 +60,7 @@ if(!defined('ABSPATH')) exit();
 											data-dim="w:100px;h:67px;"
 											data-border="bow:0px;"
 											data-frame_0="x:center;y:middle;sX:0;sY:0;"
-											data-frame_1="e:Power4.easeOut;st:250;sp:2000;sR:250;"
+											data-frame_1="e:power4.out;st:250;sp:2000;sR:250;"
 											data-frame_999="x:center;y:middle;sX:0;sY:0;o:0;st:a;sp:1000;sR:6750;"
 											style="z-index:8;"
 										><img src="<?php echo RS_PLUGIN_URL;?>admin/views/features/assets/dummy.png" data-ww="100px" data-hh="67px" width="200" height="133" data-lazyload="<?php echo RS_PLUGIN_URL;?>admin/views/features/assets/addon4.jpg" data-no-retina> 
@@ -75,7 +75,7 @@ if(!defined('ABSPATH')) exit();
 											data-dim="w:100px;h:67px;"
 											data-border="bow:0px;"
 											data-frame_0="x:center;y:middle;sX:0;sY:0;"
-											data-frame_1="e:Power4.easeOut;st:300;sp:2000;sR:300;"
+											data-frame_1="e:power4.out;st:300;sp:2000;sR:300;"
 											data-frame_999="x:center;y:middle;sX:0;sY:0;o:0;st:a;sp:1000;sR:6700;"
 											style="z-index:9;"
 										><img src="<?php echo RS_PLUGIN_URL;?>admin/views/features/assets/dummy.png" data-ww="100px" data-hh="67px" width="200" height="133" data-lazyload="<?php echo RS_PLUGIN_URL;?>admin/views/features/assets/addon7.jpg" data-no-retina> 
@@ -90,7 +90,7 @@ if(!defined('ABSPATH')) exit();
 											data-dim="w:100px;h:67px;"
 											data-border="bow:0px;"
 											data-frame_0="x:center;y:middle;sX:0;sY:0;"
-											data-frame_1="e:Power4.easeOut;st:350;sp:2000;sR:350;"
+											data-frame_1="e:power4.out;st:350;sp:2000;sR:350;"
 											data-frame_999="x:center;y:middle;sX:0;sY:0;o:0;st:a;sp:1000;sR:6650;"
 											style="z-index:10;"
 										><img src="<?php echo RS_PLUGIN_URL;?>admin/views/features/assets/dummy.png" data-ww="100px" data-hh="67px" width="200" height="133" data-lazyload="<?php echo RS_PLUGIN_URL;?>admin/views/features/assets/addon8.jpg" data-no-retina> 
@@ -105,7 +105,7 @@ if(!defined('ABSPATH')) exit();
 											data-dim="w:100px;h:67px;"
 											data-border="bow:0px;"
 											data-frame_0="x:center;y:middle;sX:0;sY:0;"
-											data-frame_1="e:Power4.easeOut;st:400;sp:2000;sR:400;"
+											data-frame_1="e:power4.out;st:400;sp:2000;sR:400;"
 											data-frame_999="x:center;y:middle;sX:0;sY:0;o:0;st:a;sp:1000;sR:6600;"
 											style="z-index:11;"
 										><img src="<?php echo RS_PLUGIN_URL;?>admin/views/features/assets/dummy.png" data-ww="100px" data-hh="67px" width="200" height="133" data-lazyload="<?php echo RS_PLUGIN_URL;?>admin/views/features/assets/addon5.jpg" data-no-retina> 
@@ -120,7 +120,7 @@ if(!defined('ABSPATH')) exit();
 											data-dim="w:100px;h:67px;"
 											data-border="bow:0px;"
 											data-frame_0="x:center;y:middle;sX:0;sY:0;"
-											data-frame_1="e:Power4.easeOut;st:450;sp:2000;sR:450;"
+											data-frame_1="e:power4.out;st:450;sp:2000;sR:450;"
 											data-frame_999="x:center;y:middle;sX:0;sY:0;o:0;st:a;sp:1000;sR:6550;"
 											style="z-index:12;"
 										><img src="<?php echo RS_PLUGIN_URL;?>admin/views/features/assets/dummy.png" data-ww="100px" data-hh="67px" width="200" height="133" data-lazyload="<?php echo RS_PLUGIN_URL;?>admin/views/features/assets/addon6.jpg" data-no-retina> 
@@ -135,7 +135,7 @@ if(!defined('ABSPATH')) exit();
 											data-dim="w:100px;h:67px;"
 											data-border="bow:0px;"
 											data-frame_0="x:center;y:middle;sX:0;sY:0;"
-											data-frame_1="e:Power4.easeOut;st:500;sp:2000;sR:500;"
+											data-frame_1="e:power4.out;st:500;sp:2000;sR:500;"
 											data-frame_999="x:center;y:middle;sX:0;sY:0;o:0;st:a;sp:1000;sR:6500;"
 											style="z-index:13;"
 										><img src="<?php echo RS_PLUGIN_URL;?>admin/views/features/assets/dummy.png" data-ww="100px" data-hh="67px" width="200" height="133" data-lazyload="<?php echo RS_PLUGIN_URL;?>admin/views/features/assets/addon9.jpg" data-no-retina> 
@@ -150,7 +150,7 @@ if(!defined('ABSPATH')) exit();
 											data-dim="w:100px;h:67px;"
 											data-border="bow:0px;"
 											data-frame_0="x:center;y:middle;sX:0;sY:0;"
-											data-frame_1="e:Power4.easeOut;st:550;sp:2000;sR:550;"
+											data-frame_1="e:power4.out;st:550;sp:2000;sR:550;"
 											data-frame_999="x:center;y:middle;sX:0;sY:0;o:0;st:a;sp:1000;sR:6450;"
 											style="z-index:14;"
 										><img src="<?php echo RS_PLUGIN_URL;?>admin/views/features/assets/dummy.png" data-ww="100px" data-hh="67px" width="200" height="133" data-lazyload="<?php echo RS_PLUGIN_URL;?>admin/views/features/assets/addon10.jpg" data-no-retina> 
@@ -165,7 +165,7 @@ if(!defined('ABSPATH')) exit();
 											data-dim="w:100px;h:67px;"
 											data-border="bow:0px;"
 											data-frame_0="x:center;y:middle;sX:0;sY:0;"
-											data-frame_1="e:Power4.easeOut;st:600;sp:2000;sR:600;"
+											data-frame_1="e:power4.out;st:600;sp:2000;sR:600;"
 											data-frame_999="x:center;y:middle;sX:0;sY:0;o:0;st:a;sp:1000;sR:6400;"
 											style="z-index:15;"
 										><img src="<?php echo RS_PLUGIN_URL;?>admin/views/features/assets/dummy.png" data-ww="100px" data-hh="67px" width="200" height="133" data-lazyload="<?php echo RS_PLUGIN_URL;?>admin/views/features/assets/addon11.jpg" data-no-retina> 
@@ -180,7 +180,7 @@ if(!defined('ABSPATH')) exit();
 											data-dim="w:100px;h:67px;"
 											data-border="bow:0px;"
 											data-frame_0="x:center;y:middle;sX:0;sY:0;"
-											data-frame_1="e:Power4.easeOut;st:650;sp:2000;sR:650;"
+											data-frame_1="e:power4.out;st:650;sp:2000;sR:650;"
 											data-frame_999="x:center;y:middle;sX:0;sY:0;o:0;st:a;sp:1000;sR:6350;"
 											style="z-index:16;"
 										><img src="<?php echo RS_PLUGIN_URL;?>admin/views/features/assets/dummy.png" data-ww="100px" data-hh="67px" width="200" height="133" data-lazyload="<?php echo RS_PLUGIN_URL;?>admin/views/features/assets/addon12.jpg" data-no-retina> 
@@ -225,8 +225,8 @@ if(!defined('ABSPATH')) exit();
 											data-text="s:25;l:30;fw:700;a:center;"
 											data-border="bow:0px;"
 											data-frame_0="y:-50;"
-											data-frame_1="e:Power4.easeOut;st:160;sp:1000;sR:160;"
-											data-frame_999="y:50;o:0;e:Power4.easeOut;st:a;sp:600;sR:7840;"
+											data-frame_1="e:power4.out;st:160;sp:1000;sR:160;"
+											data-frame_999="y:50;o:0;e:power4.out;st:a;sp:600;sR:7840;"
 											style="z-index:19;font-family:Roboto;"
 										>25+<br/>Plugin Add-Ons 
 										</rs-layer><!--
@@ -240,8 +240,8 @@ if(!defined('ABSPATH')) exit();
 											data-text="s:25;l:30;fw:700;a:center;"
 											data-border="bow:0px;"
 											data-frame_0="y:-50;"
-											data-frame_1="e:Power4.easeOut;st:a;sp:1000;sR:100;"
-											data-frame_999="y:50px;o:0;e:Power4.easeOut;st:a;sp:600;sR:7900;"
+											data-frame_1="e:power4.out;st:a;sp:1000;sR:100;"
+											data-frame_999="y:50px;o:0;e:power4.out;st:a;sp:600;sR:7900;"
 											style="z-index:20;font-family:Roboto;"
 										>Special Effects &<br/>
 						Added Functionality 
@@ -258,8 +258,8 @@ if(!defined('ABSPATH')) exit();
 											data-padding="r:35;l:35;"
 											data-border="bos:solid;boc:rgba(0,0,0,1);bow:0px;bor:3px,3px,3px,3px;"
 											data-frame_0="y:50;"
-											data-frame_1="e:Power4.easeOut;st:500;sp:1000;sR:500;"
-											data-frame_999="o:0;e:Power4.easeInOut;st:w;sp:1000;sR:7500;"
+											data-frame_1="e:power4.out;st:500;sp:1000;sR:500;"
+											data-frame_999="o:0;e:power4.inOut;st:w;sp:1000;sR:7500;"
 											data-frame_hover="c:rgba(255,255,255,1);bgc:#0a447a;boc:rgba(0,0,0,1);bor:3px,3px,3px,3px;bos:solid;oX:50;oY:50;sp:300;"
 											style="z-index:21;background-color:#006dd2;font-family:Roboto;"
 										>Show Modules 

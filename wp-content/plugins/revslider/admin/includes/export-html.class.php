@@ -253,7 +253,7 @@ class RevSliderSliderExportHtml extends RevSliderSliderExport {
 			//add common files to the zip
 			if(!$this->usepcl){
 				$this->zip->addFile(RS_PLUGIN_PATH.'/public/assets/js/rs6.min.js', 'js/rs6.min.js');
-				$this->zip->addFile(RS_PLUGIN_PATH.'/public/assets/js/revolution.tools.min.js', 'js/revolution.tools.min.js');
+				$this->zip->addFile(RS_PLUGIN_PATH.'/public/assets/js/rbtools.min.js', 'js/rbtools.min.js');
 				
 				$this->zip->addFile(RS_PLUGIN_PATH.'/public/assets/css/rs6.css', 'css/rs6.css');
 				
@@ -277,7 +277,7 @@ class RevSliderSliderExportHtml extends RevSliderSliderExport {
 				$this->zip->addFile(RS_PLUGIN_PATH.'/public/assets/fonts/revicons/revicons.woff', 'fonts/revicons/revicons.woff');
 			}else{
 				$this->pclzip->add(RS_PLUGIN_PATH.'public/assets/js/rs6.min.js', PCLZIP_OPT_REMOVE_PATH, RS_PLUGIN_PATH.'public/assets/js/', PCLZIP_OPT_ADD_PATH, 'js/');
-				$this->pclzip->add(RS_PLUGIN_PATH.'public/assets/js/revolution.tools.min.js', PCLZIP_OPT_REMOVE_PATH, RS_PLUGIN_PATH.'public/assets/js/', PCLZIP_OPT_ADD_PATH, 'js/');
+				$this->pclzip->add(RS_PLUGIN_PATH.'public/assets/js/rbtools.min.js', PCLZIP_OPT_REMOVE_PATH, RS_PLUGIN_PATH.'public/assets/js/', PCLZIP_OPT_ADD_PATH, 'js/');
 				
 				$this->pclzip->add(RS_PLUGIN_PATH.'public/assets/css/rs6.css', PCLZIP_OPT_REMOVE_PATH, RS_PLUGIN_PATH.'public/assets/css/', PCLZIP_OPT_ADD_PATH, 'css/');
 				
@@ -438,7 +438,7 @@ class RevSliderSliderExportHtml extends RevSliderSliderExport {
 			}
 			?>
 			<!-- REVOLUTION JS FILES -->
-			<script type="text/javascript" src="<?php echo $this->path_js; ?>revolution.tools.min.js"></script>
+			<script type="text/javascript" src="<?php echo $this->path_js; ?>rbtools.min.js"></script>
 			<script type="text/javascript" src="<?php echo $this->path_js; ?>rs6.min.js"></script>
 			
 			<?php echo RevSliderFront::js_set_start_size(); ?>
@@ -549,9 +549,9 @@ class RevSliderSliderExportHtml extends RevSliderSliderExport {
 				<div class="footerwidget social">
 					<h3>Follow Us</h3>
 					<ul>
-						<li><a href="https://www.facebook.com/themepunchofficial" target="_blank" class="so_facebook" data-rel="tooltip" data-animation="false" data-placement="bottom" data-original-title="Facebook"><i class="s_icon fa-icon-facebook "></i></a>
+						<li><a href="https://www.facebook.com/wordpress.slider.revolution" target="_blank" class="so_facebook" data-rel="tooltip" data-animation="false" data-placement="bottom" data-original-title="Facebook"><i class="s_icon fa-icon-facebook "></i></a>
 						</li>
-						<li><a href="https://twitter.com/themepunch" target="_blank" class="so_twitter" data-rel="tooltip" data-animation="false" data-placement="bottom" data-original-title="Twitter"><i class="s_icon fa-icon-twitter"></i></a>
+						<li><a href="https://twitter.com/revslider" target="_blank" class="so_twitter" data-rel="tooltip" data-animation="false" data-placement="bottom" data-original-title="Twitter"><i class="s_icon fa-icon-twitter"></i></a>
 						</li>
 					</ul>
 				</div>

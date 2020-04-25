@@ -5,7 +5,7 @@
  * @package The7
  */
 
-namespace The7\Adapters\Elementor;
+namespace The7\Adapters\Elementor\Widgets;
 
 use Elementor\Plugin;
 use Elementor\Group_Control_Typography;
@@ -13,6 +13,8 @@ use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Icons_Manager;
 use The7_Query_Builder;
+use The7\Adapters\Elementor\The7_Elementor_Widget_Base;
+use The7\Adapters\Elementor\The7_Elementor_Less_Vars_Decorator_Interface;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -62,7 +64,7 @@ class The7_Elementor_Elements_Carousel_Widget extends The7_Elementor_Widget_Base
 				'the7-elements-carousel-widget-preview',
 				PRESSCORE_ADMIN_URI . '/assets/js/elementor/elements-carousel-widget-preview.js',
 				[],
-				false,
+				THE7_VERSION,
 				true
 			);
 
@@ -97,6 +99,7 @@ class The7_Elementor_Elements_Carousel_Widget extends The7_Elementor_Widget_Base
 				'type'    => Controls_Manager::SELECT2,
 				'default' => 'post',
 				'options' => the7_elementor_elements_widget_post_types(),
+				'classes' => 'select2-medium-width',
 			]
 		);
 
@@ -107,6 +110,7 @@ class The7_Elementor_Elements_Carousel_Widget extends The7_Elementor_Widget_Base
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'category',
 				'options'   => [],
+				'classes'   => 'select2-medium-width',
 				'condition' => [
 					'post_type!' => '',
 				],
@@ -121,6 +125,7 @@ class The7_Elementor_Elements_Carousel_Widget extends The7_Elementor_Widget_Base
 				'default'   => '',
 				'multiple'  => true,
 				'options'   => [],
+				'classes'   => 'select2-medium-width',
 				'condition' => [
 					'taxonomy!' => '',
 				],
@@ -170,8 +175,12 @@ class The7_Elementor_Elements_Carousel_Widget extends The7_Elementor_Widget_Base
 		$this->add_control(
 			'dis_posts_total',
 			[
-				'label'   => __( 'Total number of posts', 'the7mk2' ),
-				'type'    => Controls_Manager::NUMBER,
+				'label' => __( 'Total number of posts', 'the7mk2' ),
+				'description' => __(
+					'Leave empty to use value from the WP Reading settings. Set "-1" to show all posts.',
+					'the7mk2'
+				),
+				'type' => Controls_Manager::NUMBER,
 				'default' => 6,
 			]
 		);
@@ -1283,7 +1292,7 @@ class The7_Elementor_Elements_Carousel_Widget extends The7_Elementor_Widget_Base
 				'alpha'       => true,
 				'default'     => '',
 				'selectors'   => [
-					'{{WRAPPER}} .project-links-container a:not(:hover) > span' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .project-links-container a > span' => 'color: {{VALUE}}',
 				],
 				'condition'   => [
 					'show_details' => 'y',
@@ -1365,6 +1374,16 @@ class The7_Elementor_Elements_Carousel_Widget extends The7_Elementor_Widget_Base
 		);
 
 		$this->add_control(
+			'enable_project_icon_hover',
+			[
+				'label'        => __( 'Enable icon hover', 'the7mk2' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'return_value' => 'y',
+				'default'      => 'y',
+			]
+		);
+
+		$this->add_control(
 			'project_icon_color_hover',
 			[
 				'label'       => __( 'Icon color', 'the7mk2' ),
@@ -1376,7 +1395,8 @@ class The7_Elementor_Elements_Carousel_Widget extends The7_Elementor_Widget_Base
 					'{{WRAPPER}} .project-links-container a:hover > span' => 'color: {{VALUE}}',
 				],
 				'condition'   => [
-					'show_details' => 'y',
+					'enable_project_icon_hover' => 'y',
+					'show_details'              => 'y',
 				],
 			]
 		);
@@ -1389,7 +1409,8 @@ class The7_Elementor_Elements_Carousel_Widget extends The7_Elementor_Widget_Base
 				'return_value' => 'y',
 				'default'      => 'y',
 				'condition'    => [
-					'show_details' => 'y',
+					'enable_project_icon_hover' => 'y',
+					'show_details'              => 'y',
 				],
 			]
 		);
@@ -1406,6 +1427,7 @@ class The7_Elementor_Elements_Carousel_Widget extends The7_Elementor_Widget_Base
 					'{{WRAPPER}} .project-links-container a:after' => 'border-color: {{VALUE}}',
 				],
 				'condition'   => [
+					'enable_project_icon_hover'      => 'y',
 					'show_project_icon_hover_border' => 'y',
 					'show_details'                   => 'y',
 				],
@@ -1420,7 +1442,8 @@ class The7_Elementor_Elements_Carousel_Widget extends The7_Elementor_Widget_Base
 				'return_value' => 'y',
 				'default'      => 'y',
 				'condition'    => [
-					'show_details' => 'y',
+					'enable_project_icon_hover' => 'y',
+					'show_details'              => 'y',
 				],
 			]
 		);
@@ -1436,8 +1459,9 @@ class The7_Elementor_Elements_Carousel_Widget extends The7_Elementor_Widget_Base
 					'{{WRAPPER}} .dt-icon-hover-bg-on .project-links-container a:after' => 'background: {{VALUE}}; -webkit-box-shadow: none; box-shadow: none;',
 				],
 				'condition' => [
-					'project_icon_bg_hover' => 'y',
-					'show_details'          => 'y',
+					'enable_project_icon_hover' => 'y',
+					'project_icon_bg_hover'     => 'y',
+					'show_details'              => 'y',
 				],
 			]
 		);
@@ -2419,10 +2443,16 @@ class The7_Elementor_Elements_Carousel_Widget extends The7_Elementor_Widget_Base
 	 * Render widget.
 	 */
 	protected function render() {
+		$settings = $this->get_settings_for_display();
+
+		if ( $settings['post_type'] !== 'current_query' && ! post_type_exists( $settings['post_type'] ) ) {
+			echo the7_elementor_get_message_about_disabled_post_type();
+
+			return;
+		}
+
 		$has_img_preload_me_filter = has_filter( 'dt_get_thumb_img-args', 'presscore_add_preload_me_class_to_images' );
 		remove_filter( 'dt_get_thumb_img-args', 'presscore_add_preload_me_class_to_images' );
-
-		$settings = $this->get_settings_for_display();
 
 		$this->print_inline_css();
 
@@ -2695,6 +2725,10 @@ class The7_Elementor_Elements_Carousel_Widget extends The7_Elementor_Widget_Base
 
 		if ( 'center' === $settings['post_content_alignment'] ) {
 			$class[] = 'content-align-center';
+		}
+
+		if ( ! $settings['enable_project_icon_hover'] ) {
+			$class[] = 'dt-icon-hover-off';
 		}
 
 		if ( $settings['project_icon_bg'] === 'y' ) {

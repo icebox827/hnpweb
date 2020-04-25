@@ -53,6 +53,19 @@ class RevSliderFunctions extends RevSliderData {
 		return apply_filters('rs_get_global_settings', $gs);
 	}
 	
+	
+	/**
+	 * get all additions from the update checks
+	 * @since: 6.2.0
+	 **/
+	public function get_addition($key = ''){
+		$additions = (array)get_option('revslider-additions', array());
+		$additions = (!is_array($additions)) ? json_decode($additions, true) : $additions;
+		
+		return (empty($key)) ? $additions : $this->get_val($additions, $key);
+	}
+	
+	
 	/**
 	 * update general settings
 	 * @before: RevSliderOperations::updateGeneralSettings()
@@ -869,6 +882,14 @@ class RevSliderFunctions extends RevSliderData {
 		$gs = $this->get_global_settings();
 		$fdl = $this->get_val($gs, 'fontdownload', 'off');
 		
+		if(!empty($revslider_fonts['queue'])){
+			foreach($revslider_fonts['queue'] as $f_n => $f_s){
+				if(!isset($f_s['url'])) continue; //if url is not set, continue
+				
+				$ret .= '<link href="'.esc_html($f_s['url']).'" rel="stylesheet" property="stylesheet" media="all" type="text/css" >'."\n";
+			}
+		}
+		
 		if($fdl === 'disable') return $ret;
 		
 		if(!empty($revslider_fonts['queue'])){
@@ -968,7 +989,9 @@ class RevSliderFunctions extends RevSliderData {
 						
 						$regex_url	= "/(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/";
 						$regex_fw	= "/(?<=font-weight:)(.*)(?=;)/";
+						$regex_fs	= "/(?<=font-style:)(.*)(?=;)/";
 						$url		= 'https://fonts.googleapis.com/css?family='.$font;
+						
 						$content	= wp_remote_get($url);
 						$body		= $this->get_val($content, 'body', '');
 						$body		= explode('}', $body);
@@ -977,12 +1000,16 @@ class RevSliderFunctions extends RevSliderData {
 								if(preg_match($regex_url, $b, $found_fonts)){
 									$found_font = rtrim($found_fonts[0], ')');
 									$found_fw = (preg_match($regex_fw, $b, $found_fw)) ? trim($found_fw[0]) : '400';
+									$found_fs = (preg_match($regex_fs, $b, $found_fs)) ? trim($found_fs[0]) : 'normal';
 									
 									$f_c = wp_remote_get($found_font);
-									
 									$f_c_body = $this->get_val($f_c, 'body', '');
 									
-									$file = $base_dir.'/revslider/gfonts/'. $font_name . '/' . $font_name . '-' . $found_fw . '.woff2';
+									$found_fs = ($found_fs !== 'normal') ? $found_fs : '';
+									$found_fw = ($found_fw === '400' && $found_fs !== '') ? '' : $found_fw;
+									
+									$file = $base_dir.'/revslider/gfonts/'. $font_name . '/' . $font_name . '-' . $found_fw . $found_fs . '.woff2';
+									
 									@mkdir(dirname($file));
 									@file_put_contents($file, $f_c_body);
 								}
@@ -993,11 +1020,14 @@ class RevSliderFunctions extends RevSliderData {
 					if(!empty($weights) && is_array($weights)){
 						$ret .= '<style type="text/css">';
 						foreach($weights as $weight){
-							$ret .=
+							$style	 = (strpos($weight, 'italic') !== false) ? 'italic' : 'normal';
+							$_weight = str_replace('italic', '', $weight);
+							$_weight = (empty(trim($_weight))) ? '400' : $_weight;
+							$ret	.=
 "@font-face {
   font-family: '".$f_family."';
-  font-style: normal;
-  font-weight: ".$weight.";
+  font-style: ".$style.";
+  font-weight: ".$_weight.";
   src: local('".$f_family."'), local('".$f_family."'), url(".$base_url.'/revslider/gfonts/'. $font_name . '/' . $font_name . '-' . $weight . '.woff2'.") format('woff2');
 }";
 						}

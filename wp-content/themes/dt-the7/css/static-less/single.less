@@ -22,8 +22,11 @@
 	}
 	//.entry-meta,
 	.portfolio-categories {
-		display: block;
+		display: flex;
 		overflow: hidden;
+		.content-align-center  & {
+			.justify-content(@justify: center);
+		}
 	}
 	.blog-content .entry-meta {
 		padding: 0 0 10px 0;
@@ -50,10 +53,10 @@
 		.portfolio-categories > span a {
 			text-decoration: none;
 		}
-		.entry-meta a:hover,
-		.portfolio-categories a:hover {
-			text-decoration: underline;
-		}
+		// .entry-meta a:hover,
+		// .portfolio-categories a:hover {
+		// 	text-decoration: underline;
+		// }
 		.portfolio-categories > a.data-link:hover {
 			text-decoration: none;
 			cursor: default;
@@ -578,6 +581,9 @@
 	}
 	.single .project-content {
 		margin-bottom: 55px;
+		&:last-child {
+			margin-bottom: 0;
+		}
 	}
 		
 	

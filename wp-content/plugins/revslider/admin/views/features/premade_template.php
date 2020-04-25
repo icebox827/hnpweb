@@ -16,7 +16,7 @@ if(!defined('ABSPATH')) exit();
 											data-dim="w:380px;h:207px;"
 											data-border="bow:0px;"
 											data-frame_0="y:bottom;rX:90deg;"
-											data-frame_1="e:Power4.easeOut;st:100;sp:2000;sR:100;"
+											data-frame_1="e:power4.out;st:100;sp:2000;sR:100;"
 											data-frame_999="y:bottom;o:0;rX:90deg;st:a;sp:700;sR:6900;"
 											style="z-index:5;"
 										><img src="<?php echo RS_PLUGIN_URL;?>admin/views/features/assets/dummy.png" data-ww="380px" data-hh="207px" width="440" height="240" data-lazyload="<?php echo RS_PLUGIN_URL;?>admin/views/features/assets/premade_smallgird.jpg" data-no-retina> 
@@ -31,7 +31,7 @@ if(!defined('ABSPATH')) exit();
 											data-dim="w:200px;h:240px;"
 											data-border="bow:0px;"
 											data-frame_0="x:left;rY:90deg;"
-											data-frame_1="e:Power4.easeOut;st:a;sp:2000;sR:100;"
+											data-frame_1="e:power4.out;st:a;sp:2000;sR:100;"
 											data-frame_999="auto:true;st:a;sp:700;sR:6900;"
 											style="z-index:10;"
 										><img src="<?php echo RS_PLUGIN_URL;?>admin/views/features/assets/dummy.png" data-ww="200px" data-hh="240px" width="250" height="300" data-lazyload="<?php echo RS_PLUGIN_URL;?>admin/views/features/assets/premade_left.png" data-no-retina> 
@@ -46,7 +46,7 @@ if(!defined('ABSPATH')) exit();
 											data-dim="w:200px;h:240px;"
 											data-border="bow:0px;"
 											data-frame_0="x:right;rY:-90deg;"
-											data-frame_1="e:Power4.easeOut;st:a;sp:2000;sR:100;"
+											data-frame_1="e:power4.out;st:a;sp:2000;sR:100;"
 											data-frame_999="auto:true;st:a;sp:700;sR:6900;"
 											style="z-index:11;"
 										><img src="<?php echo RS_PLUGIN_URL;?>admin/views/features/assets/dummy.png" data-ww="200px" data-hh="240px" width="250" height="300" data-lazyload="<?php echo RS_PLUGIN_URL;?>admin/views/features/assets/premade_right.png" data-no-retina> 
@@ -61,8 +61,8 @@ if(!defined('ABSPATH')) exit();
 											data-text="s:25;l:30;fw:700;a:center;"
 											data-border="bow:0px;"
 											data-frame_0="y:-50;"
-											data-frame_1="e:Power4.easeOut;st:100;sp:1000;sR:100;"
-											data-frame_999="y:50;o:0;e:Power4.easeOut;st:a;sp:600;sR:7900;"
+											data-frame_1="e:power4.out;st:100;sp:1000;sR:100;"
+											data-frame_999="y:50;o:0;e:power4.out;st:a;sp:600;sR:7900;"
 											style="z-index:12;font-family:Roboto;"
 										>200+<br/>
 						Premade Templates 
@@ -77,8 +77,8 @@ if(!defined('ABSPATH')) exit();
 											data-text="s:25;l:30;fw:700;a:center;"
 											data-border="bow:0px;"
 											data-frame_0="y:-50;"
-											data-frame_1="e:Power4.easeOut;st:a;sp:1000;sR:100;"
-											data-frame_999="y:50px;o:0;e:Power4.easeOut;st:a;sp:600;sR:7900;"
+											data-frame_1="e:power4.out;st:a;sp:1000;sR:100;"
+											data-frame_999="y:50px;o:0;e:power4.out;st:a;sp:600;sR:7900;"
 											style="z-index:13;font-family:Roboto;"
 										>Ready to Go!<br/>
 						Pick a Template Now 
@@ -95,8 +95,8 @@ if(!defined('ABSPATH')) exit();
 											data-padding="r:35;l:35;"
 											data-border="bos:solid;boc:rgba(0,0,0,1);bow:0px;bor:3px,3px,3px,3px;"
 											data-frame_0="y:50;"
-											data-frame_1="e:Power4.easeOut;st:500;sp:1000;sR:500;"
-											data-frame_999="o:0;e:Power4.easeInOut;st:w;sp:1000;sR:7500;"
+											data-frame_1="e:power4.out;st:500;sp:1000;sR:500;"
+											data-frame_999="o:0;e:power4.inOut;st:w;sp:1000;sR:7500;"
 											data-frame_hover="c:rgba(255,255,255,1);bgc:#0a447a;boc:rgba(0,0,0,1);bor:3px,3px,3px,3px;bos:solid;oX:50;oY:50;sp:300;"
 											style="z-index:14;background-color:#006dd2;font-family:Roboto;"
 										>Template Library 

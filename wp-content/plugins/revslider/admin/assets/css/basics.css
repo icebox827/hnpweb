@@ -181,8 +181,10 @@
 #rbm_quickguide,
 #rbm_quickguide .rbm_content { width: 1200px;  }
 #rbm_quickguide .rbm_content { position: relative;  height:750px; overflow: hidden}
-#rbm_globalsettings { width: 1000px; min-height: 800px; }
+#rbm_globalsettings{ width: 1000px; min-height: 800px; }
+#rbm_globalfontsettings{ width: 860px;}
 #rbm_decisionModal { width: 500px; min-height: 300px; }
+#rbm_globalfontsettings .rbm_content,
 #rbm_globalsettings .rbm_content,
 #rbm_blocksettings .rbm_content,
 #rbm_decisionModal .rbm_content { padding: 50px; }
@@ -545,8 +547,8 @@ mcg_guide_image { width: 280px; height: 160px; background-position: top left; ba
 ****************************/
 
 
-#rs_close_advert { position: absolute; top:-30px;right:0px;line-height: 30px; padding: 0px 10px; color: #62666a; font-size: 14px; font-weight: 600; cursor: pointer; background:#2a2c2f; }
-#rs_close_advert:hover { color: #fff;background: #006dd2; }
+.rs_close_advert { position: absolute; top:-30px;right:0px;line-height: 30px; padding: 0px 10px; color: #62666a; font-size: 14px; font-weight: 600; cursor: pointer; background:#2a2c2f; }
+.rs_close_advert:hover { color: #fff;background: #006dd2; }
 
 
 /*****************************
@@ -996,6 +998,9 @@ SHORTCODE GENERATOR STYLES
 						display: inline-block;
 					}
 
+.global_custom_font_row { position: relative }
+.global_custom_font_row .deletecustomglobalfont { display: inline-block;  position: absolute; right: -20px;top: 0px; opacity:0;}
+.global_custom_font_row:hover .deletecustomglobalfont { opacity: 1; }
 
 /*******************
 LABEL ICONS GLOBAL
@@ -1164,6 +1169,30 @@ GUTENBERG BLOCK EXTENSION
 #slide_template_row .slide_template_column { width: 50%; float: left; }
 #slide_template_row .setting_text { margin-bottom: 4px;}
 
+
+/******************+
+- MEMBERS AREA -
+********************/
+._TPRB_ #rs_welcome_header_area {position: relative;width: auto;}
+
+/*._TPRB_ #rs_memarea,
+._TPRB_ #rs_memarea:hover,
+._TPRB_ #rs_memarea:focus,*/
+._TPRB_ #rs_memarea_registered i { width: 17px; overflow: hidden; }
+._TPRB_ #rs_memarea_registered,
+._TPRB_ #rs_memarea_registered:hover,
+._TPRB_ #rs_memarea_registered:focus  {box-shadow: 0px 11px 30px 0px rgba(0,0,0,0.5);border-radius: 4px;position: absolute;cursor: pointer;outline: none !important;right: 15px;top: 15px;line-height: 40px !important;font-size: 15px; width:180px;}
+
+/*._TPRB_ #rs_memarea,
+._TPRB_ #rs_memarea:hover,
+._TPRB_ #rs_memarea:focus { width: 480px;height: 70px;background: url(../images/membersarea.jpg);background-size: cover;right: 0px;top: 0px;}*/
+
+
+/*._TPRB_ #rs_memarea:hover,*/
+._TPRB_ #rs_memarea_registered:hover {filter: brightness(110%);}
+
+
+
 /******************************
   - ToolBox -
 ********************************/
@@ -1209,7 +1238,9 @@ GUTENBERG BLOCK EXTENSION
 #rb_maininfo_wrap graybutton { display:block; background:#393e45; width: 100%; text-align: center; line-height: 50px; color: #fff; font-weight: 400;  font-size:17px;  cursor: pointer; border-radius: 4px}
 
 #rb_maininfo_wrap bluebutton { background:#006dd2;}
-#rb_maininfo_wrap purplebutton { background:#642fb4;}
+#rb_maininfo_wrap purplebutton,
+._TPRB_ .basic_action_coloredpurplebutton { background:#642fb4;}
+._TPRB_ .basic_action_coloredpurplebutton:hover { background:#642fb4 !important; filter: brightness(110%); }
 
 #rb_maininfo_wrap purplebutton i.material-icons,
 #rb_maininfo_wrap bluebutton i.material-icons { line-height: inherit }

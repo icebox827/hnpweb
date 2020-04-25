@@ -17,6 +17,14 @@
 .top-bar.full-width-line:after {
 	border-bottom: @top-bar-line-size @top-bar-line-style @top-bar-line-color;
 }
+.top-bar.line-content:after {
+	width: calc(100% ~'-' @top-bar-padding-right ~'-' @top-bar-padding-left);
+	left: auto;
+	right: auto;
+	.boxed & {
+		left: 50%;
+	}
+}
 
 /*Top & bottom paddings*/
 .top-bar {

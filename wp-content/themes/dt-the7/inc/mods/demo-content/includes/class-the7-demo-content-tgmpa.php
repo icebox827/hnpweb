@@ -48,6 +48,13 @@ class The7_Demo_Content_TGMPA implements The7_Demo_Content_Plugins_Checker_Inter
 				}
 			}
 
+			// If pro-elements is not installed, then check also elementor-pro.
+			if ( array_key_exists( 'pro-elements', $this->plugins_to_install ) ) {
+				if ( is_plugin_active( 'elementor-pro/elementor-pro.php' ) ) {
+					unset( $this->plugins_to_install['pro-elements'] );
+				}
+			}
+
 			if ( $this->inactive_plugins || $this->plugins_to_install ) {
 				return false;
 			}

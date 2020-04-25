@@ -982,6 +982,7 @@ return array(
 				'Yes' => 'y',
 				'No'  => 'n',
 			),
+			"edit_field_class" => "the7-icons-dependent vc_col-xs-12",
 		),
 
 		array(
@@ -1039,6 +1040,7 @@ return array(
 				'Yes' => 'y',
 				'No'  => 'n',
 			),
+			"edit_field_class" => "the7-icons-dependent vc_col-xs-12",
 		),
 		array(
 			"group" => __("Icons", 'dt-the7-core'),
@@ -1063,6 +1065,7 @@ return array(
 				'Yes' => 'y',
 				'No'  => 'n',
 			),
+			"edit_field_class" => "the7-icons-dependent vc_col-xs-12",
 			'dependency' => array(
 				'element' => 'dt_icon_hover',
 				'value'   => 'y',

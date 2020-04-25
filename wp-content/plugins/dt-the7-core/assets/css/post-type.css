@@ -1394,10 +1394,6 @@ body.testimonials {
 .albums-shortcode .entry-meta > span a {
   display: inline-block;
 }
-.portfolio-shortcode .entry-meta a:hover,
-.albums-shortcode .entry-meta a:hover {
-  text-decoration: underline;
-}
 .portfolio-shortcode .entry-meta *,
 .albums-shortcode .entry-meta * {
   color: inherit;

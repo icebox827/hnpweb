@@ -89,7 +89,20 @@ $options['footer-decoration_outline_color'] = array(
 		),
 	),
 );
-
+$options['footer-decoration-line_size'] = array(
+	'id'         => 'footer-decoration-line_size',
+	'name'       => _x( 'Line height', 'theme-options', 'the7mk2' ),
+	'std'        => '1px',
+	'type'       => 'number',
+	'units'      => 'px',
+	'dependency' => array(
+		array(
+			'field'    => 'footer-style',
+			'operator' => '!=',
+			'value'    => 'solid_background',
+		),
+	),
+);
 $options['footer-bg_image'] = array(
 	'type'       => 'background_img',
 	'name'       => _x( 'Add background image', 'theme-options', 'the7mk2' ),
@@ -304,6 +317,20 @@ $options['bottom_bar-bg_color'] = array(
 	'id'   => 'bottom_bar-bg_color',
 	'std'  => '#ffffff',
 	'type' => 'alpha_color',
+);
+$options['bottom_bar-line_size'] = array(
+	'id'         => 'bottom_bar-line_size',
+	'name'       => _x( 'Line height', 'theme-options', 'the7mk2' ),
+	'std'        => '1px',
+	'type'       => 'number',
+	'units'      => 'px',
+	'dependency' => array(
+		array(
+			'field'    => 'bottom_bar-style',
+			'operator' => '!=',
+			'value'    => 'solid_background',
+		),
+	),
 );
 
 $options['bottom_bar-bg_image'] = array(

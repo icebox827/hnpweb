@@ -157,12 +157,22 @@
 				}
 		#bottom-bar .menu-select {
 			position: absolute;
+		//	display: flex;
+			align-items: center;
 			visibility: hidden;
 			height: 0;
 			opacity: 0;
-		}
-		#bottom-bar .menu-select {
 			overflow: hidden;
+			&:before {
+				margin-right: 8px;
+				content: "\e90b";
+				font-family: 'icomoon-the7-font' !important;
+				speak: none;
+				font-size: 12px;
+				font-style: normal;
+				font-weight: normal;
+				line-height: 1;
+			}
 		}
 			#bottom-bar .mini-nav ul {
 				display: block;

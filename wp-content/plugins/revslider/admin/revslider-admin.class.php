@@ -17,7 +17,38 @@ class RevSliderAdmin extends RevSliderFunctionsAdmin {
 	private $pages			 = array('revslider'); //, 'revslider_navigation', 'rev_addon', 'revslider_global_settings'
 	private $dev_mode		 = false;
 	private $path_views;
-
+	
+	
+	/**
+	 * START: DEPRECATED FUNCTIONS PRIOR 6.2.0 THAT ARE IN HERE FOR OLD THEMES TO WORK PROPERLY
+	 **/
+	
+	/**
+	 * Activate the Plugin through the ThemePunch Servers
+	 * @before: RevSliderOperations::checkPurchaseVerification();
+	 * @moved to RevSliderLicense::activate_plugin();
+	 **/
+	public function activate_plugin($code){
+		$rs_license = new RevSliderLicense();
+		return $rs_license->activate_plugin($code);
+	}
+	
+	
+	/**
+	 * Deactivate the Plugin through the ThemePunch Servers
+	 * @before: RevSliderOperations::doPurchaseDeactivation();
+	 * @moved to RevSliderLicense::deactivate_plugin();
+	 **/
+	public function deactivate_plugin(){
+		$rs_license = new RevSliderLicense();
+		return $rs_license->deactivate_plugin();
+	}
+	
+	/**
+	 * END: DEPRECATED FUNCTIONS THAT ARE IN HERE FOR OLD ADDONS TO WORK PROPERLY
+	 **/
+	 
+	
 	/**
 	 * construct admin part
 	 **/
@@ -106,7 +137,7 @@ class RevSliderAdmin extends RevSliderFunctionsAdmin {
 				$wait_for[] = 'image-edit';
 			}
 			$wait_for = array();
-			wp_enqueue_script('tp-tools', RS_PLUGIN_URL . 'public/assets/js/revolution.tools.min.js', $wait_for, RS_TP_TOOLS);
+			wp_enqueue_script('tp-tools', RS_PLUGIN_URL . 'public/assets/js/rbtools.min.js', $wait_for, RS_TP_TOOLS);
 			
 			if($this->dev_mode){
 				wp_enqueue_script('revbuilder-admin', RS_PLUGIN_URL . 'admin/assets/js/modules/admin.js', array('jquery'), RS_REVISION, false);
@@ -392,6 +423,7 @@ class RevSliderAdmin extends RevSliderFunctionsAdmin {
 			add_action('admin_notices', array($this, 'add_plugins_page_notices'));
 		}
 		
+		add_action('admin_init', array($this, 'merge_addon_notices'), 99);
 		add_action('admin_init', array($this, 'add_suggested_privacy_content'), 15);
 	}
 
@@ -412,6 +444,60 @@ class RevSliderAdmin extends RevSliderFunctionsAdmin {
 		return (in_array($domain, array('revslider', 'revsliderhelp'), true)) ? $this->get_val($this->global_settings, 'lang', 'default') : $locale;
 	}
 
+	/**
+	 * merge the revslider addon notices into one bigger notice
+	 * @since: 2.2.0
+	 **/
+	public static function merge_addon_notices(){
+		global $wp_filter;
+		
+		if(!isset($wp_filter['admin_notices'])) return;
+		if(!isset($wp_filter['admin_notices']->callbacks)) return;
+		
+		global $revslider_addon_notice_merged;
+		$slugs = array(
+			'Revslider_404_Addon_Verify', 'RsAddOnBackupNotice', 'RsAddOnBeforeAfterNotice', 'RsAddOnBubblemorphNotice', 'Revslider_Domain_Switch_Addon_Verify',
+			'RsAddOnDuotoneNotice', 'RsAddOnExplodinglayersNotice', 'Revslider_Featured_Addon_Verify', 'RsAddOnFilmstripNotice', 'Revslider_Gallery_Addon_Verify',
+			'RsAddOnLiquideffectNotice', 'Revslider_Login_Addon_Verify', 'Revslider_Maintenance_Addon_Verify', 'RsAddOnMousetrapNotice', 'RsAddOnPaintbrushNotice',
+			'RsAddOnPanoramaNotice', 'RsAddOnParticlesNotice', 'RsAddOnPolyfoldNotice', 'Revslider_Prev_Next_Addon_Verify', 'RsAddOnRefreshNotice',
+			'Revslider_Related_Posts_Addon_Verify', 'RsAddOnRevealerNotice', 'RsAddOnShapebuilderNotice', 'Revslider_Sharing_Addon_Verify', 'RsAddOnSliceyNotice',
+			'RsAddOnSnowNotice', 'RsAddOnSunbeamNotice', 'RsAddOnTypewriterNotice', 'Revslider_Weather_Addon_Verify', 'Revslider_Whiteboard_Addon_Verify',
+			'Revslider_Whiteboard_Addon_Verify'
+		);
+	
+		foreach($wp_filter['admin_notices']->callbacks as $k => $o){
+			if(!empty($o)){
+				foreach($o as $ok => $f){
+					if(!isset($f['function'])) continue;
+					if(!is_array($f['function'])) continue;
+					if(!isset($f['function'][0])) continue;
+					if(!is_object($f['function'][0])) continue;
+					
+					$class = get_class($f['function'][0]);
+					if(in_array($class, $slugs, true)){
+						unset($wp_filter['admin_notices']->callbacks[$k][$ok]);
+						$revslider_addon_notice_merged++;
+					}
+				}
+			}
+		}
+		if($revslider_addon_notice_merged > 0){
+			add_action('admin_notices', array($this, 'add_addon_plugins_page_notices'));
+		}
+	}
+	
+	/**
+	 * add addon merged notices
+	 * @since: 6.2.0
+	 **/
+	public static function add_addon_plugins_page_notices(){
+		?>
+		<div class="error below-h2 soc-notice-wrap revaddon-notice" style="display: none;">
+			<p><?php echo __('Action required for Slider Revolution AddOns: Please <a href="//revolution.themepunch.com/" target="_blank">install</a>/<a href="//www.themepunch.com/slider-revolution/install-activate-and-update/#register-purchase-code" target="_blank">activate</a>/<a href="//www.themepunch.com/slider-revolution/install-activate-and-update/#plugin-updates" target="_blank">update</a> Slider Revolution</a>', 'revslider'); ?><span data-addon="rs-addon-notice" data-noticeid="rs-addon-merged-notices" style="float: right; cursor: pointer" class="revaddon-dismiss-notice dashicons dashicons-dismiss"></span></p>
+		</div>
+		<?php
+	}
+	
 	/**
 	 * add plugin notices to the Slider Revolution Plugin at the overview page of plugins
 	 **/
@@ -591,30 +677,39 @@ class RevSliderAdmin extends RevSliderFunctionsAdmin {
 
 			switch($action){
 				case 'activate_plugin':
-					$result = false;
-					$code = trim($this->get_val($data, 'code'));
+					$result	 = false;
+					$code	 = trim($this->get_val($data, 'code'));
+					$selling = $this->get_addition('selling');
+					$rs_license = new RevSliderLicense();
+					
 					if(!empty($code)){
-						$result = $this->activate_plugin($code);
+						$result = $rs_license->activate_plugin($code);
 					}else{
-						$this->ajax_response_error(__('The Purchase Code needs to be set!', 'revslider'));
+						$error = ($selling === true) ? __('The License Key needs to be set!', 'revslider') : __('The Purchase Code needs to be set!', 'revslider');
+						$this->ajax_response_error($error);
 						exit;
 					}
 
 					if($result === true){
 						$this->ajax_response_success(__('Plugin successfully activated', 'revslider'));
 					}elseif($result === false){
-						$this->ajax_response_error(__('Purchase Code is invalid', 'revslider'));
+						$error = ($selling === true) ? __('License Key is invalid', 'revslider') : __('Purchase Code is invalid', 'revslider');
+						$this->ajax_response_error($error);
 					}else{
 						if($result == 'exist'){
-							$this->ajax_response_error(__('Purchase Code already registered!', 'revslider'));
+							$error = ($selling === true) ? __('License Key already registered!', 'revslider') : __('Purchase Code already registered!', 'revslider');
+							$this->ajax_response_error($error);
 						}elseif($result == 'banned'){
-							$this->ajax_response_error(__('Purchase Code was locked, please contact the ThemePunch support!', 'revslider'));
+							$error = ($selling === true) ? __('License Key was locked, please contact the ThemePunch support!', 'revslider') : __('Purchase Code was locked, please contact the ThemePunch support!', 'revslider');
+							$this->ajax_response_error($error);
 						}
-						$this->ajax_response_error(__('Purchase Code could not be validated', 'revslider'));
+						$error = ($selling === true) ? __('License Key could not be validated', 'revslider') : __('Purchase Code could not be validated', 'revslider');
+						$this->ajax_response_error($error);
 					}
 				break;
 				case 'deactivate_plugin':
-					$result = $this->deactivate_plugin();
+					$rs_license = new RevSliderLicense();
+					$result = $rs_license->deactivate_plugin();
 
 					if($result){
 						$this->ajax_response_success(__('Plugin deregistered', 'revslider'));
@@ -1020,7 +1115,6 @@ class RevSliderAdmin extends RevSliderFunctionsAdmin {
 					$post60		= (version_compare($slider->get_setting('version', '1.0.0'), '6.0.0', '<')) ? false : true;
 					// Given Alias
 					$alias = $this->get_val($data, 'alias');
-					
 					$return = array_search($alias,$arrSliders);
 
 					foreach($arrSliders as $sliderony){
@@ -1030,8 +1124,16 @@ class RevSliderAdmin extends RevSliderFunctionsAdmin {
 							$title = $slider_found['title'];
 						}
 					}
-					
-					$this->ajax_response_data(array('image' => $return, 'title' => $title));
+
+					if(!$return) $return = "";
+
+					if(!empty($title)){
+						$this->ajax_response_data(array('image' => $return, 'title' => $title));
+					}
+					else{
+						$this->ajax_response_error( __('The Slider with the alias "' . $alias . '" is not available!', 'revslider') );
+					}
+
 				break;
 				case 'getSliderSizeLayout':
 					// Available Sliders
@@ -1628,7 +1730,9 @@ class RevSliderAdmin extends RevSliderFunctionsAdmin {
 				case 'get_addon_list':
 					$addon = new RevSliderAddons();
 					$addons = $addon->get_addon_list();
-
+					
+					update_option('rs-addons-counter', 0); //set the counter back to 0
+					
 					$this->ajax_response_data(array('addons' => $addons));
 				break;
 				case 'get_layers_by_slide':
@@ -1971,7 +2075,7 @@ class RevSliderAdmin extends RevSliderFunctionsAdmin {
 						$slider = new RevSliderOutput();
 						$slider->set_ajax_loaded();
 						
-						$slider_class = $slider->add_slider_to_stage($id, $usage,$layout,$offset,$modal);
+						$slider_class = $slider->add_slider_to_stage($id, $usage, $layout, $offset, $modal);
 						$html = ob_get_contents();
 						ob_clean();
 						ob_end_clean();
@@ -2133,67 +2237,6 @@ class RevSliderAdmin extends RevSliderFunctionsAdmin {
 		$message = $prefix.' '.esc_attr($filepath).' not exists!';
 		
 		$this->throw_error($message);
-	}
-	
-	
-	/**
-	 * Activate the Plugin through the ThemePunch Servers
-	 * @before: RevSliderOperations::checkPurchaseVerification();
-	 **/
-	public function activate_plugin($code){
-		$rslb = new RevSliderLoadBalancer();
-		$data = array(
-			'code'		=> urlencode($code),
-			'version'	=> urlencode(RS_REVISION),
-			'product'	=> urlencode(RS_PLUGIN_SLUG)
-		);
-		
-		$response	  = $rslb->call_url('activate.php', $data, 'updates');
-		$version_info = wp_remote_retrieve_body($response);
-		
-		if(is_wp_error($version_info)){
-			return false;
-		}
-		
-		if($version_info == 'valid'){
-			update_option('revslider-valid', 'true');
-			update_option('revslider-code', $code);
-			return true;
-		}elseif($version_info == 'exist'){
-			return 'exist';
-		}elseif($version_info == 'banned'){
-			return 'banned';
-		}
-		
-		return false;
-	}
-	
-	
-	/**
-	 * Deactivate the Plugin through the ThemePunch Servers
-	 * @before: RevSliderOperations::doPurchaseDeactivation();
-	 **/
-	public function deactivate_plugin(){
-		$rslb = new RevSliderLoadBalancer();
-		$code = get_option('revslider-code', '');
-		$data = array(
-			'code'		=> urlencode($code),
-			'product'	=> urlencode(RS_PLUGIN_SLUG)
-		);
-		$res = $rslb->call_url('deactivate.php', $data, 'updates');
-		$vi	 = wp_remote_retrieve_body($res);
-		
-		if(is_wp_error($vi)){
-			return false;
-		}
-
-		if($vi == 'valid'){
-			update_option('revslider-valid', 'false');
-			update_option('revslider-code', '');
-			return true;
-		}
-		
-		return false;
 	}
 	
 	

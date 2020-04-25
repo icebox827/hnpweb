@@ -29,16 +29,19 @@
 
 .sidebar.bg-under-widget .widget:first-child,
 .bg-under-widget .sidebar-content .widget:first-child,
-.solid-bg.sidebar-content .widget:first-child {
+.solid-bg.sidebar-content .widget:first-child,
+.elementor-widget-sidebar .widget:first-child {
 	margin-top: 0;
 }
 .sidebar:not(.solid-bg):not(.bg-under-widget) .widget:first-child,
-.content .sidebar-content:not(.solid-bg):not(.bg-under-widget) .widget:first-child {
+.content .sidebar-content:not(.solid-bg):not(.bg-under-widget) .widget:first-child,
+.elementor-widget-sidebar .widget:first-child {
 	padding-top: 0;
 }
 
 .sidebar .widget:first-child,
-.sidebar-content .widget:first-child {
+.sidebar-content .widget:first-child,
+.elementor-widget-sidebar .widget:first-child {
 	border-top: none;
 }
 .footer .widget {
@@ -270,6 +273,7 @@
 ================================================== */
 
 .menu,
+.content .menu,
 .custom-menu
 .widget_pages > ul {
 	margin: 0;
@@ -502,7 +506,7 @@
 
 .widget_search input[type="text"] {
 	width: 100%;
-	margin: 0;
+	margin: 0 !important;
 }
 	.widget .searchform input,
 	.content .searchform input {

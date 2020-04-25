@@ -227,22 +227,14 @@ h1, h2, h3, h4, h5, h6 {
 
 .content>*.alignfull {
     position: relative;
-    // left: -1rem;
-    // width: calc(100% ~'+'2 ~'*'1rem);
-    // max-width: calc(100% ~'+'2 ~'*'1rem);
 }
 
-//@media only screen and (min-width: 768px) {
-    .content>*.alignfull,
-    .content ul.wp-block-gallery.alignfull {
-        margin-top: calc(2 ~'*'1rem);
-        margin-bottom: calc(2 ~'*'1rem);
-        left: 50%;
-        margin-left: -50vw;
-        width: 100vw;
-        max-width: none;
+    .sidebar-none .content>*.alignfull,
+    .sidebar-none .content ul.wp-block-gallery.alignfull {
+        width:  100vw;
+        max-width:  100vw;
+        margin-left:  calc(50% ~'-' 50vw);
     }
-//}
 
 .content>*.alignfull img {
     display: block;

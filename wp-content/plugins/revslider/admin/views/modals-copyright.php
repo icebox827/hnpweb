@@ -9,6 +9,11 @@
  */
  
 if(!defined('ABSPATH')) exit();
+
+if(!isset($rs_f)) $rs_f = new RevSliderFunctions();
+
+$registered_p_c = ($rs_f->get_addition('selling') === true) ? __('registered license key', 'revslider') : __('registered purchase code', 'revslider');
+$registered_p_c_url = ($rs_f->get_addition('selling') === true) ? 'https://sliderrevolution.com/pricing/' : 'https://themepunch.com/faq/where-to-find-purchase-code/';
 ?>
 
 <!--OPTIMIZER DETAILS-->
@@ -99,7 +104,6 @@ if(!defined('ABSPATH')) exit();
 								<div class="ale_i_title thumbnail_title"><?php _e('Pop Up by Events','revslider');?><input type="checkbox" data-rocker="foals"  class="easyinit scblockinput" data-r="popup.event.use"></div><hr class="general_hr"><span class="linebreak"></span>							
 								<row class="direktrow"><onefull><label_a><?php _e('Listen to','revslider');?></label_a><input data-r="popup.event.v" class="valueduekeyboard longinput scblockinput easyinit callEvent" data-evt="updateSRBSSVREVT" type="text"></onefull></row>							
 								<div class="function_info_small">i.e.: jQuery(document).trigger("<span id="srbs_scr_evt"></span>"")</div>
-																						
 							</div>
 						</div>
 					</div>
@@ -108,7 +112,6 @@ if(!defined('ABSPATH')) exit();
 		</div>
 	</div>
 </div>
-
 
 
 
@@ -131,12 +134,12 @@ if(!defined('ABSPATH')) exit();
 					<div class="rbm_content_right">
 						<div class="crm_content_wrap" id="crm_templates">
 							<div class="crm_title"><?php _e('Terms of using Layer Group Objects from the Library');?></div>
-							<div class="crm_content"><div class="crm_arrow material-icons">arrow_forward</div><div class="crm_text"><?php _e('Templates from the Slider Revolution Library <b>must only</b> be used with a');?><br><a target="_blank" href="https://themepunch.com/faq/where-to-find-purchase-code/"><?php _e('registered purchase code');?></a> <?php _e('on that particular website.');?></div></div>							
+							<div class="crm_content"><div class="crm_arrow material-icons">arrow_forward</div><div class="crm_text"><?php _e('Templates from the Slider Revolution Library <b>must only</b> be used with a');?><br><a target="_blank" href="<?php echo $registered_p_c_url; ?>"><?php echo $registered_p_c;?></a> <?php _e('on that particular website.');?></div></div>							
 							<div class="crm_content"><div class="crm_arrow material-icons">arrow_forward</div><div class="crm_text"><?php _e('Media assets used in the respective templates, are licensed according to the here mentioned license terms (see list on the left).');?></div></div>
-							<div class="crm_content"><div class="crm_arrow material-icons">arrow_forward</div><div class="crm_text"><?php _e('Slider Revolution Add-Ons <b>must only</b> be used with a');?> <a target="_blank" href="https://themepunch.com/faq/where-to-find-purchase-code/"><?php _e('registered purchase code');?></a> <?php _e('on that particular website.');?></div></div>
+							<div class="crm_content"><div class="crm_arrow material-icons">arrow_forward</div><div class="crm_text"><?php _e('Slider Revolution Add-Ons <b>must only</b> be used with a');?> <a target="_blank" href="<?php echo $registered_p_c_url; ?>"><?php echo $registered_p_c;?></a> <?php _e('on that particular website.');?></div></div>
 							<div class="div30"></div>
 							<a target="_blank" href="https://getsliderrevolution.com" class="crm_basic_button basic_action_button autosize basic_action_coloredbutton" style="padding:0px 30px"><?php _e('Buy another License');?> <span style="line-height:28px" class="crm_infostar">*</span></a>
-							<div class="crm_info_text"><span class="crm_infostar">*</span><?php _e('One License / Purchase Code is required for each Website');?></div>
+							<div class="crm_info_text"><span class="crm_infostar">*</span><?php _e('One License Key / Purchase Code is required for each Website');?></div>
 						</div>
 						<div class="crm_content_wrap" id="crm_images">
 							<div class="crm_title"><?php _e('Terms of using JPG Images from the Library');?></div>
@@ -148,12 +151,12 @@ if(!defined('ABSPATH')) exit();
 						</div>
 						<div class="crm_content_wrap" id="crm_objects">
 							<div class="crm_title"><?php _e('Terms of using PNG Objects from the Library');?></div>
-							<div class="crm_content"><div class="crm_arrow material-icons">arrow_forward</div><div class="crm_text"><?php _e('PNG Objects from the Slider Revolution Library <b>must only</b> be used with a');?><br><a target="_blank" href="https://themepunch.com/faq/where-to-find-purchase-code/"><?php _e('registered purchase code');?></a> <?php _e('on that particular website.');?></div></div>							
+							<div class="crm_content"><div class="crm_arrow material-icons">arrow_forward</div><div class="crm_text"><?php _e('PNG Objects from the Slider Revolution Library <b>must only</b> be used with a');?><br><a target="_blank" href="<?php echo $registered_p_c_url; ?>"><?php echo $registered_p_c;?></a> <?php _e('on that particular website.');?></div></div>							
 							<div class="crm_content"><div class="crm_arrow material-icons">arrow_forward</div><div class="crm_text"><?php _e('Licenses via extended license and cooperation with author ');?> <a target="_blank" href="https://creativemarket.com/ceacle"><?php _e('Ceacle');?></a></div></div>
 							<div class="crm_content"><div class="crm_arrow material-icons">arrow_forward</div><div class="crm_text"><?php _e('If you need .psd files for objects, you can purchase it from the original author');?> <a target="_blank" href="https://creativemarket.com/ceacle"><?php _e('here');?></a></div></div>
 							<div class="div30"></div>
 							<a target="_blank" href="https://getsliderrevolution.com" class="crm_basic_button basic_action_button autosize basic_action_coloredbutton" style="padding:0px 30px"><?php _e('Buy another License');?> <span style="line-height:28px" class="crm_infostar">*</span></a>
-							<div class="crm_info_text"><span class="crm_infostar">*</span><?php _e('One License / Purchase Code is required for each Website');?></div>
+							<div class="crm_info_text"><span class="crm_infostar">*</span><?php _e('One License Key / Purchase Code is required for each Website');?></div>
 						</div>
 						<div class="crm_content_wrap " id="crm_videos">
 							<div class="crm_title"><?php _e('Terms of using HTML5 Videos from the Library');?></div>
@@ -180,11 +183,11 @@ if(!defined('ABSPATH')) exit();
 						</div>
 						<div class="crm_content_wrap selected" id="crm_layers">
 							<div class="crm_title"><?php _e('Terms of using Layer Group Objects from the Library');?></div>
-							<div class="crm_content"><div class="crm_arrow material-icons">arrow_forward</div><div class="crm_text"><?php _e('Layer Group Objects from the Slider Revolution Library <b>must only</b> be used with a');?><br><a target="_blank" href="https://themepunch.com/faq/where-to-find-purchase-code/"><?php _e('registered purchase code');?></a> <?php _e('on that particular website.');?></div></div>							
+							<div class="crm_content"><div class="crm_arrow material-icons">arrow_forward</div><div class="crm_text"><?php _e('Layer Group Objects from the Slider Revolution Library <b>must only</b> be used with a');?><br><a target="_blank" href="<?php echo $registered_p_c_url; ?>"><?php echo $registered_p_c;?></a> <?php _e('on that particular website.');?></div></div>							
 							<div class="crm_content"><div class="crm_arrow material-icons">arrow_forward</div><div class="crm_text"><?php _e('Media assets used in the respective Layer Group Objects, are licensed according to the here mentioned license terms (see list on the left).');?></div></div>							
 							<div class="div30"></div>
 							<a target="_blank" href="https://getsliderrevolution.com" class="crm_basic_button basic_action_button autosize basic_action_coloredbutton" style="padding:0px 30px"><?php _e('Buy another License');?> <span style="line-height:28px" class="crm_infostar">*</span></a>
-							<div class="crm_info_text"><span class="crm_infostar">*</span><?php _e('One License / Purchase Code is required for each Website');?></div>
+							<div class="crm_info_text"><span class="crm_infostar">*</span><?php _e('One License Key / Purchase Code is required for each Website');?></div>
 						</div>
 					</div>
 				</div>					

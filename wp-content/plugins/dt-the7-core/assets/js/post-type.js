@@ -338,7 +338,9 @@ jQuery(document).ready(function($){
                 return;
             }
 
-            var $this = $(this).find(".rollover-content");
+            //var $this = $this.find("a").first();
+            var $anchor = $this.find("a").first();
+            var href = $anchor.attr("href");
             $this.on("touchstart", function(e) { 
                 origY = e.originalEvent.touches[0].pageY;
                 origX = e.originalEvent.touches[0].pageX;
@@ -348,7 +350,11 @@ jQuery(document).ready(function($){
                     touchEY = e.originalEvent.changedTouches[0].pageY;
                 if( origY == touchEY || origX == touchEX ){
                     if ($this.hasClass("is-clicked")) {
-                            window.location.href = $this.prev("a").first().attr("href");
+                        if ( $anchor.attr("target") === "_blank" ) {
+                            window.open(href, "_blank");
+                            return false;
+                        }
+                        window.location.href = href;
                     } else {
                         e.preventDefault();
                         $(".mobile-ture .rollover-content").removeClass("is-clicked");
@@ -502,8 +508,6 @@ jQuery(document).ready(function($){
             var $thisSingleLink = $this.find(".post-thumbnail-rollover").first(),
                 $thisCategory = $this.find(".entry-meta a, .fancy-date a, .fancy-categories a"),
                 $thisOfTop = $this.find(".entry-excerpt").height() + $this.find(".post-details").height();
-
-           
             $this.on("touchstart", function(e) { 
                 origY = e.originalEvent.touches[0].pageY;
                 origX = e.originalEvent.touches[0].pageX;
@@ -528,6 +532,7 @@ jQuery(document).ready(function($){
                             if(e.target.tagName.toLowerCase() === 'a'){
                                // $(e.target).trigger("click");
                             }
+
                             $(".mobile-ture .post").removeClass("is-clicked");
                             $this.addClass("is-clicked");
                             $this.parent().siblings().find(".post").removeClass("is-clicked");
@@ -673,15 +678,16 @@ jQuery(document).ready(function($){
     $(".mobile-true .dt-owl-item .links-container > a").touchHoverLinks();
 
     /*!Trigger albums click */
+
     $.fn.triggerAlbumsClick = function() {
         return this.each(function() {
-            var $this = $(this);
+           var $this = $(this);
             if ($this.hasClass("this-ready")) {
                 return;
             }
 
-            var $thisSingleLink = $this.find("a.rollover-click-target, a.dt-pswp-item").first(),
-                $thisCategory = $this.find(".portfolio-categories a");
+            var $thisSingleLink = $(this).find("a.rollover-click-target, a.dt-pswp-item").first(),
+                $thisCategory = $(this).find(".portfolio-categories a");
 
 
             if( $thisSingleLink.length > 0 ){
@@ -697,8 +703,10 @@ jQuery(document).ready(function($){
 
                 var alreadyTriggered = false;
 
-                $this.on("click", function(){
-                    if ($this.parents(".ts-wrap").hasClass("ts-interceptClicks")) return;
+                $(this).on("click", function(){
+                    var $thisSingleLink = $(this).find("a.rollover-click-target, a.dt-pswp-item").first(),
+                $thisCategory = $(this).find(".portfolio-categories a");
+                    if ($(this).parents(".ts-wrap").hasClass("ts-interceptClicks")) return;
 
                     if ( !alreadyTriggered ) {
                         alreadyTriggered = true;
@@ -708,7 +716,7 @@ jQuery(document).ready(function($){
                     }
                     return false;
                 })
-                $this.find($thisCategory).click(function(e) {
+               $(this).find($thisCategory).click(function(e) {
 
                      e.stopPropagation()
                     window.location.href = $thisCategory.attr('href');
@@ -717,7 +725,54 @@ jQuery(document).ready(function($){
             $this.addClass("this-ready");
         });
     };
-    $(".mobile-false .dt-albums-template .rollover-project, .mobile-false .dt-albums-shortcode .rollover-project, .mobile-false .dt-albums-template .buttons-on-img, .mobile-false .dt-albums-shortcode .buttons-on-img, .mobile-false .archive .type-dt_gallery .buttons-on-img, .mobile-false .albums-shortcode:not(.content-rollover-layout-list):not(.gradient-overlay-layout-list) .post-thumbnail").triggerAlbumsClick();
+    $(".mobile-false .dt-albums-template .rollover-project, .mobile-false .dt-albums-shortcode .rollover-project, .mobile-false .dt-albums-template .buttons-on-img, .mobile-false .dt-albums-shortcode .buttons-on-img, .mobile-false .archive .type-dt_gallery .buttons-on-img, .mobile-false .albums-shortcode:not(.content-rollover-layout-list):not(.gradient-overlay-layout-list) .post-thumbnail-wrap").triggerAlbumsClick();
+
+     $.fn.triggerClonedAlbumsClick = function() {
+        return this.each(function() {
+           var $this = $(this);
+            if ($this.hasClass("this-clone-ready")) {
+                return;
+            }
+
+            var $thisSingleLink = $(this).find("a.rollover-click-target, a.dt-pswp-item").first(),
+                $thisCategory = $(this).find(".portfolio-categories a");
+
+
+            if( $thisSingleLink.length > 0 ){
+                $thisSingleLink.on("click", function(event) {
+                    event.preventDefault();
+                   // event.stopPropagation();
+                     if ($thisSingleLink.parents(".ts-wrap").hasClass("ts-interceptClicks")) return;
+
+                    if ( $(this).hasClass('go-to') ) {
+                        window.location.href = $(this).attr('href');
+                    }
+                });
+
+                var alreadyTriggered = false;
+
+                $(this).on("click", function(){
+                    var $thisSingleLink = $(this).find("a.rollover-click-target, a.dt-pswp-item").first(),
+                $thisCategory = $(this).find(".portfolio-categories a");
+                    if ($(this).parents(".ts-wrap").hasClass("ts-interceptClicks")) return;
+
+                    if ( !alreadyTriggered ) {
+                        alreadyTriggered = true;
+                        $thisSingleLink.trigger("click");
+                        
+                        alreadyTriggered = false;
+                    }
+                    return false;
+                })
+               $(this).find($thisCategory).click(function(e) {
+
+                     e.stopPropagation()
+                    window.location.href = $thisCategory.attr('href');
+                });
+            }
+            $this.addClass("this-clone-ready");
+        });
+    };
     $.fn.triggerOverlayAlbumsClick = function() {
         return this.each(function() {
             var $this = $(this);
@@ -764,6 +819,51 @@ jQuery(document).ready(function($){
         });
     };
     $(" .mobile-false .albums-shortcode.content-rollover-layout-list .post-entry-content, .mobile-false .albums-shortcode.gradient-overlay-layout-list .post-entry-content").triggerOverlayAlbumsClick();
+     $.fn.triggerClonedOverlayAlbumsClick = function() {
+        return this.each(function() {
+            var $this = $(this);
+            if ($this.hasClass("this-cloned-overlay-ready")) {
+                return;
+            }
+            var $thisSingleLink = $this.parents('.post').first().find("a.rollover-click-target, a.dt-pswp-item").first(),
+                $thisCategory = $this.find(".portfolio-categories a, .entry-excerpt a");
+
+
+             if( $thisSingleLink.length > 0 ){
+                $thisSingleLink.on("click", function(event) {
+                    event.preventDefault();
+                   // event.stopPropagation();
+                     if ($thisSingleLink.parents(".ts-wrap").hasClass("ts-interceptClicks")) return;
+
+                    if ( $(this).hasClass('go-to') ) {
+                        window.location.href = $(this).attr('href');
+                    }
+                });
+
+                var alreadyTriggered = false;
+
+                $this.on("click", function(){
+
+                    if ($this.parents(".ts-wrap").hasClass("ts-interceptClicks")) return;
+
+                    if ( !alreadyTriggered ) {
+                        alreadyTriggered = true;
+                        $thisSingleLink.trigger("click");
+
+                        
+                        alreadyTriggered = false;
+                    }
+                    return false;
+                })
+                $this.find($thisCategory).click(function(e) {
+
+                     e.stopPropagation()
+                    window.location.href = $thisCategory.attr('href');
+                });
+            }
+            $this.addClass("this-cloned-overlay-ready");
+        });
+    };
 
      $.fn.triggerOverlayAlbumsTouch = function() {
 
@@ -916,7 +1016,6 @@ jQuery(document).ready(function($){
                     $targetClick = $(e.target);
                    
                     if($targetClick.hasClass("project-zoom") || $targetClick.parent('a').hasClass("project-zoom")){ 
-                        console.log($targetClick)
                     }else{
                         if ( !alreadyTriggered ) {
                             alreadyTriggered = true;

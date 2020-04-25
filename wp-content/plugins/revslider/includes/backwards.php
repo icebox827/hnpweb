@@ -8,7 +8,7 @@
 if(!defined('ABSPATH')) exit();
 
 /**
- * backwards compatibility code
+ * backwards compatibility prior 6.0.0 code
  * @START
  **/
 //mostly needed for RevSlider AddOns
@@ -72,8 +72,7 @@ if(!function_exists('set_revslider_as_theme')){
 }
 
 /**
- * backwards compatibility code
+ * backwards compatibility prior 6.0.0 code
  * @END
  **/
- 
  ?>

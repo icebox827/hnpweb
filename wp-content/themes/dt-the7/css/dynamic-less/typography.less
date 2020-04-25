@@ -35,8 +35,7 @@ body.page,
 	max-width: @customSize;
 }
 
-.header-bar,
-.mobile-header-bar {
+.header-bar {
  	.masthead:not(.side-header):not(.side-header-menu-icon) & {
 		max-width: calc(@content-width ~"-" @header-right-padding ~"-" @header-left-padding);
 		.header-width (@content-width);
@@ -407,6 +406,7 @@ a:hover {
 #footer > .wf-wrap {
 	width: @content-width;
 }
+
 // .ph-wrap {
 // 	max-width:  @content-width - 88;
 // }
@@ -476,6 +476,10 @@ body {
 			background-size: @page-bg-size;
 		}
 	}
+}
+.fixed-page-bg #page.boxed:after {
+	max-width: @box-width;
+	margin: 0 auto;
 }
 	.footer-overlap .page-inner {
 		background: @page-bg-color @page-bg-image @page-bg-repeat @page-bg-attachment @page-bg-position-x @page-bg-position-y;

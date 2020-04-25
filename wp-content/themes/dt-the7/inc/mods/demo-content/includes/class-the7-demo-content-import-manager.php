@@ -161,6 +161,22 @@ If the problem persists, please don\'t hesitate to contact our <a href="%s" targ
 		ob_start();
 		$this->import_file( $this->content_dir . 'full-content.xml', $import_options );
 		ob_end_clean();
+
+		$widgets = get_option( 'widget_text', array() );
+		if ( $widgets ) {
+			$widgets_str = wp_json_encode( $widgets );
+
+			$url_remap = $this->importer_obj->url_remap;
+			uksort( $url_remap, array( $this->importer_obj, 'cmpr_strlen' ) );
+
+			foreach ( $url_remap as $old_url => $new_url ) {
+				$old_url     = str_replace( '"', '', wp_json_encode( $old_url ) );
+				$new_url     = str_replace( '"', '', wp_json_encode( $new_url ) );
+				$widgets_str = str_replace( $old_url, $new_url, $widgets_str );
+			}
+
+			update_option( 'widget_text', json_decode( $widgets_str, true ) );
+		}
 	}
 
 	/**
@@ -325,7 +341,7 @@ If the problem persists, please don\'t hesitate to contact our <a href="%s" targ
 	 */
 	public function menu_item_args_filter( $args ) {
 		$home_url  = home_url( '/' );
-		$demo_path = parse_url( $this->demo['link'], PHP_URL_PATH );
+		$demo_path = $this->get_demo_url_path();
 		if ( $demo_path !== '/' ) {
 			$args['menu-item-url'] = preg_replace( "#^{$demo_path}(.*)#", "{$home_url}$1", $args['menu-item-url'] );
 		}
@@ -470,13 +486,6 @@ If the problem persists, please don\'t hesitate to contact our <a href="%s" targ
 
 				$this->empty_theme_cache();
 			}
-
-			// Import widgets settings.
-			if ( ! empty( $site_meta['widgets_settings'] ) && is_array( $site_meta['widgets_settings'] ) ) {
-				foreach ( $site_meta['widgets_settings'] as $key => $setting ) {
-					update_option( $key, $setting );
-				}
-			}
 		}
 	}
 
@@ -511,6 +520,16 @@ If the problem persists, please don\'t hesitate to contact our <a href="%s" targ
 		// Import menus.
 		if ( isset( $site_meta['nav_menu_locations'] ) ) {
 			$this->set_menus( $site_meta['nav_menu_locations'] );
+		}
+	}
+
+	public function import_widgets() {
+		$site_meta = $this->get_site_meta();
+
+		if ( ! empty( $site_meta['widgets_settings'] ) && is_array( $site_meta['widgets_settings'] ) ) {
+			foreach ( $site_meta['widgets_settings'] as $widget_id => $settings ) {
+				update_option( $widget_id, $this->filter_widget_settings( $widget_id, $settings ) );
+			}
 		}
 	}
 
@@ -708,6 +727,10 @@ If the problem persists, please don\'t hesitate to contact our <a href="%s" targ
 		}
 
 		Elementor\Plugin::$instance->files_manager->clear_cache();
+
+		if ( class_exists( 'ElementorPro\Modules\ThemeBuilder\Module' ) ) {
+			\ElementorPro\Modules\ThemeBuilder\Module::instance()->get_conditions_manager()->get_cache()->regenerate();
+		}
 	}
 
 	public function import_tinvwl_settings() {
@@ -1040,5 +1063,38 @@ If the problem persists, please don\'t hesitate to contact our <a href="%s" targ
 		$noimage_fname = 'noimage.' . $ext;
 
 		return the7_demo_content_dir_url( 'admin/images/' . $noimage_fname );
+	}
+
+	/**
+	 * @param string $widget_id
+	 * @param array  $settings
+	 *
+	 * @return array
+	 */
+	protected function filter_widget_settings( $widget_id, $settings ) {
+		if ( in_array( $widget_id, array( 'widget_presscore-custom-menu-one', 'widget_presscore-custom-menu-two' ), true ) ) {
+			foreach ( $settings as &$widget_settings ) {
+				if ( isset( $widget_settings['menu'] ) ) {
+					$widget_settings['menu'] = $this->importer_get_processed_terms( $widget_settings['menu'] );
+				}
+			}
+			unset( $widget_settings );
+		}
+
+		return $settings;
+	}
+
+	/**
+	 * @return string
+	 */
+	protected function get_demo_url() {
+		return $this->demo['link'];
+	}
+
+	/**
+	 * @return string
+	 */
+	protected function get_demo_url_path() {
+		return parse_url( $this->get_demo_url(), PHP_URL_PATH );
 	}
 }

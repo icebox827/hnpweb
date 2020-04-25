@@ -1075,7 +1075,6 @@ class RevSliderSlider extends RevSliderFunctions {
 			}
 		}
 		
-		
 		//change the javascript api ID to the correct one
 		$c_slider	= new RevSliderSlider();
 		$c_slider->init_by_id($slider_last_id);
@@ -1092,6 +1091,9 @@ class RevSliderSlider extends RevSliderFunctions {
 				$c_slider->update_params(array('codes' => array('javascript' => $cus_js, 'css' => $c_slider->get_param(array('codes', 'css'), ''))));
 			}
 		}
+		
+		$upd = new RevSliderPluginUpdate();
+		$upd->upgrade_slider_to_latest($c_slider);
 		
 		return $slider_last_id;
 	}
@@ -2160,7 +2162,7 @@ class RevSliderSlider extends RevSliderFunctions {
 		}
 		
 		$this->slides = $_slides;
-
+		
 		return $this->slides;
 	}
 	

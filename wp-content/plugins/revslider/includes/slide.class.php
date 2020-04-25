@@ -1226,6 +1226,7 @@ class RevSliderSlide extends RevSliderFunctions {
 	/**
 	 * init the data for flickr
 	 * @since: 5.0
+	 * @update: 6.1.7 
 	 */
 	private function init_by_flickr($slider_id, $additions){
 		$this->post_data = apply_filters('revslider_slide_initByFlickr_pre', $this->post_data, $slider_id, $this);
@@ -1524,13 +1525,15 @@ class RevSliderSlide extends RevSliderFunctions {
 					}
 				}
 				
-				if($this->get_val($layer, 'type', 'text') === 'image' && $this->get_val($layer, array('media', 'imageFromStream'), false) === true){
+				$layer_type = $this->get_val($layer, 'type', 'text');
+
+				//TODO: Check Patrick
+				if ( ( $layer_type === 'image' && $this->get_val($layer, array('media', 'imageFromStream'), false) === true ) || ( in_array($layer_type, array('shape', 'row', 'group'), true)  && $this->get_val($layer, array('idle', 'bgFromStream'), false) === true )  ){
 					$featured_image_url = $this->get_val($attr, 'stream_image_url', '');
 					if(!empty($featured_image_url)){
 						$this->set_val($layer, array('media', 'imageUrl'), $featured_image_url);
 					}
 				}
-				
 				$this->layers[$key] = $layer;
 			}
 		}
@@ -2598,10 +2601,13 @@ class RevSliderSlide extends RevSliderFunctions {
 				$font = $this->get_val($layer, array('idle', 'fontFamily'), 'Roboto');
 				
 				foreach($all_fonts as $f){
-					if(strtolower(str_replace(array('"', "'", ' '), '', $f['label'])) == strtolower(str_replace(array('"', "'", ' '), '', $font)) && $f['type'] == 'googlefont'){
+					if(strtolower(str_replace(array('"', "'", ' '), '', $f['label'])) == strtolower(str_replace(array('"', "'", ' '), '', $font)) && ($f['type'] == 'googlefont' || $f['type'] === 'custom' && isset($f['url']) && isset($f['frontend']) && $f['frontend'] === true)){
+						
 						if(!isset($fonts[$f['label']])){
 							$fonts[$f['label']] = array('variants' => array(), 'subsets' => array());
 						}
+						if($f['type'] === 'custom') $fonts[$f['label']]['url'] = $f['url'];
+						
 						if($full){ //if full, add all.
 							//switch the variants around here!
 							$mv = array();
@@ -2634,7 +2640,9 @@ class RevSliderSlide extends RevSliderFunctions {
 								$fonts[$f['label']]['variants'][$w] = true;
 							}
 							
-							$fonts[$f['label']]['subsets'] = $f['subsets']; //subsets always get added, needs to be done then by the Slider Settings
+							if(isset($f['subsets'])){
+								$fonts[$f['label']]['subsets'] = $f['subsets']; //subsets always get added, needs to be done then by the Slider Settings
+							}
 						}
 						break;
 					}

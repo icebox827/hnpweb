@@ -313,7 +313,7 @@ If the issue persists, contact your hosting provider and make sure that %s is no
 		                if ( $the7_server_code === 400 ) {
 			                echo '<span class="yes">&#10004;</span>';
 		                } else {
-			                printf( __( '<span class="error">No</span><br> Seems that your server is blocking connections to your own site. It may brake theme db update process and lead to style corruption. Please, make sure that remote requests to %s are not blocked.', 'the7mk2' ), $ajax_url );
+			                printf( __( '<span class="error">No</span><br> Seems that your server is blocking connections to your own site. It may break theme db update process and lead to style corruption. Please, make sure that remote requests to %s are not blocked.', 'the7mk2' ), $ajax_url );
 		                }
 		                ?>
                     </td>

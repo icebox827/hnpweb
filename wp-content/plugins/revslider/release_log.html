@@ -1,25 +1,94 @@
 <div class="slider-revolution-update-list">
-	<h3 class="version-number">Version 6.1.7 (18th January 2019)</h3>
+	<h3 class="version-number">Version 6.2.2 (7th March 2020)</h3>
+	<div class="change"><strong style="font-weight:700">Changes</strong></div>
+	<ul>
+		<li>Links with target="_blank" will be extended with the rel="noopener" attribute to avoid performance and security issues</li>
+		<li>Double defined slide link actions : "Next Slide" and "Previous Slide" removed from the "Jump To Slide" action to avoid misunderstanding (existing values are still available)</li>
+		<li>Added ScrollTo GreenSock plugin with the latest version to avoid issues where 3rd party plugins and themes using the RS libraries with older components of GreenSock</li>
+	</ul>
 	<div class="bugfix"><strong style="font-weight:700">Bugfixes</strong></div>
+	<ul>		
+		<li>Fixed an issue where sliders could not be lunched on iOS 9.x deviced due to a JavaScript issue</li>
+		<li>Corrected the naming of some attributes in the 3D parallax settings for better understanding</li>
+		<li>Fixed a bug where the update process from V5.x to 6.2.1 would break in some cases the slide animation settings</li>
+		<li>Fixed "first slide" and "last slide" links due the "jump to slide" action</li>
+		<li>Fixed skew transforms in frontend rendering where elements kept their calculated "scale and skew" values in case any of the skew attributes had negative values</li>
+		<li>Fixed layer size calculation in frontend rendering if the layer was added to a group with % based width and/or heights</li>	
+		<li>Fixed thumbail and tab positions calculation glitches if RTL navigation is enabled</li>
+	</ul>
+	<h3 class="version-number">Version 6.2.1 (19th February 2020)</h3>
+	<div class="newfeature"><strong style="font-weight:700">New Features</strong></div>
+	<ul>
+		<li>Layer background supports now also image sources from stream</li>
+		<li>Added custom fonts list to global settings, which supports custom fonts in the editor area also.<br>Available options: font family name, url to font style, available font weights, load font in front- and/or backend environment</li>
+	</ul>
+	<div class="change"><strong style="font-weight:700">Changes</strong></div>
+	<ul>
+		<li>ThemePunch tool main reference "punchgs" has been replaced by "tpGS"</li>
+		<li><b>GreenSock</b> Engine update from Version 2.x to <b>Version 3.x</b></li>
+		<li>Easing now have new aliases. i.e. Power2.easeInOut now can be referenced with short names like power2.inOut</li>
+		<li>Added carousel mobile swipe and desktop mobile swipe options under the navigation touch section which allows you to disable the carousel navigation via touch if needed</li>
+		<li>Timeline limit extended to a maximum of 3:00 min</li>
+		<li>Merged the AddOn notices into one single notice</li>
+		<li>Optimized page loading</li>
+		<li>Reduced file sizes for faster loading times</li>
+		<li>Added sharp corners also to shape layers</li>
+	</ul>
+	<div class="bugfix"><strong style="font-weight:700">Bugfixes</strong></div>
+	<ul>		
+		<li>Text decoration style will no longer be applied to row, column and group layers</li>
+		<li>Auto width full height image layers will now respect also the image width in FireFox</li>
+		<li>Importing a package into a folder will no longer return an moving error even thought the slider was properly moved</li>
+		<li>Releasing Mouse outside of Modal windows will not any more close the Modal windows, to support copy/paste within text editors</li>
+		<li>Fixed an issue where the touch/swipe functionality on full slide links in carousel mode was not working properly.</li>
+		<li>Fixed the color animation if the text color has been animated from a different value to the default and the splitted text option was set in character, word or lines mode.</li>
+		<li>Fixed hover animation issues in editor mode where the default filters added an odd black flash effect to the animation start</li>
+		<li>Fixed navigation not working anymore after loading a slider in a modal that has the "Put JS To Body" option set to on</li>
+		<li>Fixed a bug where old carousel sliders do not show all slides even if they should</li>
+		<li>Elements without 3d animation settings will now ignore the transform perspective attribute to render layers on retina displays as sharp as possible</li>
+		<li>Fixed an issue where the navigation arrows lost their thumbnail images after the first slide</li>
+		<li>Fixed an issue where the navigation thumbs of a post based slider would be scaled two times</li>
+		<li>Issue with Ken Burns effect in Firefox's latest browser hes been fixed where the animation stop playing after slide in transform</li> 
+		<li>Fixed a very rare bug where JavaScript errors blocked any further functionality in the overview page when a template has been directly installed after updating the AddOns</li>
+		<li>Fixed small glitches in overview page and in editor</li>
+		<li>Scroll navigation in carousel sliders has beed fixed</li>
+		<li>Long Touch and swipe function in Carousel Sliders may made the whole slider container to jump and laggy</li>
+		<li>Fixed an issue where moving sliders from folders to root and back broke with JavaScript error</li>
+	</ul>
+
+	<h3 class="version-number">Version 6.1.8 (30th January 2020)</h3>
+	<div class="bugfix"><strong style="font-weight:700">Bugfixes</strong></div>
+	<ul>
+		<li>Fixed google font preload not working properly with italic fonts</li>
+		<li>Fixed CountDown AddOn where the count down layers were not auto updated within groups, rows and columns. CountDown AddOn version 2.1.1 is required</li>
+		<li>Carousel animation was laggy if all layers were visible on all slide elements</li>
+		<li>Carousel did not auto transform to next slide and did not reacted to navigation evens if "snap to X aligment" option was turned off</li>
+		<li>Carousel Elements sometimes disappearing by Swipe if max amount of elements size smaller then Document width</li>
+		<li>Fixed exploding layers issues in the editor where a layer can not be moved around in the animation mode. AddOn version 2.1.0 required</li>
+		<li>Fixed an issue with exploding layers where the animation on Layers with a tag will not animate smoothly. AddOn version 2.1.0 required</li>
+		<li>Fixed an issue in the core of the Distortion AddOn which was breaking the slider editor in some rare cases</li>	
+		<li>Fixed BubbleMorph shadow options. AddOn version 2.1.0 of the BubbleMorph AddOn is required</li>		
+		<li>Navigation tabs and thumbs vertical scrolling will not scroll the page any more on mobile devices</li>
+		<li>Fixed Avada Slider Revolution Block (bug came with the 6.1.7 update of RevSlider)</li>
+		<li>Importing a package into a folder will no longer return an moving error even thought the slider were properly moved</li>
+		<li>Buttons become unresponsive on mobile (both iOS and Android) if Block Scroll option is turned on</li>
+		<li>Fixed Android Scroll issues on Slider when Swipe was enabled</li>
+	</ul>
+	
+	<h3 class="version-number">Version 6.1.7 (18th January 2020)</h3>
+	<div class="bugfix"><strong style="font-weight:700">Bugfixes</strong></div>
+	<div class="newfeature"><strong style="font-weight:700">New Features</strong></div>
+	<ul>
+		<li>Added Image Background from Stream for Layers</li>
+	</ul>
 	<ul>
 		<li>Fixed tabindex not beeing properly added</li>
 		<li>Fixed a bug with the plugin_locale filter</li>
 		<li>Fixed an issue with flickr not displaying images if original size is not available anymore</li>
-		<li>Fixed default text shadow settings not beeing applied properly</li>
-		<li>Fixed block scroll on vertical touch option for mobile devices</li>
-		<li>Fixed an issue where slides disappeared in carousel mode if the slide amounts were less than required to fill a full width screen</li>
-		<li>Fixed an issues if mouse enter/leave actions were fired rapidly in the row</li>
-		<li>Fixed mayor bug: I[c].querySelectorAll is not a function in some cases where JavaScript objects were extended by 3rd party plugins and themes</li>
-		<li>Fixed toggle frame actions where the first frame was resetted instead of cont animating from current state</li>
-		<li>Fixed a bug where global layers play sometimes twice in case the layers were added to a group</li>
-		<li>Fixed an issue where the backend messaging in the overview mode was not working smoothly</li>
-		<li>Fixed show/hide navigation problems if "show navigation only on hover" was selected</li>
-		<li>Readded the hidden hover style options</li>
-		<li>Readded the hidden slide link/next slide/previous slide etc. options under slide actions</li>
 	</ul>
 	
 	<h3 class="version-number">Version 6.1.6 (10th January 2020)</h3>
-	<div class="change"><strong style="font-weight:700">New Features</strong></div>
+	<div class="newfeature"><strong style="font-weight:700">New Features</strong></div>
 	<ul>
 		<li>Added color skins to define global colors for different color attributes through any kind of element. I.e. create a color group for highlight colors and then attach them to the font-color, border-color, navigation elements, slide backgrounds, shape colors and so on. This is the best way to edit templates very quick and simple.</li>
 		<li>Carousel offset values can scale now also linear to slide scales to allow different horizontal carousel animations based on scale, horizontal offset and this new option</li>

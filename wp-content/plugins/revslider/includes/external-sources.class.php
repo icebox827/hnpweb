@@ -68,7 +68,6 @@ class RevSliderFacebook extends RevSliderFunctions {
 	public function get_photo_sets($user_id, $item_count = 10, $access_token){
 		//photoset params
 		$url = "https://graph.facebook.com/$user_id/albums?access_token=" . $access_token;
-
 		$photo_sets_list = json_decode(wp_remote_fopen($url));
 		if(!empty($photo_sets_list->error->message)){
 			return array("error",$photo_sets_list->error->message);
@@ -1472,7 +1471,7 @@ class RevSliderFlickr extends RevSliderFunctions {
 		
 		//get photo list
 		$gallery_photos_list = $this->call_flickr_api($gallery_photo_params);
-
+		
 		return $this->get_val($gallery_photos_list, array('photos', 'photo'), '');
 	}
 }	// End Class

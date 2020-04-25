@@ -114,7 +114,7 @@ if ( !function_exists( 'dt_paginator' ) ) {
 			add_filter( 'get_pagenum_link', 'dt_ajax_paginator_filter', 10, 1 );
 		}
 		// Setting up default values based on the current URL.
-		$pagenum_link = html_entity_decode( get_pagenum_link() );
+		$pagenum_link = html_entity_decode( is_single() ? get_permalink() : get_pagenum_link() );
 		remove_filter( 'get_pagenum_link', 'dt_ajax_paginator_filter', 10 );
 		$url_parts = explode( '?', $pagenum_link );
 
@@ -127,8 +127,9 @@ if ( !function_exists( 'dt_paginator' ) ) {
 		$format = $opts['format'];
 		if ( ! $format ) {
 			// URL base depends on permalink settings.
+			$pagination_base = is_single() ? '' : $wp_rewrite->pagination_base . '/';
 			$format = $wp_rewrite->using_index_permalinks() && ! strpos( $pagenum_link, 'index.php' ) ? 'index.php/' : '';
-			$format .= $wp_rewrite->using_permalinks() ? user_trailingslashit( $wp_rewrite->pagination_base . '/%#%', 'paged' ) : '?paged=%#%';
+			$format .= $wp_rewrite->using_permalinks() ? user_trailingslashit( $pagination_base . '%#%', 'paged' ) : '?paged=%#%';
 		}
 
 		$add_args = array();

@@ -57,7 +57,9 @@ class RevSliderTemplate extends RevSliderFunctions {
 							$return = array('error' => __('Can\'t write the file into the uploads folder of WordPress, please change permissions and try again!', 'revslider'));
 						}
 					}else{
-						$return = array('error' => __('Purchase Code is invalid', 'revslider'));
+						$error = ($this->get_addition('selling') === true) ? __('License Key is invalid', 'revslider') : __('Purchase Code is invalid', 'revslider');
+						
+						$return = array('error' => $error);
 					}
 				}
 			}else{//else, check for error and print it to customer
@@ -142,13 +144,21 @@ class RevSliderTemplate extends RevSliderFunctions {
 	private function update_template_list(){
 		$new = get_option('rs-templates-new', false);
 		$cur = get_option('rs-templates', array());
-		$cur = array();
+		
+		$counter = 0;
 		
 		if($new !== false && !empty($new) && is_array($new)){
 			if(empty($cur)){
 				$cur = $new;
+				$counter = (isset($cur['slider']) && is_array($cur['slider'])) ? count($cur['slider']) : $counter;
 			}else{
 				if(isset($new['slider']) && is_array($new['slider'])){
+					if(isset($cur['slider']) && is_array($cur['slider']) && isset($new['slider']) && is_array($cur['slider'])){
+						$_n = count($new['slider']);
+						$_c = count($cur['slider']);
+						$counter = ($_n > $_c) ? $_n - $_c : $counter;
+					}
+					
 					foreach($new['slider'] as $n){
 						$found = false;
 						if(isset($cur['slider']) && is_array($cur['slider'])){
@@ -179,7 +189,6 @@ class RevSliderTemplate extends RevSliderFunctions {
 							$n['new_slider'] = true;
 							$cur['slider'][] = $n;
 						}
-						
 					}
 					
 					foreach($cur['slider'] as $ck => $c){ //remove no longer available Slider
@@ -199,6 +208,8 @@ class RevSliderTemplate extends RevSliderFunctions {
 			
 			//$this->_update_images();
 		}
+		
+		update_option('rs-templates-counter', $counter, false);
 	}
 	
 	
@@ -711,7 +722,7 @@ class RevSliderTemplate extends RevSliderFunctions {
 	 * get the template sliders for the get_full_library function
 	 * @since: 6.0
 	 */
-	public function get_tp_template_sliders_for_library(){
+	public function get_tp_template_sliders_for_library($leave_counter = false){
 		$templates = $this->get_tp_template_sliders();
 		$addons = array();
 		if(!empty($templates)){
@@ -720,6 +731,9 @@ class RevSliderTemplate extends RevSliderFunctions {
 			}
 		}
 		
+		if(!$this->_truefalse($leave_counter)){
+			update_option('rs-templates-counter', 0, false); //reset the counter
+		}
 		return $templates;
 	}
 	

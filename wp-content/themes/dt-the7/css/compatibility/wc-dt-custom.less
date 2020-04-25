@@ -3374,15 +3374,16 @@ ul.product_list_widget,
 }
 	.widget_layered_nav ul li.chosen a:before,
 	.widget_layered_nav_filters ul li a:before {
-		font-family:WooCommerce;
-		speak:none;
-		font-weight:400;
-		font-variant:normal;
-		text-transform:none;
-		line-height:1;
-		-webkit-font-smoothing:antialiased;
-		margin-right:7px;
-		content:"\e013"
+	    font-family: 'icomoon-the7-font';
+	    speak: none;
+	    font-style: normal;
+	    font-weight: normal;
+	    font-variant: normal;
+	    text-transform: none;
+	  	line-height: 1;
+		margin-right:5px;
+		content:"\eb02";
+		font-size: 12px;
 	}
 .widget_layered_nav ul small.count {
 	float:right;
@@ -4293,6 +4294,12 @@ form.cart:after {
 					}
 				}
 			}
+			.plus-border (@a) when (@a > 0) {
+				border-left: none !important;
+			}
+			.minus-border (@a) when (@a > 0) {
+				border-right: none !important;
+			}
 			.quantity {
 				.woocommerce-cart-wrap &,
 				.woocommerce-variation-add-to-cart &,
@@ -4314,10 +4321,10 @@ form.cart:after {
 					    box-shadow: none !important;
 					}
 					& .plus {
-						border-left: none !important;
+						.plus-border (@right-input-border-width);
 					}
 					& .minus {
-						border-right: none !important;
+						.minus-border (@left-input-border-width);
 					}
 			    }
 			}
@@ -4664,7 +4671,6 @@ form.lost_reset_password,
 		.flex-flow( row wrap);
 		padding: 30px 30px 20px 30px;
 		margin-top: 25px;
-		& .coupon,
 		& .button {
 			margin-bottom: 10px;
 		}

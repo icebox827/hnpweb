@@ -96,7 +96,7 @@ class RevSliderFront extends RevSliderFunctions {
 			wp_dequeue_script('tp-tools');
 		}
 		
-		wp_enqueue_script('tp-tools', RS_PLUGIN_URL . 'public/assets/js/revolution.tools.min.js', $waitfor, RS_TP_TOOLS, $inc_footer);
+		wp_enqueue_script('tp-tools', RS_PLUGIN_URL . 'public/assets/js/rbtools.min.js', $waitfor, RS_TP_TOOLS, $inc_footer);
 		
 		if(!file_exists(RS_PLUGIN_PATH.'public/assets/js/rs6.min.js')){
 			wp_enqueue_script('revmin', RS_PLUGIN_URL . 'public/assets/js/dev/rs6.main.js', 'tp-tools', $rs_ver, $inc_footer);
@@ -250,7 +250,7 @@ class RevSliderFront extends RevSliderFunctions {
 	 * @since: 5.0
 	 */
 	public static function add_defer_forscript($url){
-		if(strpos($url, 'rs6.min.js') === false && strpos($url, 'revolution.tools.min.js') === false){
+		if(strpos($url, 'rs6.min.js') === false && strpos($url, 'rbtools.min.js') === false){
 			return $url;
 		}elseif(is_admin()){
 			return $url;
@@ -279,7 +279,6 @@ class RevSliderFront extends RevSliderFunctions {
 			require_once(RS_PLUGIN_PATH . 'admin/includes/shortcode_generator/shortcode_generator.class.php');
 			
 			//Shortcode Wizard Includes
-
 			//WPB Functionality
 			require_once(RS_PLUGIN_PATH . 'admin/includes/shortcode_generator/wpbakery/wpbakery.class.php');
 			add_action('vc_before_init', array('RevSliderWpbakeryShortcode', 'visual_composer_include')); //VC functionality
@@ -289,18 +288,12 @@ class RevSliderFront extends RevSliderFunctions {
 			add_action('vc_before_init', array('RevSliderShortcodeWizard', 'add_styles')); //VC functionality
 		}
 		
+		
 
 		//Elementor Functionality
 		require_once(RS_PLUGIN_PATH . 'admin/includes/shortcode_generator/elementor/elementor.class.php');
 		add_action('init', array('RevSliderElementor', 'init'));
 		add_action('elementor/editor/before_enqueue_scripts', array('RevSliderShortcodeWizard', 'enqueue_files'));
-
-		//Fusion Builder Functionality
-		require_once(RS_PLUGIN_PATH . 'admin/includes/shortcode_generator/fusionbuilder/fusionbuilder.class.php');
-		add_action( 'fusion_builder_before_init', array( 'RevSliderFusionbuilderShortcode', 'fusionbuilder_add_revslider_shortcode' ) );
-		add_filter( 'fusion_builder_all_elements', array( 'RevSliderFusionbuilderShortcode', 'fusionbuilder_exchange_revslider_shortcode' ) );
-		
-
 	}
 
 	/**

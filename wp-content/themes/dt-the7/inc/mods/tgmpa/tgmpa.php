@@ -212,20 +212,26 @@ if ( ! class_exists( 'Presscore_Modules_TGMPAModule', false ) ) :
 				return $transient;
 			}
 
+			// Overcome "Manage WP" plugin ajax call.
+			if ( empty( $the7_tgmpa->plugins ) ) {
+				self::register_plugins_action();
+			}
+
 			if ( ! is_object( $transient ) ) {
 				$transient           = new stdClass;
 				$transient->response = array();
 			}
 
 			foreach ( $the7_tgmpa->plugins as $slug => $plugin ) {
-				if ( ! $the7_tgmpa->is_the7_plugin( $slug )) {
+				if ( ! $the7_tgmpa->is_the7_plugin( $slug ) ) {
 					continue;
 				}
-				else if (!$the7_tgmpa->is_plugin_updatetable( $slug )){
-				    $file_path = $plugin['file_path'];
-				    unset($transient->response[ $file_path ]);
-				    continue;
-                }
+
+				$file_path = $plugin['file_path'];
+				if ( ! $the7_tgmpa->is_plugin_updatetable( $slug ) ) {
+					unset( $transient->response[ $file_path ] );
+					continue;
+				}
 
 				$plugin_ver = $the7_tgmpa->get_plugin_minimum_version( $slug );
 				$source     = $the7_tgmpa->get_download_url( $slug );
@@ -235,7 +241,6 @@ if ( ! class_exists( 'Presscore_Modules_TGMPAModule', false ) ) :
 					$source = $the7_tgmpa->add_plugin_version_query_arg( $source, $slug, $plugin_ver );
 				}
 
-				$file_path = $plugin['file_path'];
 				if ( empty( $transient->response[ $file_path ] ) ) {
 					$transient->response[ $file_path ] = new stdClass;
 				}

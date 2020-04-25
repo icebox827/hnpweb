@@ -1120,7 +1120,7 @@ if ($wpml->wpml_exists()) {
 						<div class="form_inner_header"><i class="material-icons">3d_rotation</i><?php _e('3D Settings', 'revslider');?></div>
 							<div class="collapsable" style="display:block !important">
 								<longoption><i class="material-icons">collections</i><label_a><?php _e('Shadow', 'revslider');?></label_a><input type="checkbox"  id="sr_ddd_shadow" class="sliderinput easyinit" data-r="parallax.ddd.shadow"/></longoption>
-								<longoption><i class="material-icons">image</i><label_a><?php _e('On Background Enabled', 'revslider');?></label_a><input type="checkbox"  id="sr_ddd_BGFreeze" class="sliderinput easyinit" data-r="parallax.ddd.BGFreeze"/></longoption>
+								<longoption><i class="material-icons">image</i><label_a><?php _e('Slide Background Disabled', 'revslider');?></label_a><input type="checkbox"  id="sr_ddd_BGFreeze" class="sliderinput easyinit" data-r="parallax.ddd.BGFreeze"/></longoption>
 								<longoption><i class="material-icons">star_half</i><label_a><?php _e('Slider Overflow Hidden', 'revslider');?></label_a><input type="checkbox"  id="sr_ddd_overflow" class="sliderinput easyinit" data-r="parallax.ddd.overflow"/></longoption>
 								<longoption><i class="material-icons">star_half</i><label_a><?php _e('Layers Overflow Hidden', 'revslider');?></label_a><input type="checkbox"  id="sr_ddd_layerOverflow" class="sliderinput easyinit" data-r="parallax.ddd.layerOverflow"/></longoption>
 								<div class="div15"></div>

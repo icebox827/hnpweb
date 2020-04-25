@@ -906,6 +906,7 @@ return array(
 				'Yes' => 'y',
 				'No'  => 'n',
 			),
+			"edit_field_class" => "the7-icons-dependent vc_col-xs-12",
 		),
 		array(
 			"group" => __("Icons", 'dt-the7-core'),
@@ -962,6 +963,7 @@ return array(
 				'Yes' => 'y',
 				'No'  => 'n',
 			),
+			"edit_field_class" => "the7-icons-dependent vc_col-xs-12",
 		),
 		array(
 			"group" => __("Icons", 'dt-the7-core'),
@@ -971,7 +973,6 @@ return array(
 			'type' => 'colorpicker',
 			'value' => 'rgba(255,255,255,1)',
 			"edit_field_class" => "the7-icons-dependent vc_col-xs-12",
-
 			'dependency' => array(
 				'element' => 'dt_icon_hover',
 				'value'   => 'y',
@@ -987,6 +988,7 @@ return array(
 				'Yes' => 'y',
 				'No'  => 'n',
 			),
+			"edit_field_class" => "the7-icons-dependent vc_col-xs-12",
 			'dependency' => array(
 				'element' => 'dt_icon_hover',
 				'value'   => 'y',
@@ -1015,12 +1017,11 @@ return array(
 				'Yes' => 'y',
 				'No' => 'n',
 			),
-
+			"edit_field_class" => "the7-icons-dependent vc_col-xs-12",
 			'dependency' => array(
 				'element' => 'dt_icon_hover',
 				'value'   => 'y',
 			),
-			"edit_field_class" => "the7-icons-dependent vc_col-xs-12",
 		),
 		array(
 			"group" => __("Icons", 'dt-the7-core'),
@@ -1345,6 +1346,21 @@ return array(
 			'units' => 'px',
 			'description' => __('Leave empty to use default gap', 'dt-the7-core'),
 			'group' => __( 'Pagination & Categorization', 'dt-the7-core' ),
+		),
+		array(
+			'heading'    => __( 'Enable url navigation', 'dt-the7-core' ),
+			'param_name' => 'allow_to_navigate_by_url',
+			'type'       => 'dt_switch',
+			'value'      => 'n',
+			'options'    => array(
+				'Yes' => 'y',
+				'No'  => 'n',
+			),
+			'dependency' => array(
+				'element' => 'loading_mode',
+				'value'   => array( 'disabled', 'js_pagination', 'js_more', 'js_lazy_loading' ),
+			),
+			'group'      => __( 'Pagination & Categorization', 'dt-the7-core' ),
 		),
 		array(
 			'heading' => __( 'Color Settings', 'dt-the7-core' ),

@@ -53,6 +53,5 @@ if ( defined( 'ULTIMATE_VERSION' ) ) {
 
 if ( class_exists( 'Elementor\Plugin' ) ) {
 	require_once $path . '/elementor/class-the7-elementor-compatibility.php';
-	$elemetor_compat = new The7_Elementor_Compatibility();
-	$elemetor_compat->bootstrap();
+	The7_Elementor_Compatibility::instance();
 }

@@ -180,6 +180,44 @@ if ( ! class_exists( 'The7_TGMPA' ) ) {
 		}
 
 		/**
+		 * Check if a plugin is installed. Does not take must-use plugins into account.
+		 *
+		 * @since 2.5.0
+		 *
+		 * @param string $slug Plugin slug.
+		 * @return bool True if installed, false otherwise.
+		 */
+		public function is_plugin_installed( $slug ) {
+			if ( empty( $this->plugins[ $slug ]['file_path'] ) ) {
+				return true;
+			}
+
+			$installed_plugins = $this->get_plugins(); // Retrieve a list of all installed plugins (WP cached).
+
+			return ! empty( $installed_plugins[ $this->plugins[ $slug ]['file_path'] ] );
+		}
+
+		/**
+		 * Check if a plugin is active.
+		 *
+		 * @since 2.5.0
+		 *
+		 * @param string $slug Plugin slug.
+		 * @return bool True if active, false otherwise.
+		 */
+		public function is_plugin_active( $slug ) {
+			if ( ! empty( $this->plugins[ $slug ]['is_callable'] ) ) {
+				return is_callable( $this->plugins[ $slug ]['is_callable'] );
+			}
+
+			if ( isset( $this->plugins[ $slug ]['file_path'] ) ) {
+				return is_plugin_active( $this->plugins[ $slug ]['file_path'] );
+			}
+
+			return true;
+		}
+
+		/**
 		 * Check to see if the plugin is 'updatetable', i.e. installed, with an update available
 		 * and no WP version requirements blocking it.
 		 *
@@ -222,6 +260,9 @@ if ( ! class_exists( 'The7_TGMPA' ) ) {
 			}
 
 			$plugin_name = strtolower( $installed_plugins[ $plugin_file_path ]['Name'] );
+			if ( $plugin_name === 'pro elements' ) {
+				return true;
+			}
 
 			return strpos( $plugin_name, 'the7' ) === 0;
 		}

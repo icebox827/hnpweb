@@ -6,7 +6,7 @@ Description: Slider Revolution - Premium responsive slider
 Author: ThemePunch
 Text Domain: revslider
 Domain Path: /languages
-Version: 6.1.7
+Version: 6.2.2
 Author URI: https://themepunch.com/
 */
 
@@ -17,7 +17,7 @@ if(class_exists('RevSliderFront')){
 	die('ERROR: It looks like you have more than one instance of Slider Revolution installed. Please remove additional instances for this plugin to work again.');
 }
 
-define('RS_REVISION',			'6.1.7');
+define('RS_REVISION',			'6.2.2');
 define('RS_PLUGIN_PATH',		plugin_dir_path(__FILE__));
 define('RS_PLUGIN_SLUG_PATH',	plugin_basename(__FILE__));
 define('RS_PLUGIN_FILE_PATH',	__FILE__);
@@ -30,6 +30,7 @@ define('RS_TP_TOOLS',			'6.0'); //holds the version of the tp-tools script, load
 $revslider_fonts = array('queue' => array(), 'loaded' => array());
 $revslider_is_preview_mode = false;
 $revslider_save_post = false;
+$revslider_addon_notice_merged = 0;
 
 function revslider_as_theme() {
 	if(defined('REVSLIDER_THEME_INIT')) return;
@@ -141,6 +142,7 @@ try{
 	add_action('widgets_init', array('RevSliderWidget', 'register_widget'));
 	
 	if(is_admin()){
+		require_once(RS_PLUGIN_PATH . 'admin/includes/license.class.php');
 		require_once(RS_PLUGIN_PATH . 'admin/includes/addons.class.php');
 		require_once(RS_PLUGIN_PATH . 'admin/includes/template.class.php');
 		require_once(RS_PLUGIN_PATH . 'admin/includes/functions-admin.class.php');

@@ -10,7 +10,7 @@
  
 if(!defined('ABSPATH')) exit();
 
-if(!isset($rs_f)) $rs_f = new RevSliderFunctions();
+$rs_f = new RevSliderFunctions();
 
 $registered_p_c = ($rs_f->get_addition('selling') === true) ? __('registered license key', 'revslider') : __('registered purchase code', 'revslider');
 $registered_p_c_url = ($rs_f->get_addition('selling') === true) ? 'https://sliderrevolution.com/pricing/' : 'https://themepunch.com/faq/where-to-find-purchase-code/';

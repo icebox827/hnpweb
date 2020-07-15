@@ -271,22 +271,30 @@ class Vc_Base {
 	 * Function creates meta data for post with the key '_wpb_shortcodes_custom_css'
 	 * and value as css string, which will be added to the footer of the page.
 	 *
-	 * @param $post_id
+	 * @param $id
 	 * @throws \Exception
 	 * @since  4.2
 	 * @access public
 	 */
-	public function buildShortcodesCustomCss( $post_id ) {
-		$post = get_post( $post_id );
+	public function buildShortcodesCustomCss( $id ) {
+		if ( 'dopreview' === vc_post_param( 'wp-preview' ) && wp_revisions_enabled( get_post( $id ) ) ) {
+			$latest_revision = wp_get_post_revisions( $id );
+			if ( ! empty( $latest_revision ) ) {
+				$array_values = array_values( $latest_revision );
+				$id = $array_values[0]->ID;
+			}
+		}
+
+		$post = get_post( $id );
 		/**
 		 * vc_filter: vc_base_build_shortcodes_custom_css
 		 * @since 4.4
 		 */
-		$css = apply_filters( 'vc_base_build_shortcodes_custom_css', $this->parseShortcodesCustomCss( $post->post_content ), $post_id );
+		$css = apply_filters( 'vc_base_build_shortcodes_custom_css', $this->parseShortcodesCustomCss( $post->post_content ), $id );
 		if ( empty( $css ) ) {
-			delete_metadata( 'post', $post_id, '_wpb_shortcodes_custom_css' );
+			delete_metadata( 'post', $id, '_wpb_shortcodes_custom_css' );
 		} else {
-			update_metadata( 'post', $post_id, '_wpb_shortcodes_custom_css', $css );
+			update_metadata( 'post', $id, '_wpb_shortcodes_custom_css', $css );
 		}
 	}
 
@@ -358,6 +366,7 @@ class Vc_Base {
 				}
 			}
 			$post_custom_css = get_metadata( 'post', $id, '_wpb_post_custom_css', true );
+			$post_custom_css = apply_filters( 'vc_post_custom_css', $post_custom_css, $id );
 			if ( ! empty( $post_custom_css ) ) {
 				$post_custom_css = wp_strip_all_tags( $post_custom_css );
 				echo '<style type="text/css" data-type="vc_custom-css">';
@@ -380,10 +389,7 @@ class Vc_Base {
 	 *
 	 */
 	public function addShortcodesCustomCss( $id = null ) {
-		if ( ! is_singular() ) {
-			return;
-		}
-		if ( ! $id ) {
+		if ( ! $id && is_singular() ) {
 			$id = get_the_ID();
 		}
 
@@ -396,6 +402,7 @@ class Vc_Base {
 				}
 			}
 			$shortcodes_custom_css = get_metadata( 'post', $id, '_wpb_shortcodes_custom_css', true );
+			$shortcodes_custom_css = apply_filters( 'vc_shortcodes_custom_css', $shortcodes_custom_css, $id );
 			if ( ! empty( $shortcodes_custom_css ) ) {
 				$shortcodes_custom_css = wp_strip_all_tags( $shortcodes_custom_css );
 				echo '<style type="text/css" data-type="vc_shortcodes-custom-css">';

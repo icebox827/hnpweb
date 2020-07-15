@@ -571,7 +571,6 @@ if ( ! function_exists( 'presscore_get_blog_query' ) ) :
 
 		$query_args = array(
 			'post_type'		    => 'post',
-			'post_status'	    => 'publish',
 			'paged'			    => the7_get_paged_var(),
 			'order'			    => $config->get( 'order' ),
 			'orderby'		    => 'name' == $orderby ? 'title' : $orderby,

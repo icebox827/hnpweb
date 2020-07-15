@@ -51,6 +51,12 @@ if ( ! function_exists( 'presscore_register_scripts' ) ) :
 				'deps'      => array( 'jquery' ),
 				'in_footer' => true,
 			),
+
+			'dt-photo-scroller'     => array(
+				'src'       => PRESSCORE_THEME_URI . '/js/photo-scroller',
+				'deps'      => array( 'jquery' ),
+				'in_footer' => true,
+			),
 		);
 
 		foreach ( $register_scripts as $name => $props ) {

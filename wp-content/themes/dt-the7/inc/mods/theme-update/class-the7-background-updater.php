@@ -112,6 +112,46 @@ class The7_Background_Updater extends WP_Background_Process {
 	}
 
 	/**
+	 * Get batches.
+	 *
+	 * @return stdClass Return the first batch from the queue
+	 */
+	public function get_batches() {
+		global $wpdb;
+
+		$table        = $wpdb->options;
+		$column       = 'option_name';
+		$key_column   = 'option_id';
+		$value_column = 'option_value';
+
+		if ( is_multisite() ) {
+			$table        = $wpdb->sitemeta;
+			$column       = 'meta_key';
+			$key_column   = 'meta_id';
+			$value_column = 'meta_value';
+		}
+
+		$key = $this->identifier . '_batch_%';
+
+		$query = $wpdb->get_results( $wpdb->prepare( "
+		SELECT *
+		FROM {$table}
+		WHERE {$column} LIKE %s
+		ORDER BY {$key_column} ASC
+		", $key ) );
+
+		$batches = array();
+		foreach($query as $row) {
+			$batch       = new stdClass();
+			$batch->key  = $row->$column;
+			$batch->data = maybe_unserialize( $row->$value_column );
+			$batches[] = $batch;
+		}
+
+		return $batches;
+	}
+
+	/**
 	 * Task
 	 *
 	 * Override this method to perform any actions required on each

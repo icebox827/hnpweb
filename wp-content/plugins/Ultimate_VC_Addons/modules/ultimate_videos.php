@@ -226,7 +226,7 @@ if ( ! class_exists( 'Ultimate_Videos' ) ) {
 						}
 						if ( 'on' == $setting['vimeo_intro_byline'] ) {
 							$html .= '<div class="ultv-vimeo-byline">
-						' . esc_attr_e( 'from ', 'ultimate_vc' ) . '<a href="' . $setting['vimeo_video_url'] . '"> ' . $vimeo[0]['user_name'] . '</a>
+						' . esc_html__( 'from ', 'ultimate_vc' ) . '<a href="' . $setting['vimeo_video_url'] . '"> ' . $vimeo[0]['user_name'] . '</a>
 					</div>';
 						}
 						$html .= '</div>';

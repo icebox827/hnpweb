@@ -24,8 +24,8 @@
 	}
 }
 
-.sidebar-content .widget:not(.widget_icl_lang_sel_widget) a,
-.sidebar-content.solid-bg .widget:not(.widget_icl_lang_sel_widget) a * {
+.sidebar-content .widget:not(.widget_icl_lang_sel_widget) a:not(.elementor-button),
+.sidebar-content.solid-bg .widget:not(.widget_icl_lang_sel_widget) a:not(.elementor-button) * {
 	color: @widget-sidebar-color;
 }
 .sidebar-content .widget .post-content .text-secondary {
@@ -177,8 +177,8 @@ a.rsswidget:hover {
 		color: @accent-bg-color;
 	}
 	.footer & {
-		.custom-mixin-footer-color (@widget-footer-accent-color);
 		color: @accent-bg-color;
+		.custom-mixin-footer-color (@widget-footer-accent-color);
 		.accent-gradient #page & {
 			.custom-mixin-footer-color (@widget-footer-accent-color);
 			.text-gradient (@startColor: @accent-bg-color, @endColor: @accent-text-color-2);

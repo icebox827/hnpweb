@@ -1,20 +1,13 @@
 <?php
 
 /**
- * The plugin bootstrap file
- *
- * This file is read by WordPress to generate the plugin information in the plugin
- * admin area. This file also includes all of the dependencies used by the plugin,
- * registers the activation and deactivation functions, and defines a function
- * that starts the plugin.
- *
  * @since             1.0.0
  * @package           dt_the7_core
  *
  * @wordpress-plugin
  * Plugin Name:       The7 Elements
- * Description:       This plugin contains The7 custom post types and corresponding page builder elements.
- * Version:           2.4.0
+ * Description:       This plugin contains The7 custom post types, elements for WPBakery Page Builder and Elementor, theme builder, and other advanced features.
+ * Version:           2.5.0.1
  * Author:            Dream-Theme
  * Author URI:        http://dream-theme.com/
  * Text Domain:       dt-the7-core
@@ -51,7 +44,7 @@ if ( ! class_exists( 'The7PT_Core' ) ) :
 
 	final class The7PT_Core {
 
-		const THE7_COMPATIBLE_VERSION = '8.7.0';
+		const THE7_COMPATIBLE_VERSION = '8.9.0';
 		const PLUGIN_DB_VERSION = '2.2.4';
 
 		/**
@@ -59,7 +52,7 @@ if ( ! class_exists( 'The7PT_Core' ) ) :
 		 *
 		 * @var string
 		 */
-		private $version = '2.4.0';
+		private $version = '2.5.0.1';
 
 		/**
 		 * The single instance of the class.
@@ -112,6 +105,10 @@ if ( ! class_exists( 'The7PT_Core' ) ) :
 			require_once $plugin_path . 'includes/sliders/class-the7pt-posts-scroller.php';
 			require_once $plugin_path . 'includes/compatibility-functions.php';
 			require_once $plugin_path . 'includes/class-the7pt-shortcode-with-inline-css.php';
+
+			if ( ! defined( 'DISABLE_THE7_PRO_ELEMENTS' ) ) {
+				require_once $plugin_path . 'mods/pro-elements/pro-elements.php';
+			}
 
 			$this->load_plugin_textdomain();
 

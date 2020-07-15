@@ -9,9 +9,19 @@ import './editor.scss';
  */
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
-
+if(typeof wp.blockEditor !== 'undefined')
+  var { InspectorControls, InspectorAdvancedControls } = wp.blockEditor;
+else
+  var { InspectorControls, InspectorAdvancedControls } = wp.editor;
+  const { Component } = wp.element;
 import { deprecated } from './deprecated';
 import { RevSlider } from './revslider';
+
+
+import { TextControl } from '@wordpress/components';
+const { withState } = wp.compose;
+
+
 
 /**
  * Register block
@@ -21,7 +31,7 @@ export default registerBlockType(
     {
         title: __( 'Slider Revolution', 'revslider' ),
         description: __( 'Add your Slider Revolution Module!', 'revslider' ),
-        category: 'themepunch',
+        category: 'common',
         icon: {
           src:  'update',
           background: 'rgb(94, 53, 177)',
@@ -69,24 +79,28 @@ export default registerBlockType(
           },
           zindex: {
             type: 'string'
+          },
+          wrapperid: {
+           type: 'string'
           }
         },
         edit: props => {
-          const { setAttributes } = props;
-          return (
+          const { setAttributes, attributes: { wrapperid } } = props;
+          return [
+            
             <div>
               <RevSlider {...{ setAttributes, ...props }} />
             </div>
-          );
+          ];
         },
         deprecated,
         save: props => {
-          const { attributes: { text, content, slidertitle, modal, zindex } } = props;
+          const { attributes: { text, content, slidertitle, modal, zindex, wrapperid } } = props;
           let style;
           style = zindex ? "z-index:"+zindex+";" : "";
           let shortcode = !content && text ? text : content;
           return (
-            <div className="revslider" data-modal={modal} data-slidertitle={slidertitle} style={style}>
+            <div className="revslider" id={wrapperid} data-modal={modal} data-slidertitle={slidertitle} style={style}>
                {shortcode}
             </div>
           );

@@ -78,6 +78,13 @@ if ( ! function_exists( 'dt_woocommerce_configure_template' ) ) :
 		}
 	}
 
-	add_action( 'get_header', 'dt_woocommerce_configure_template', 5 );
+
+	// On Editor - Register WooCommerce frontend hooks before the Editor init.
+	if ( ! empty( $_REQUEST['action'] ) && ('elementor' === $_REQUEST['action'] || 'elementor_ajax' === $_REQUEST['action']) && is_admin() ) {
+		add_action( 'init', 'dt_woocommerce_configure_template', 5 );
+	}
+	else{
+		add_action( 'get_header', 'dt_woocommerce_configure_template', 5 );
+	}
 
 endif;

@@ -40,10 +40,69 @@ if(!defined('ABSPATH')) exit();
 				<div class="form_inner_header"><i class="material-icons">timelapse</i><?php _e('Progress Bar', 'revslider');?></div>
 				<div class="on_off_navig_wrap"><input type="checkbox"  id="sr_pb_set" class="sliderinput easyinit" data-evt="sliderProgressUpdate" data-r="general.progressbar.set" data-showhide="#slider_pb_settings, #slider_pb_settings_arrow" data-showhidedep="true"/></div>
 				<div id="slider_pb_settings" class="collapsable" style="display:block">
-					<label_a><?php _e('Color', 'revslider');?></label_a><input type="text" data-editing="Progressbar Color" data-evt="sliderProgressUpdate" name="sliderprogresscolor" data-visible="true" id="sliderprogresscolor" class="my-color-field sliderinput" data-r="general.progressbar.color" value="transparent">
+					<label_a><?php _e('Based On', 'revslider');?></label_a><select data-evt="sliderProgressUpdate" id="sr_pb_basedon" data-show=".progressgaps_*val*" data-hide=".progressgaps" class="sliderinput tos2 nosearchbox easyinit"  data-r="general.progressbar.basedon"><option value="slide"><?php _e('Current Slide Progress', 'revslider');?></option><option value="module"><?php _e('Module Progress', 'revslider');?></option></select><span class="linebreak"></span>					
+					<label_a><?php _e('Style', 'revslider');?></label_a><select data-evt="sliderProgressUpdate" id="sr_pb_style" class="sliderinput tos2 nosearchbox easyinit"  data-r="general.progressbar.style" data-show=".progressoffsets_*val*" data-hide=".progressoffsets"><option value="horizontal"><?php _e('Horizontal', 'revslider');?></option><option value="vertical"><?php _e('Vertical', 'revslider');?></option><option value="cw"><?php _e('Circle CW', 'revslider');?></option><option value="ccw"><?php _e('Circle CCW', 'revslider');?></option></select><span class="linebreak"></span>
+					<div class="progressoffsets progressoffsets_horizontal progressoffsets_vertical">
+						<div class="progressgaps progressgaps_module">
+							<label_a><?php _e('Gap', 'revslider');?></label_a><input type="checkbox" class="easyinit sliderinput" data-evt="sliderProgressUpdate" id="sr_pb_separator" data-showhide=".separatorpb" data-showhidedep="true" data-r="general.progressbar.gap"><span class="linebreak"></span>						
+							<div class="separatorpb">
+								<label_a><?php _e('Gap Size', 'revslider');?></label_a><input class="sliderinput valueduekeyboard easyinit" data-numeric="true" data-allowed="" data-evt="sliderProgressUpdate" data-r="general.progressbar.gapsize" type="text" id="sr_pb_gaps" ><span class="linebreak"></span>						
+								<label_a><?php _e('Gap Color', 'revslider');?></label_a><input type="text" data-editing="Gap Color" data-evt="sliderProgressUpdate" name="progressgapcolor" data-visible="true" id="progressgapcolor" class="my-color-field sliderinput" data-r="general.progressbar.gapcolor" value="transparent">							
+							</div>
+						</div>
+					</div>
+					<div class="div5"></div>										
+					<label_a><?php _e('Progress Bar', 'revslider');?></label_a><input type="text" data-editing="Progressbar Color" data-evt="sliderProgressUpdate" name="sliderprogresscolor" data-visible="true" id="sliderprogresscolor" class="my-color-field sliderinput" data-r="general.progressbar.color" value="transparent">
+					<label_a><?php _e('Background', 'revslider');?></label_a><input type="text" data-editing="Progressbar Color BG" data-evt="sliderProgressUpdate" name="sliderprogresscolorbg" data-visible="true" id="sliderprogresscolorbg" class="my-color-field sliderinput" data-r="general.progressbar.bgcolor" value="transparent">
 					<div class="div5"></div>
-					<label_a><?php _e('Position', 'revslider');?></label_a><select data-evt="sliderProgressUpdate" id="sr_pb_pos" class="sliderinput tos2 nosearchbox easyinit"  data-r="general.progressbar.position"><option value="top"><?php _e('Top', 'revslider');?></option><option value="bottom"><?php _e('Bottom', 'revslider');?></option></select><span class="linebreak"></span>
-					<label_a><?php _e('Height', 'revslider');?></label_a><input class="sliderinput valueduekeyboard  easyinit" data-evt="sliderProgressUpdate" data-r="general.progressbar.height" data-min="0" data-max="100" type="text" id="sr_pb_height" ><span class="linebreak"></span>
+					<label_a>Aligned by</label_a>
+					<div class="radiooption">
+						<div><input class="sliderinput easyinit" data-evt="sliderProgressUpdate" type="radio" value="slider" name="sr_pr_alignscene" data-r="general.progressbar.alignby"><label_sub>Module Dimension</label_sub></div>
+						<div><input class="sliderinput easyinit" data-evt="sliderProgressUpdate" type="radio" value="grid" name="sr_pr_alignscene" data-r="general.progressbar.alignby"><label_sub>Content</label_sub></div>
+					</div>
+					<div class="div20"></div>
+					<div class="div5"></div>					
+					<select style="display:none" id="sr_progbaralignrhor" data-evt="sliderProgressUpdate" data-evtparam="progressbar" data-unselect=".progressbar_selector" data-select="#progressbar_selector_*val*-*RVAL*" data-rval="settings.general.progressbar.vertical" class="sliderinput easyinit" data-r="general.progressbar.horizontal" data-triggerinp="#generalprogressbaroffsetx" data-triggerinpval="0"><option value="left"><?php _e('Left', 'revslider');?></option><option value="center"><?php _e('Center', 'revslider');?></option><option value="right"><?php _e('Right', 'revslider');?></option></select>
+					<select style="display:none" id="sr_progbaralignrver" data-evt="sliderProgressUpdate" data-evtparam="progressbar" data-unselect=".progressbar_selector" data-select="#progressbar_selector_*RVAL*-*val*" data-rval="settings.general.progressbar.horizontal" class="sliderinput easyinit" data-r="general.progressbar.vertical" data-triggerinp="#generalprogressbaroffsety"  data-triggerinpval="0"><option value="top"><?php _e('Top', 'revslider');?></option><option value="center"><?php _e('Center', 'revslider');?></option><option value="bottom"><?php _e('Bottom', 'revslider');?></option></select>					
+					<row class="direktrow">
+						<onelong>
+							<label_a><?php _e('Aligment', 'revslider');?></label_a>
+							<div class="bg_alignselector_wrap">
+								<div class="bg_align_row">
+									<div data-type="progressbar" class=" progressbar_selector bg_alignselector" data-select="#sr_progbaralignrhor,#sr_progbaralignrver" data-val="left,top" id="progressbar_selector_left-top"></div>
+									<div data-type="progressbar" class=" progressbar_selector bg_alignselector" data-select="#sr_progbaralignrhor,#sr_progbaralignrver" data-val="center,top" id="progressbar_selector_center-top"></div>
+									<div data-type="progressbar" class=" progressbar_selector bg_alignselector" data-select="#sr_progbaralignrhor,#sr_progbaralignrver" data-val="right,top" id="progressbar_selector_right-top"></div>
+								</div>
+								<div class="bg_align_row">
+									<div data-type="progressbar" class=" progressbar_selector bg_alignselector" data-select="#sr_progbaralignrhor,#sr_progbaralignrver" data-val="left,center" id="progressbar_selector_left-center"></div>
+									<div data-type="progressbar" class=" progressbar_selector bg_alignselector" data-select="#sr_progbaralignrhor,#sr_progbaralignrver" data-val="center,center" id="progressbar_selector_center-center"></div>
+									<div data-type="progressbar" class=" progressbar_selector bg_alignselector" data-select="#sr_progbaralignrhor,#sr_progbaralignrver" data-val="right,center" id="progressbar_selector_right-center"></div>
+								</div>
+								<div class="bg_align_row">
+									<div data-type="progressbar" class=" progressbar_selector bg_alignselector" data-select="#sr_progbaralignrhor,#sr_progbaralignrver" data-val="left,bottom" id="progressbar_selector_left-bottom"></div>
+									<div data-type="progressbar" class=" progressbar_selector bg_alignselector" data-select="#sr_progbaralignrhor,#sr_progbaralignrver" data-val="center,bottom" id="progressbar_selector_center-bottom"></div>
+									<div data-type="progressbar" class=" progressbar_selector bg_alignselector" data-select="#sr_progbaralignrhor,#sr_progbaralignrver" data-val="right,bottom" id="progressbar_selector_right-bottom"></div>
+								</div>
+							</div>
+						</onelong>
+						<oneshort>
+							<div class="progressoffsets progressoffsets_vertical progressoffsets_ccw progressoffsets_cw"><label_icon class="ui_x"></label_icon><input class="sliderinput valueduekeyboard  easyinit" data-r="general.progressbar.x" data-evt="sliderProgressUpdate" data-numeric="true"  data-min="-1200" data-max="1200" type="text" id="generalprogressbaroffsetx" ></div>
+							<div class="progressoffsets progressoffsets_horizontal progressoffsets_ccw progressoffsets_cw"><label_icon class="ui_y"></label_icon><input class="sliderinput valueduekeyboard  easyinit" data-r="general.progressbar.y" data-evt="sliderProgressUpdate" data-numeric="true"  data-min="-1200" data-max="1200" type="text" id="generalprogressbaroffsety" ></div>
+						</oneshort>
+					</row>
+					<div class="div5"></div>										
+					<label_a><?php _e('Strength', 'revslider');?></label_a><input class="sliderinput valueduekeyboard easyinit" data-allowed="px,%" data-numeric="true" data-evt="sliderProgressUpdate" data-r="general.progressbar.size" type="text" id="sr_pb_size" ><span class="linebreak"></span>
+					<div class="progressoffsets progressoffsets_ccw progressoffsets_cw"><label_a><?php _e('Radius', 'revslider');?></label_a><input class="sliderinput valueduekeyboard easyinit" data-evt="sliderProgressUpdate" data-r="general.progressbar.radius" type="text" id="sr_pb_radius" ></div>
+					<label_a><?php _e('Reset', 'revslider');?></label_a><select class="sliderinput tos2 nosearchbox easyinit"  data-r="general.progressbar.reset"><option value="reset"><?php _e('No Animation', 'revslider');?></option><option value="animate"><?php _e('Animate', 'revslider');?></option></select><span class="linebreak"></span>
+					<div class="div5"></div>
+					<row class="directrow">
+						<onelong><label_icon class="ui_desktop"></label_icon><input type="checkbox" class="easyinit sliderinput" data-r="general.progressbar.visibility.d"></onelong>
+						<oneshort><label_icon class="ui_notebook"></label_icon><input type="checkbox" class="easyinit sliderinput" data-r="general.progressbar.visibility.n" ></oneshort>
+					</row>
+					<row class="directrow">
+						<onelong><label_icon class="ui_tablet"></label_icon><input type="checkbox" class="easyinit sliderinput" data-r="general.progressbar.visibility.t" ></onelong>
+						<oneshort><label_icon class="ui_mobile"></label_icon><input type="checkbox" class="easyinit sliderinput" data-r="general.progressbar.visibility.m" ></oneshort>
+					</row>
 				</div>
 			</div>
 		</div><!-- PROGRESS BAR SETTINGS ENDS-->

@@ -164,12 +164,13 @@ class The7_Icon_Manager {
 				</h1>
 				<div id="msg"></div>
 			<?php
-			self::print_icon_set( self::get_the7_icons(), 'The7 Icons', '', false );
+			self::print_icon_set( self::get_the7_icons(), 'The7 Icons', '', '', false );
 			self::get_font_set();
 			$fa_status = self::is_fontawesome_enabled();
 			if ( $fa_status ) {
 				$fa_title = $fa_status === 'fa5' ? 'Font Awesome 5' : 'Font Awesome 4';
-				self::print_icon_set( self::get_fontawesome_icons(), $fa_title );
+				$fa_version = self::get_fontawesome_version();
+				self::print_icon_set( self::get_fontawesome_icons(), $fa_title, $fa_title . " ($fa_version)" );
 			}
 			?>
 			</div>
@@ -198,29 +199,29 @@ class The7_Icon_Manager {
 				$icon_set = array_merge( $icon_set, $icons );
 			}
 
-			self::print_icon_set( $icon_set, $font, "$font-" );
+			self::print_icon_set( $icon_set, $font, '', "$font-" );
 		}
 	}
 
-	public static function print_icon_set( $icon_set, $font, $icons_prefix = '', $can_be_deleted = true ) {
+	public static function print_icon_set( $icon_set, $font_id, $font_title = '', $icons_prefix = '', $can_be_deleted = true ) {
 		if ( empty( $icon_set ) ) {
 			return '';
 		}
 
-		$unescaped_font = $font;
-		$font           = str_replace( ' ', '-', $font );
-		$output         = '<div class="icon_set-' . esc_attr( $font ) . ' metabox-holder">';
-		$output        .= '<div class="postbox">';
+		$font_title = $font_title ? $font_title : $font_id;
+		$font_id    = str_replace( ' ', '-', $font_id );
+		$output     = '<div class="icon_set-' . esc_attr( $font_id ) . ' metabox-holder">';
+		$output     .= '<div class="postbox">';
 		reset( $icon_set );
 		$count = count( current( $icon_set ) );
-		if ( $font === 'smt' || $font === 'Defaults' ) {
+		if ( $font_id === 'smt' || $font_id === 'Defaults' ) {
 			$output .= '<h3 class="icon_font_name"><strong>' . _x( 'Default Icons', 'admin', 'the7mk2' ) . '</strong>';
 		} else {
-			$output .= '<h3 class="icon_font_name"><strong>' . esc_html( ucfirst( $unescaped_font ) ) . '</strong>';
+			$output .= '<h3 class="icon_font_name"><strong>' . esc_html( ucfirst( $font_title ) ) . '</strong>';
 		}
-		$output .= '<span class="fonts-count count-' . esc_attr( $font ) . '">' . $count . '</span>';
+		$output .= '<span class="fonts-count count-' . esc_attr( $font_id ) . '">' . $count . '</span>';
 		if ( $can_be_deleted ) {
-			$output .= '<button class="button button-secondary button-small the7_del_icon" data-delete=' . esc_attr( $font ) . ' data-title="' . esc_attr( _x( 'Delete Icon Set', 'admin', 'the7mk2' ) ) . '">' . esc_html( _x( 'Delete Icon Set', 'admin', 'the7mk2' ) ) . '</button>';
+			$output .= '<button class="button button-secondary button-small the7_del_icon" data-delete=' . esc_attr( $font_id ) . ' data-title="' . esc_attr( _x( 'Delete Icon Set', 'admin', 'the7mk2' ) ) . '">' . esc_html( _x( 'Delete Icon Set', 'admin', 'the7mk2' ) ) . '</button>';
 		}
 		$output .= '</h3>';
 		$output .= '<div class="inside"><div class="icon_actions">';
@@ -875,6 +876,13 @@ class The7_Icon_Manager {
 
 	public static function disable_fontawesome() {
 		update_option( 'the7_fontawesome_enabled', false );
+	}
+
+	/**
+	 * @return string
+	 */
+	protected static function get_fontawesome_version() {
+		return include PRESSCORE_EXTENSIONS_DIR . '/font-awesome-version.php';
 	}
 
 	protected static function get_fontawesome_icons() {

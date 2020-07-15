@@ -104,25 +104,23 @@ class The7_Archive_Shortcodes_Manager {
 			return;
 		}
 
-		$do_less = is_a( $this->shortcode_obj, 'DT_Shortcode_With_Inline_Css' );
-		$do_less && $this->handler->add_hooks( $this->shortcode_obj );
+		$this->handler->add_hooks( $this->shortcode_obj );
 		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		echo $this->shortcode_obj->shortcode( $this->shortcode_atts, '' );
-		$do_less && $this->handler->remove_hooks( $this->shortcode_obj );
+		$this->handler->remove_hooks( $this->shortcode_obj );
 	}
 
 	/**
 	 * Output page content with proper shortcodes styling.
 	 */
 	public function display_content() {
-		$do_less = is_a( $this->shortcode_obj, 'DT_Shortcode_With_Inline_Css' );
-		$do_less && $this->handler->add_hooks( $this->shortcode_obj );
+		$this->handler->add_hooks( $this->shortcode_obj );
 		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		echo apply_filters(
 			'the_content',
 			$this->post_content
 		);
-		$do_less && $this->handler->remove_hooks( $this->shortcode_obj );
+		$this->handler->remove_hooks( $this->shortcode_obj );
 	}
 }
 

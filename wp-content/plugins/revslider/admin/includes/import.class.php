@@ -102,6 +102,7 @@ class RevSliderSliderImport extends RevSliderSlider {
 			$slider->init_by_id($this->slider_id);
 			
 			$slider->update_css_and_javascript_ids($this->old_slider_id, $this->slider_id, $this->map);
+			$slider->update_color_ids($this->map);
 			
 			//$slider->update_modal_ids($slider_ids, $slides_ids);
 			
@@ -1506,9 +1507,8 @@ class RevSliderSliderImport extends RevSliderSlider {
 						}
 						
 						if(isset($layer['type']) && $layer['type'] == 'svg'){
-							if(isset($layer['svgSource'])){
-								$layer['svgSource'] = content_url().$layer['svgSource'];
-							}
+							$svg = $this->get_val($layer, array('svg', 'source'), '');
+							if(!empty($svg)) $layer['svg']['source'] = content_url().$svg;
 						}
 						
 						$actions = $this->get_val($layer, array('actions', 'action'), array());
@@ -1628,6 +1628,42 @@ class RevSliderSliderImport extends RevSliderSlider {
 		}
 		
 		return true;
+	}
+	
+	
+	/**
+	 * update the slide ids in the slider skins 
+	 * @since: 6.2.3
+	 * skins -> colors -> [] -> ref -> [] -> r & slide
+	 **/
+	public function update_color_ids($map){
+		$skins = $this->get_param('skins', array());
+		if(!empty($skins) && isset($skins['colors']) && !empty($skins['colors']) && !empty($map)){
+			
+			$update = false;
+			foreach($skins['colors'] as $k => $v){
+				if(isset($v['ref']) && !empty($v['ref'])){
+					foreach($v['ref'] as $rk => $rv){
+						$os = $this->get_val($rv, 'slide');
+						
+						if(isset($map[$os])){
+							$update = true;
+							$skins['colors'][$k]['ref'][$rk]['slide'] = (string)$map[$os];
+							
+							$r = explode('.', $this->get_val($rv, 'r'));
+							if(!empty($r) && is_array($r)){
+								$r[0] = $map[$os];
+								$skins['colors'][$k]['ref'][$rk]['r'] = implode('.', $r);
+							}
+						}
+					}
+				}
+			}
+			
+			if($update){
+				$this->update_params(array('skins' => $skins));
+			}
+		}
 	}
 	
 	

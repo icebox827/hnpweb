@@ -27,6 +27,38 @@ function the7_elementor_elements_widget_post_types() {
 	return $supported_post_types;
 }
 
+function the7_get_public_post_types( $args = [] ) {
+	$post_type_args = [
+		// Default is the value $public.
+		'show_in_nav_menus' => true,
+	];
+
+	// Keep for backwards compatibility
+	if ( ! empty( $args['post_type'] ) ) {
+		$post_type_args['name'] = $args['post_type'];
+		unset( $args['post_type'] );
+	}
+
+	$post_type_args = wp_parse_args( $post_type_args, $args );
+
+	$_post_types = get_post_types( $post_type_args, 'objects' );
+
+	$post_types = [];
+
+	foreach ( $_post_types as $post_type => $object ) {
+		$post_types[ $post_type ] = $object->label;
+	}
+
+	/**
+	 * Public Post types
+	 *
+	 * Allow 3rd party plugins to filters the public post types the7 widgets should work on
+	 *
+	 * @param array $post_types The7 widgets supported public post types.
+	 */
+	return apply_filters( 'the7_get_public_post_types', $post_types );
+}
+
 /**
  * @return string
  */

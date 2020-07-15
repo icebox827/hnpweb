@@ -33,7 +33,8 @@ input[type="range"],
 input[type="password"],
 select,
 textarea,
-.wpcf7-number {
+.wpcf7-number,
+.woocommerce div.elementor .the7-elementor-widget form.cart table.variations td.value select{
 	color: @input-color;
 	border-top-width: @top-input-border-width;
 	border-right-width: @right-input-border-width;
@@ -62,7 +63,8 @@ input[type="range"],
 input[type="password"],
 select,
 .wpcf7-number,
-.tinvwl-input-group .form-control {
+.tinvwl-input-group .form-control,
+.woocommerce div.elementor .the7-elementor-widget form.cart table.variations td.value select{
 	height: @input-height;
 }
 .formError + input,
@@ -72,12 +74,28 @@ select,
 .select-icon(@colour) {
 	background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="@{colour}" x="0px" y="0px" width="8px" height="8px" viewBox="0 0 386.257 386.257" style="enable-background:new 0 0 386.257 386.257;" xml:space="preserve"><polygon points="0,96.879 193.129,289.379 386.257,96.879 "/></svg>');
 }
-select:not(.elementor-field) {
-	-webkit-appearance: none !important;
-	-moz-appearance: none;
-	.select-icon(fade(@input-color, 50%));
-	background-position: calc(100% ~'-' 15px) center;
-	background-repeat: no-repeat;
+
+select:not(.elementor-field),
+.woocommerce div.elementor .the7-elementor-widget form.cart table.variations td.value select:not(.elementor-field){
+	 -webkit-appearance: none !important;
+	 -moz-appearance: none;
+	 .select-icon(fade(@input-color, 50%));
+	 background-position: calc(100% ~'-' 10px) center;
+	 background-repeat: no-repeat;
+	 padding-right: calc(@right-input-padding ~'+' 15px);
+}
+ select:focus,
+ .woocommerce div.product.elementor form.cart table.variations td.value:focus:before {
+	outline: 0px solid transparent;
+	box-shadow: 0 0 0 2px @accent-bg-color;
+ }
+.woocommerce div.elementor .the7-elementor-widget form.cart table.variations td.value select:not(.elementor-field){
+	.select-icon(fade(@input-color, 50%))!important;
+}
+
+select:focus {
+	outline: 0px solid transparent;
+	box-shadow: 0 0 0 2px @accent-bg-color;
 }
 .dt-btn {
 	.widget .dt-form &,
@@ -150,94 +168,4 @@ div.mc4wp-form button[type="submit"],
 .comment-form-cookies-consent label,
 .form-terms-text {
 	.text-small;
-}
-input.elementor-field,
-textarea.elementor-field,
-select.elementor-field {
-	height: auto;
-	padding: 5px 14px;
-	border-radius: 3px;
-}
-.elementor-field-textual {
-	line-height: 1.4;
-	font-size: 15px;
-	min-height: 40px;
-	padding: 5px 14px;
-	-webkit-border-radius: 3px;
-	border-radius: 3px;
-}
-.elementor-field-textual.elementor-size-xs,
-.content  .elementor-field-textual.elementor-size-xs {
-	font-size: 13px;
-	line-height: 1.4;
-	min-height: 33px;
-	padding: 4px 12px;
-	-webkit-border-radius: 2px;
-	border-radius: 2px;
-}
-.elementor-field-textual.elementor-size-md,
-.content .elementor-field-textual.elementor-size-md {
-	font-size: 16px;
-	line-height: 1.4;
-	min-height: 47px;
-	padding: 6px 16px;
-	-webkit-border-radius: 4px;
-	border-radius: 4px;
-}
-.elementor-field-textual.elementor-size-lg,
-.content .elementor-field-textual.elementor-size-lg {
-	font-size: 18px;
-	line-height: 1.4;
-	min-height: 59px;
-	padding: 7px 20px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
-}
-.elementor-field-textual.elementor-size-xl,
-.content .elementor-field-textual.elementor-size-xl {
-	font-size: 20px;
-	line-height: 1.4;
-	min-height: 72px;
-	padding: 8px 24px;
-	-webkit-border-radius: 6px;
-	border-radius: 6px;
-}
-.elementor-form .elementor-button.elementor-size-xs {
-	min-height: 33px;
-}
-.elementor-form .elementor-button.elementor-size-sm {
-	min-height: 40px;
-}
-.elementor-form .elementor-button.elementor-size-md {
-	min-height: 47px;
-}
-.elementor-form .elementor-button.elementor-size-lg {
-	min-height: 59px;
-}
-.elementor-form .elementor-button.elementor-size-xl {
-	min-height: 72px;
-}
-.elementor-button.elementor-size-xs {
-	font-size: 13px;
-	padding: 10px 20px;
-	-webkit-border-radius: 2px;
-	border-radius: 2px;
-}
-.elementor-button.elementor-size-md {
-	font-size: 16px;
-	padding: 15px 30px;
-	-webkit-border-radius: 4px;
-	border-radius: 4px;
-}
-.elementor-button.elementor-size-lg {
-	font-size: 18px;
-	padding: 20px 40px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
-}
-.elementor-button.elementor-size-xl {
-	font-size: 20px;
-	padding: 25px 50px;
-	-webkit-border-radius: 6px;
-	border-radius: 6px;
 }

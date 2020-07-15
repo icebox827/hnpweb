@@ -99,11 +99,12 @@ $options[] = array(
 $options[] = array( 'name' => _x( 'Custom CSS', 'theme-options', 'the7mk2' ), 'type' => 'block' );
 
 $options['general-custom_css'] = array(
-	'settings' => array( 'rows' => 16, 'code_style' => 'text/css' ),
+	'settings' => array( 'rows' => 64, 'code_style' => 'text/css' ),
 	'id'       => 'general-custom_css',
 	'std'      => false,
 	'type'     => 'code_editor',
 	'sanitize' => 'without_sanitize',
+	'class'    => 'section-code_editor-long',
 );
 
 $options[] = array(
@@ -118,9 +119,10 @@ $options[] = array(
 );
 
 $options['general-tracking_code'] = array(
-	'settings' => array( 'rows' => 16, 'code_style' => 'htmlmixed' ),
+	'settings' => array( 'rows' => 32, 'code_style' => 'htmlmixed' ),
 	'id'       => 'general-tracking_code',
 	'std'      => false,
 	'type'     => 'code_editor',
 	'sanitize' => 'without_sanitize',
+	'class'    => 'section-code_editor-long',
 );

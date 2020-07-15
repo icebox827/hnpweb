@@ -31,31 +31,29 @@ if ( ! has_post_thumbnail() ) {
 </div>
 
 <div class="post-entry-content  <?php echo $rollover_class; ?>">
+	<div class="post-entry-body">
+		<?php
+		if ( ! empty( $icons_html ) ) {
+			echo '<div class="project-links-container">' . $icons_html . '</div>';
+		}
 
-	<?php
-	if ( ! empty( $icons_html ) ) {
-		echo '<div class="project-links-container">' . $icons_html . '</div>';
-	}
-	?>
+		if ( ! empty( $post_title ) ) {
+			echo $post_title;
+		}
 
-	<h3 class="entry-title">
-		<a href="<?php echo esc_url( $follow_link ); ?>" title="<?php echo the_title_attribute( 'echo=0' ); ?>" rel="bookmark"><?php the_title(); ?></a>
-	</h3>
+		if ( ! empty( $post_meta ) ) {
+			echo $post_meta;
+		}
 
-	<?php
-	if ( isset( $post_meta ) ) {
-		echo $post_meta;
-	}
+		if ( ! empty( $post_excerpt ) ) {
+			echo '<div class="entry-excerpt">';
+			echo $post_excerpt;
+			echo '</div>';
+		}
 
-	if ( isset( $post_excerpt ) ) {
-		echo '<div class="entry-excerpt">';
-		echo $post_excerpt;
-		echo '</div>';
-	}
-
-	if ( isset( $details_btn ) ) {
-		echo $details_btn;
-	}
-	?>
-
+		if ( ! empty( $details_btn ) ) {
+			echo $details_btn;
+		}
+		?>
+	</div>
 </div>

@@ -29,46 +29,38 @@ class The7PT_Assets {
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 		$template_uri = The7PT()->plugin_url() . 'assets';
 
-		$register_styles = array(
-			'the7pt-static' => array(
-				'src' => "{$template_uri}/css/post-type{$suffix}.css",
-			),
-			'the7pt-photo-scroller'    => array(
-				'src'     => "{$template_uri}/css/photo-scroller{$suffix}.css",
-			),
-		);
+		if ( class_exists( 'The7_Admin_Dashboard_Settings' ) ) {
+			$post_types = array(
+				'portfolio',
+				'testimonials',
+				'team',
+				'logos',
+				'benefits',
+				'albums',
+				'slideshow',
+			);
 
-		foreach ( $register_styles as $name => $props ) {
-			$deps = isset( $props['deps'] ) ? $props['deps'] : array();
-			wp_register_style( $name, $props['src'], $deps, THE7_VERSION, 'all' );
+			foreach ( $post_types as $post_type ) {
+				if ( The7_Admin_Dashboard_Settings::get( $post_type ) ) {
+					wp_enqueue_style(
+						'the7-core',
+						"{$template_uri}/css/post-type{$suffix}.css",
+						array(),
+						The7PT()->version(),
+						'all'
+					);
+					break;
+				}
+			}
 		}
-
-		$register_scripts = array(
-			'the7pt-photo-scroller'    => array(
-				'src'     => "{$template_uri}/js/photo-scroller{$suffix}.js",
-				'deps'      => array( 'jquery' ),
-				'in_footer' => true,
-			),
-		);
 
 		if (
 			! class_exists( 'The7_Admin_Dashboard_Settings' )
 			|| The7_Admin_Dashboard_Settings::get( 'portfolio' )
 			|| The7_Admin_Dashboard_Settings::get( 'albums' )
 		) {
-			$register_scripts['the7pt'] = array(
-				'src'       => "{$template_uri}/js/post-type{$suffix}.js",
-				'deps'      => array( 'jquery' ),
-				'in_footer' => true,
-			);
+			wp_enqueue_script( 'the7-core', "{$template_uri}/js/post-type{$suffix}.js", array( 'jquery' ), The7PT()->version(), true );
 		}
-
-		foreach ( $register_scripts as $name => $props ) {
-			wp_register_script( $name, $props['src'], $props['deps'], THE7_VERSION, $props['in_footer'] );
-		}
-
-		wp_enqueue_script( 'the7pt' );
-		wp_enqueue_style( 'the7pt-static' );
 	}
 
 	/**

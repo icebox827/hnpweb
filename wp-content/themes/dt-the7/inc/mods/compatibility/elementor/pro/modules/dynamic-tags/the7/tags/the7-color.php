@@ -90,7 +90,7 @@ class The7_Color extends Tag {
 	 * Return simplified hex color.
 	 */
 	private function get_simplified_the7_color( $color_mode_option ) {
-		$color_val = '#ffffff00';
+		$color_val = '';
 
 		$color_option = str_replace( "_mode", "", $color_mode_option );
 		switch ( of_get_option( $color_mode_option ) ) {
@@ -103,9 +103,12 @@ class The7_Color extends Tag {
 				$color_val = of_get_option( $color_option );
 				break;
 			case 'gradient':
-				$gradient_color = of_get_option( $color_option + '_gradient' );
-				$color_val = isset( $gradient_color[0] ) ? $gradient_color[0] : '#ffffff';
+				$gradient_obj = the7_less_create_gradient_obj( of_get_option( $color_option . '_gradient' ) );
+				$color_val = $gradient_obj->get_color_stop( 1 )->get_color();
 				break;
+		}
+		if ( empty( $color_val ) ) {
+			$color_val = '#ffffff00';
 		}
 
 		return $color_val;

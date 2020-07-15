@@ -3,6 +3,7 @@
 .paginator {
 	position: relative;
 	margin: 30px 0 0 0;
+	padding-bottom: 2px;
 	z-index: 10;
 	.flex-display(@display: flex);
 	 .flex-flow( row wrap);
@@ -29,14 +30,7 @@
 
 		a,
 		span {
-			.paginator:not(.paginator-more-button) & {
-				position: relative;
-				display: inline-block;
-				padding: 1px 8px;
-				margin: 0 6px;
-				text-align: center;
-				text-decoration: none;
-				font-weight: bold;
+			.paginator:not(.paginator-more-button):not(.filter-decorations) & {
 				&:after {
 					position: absolute;
 					left: 0;
@@ -45,15 +39,27 @@
 					height: 2px;
 					content: "";
 					opacity: 0;
-				 	transition: opacity 0.3s ease;
+					transition: opacity 0.3s ease;
 				}
+				&.act:after,
+				&:hover:after {
+					opacity: 1;
+				}
+			}
+			.paginator:not(.paginator-more-button) & {
+				position: relative;
+				display: inline-block;
+				padding: 1px 8px;
+				margin: 0 6px;
+				text-align: center;
+				text-decoration: none;
+				font-weight: bold;
 				&.disabled {
 					opacity: 0;
 				}
 				&.nav-next,
 				&.nav-prev {
 					padding: 0;
-					font-size: 14px;
 					line-height: 1;
 				 	transition: transform 0.3s ease;
 				 	transform: translateX(0);
@@ -67,10 +73,6 @@
 				&.nav-next:after,
 				&.nav-prev:after {
 					display: none;
-				}
-				&.act:after,
-				&:hover:after {
-					opacity: 1;
 				}
 			}
 		}

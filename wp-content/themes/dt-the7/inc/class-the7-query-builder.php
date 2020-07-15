@@ -35,7 +35,6 @@ class The7_Query_Builder {
 				'post_type'        => 'post',
 				'order'            => 'desc',
 				'orderby'          => 'date',
-				'post_status'      => 'publish',
 				'paged'            => 1,
 				'posts_per_page'   => 10,
 				'suppress_filters' => false,

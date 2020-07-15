@@ -810,27 +810,30 @@ class WP_Import extends WP_Importer {
 			// add/update post meta
 			if ( ! empty( $post['postmeta'] ) ) {
 				foreach ( $post['postmeta'] as $meta ) {
-					$key = apply_filters( 'import_post_meta_key', $meta['key'], $post_id, $post );
+					$key   = apply_filters( 'import_post_meta_key', $meta['key'], $post_id, $post );
 					$value = false;
 
 					if ( '_edit_last' == $key ) {
-						if ( isset( $this->processed_authors[intval($meta['value'])] ) )
-							$value = $this->processed_authors[intval($meta['value'])];
-						else
+						if ( isset( $this->processed_authors[ intval( $meta['value'] ) ] ) ) {
+							$value = $this->processed_authors[ intval( $meta['value'] ) ];
+						} else {
 							$key = false;
+						}
 					}
 
 					if ( $key ) {
 						// export gets meta straight from the DB so could have a serialized string
-						if ( ! $value )
+						if ( ! $value ) {
 							$value = maybe_unserialize( $meta['value'] );
+						}
 
-						add_post_meta( $post_id, $key, $value );
+						add_post_meta( $post_id, wp_slash( $key ), wp_slash_strings_only( $value ) );
 						do_action( 'import_post_meta', $post_id, $key, $value );
 
 						// if the post has a featured image, take note of this in case of remap
-						if ( '_thumbnail_id' == $key )
-							$this->featured_images[$post_id] = (int) $value;
+						if ( '_thumbnail_id' == $key ) {
+							$this->featured_images[ $post_id ] = (int) $value;
+						}
 					}
 				}
 			}

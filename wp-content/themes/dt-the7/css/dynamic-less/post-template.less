@@ -202,7 +202,15 @@ article {
 .description-under-image .post .entry-title a:hover,
 .post .blog-content .entry-title a:hover,
 .project-list-content .entry-title a:hover {
-	.color-accent;
+	//.color-accent;
+	color: @accent-bg-color;
+	.accent-gradient & {
+		.text-gradient (@startColor: @accent-bg-color, @endColor: @accent-text-color-2);
+	}
+	.wf-container-footer &,
+	.accent-gradient .footer &  {
+		.custom-mixin-footer-color (@widget-footer-accent-color);
+	}
 }
 /* #Blog
 ================================================== */

@@ -260,11 +260,23 @@ article {
 	//Content
 	.post-entry-content {
 		.box-sizing (border-box);
+
 		.content-align-center & {
 			text-align: center;
 			.justify-content(@justify: center);
 			.align-self(@align: center);
 		}
+		.content-align-right & {
+			text-align: right;
+			.justify-content(@justify: right);
+			.align-self(@align: right);
+		}
+		.content-align-left & {
+			text-align: left;
+			.justify-content(@justify: left);
+			.align-self(@align: left);
+		}
+
 		@media all and (-ms-high-contrast: none) {
 			max-width: 100%;
 		}

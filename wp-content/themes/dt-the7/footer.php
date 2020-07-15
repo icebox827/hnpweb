@@ -54,10 +54,10 @@ if ( presscore_is_content_visible() ) : ?>
 		<div class="pswp__ui pswp__ui--hidden">
 			<div class="pswp__top-bar">
 				<div class="pswp__counter"></div>
-				<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-				<button class="pswp__button pswp__button--share" title="Share"></button>
-				<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-				<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+				<button class="pswp__button pswp__button--close" title="<?php esc_html_e( 'Close (Esc)', 'the7mk2' ) ?>" aria-label="<?php esc_html_e( 'Close (Esc)', 'the7mk2' ) ?>"></button>
+				<button class="pswp__button pswp__button--share" title="<?php esc_html_e( 'Share', 'the7mk2' ) ?>" aria-label="<?php esc_html_e( 'Share', 'the7mk2' ) ?>"></button>
+				<button class="pswp__button pswp__button--fs" title="<?php esc_html_e( 'Toggle fullscreen', 'the7mk2' ) ?>" aria-label="<?php esc_html_e( 'Toggle fullscreen', 'the7mk2' ) ?>"></button>
+				<button class="pswp__button pswp__button--zoom" title="<?php esc_html_e( 'Zoom in/out', 'the7mk2' ) ?>" aria-label="<?php esc_html_e( 'Zoom in/out', 'the7mk2' ) ?>"></button>
 				<div class="pswp__preloader">
 					<div class="pswp__preloader__icn">
 						<div class="pswp__preloader__cut">
@@ -69,9 +69,9 @@ if ( presscore_is_content_visible() ) : ?>
 			<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
 				<div class="pswp__share-tooltip"></div> 
 			</div>
-			<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+			<button class="pswp__button pswp__button--arrow--left" title="<?php esc_html_e( 'Previous (arrow left)', 'the7mk2' ) ?>" aria-label="<?php esc_html_e( 'Previous (arrow left)', 'the7mk2' ) ?>">
 			</button>
-			<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+			<button class="pswp__button pswp__button--arrow--right" title="<?php esc_html_e( 'Next (arrow right)', 'the7mk2' ) ?>" aria-label="<?php esc_html_e( 'Next (arrow right)', 'the7mk2' ) ?>">
 			</button>
 			<div class="pswp__caption">
 				<div class="pswp__caption__center"></div>

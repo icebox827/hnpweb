@@ -24,7 +24,13 @@ if ( $upsells ) : ?>
 
     <section class="up-sells upsells products">
 
-        <h2><?php esc_html_e( 'You may also like&hellip;', 'the7mk2' ) ?></h2>
+	    <?php
+	    $heading = apply_filters( 'woocommerce_product_upsells_products_heading', __( 'You may also like&hellip;', 'the7mk2' ) );
+
+	    if ( $heading ) :
+		    ?>
+            <h2><?php echo esc_html( $heading ); ?></h2>
+	    <?php endif; ?>
 
 		<ul class="related-product cart-btn-below-img">
 
@@ -54,9 +60,11 @@ if ( $upsells ) : ?>
                         <span class="price"><?php echo $product->get_price_html(); ?></span>
 
 						<?php
-						echo wc_get_rating_html( $product->get_average_rating() );
+						if ( wc_review_ratings_enabled() ) {
+							echo wc_get_rating_html( $product->get_average_rating() );
+						}
 
-						if(presscore_config()->get( 'product.related.show_cart_btn')){
+						if ( presscore_config()->get( 'product.related.show_cart_btn' ) ) {
 							echo '<div class="woo-buttons">' . dt_woocommerce_get_product_add_to_cart_icon() . '</div>';
 						}
 						?>

@@ -1,4 +1,7 @@
 <?php
+
+use Elementor\Icons_Manager;
+
 defined( 'ABSPATH' ) || exit;
 
 include_once dirname( __FILE__ ) . '/the7-update-utility-functions.php';
@@ -950,4 +953,21 @@ function the7_update_860_db_version() {
 
 function the7_update_870_db_version() {
 	The7_Install::update_db_version( '8.7.0' );
+}
+
+function the7_update_890_elementor_the7_elements() {
+	if ( ! the7_elementor_is_active() ) {
+		return false;
+	}
+
+	$updater = new \The7\Adapters\Elementor\Upgrade\The7_Elementor_Updater();
+	\The7\Adapters\Elementor\Upgrade\Widgets\The7_Elementor_Masonry_Migrations::run( '_8_9_0_migration', $updater );
+
+	\Elementor\Plugin::$instance->files_manager->clear_cache();
+
+	return false;
+}
+
+function the7_update_890_db_version() {
+	The7_Install::update_db_version( '8.9.0' );
 }

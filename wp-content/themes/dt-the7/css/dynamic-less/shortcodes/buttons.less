@@ -177,9 +177,9 @@ input[type="submit"]:not([name="update_cart"]),
 
 /* #standard buttons color & background
 ================================================== */
-button.button,
+
 .mec-event-footer .mec-booking-button,
-a.button:not(.edd-submit),
+
 .dt-form button,
 #page .widget .dt-form .dt-btn,
 .widget .dt-form .dt-btn,
@@ -191,7 +191,6 @@ input[type="reset"],
 input#place_order,
 .woocommerce-Reviews .submit,
 input.button,
-.cart-btn-below-img .woo-buttons a,
 input[name="save_address"],
 .wc-layout-list .woo-buttons a,
 .post-password-form input[type="submit"],
@@ -239,6 +238,53 @@ input[type="submit"]:not([name="update_cart"]),
 			.background-gradient (@startColor: @dt-btn-hover-bg-color, @endColor: @dt-btn-hover-bg-color-2);
 		}
 		.btn-hover-bg-off #page & {
+			background: none;
+		}
+	}
+	&:hover .text-wrap {
+		color: @dt-btn-hover-color;
+	}
+}
+button.button,
+.cart-btn-below-img .woo-buttons a,
+a.button:not(.edd-submit) {
+
+	color: @dt-btn-color;
+	.stripe &,
+	& *,
+	.sidebar &,
+	.sidebar .widget &,
+	.sidebar-content .widget &,
+	.footer & {
+		color: @dt-btn-color;
+		.custom-mixin-footer-with-accent-color (@dt-btn-color, @widget-footer-accent-color);
+	}
+	background-color: @dt-btn-bg-color;
+	.background-gradient (@startColor: @dt-btn-bg-color, @endColor: @dt-btn-bg-color-2);
+	&:not(:hover) {
+		.btn-bg-off & {
+			background: none;
+		}
+	}
+	&:hover > *,
+	&:hover {
+		color: @dt-btn-hover-color;
+	}
+	&:hover {
+		border-color: @dt-btn-border-hover-color;
+		.stripe &,
+		& *,
+		.sidebar &,
+		.sidebar .widget &,
+		.sidebar-content .widget &,
+		.footer & {
+			color: @dt-btn-hover-color;
+			.custom-mixin-footer-with-accent-color (@dt-btn-hover-color, @widget-footer-accent-color);
+		}
+		background: @dt-btn-hover-bg-color;
+		.background-gradient (@startColor: @dt-btn-hover-bg-color, @endColor: @dt-btn-hover-bg-color-2);
+	
+		.btn-hover-bg-off & {
 			background: none;
 		}
 	}

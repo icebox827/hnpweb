@@ -338,7 +338,7 @@ if ( ! class_exists( 'DT_Shortcode_BlogMasonry', false ) ):
 				// Do not output pagination.
 			} else if ( in_array( $loading_mode, array( 'js_more', 'js_lazy_loading' ) ) ) {
 				// JS load more.
-				echo dt_get_next_page_button( 2, 'paginator paginator-more-button' );
+				echo dt_get_next_page_button( 2, 'paginator paginator-more-button', $cur_page = 1 );
 			} else if ( 'js_pagination' == $loading_mode ) {
 				// JS pagination.
 				echo '<div class="paginator" role="navigation"></div>';
@@ -1005,7 +1005,6 @@ if ( ! class_exists( 'DT_Shortcode_BlogMasonry', false ) ):
 					'order'            => $config->get( 'order' ),
 					'posts_per_page'   => $posts_per_page,
 					'post_type'        => $post_type,
-					'post_status'      => 'publish',
 					'paged'            => the7_get_paged_var(),
 					'suppress_filters' => false,
 					'post__in'         => $post_ids,
@@ -1027,7 +1026,6 @@ if ( ! class_exists( 'DT_Shortcode_BlogMasonry', false ) ):
 					'order'            => $this->get_att( 'order' ),
 					'posts_per_page'   => $posts_per_page,
 					'post_type'        => $post_type,
-					'post_status'      => 'publish',
 					'paged'            => 1,
 					'suppress_filters' => false,
 					'post__in'         => $post_ids,
@@ -1080,7 +1078,6 @@ if ( ! class_exists( 'DT_Shortcode_BlogMasonry', false ) ):
 			$query_args = array(
 				'posts_per_page'   => $posts_per_page,
 				'post_type'        => $post_type,
-				'post_status'      => 'publish',
 				'suppress_filters' => false,
 			);
 

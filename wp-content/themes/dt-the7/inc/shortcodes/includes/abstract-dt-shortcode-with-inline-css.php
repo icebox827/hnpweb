@@ -9,13 +9,6 @@ abstract class DT_Shortcode_With_Inline_Css extends DT_Shortcode {
 	const INLINE_CSS_META_KEY = 'the7_shortcodes_dynamic_css';
 
 	/**
-	 * Shortcode name.
-	 *
-	 * @var string
-	 */
-	protected $sc_name;
-
-	/**
 	 * Shortcode attributes.
 	 *
 	 * @var array
@@ -65,10 +58,6 @@ abstract class DT_Shortcode_With_Inline_Css extends DT_Shortcode {
 	 */
 	public function __construct() {
 		add_filter( "the7_generate_sc_{$this->sc_name}_css", array( $this, 'generate_inline_css' ), 10, 2 );
-	}
-
-	public function get_tag() {
-		return $this->sc_name;
 	}
 
 	public function reset_id() {
@@ -328,4 +317,7 @@ abstract class DT_Shortcode_With_Inline_Css extends DT_Shortcode {
 		return true;
 	}
 
+	protected function display_shortcode_content( WP_Query $query ) {
+		return true;
+	}
 }

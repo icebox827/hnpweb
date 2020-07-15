@@ -17,6 +17,29 @@ abstract class The7_Elementor_Widget_Base extends Widget_Base {
 	const WIDGET_CSS_CACHE_ID = '_the7_elementor_widgets_css';
 
 	/**
+	 * Get widget keywords.
+	 *
+	 * Retrieve the widget keywords.
+	 *
+	 * @since 1.0.10
+	 * @access public
+	 *
+	 * @return array Widget keywords.
+	 */
+	public function get_keywords() {
+		return [ 'the7' ];
+	}
+
+	/**
+	 * Get widget category.
+	 *
+	 * @return array
+	 */
+	public function get_categories() {
+		return [ 'the7-elements', 'pro-elements' ];
+	}
+
+	/**
 	 * Return unique shortcode class like {$unique_class_base}-{$sc_id}.
 	 *
 	 * @return string

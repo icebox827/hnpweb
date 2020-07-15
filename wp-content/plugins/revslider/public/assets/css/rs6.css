@@ -4,7 +4,7 @@
 
 Screen Stylesheet
 
-version:   	6.0.0
+version:   	6.2.8
 date:      	24/06/19
 author:		themepunch
 email:     	info@themepunch.com
@@ -43,12 +43,13 @@ rs-debug {
 }
 
 /* MODAL BASICS */
-rs-modal { position: fixed !important; z-index: 9999999 !important; pointer-events: none !important; }
+rs-modal { position: fixed !important; z-index: 9999999 !important; pointer-events: none !important;}
 rs-modal.rs-modal-auto { top: auto;bottom: auto;left: auto; right:auto; }
 rs-modal.rs-modal-fullwidth,
 rs-modal.rs-modal-fullscreen { top: 0px; left: 0px; width: 100%; height: 100%; }
 rs-modal rs-fullwidth-wrap { position: absolute; top: 0px; left: 0px; height: 100%;}
 rs-module-wrap.rs-modal { display:none; max-height: 100% !important; overflow: auto !important;  pointer-events: auto !important;}
+rs-module-wrap.hideallscrollbars.rs-modal { overflow: hidden !important; max-width: 100% !important}
 rs-modal-cover { width: 100%; height: 100%; z-index: 0; background: transparent; position: absolute;top: 0px;left: 0px; cursor: pointer; pointer-events: auto}
 body>rs-modal-cover { position: fixed; z-index: 9999995 !important; }
 
@@ -306,16 +307,20 @@ rs-module .sr-only-focusable:focus,
 ******************************/
 
 .tp-fullwidth-forcer { z-index: 0; pointer-events: none}
+rs-module-wrap { visibility: hidden }
 rs-module-wrap,
 rs-module-wrap * { box-sizing: border-box; -webkit-tap-highlight-color: rgba(0,0,0,0);}
 
 rs-module-wrap {position:relative;z-index: 1;width:100%; display: block;}
 
-.rs-fixedscrollon rs-module-wrap { position: fixed !important; top: 0px !important; z-index: 1000; }
-
+.rs-fixedscrollon rs-module-wrap { position: fixed !important; top: 0px !important; z-index: 1000; left: 0 !important;}
+.rs-stickyscrollon rs-module-wrap {  position: sticky !important; top:0px; z-index: 1000; }
+.rs-stickyscrollon { overflow: visible !important; }
 
 rs-fw-forcer { display:block;width:100%;pointer-events: none;}
-rs-module { position:relative;overflow:hidden;display: block;}
+rs-module { position:relative;overflow:hidden;display: block; }
+
+rs-module.disableVerticalScroll { -ms-touch-action: pan-x; touch-action: pan-x; }
 
 /*rs-carousel-wrap,*/
 rs-pzimg-wrap,
@@ -369,15 +374,15 @@ rs-slide,rs-slide:before {  display:block; visibility:hidden; }
 .rs-layer-video { overflow: hidden }
 
 rs-module rs-layer,
-rs-module .rs-layer { 
+rs-module .rs-layer { 	
 	opacity: 0;
 	position:relative; 	
 	visibility: hidden;
 	white-space: nowrap;
 	display: block;	
-	/*-webkit-font-smoothing: antialiased !important;
+	-webkit-font-smoothing: antialiased !important;
 	-webkit-tap-highlight-color:rgba(0, 0, 0, 0);
-	-moz-osx-font-smoothing: grayscale;*/
+	-moz-osx-font-smoothing: grayscale;
 	z-index:1;	
 }
 
@@ -467,13 +472,14 @@ rs-bg-elem 	{	position:absolute; top:0px;left:0px; width:100%;height:100%;z-inde
 	- 	ZONES / GOUP / ROW / COLUMN LAYERS AND HELPERS 	-
 ***********************************************************/
 rs-zone			{	position:absolute; width:100%;left:0px; box-sizing: border-box;min-height:50px; font-size:0px;pointer-events: none}
-rs-layer-wrap,
 rs-row-wrap,
 rs-column,
+rs-cbg-mask-wrap {	display:block; visibility: hidden}
+
+rs-layer-wrap,
 rs-parallax-wrap,
-rs-mask-wrap,
-rs-cbg-mask-wrap,
-rs-loop-wrap 	{	display:block; visibility: hidden}
+rs-loop-wrap,
+rs-mask-wrap { display: block; }
 
 
 rs-column-wrap>rs-loop-wrap { z-index: 1 }
@@ -481,7 +487,20 @@ rs-column-wrap>rs-loop-wrap { z-index: 1 }
 rs-layer-wrap,
 rs-mask-wrap,
 rs-cbg-mask-wrap
- { transform-style:flat; perspective:10000px;}
+ { transform-style:flat;}
+
+ 
+.safarifix rs-layer-wrap {
+	perspective: 1000000;
+}
+
+
+@-moz-document url-prefix() {
+ 	rs-layer-wrap,
+	rs-mask-wrap,
+	rs-cbg-mask-wrap { perspective: none; }
+}
+
 
  /*@-moz-document url-prefix() {
  	rs-layer-wrap,
@@ -489,10 +508,20 @@ rs-cbg-mask-wrap
 	rs-cbg-mask-wrap { filter: blur(0px); }
  }*/   /* REMOVED LINES TO FIX BOX-SHADOW ISSUE IN FIREFOX */
 
- .rs-fixedscrollon rs-module-wrap{left: 0 !important;}
+ 
 
 rs-mask-wrap { overflow: hidden }
-rs-fullwidth-wrap { position:relative;width:100%;height:auto;display: block; }
+rs-fullwidth-wrap { position:relative;width:100%;height:auto;display: block; overflow:visible;max-width:none !important;}
+/*IE11 AND IE EDGE NEED SOME SPECIAL OVERFLOW
+Removed now since iE 11 and ieEdge fullwidth Slider had spacings again on other themes.
+May need to keep in eye the Carousel and Modal sliders in Fullscreen / Fullwidth mode ! 
+@media screen and (-ms-high-contrast: none) {
+	rs-fullwidth-wrap { overflow: hidden; }
+}
+@supports (-ms-ime-align:auto) {
+  rs-fullwidth-wrap { overflow: hidden; }  
+}
+*/  
 
 .rev_row_zone_top 				{	top:0px;}
 .rev_row_zone_bottom 			{	bottom:0px;}
@@ -537,6 +566,8 @@ rs-cbg-mask-wrap {
     z-index: 0;
     box-sizing: border-box;     
 } 
+
+rs-column-wrap rs-cbg-mask-wrap { top: 0px; left: 0px; bottom: 0px; right: 0px; }
 rs-column-bg {	
     position: absolute;    
     z-index: 0;
@@ -634,7 +665,7 @@ img.tp-slider-alternative-image	{
 	-	FULLSCREEN VIDEO	-
 *********************************/
 
-rs-bgvideo 		{	position: absolute;top:0px;left:0px; width:100%;height:100%;visibility: hidden;z-index: 0; display: block}
+rs-bgvideo 		{	position: absolute;top:0px;left:0px; width:100%;height:100%;z-index: 0; display: block}
 
 .rs-layer.coverscreenvideo	{	width:100%;height:100%;top:0px;left:0px;position:absolute;}
 .rs-layer.rs-fsv		{	left:0px; top:0px; position:absolute;width:100%;height:100%}
@@ -697,6 +728,9 @@ rs-bgvideo 		{	position: absolute;top:0px;left:0px; width:100%;height:100%;visib
 
 .rs-fsv .rs-fsv audio 		{	object-fit:contain !important;}
 .rs-fsv .rs-fsv video 		{	object-fit:contain !important;}
+
+.rs-layer-video .html5vid.hidefullscreen video::-webkit-media-controls-fullscreen-button  { display: none; }
+
 
 @supports not (-ms-high-contrast:none) {
    /* Non-IE styles here */
@@ -953,7 +987,7 @@ rs-dotted.threexthreewhite		{	background:url(../assets/gridtile_3x3_white.png)}
 	background: #333;	
 }
 
-.rev-scroll-btn.revs-fulldark,  {
+.rev-scroll-btn.revs-fulldark  {
 	background:#333;
 	border:none;
 }
@@ -1043,10 +1077,13 @@ rs-dotted.threexthreewhite		{	background:url(../assets/gridtile_3x3_white.png)}
 /************************************
 -	TP BANNER TIMER		-
 *************************************/
-rs-progress								{	visibility: hidden; width:100%; height:5px; background:#000; background:rgba(0,0,0,0.15); position:absolute; z-index:200; top:0px}
-rs-progress.rs-bottom					{	top:auto; bottom:0px !important;height:5px}
-
-
+rs-progress						{	visibility: hidden; position:absolute; z-index:200;width:100%;height:100%;}
+rs-progress-bar,
+.rs-progress-bar				{ 	display:block;z-index: 20;box-sizing: border-box;background-clip: content-box;position: absolute; vertical-align:top;line-height:0px;width:100%;height:100%;}
+rs-progress-bgs 				{ 	display:block;z-index: 15;box-sizing: border-box; width: 100%; position: absolute; height: 100%; top: 0px; left: 0px; }
+rs-progress-bg					{	display:block;background-clip: content-box; position: absolute;width:100%;height:100%;}
+rs-progress-gap					{	display:block;background-clip: content-box; position: absolute;width:100%;height:100%;}
+rs-progress-vis 				{ 	display:block;width: 100%;height: 100%; position: absolute;top: 0px;left: 0px }
 
 /*********************************************
 -	BASIC SETTINGS FOR THE BANNER	-
@@ -1290,6 +1327,8 @@ rs-layer input[type="time"],
 rs-layer input[type="datetime"],
 rs-layer input[type="datetime-local"] { display: inline-block }
 
+rs-layer input::placeholder { vertical-align: middle; line-height: inherit !important}
+
 a.rs-layer { transition: none }
 
 
@@ -1308,7 +1347,7 @@ rs-navmask,
 rs-tabs,
 rs-arrow 					{	display:block;}
 
-rs-navmask 					{ direction: ltr !important }
+/*rs-layer {	font-size:20px; line-height: 25px; padding:0px; margin:0px; border-radius:0px; max-width: none;min-width:none; max-height: none; min-height: none}*/
 
 .tp-thumbs.navbar,
 .tp-bullets.navbar,
@@ -1396,21 +1435,11 @@ body.rtl .rs-pzimg {left: 0 !important}
 
 
 
-.hglayerinfo				   {	  position: fixed;
-  bottom: 0px;
-  left: 0px;
-  color: #FFF;
-  font-size: 12px;
-  line-height: 20px;
-  font-weight: 600;
-  background: rgba(0, 0, 0, 0.75);
-  padding: 5px 10px;
-  z-index: 2000;
-  white-space: normal;}
-.hginfo 					   { 	position:absolute;top:-2px;left:-2px;color:#e74c3c;font-size:12px;font-weight:600; background:#000;padding:2px 5px;}
-.indebugmode .rs-layer:hover { 	border:1px dashed #c0392b !important;}
-.helpgrid 					   { 	border:2px dashed #c0392b;position:absolute;top:0px;left:0px;z-index:0 }
-#revsliderlogloglog				{	padding:15px;color:#fff;position:fixed; top:0px;left:0px;width:200px;height:150px;background:rgba(0,0,0,0.7); z-index:100000; font-size:10px; overflow:scroll;}
+.hglayerinfo				   {position: fixed;bottom: 0px;left: 0px;color: #FFF;font-size: 12px;line-height: 20px;font-weight: 600;background: rgba(0, 0, 0, 0.75);padding: 5px 10px;z-index: 2000;white-space: normal;}
+.hginfo 					   {position:absolute;top:-2px;left:-2px;color:#e74c3c;font-size:12px;font-weight:600; background:#000;padding:2px 5px;}
+.indebugmode .rs-layer:hover {border:1px dashed #c0392b !important;}
+.helpgrid 					   {border:2px dashed #c0392b;position:absolute;top:0px;left:0px;z-index:0 }
+#revsliderlogloglog				{padding:15px;color:#fff;position:fixed; top:0px;left:0px;width:200px;height:150px;background:rgba(0,0,0,0.7); z-index:100000; font-size:10px; overflow:scroll;}
 
 
 
@@ -1429,4 +1458,4 @@ rs-loader.spinner6{width:40px;height:40px;-webkit-transform:translate(-50%,-50%)
 
 
 /* NEW CANVAS ANIMATIONS ON SLIDE BG'S */
-.bgcanvas { display: none; position: absolute; oveflow: hidden; }
+.bgcanvas { display: none; position: absolute; overflow: hidden; }

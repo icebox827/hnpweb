@@ -448,7 +448,7 @@ class RevSliderAdmin extends RevSliderFunctionsAdmin {
 	 * merge the revslider addon notices into one bigger notice
 	 * @since: 2.2.0
 	 **/
-	public static function merge_addon_notices(){
+	public function merge_addon_notices(){
 		global $wp_filter;
 		
 		if(!isset($wp_filter['admin_notices'])) return;
@@ -473,6 +473,7 @@ class RevSliderAdmin extends RevSliderFunctionsAdmin {
 					if(!isset($f['function'][0])) continue;
 					if(!is_object($f['function'][0])) continue;
 					
+					
 					$class = get_class($f['function'][0]);
 					if(in_array($class, $slugs, true)){
 						unset($wp_filter['admin_notices']->callbacks[$k][$ok]);
@@ -490,7 +491,7 @@ class RevSliderAdmin extends RevSliderFunctionsAdmin {
 	 * add addon merged notices
 	 * @since: 6.2.0
 	 **/
-	public static function add_addon_plugins_page_notices(){
+	public function add_addon_plugins_page_notices(){
 		?>
 		<div class="error below-h2 soc-notice-wrap revaddon-notice" style="display: none;">
 			<p><?php echo __('Action required for Slider Revolution AddOns: Please <a href="//revolution.themepunch.com/" target="_blank">install</a>/<a href="//www.themepunch.com/slider-revolution/install-activate-and-update/#register-purchase-code" target="_blank">activate</a>/<a href="//www.themepunch.com/slider-revolution/install-activate-and-update/#plugin-updates" target="_blank">update</a> Slider Revolution</a>', 'revslider'); ?><span data-addon="rs-addon-notice" data-noticeid="rs-addon-merged-notices" style="float: right; cursor: pointer" class="revaddon-dismiss-notice dashicons dashicons-dismiss"></span></p>
@@ -1732,7 +1733,7 @@ class RevSliderAdmin extends RevSliderFunctionsAdmin {
 					$addons = $addon->get_addon_list();
 					
 					update_option('rs-addons-counter', 0); //set the counter back to 0
-					
+										
 					$this->ajax_response_data(array('addons' => $addons));
 				break;
 				case 'get_layers_by_slide':

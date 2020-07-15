@@ -13,6 +13,10 @@ if ( ! function_exists( 'presscore_render_porthole_slider_data' ) ) :
 	 *
 	 */
 	function presscore_render_porthole_slider_data() {
+		the7_register_style( 'dt-porthole-slider', PRESSCORE_THEME_URI . '/css/photo-scroller' );
+		the7_register_script( 'dt-porthole-slider', PRESSCORE_THEME_URI . '/js/photo-scroller', array(), false, true );
+		wp_enqueue_script( 'dt-porthole-slider' );
+		wp_enqueue_style( 'dt-porthole-slider' );
 		global $post;
 		$config = Presscore_Config::get_instance();
 

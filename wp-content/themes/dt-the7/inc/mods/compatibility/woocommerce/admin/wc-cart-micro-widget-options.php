@@ -28,7 +28,7 @@ $new_options['header-elements-woocommerce_cart-caption'] = array(
 );
 
 $new_options['header-elements-woocommerce_cart-icon'] = array(
-	'name'    => _x( 'Graphic icon', 'theme-options', 'the7mk2' ),
+	'name'    => _x( 'Icon', 'theme-options', 'the7mk2' ),
 	'id'      => 'header-elements-woocommerce_cart-icon',
 	'type'    => 'select',
 	'class'   => 'middle',
@@ -71,61 +71,12 @@ $new_options['header-elements-woocommerce_cart-custom-icon'] = array(
 	),
 );
 
-$new_options[] = array( 'type' => 'divider' );
-
-$new_options['header-elements-woocommerce_cart-show_sub_cart'] = array(
-	'id'   => 'header-elements-woocommerce_cart-show_sub_cart',
-	'name' => _x( 'Show drop down cart', 'theme-options', 'the7mk2' ),
-	'type' => 'checkbox',
-	'std'  => '1',
-);
-$new_options['header-elements-woocommerce_cart-sub_cart-bg-width'] = array(
-	'id'       => 'header-elements-woocommerce_cart-sub_cart-bg-width',
-	'name'     => _x( 'Background width', 'theme-options', 'the7mk2' ),
-	'type'     => 'text',
-	'std'      => '240',
-	'class'    => 'mini',
-	'sanitize' => 'dimensions',
-	'dependency' => array(
-		'field'    => 'header-elements-woocommerce_cart-show_sub_cart',
-		'operator' => '==',
-		'value'    => '1',
-	),
-);
-$new_options['header-elements-woocommerce_cart-sub_cart-bg-color'] = array(
-	'id'   => 'header-elements-woocommerce_cart-sub_cart-bg-color',
-	'name' => _x( 'Background color', 'theme-options', 'the7mk2' ),
-	'type' => 'alpha_color',
-	'std'  => 'rgba(255,255,255,0.3)',
-	'dependency' => array(
-		'field'    => 'header-elements-woocommerce_cart-show_sub_cart',
-		'operator' => '==',
-		'value'    => '1',
-	),
-);
-$new_options['header-elements-woocommerce_cart-sub_cart-font-color'] = array(
-	'id'   => 'header-elements-woocommerce_cart-sub_cart-font-color',
-	'name' => _x( 'Text color', 'theme-options', 'the7mk2' ),
-	'type' => 'color',
-	'std'  => '#000',
-	'dependency' => array(
-		'field'    => 'header-elements-woocommerce_cart-show_sub_cart',
-		'operator' => '==',
-		'value'    => '1',
-	),
-);
-
-
-$new_options[] = array( 'type' => 'divider' );
-
 $new_options['header-elements-woocommerce_cart-show_subtotal'] = array(
 	'id'   => 'header-elements-woocommerce_cart-show_subtotal',
 	'name' => _x( 'Show cart subtotal', 'theme-options', 'the7mk2' ),
 	'type' => 'checkbox',
 	'std'  => '0',
 );
-
-$new_options[] = array( 'type' => 'divider' );
 
 $new_options['header-elements-woocommerce_cart-show_counter'] = array(
 	'id'        => 'header-elements-woocommerce_cart-show_counter',
@@ -139,7 +90,6 @@ $new_options['header-elements-woocommerce_cart-show_counter'] = array(
 		'allways'      => _x( 'Allways', 'theme-options', 'the7mk2' ),
 	),
 );
-
 $new_options[] = array( 'type' => 'js_hide_begin' );
 
 $new_options['header-elements-woocommerce_cart-counter-style'] = array(
@@ -199,6 +149,55 @@ $new_options['header-elements-woocommerce_cart-counter-bg-gradient'] = array(
 );
 
 $new_options[] = array( 'type' => 'js_hide_end' );
+
+$new_options[] = array( 'type' => 'divider' );
+
+$new_options['header-elements-woocommerce_cart-show_sub_cart'] = array(
+	'id'   => 'header-elements-woocommerce_cart-show_sub_cart',
+	'name' => _x( 'Show drop down cart', 'theme-options', 'the7mk2' ),
+	'type' => 'checkbox',
+	'std'  => '1',
+);
+$new_options['header-elements-woocommerce_cart-sub_cart-bg-width'] = array(
+	'id'       => 'header-elements-woocommerce_cart-sub_cart-bg-width',
+	'name'     => _x( 'Background width', 'theme-options', 'the7mk2' ),
+	'type'     => 'text',
+	'std'      => '240',
+	'class'    => 'mini',
+	'sanitize' => 'dimensions',
+	'dependency' => array(
+		'field'    => 'header-elements-woocommerce_cart-show_sub_cart',
+		'operator' => '==',
+		'value'    => '1',
+	),
+);
+$new_options['header-elements-woocommerce_cart-sub_cart-bg-color'] = array(
+	'id'   => 'header-elements-woocommerce_cart-sub_cart-bg-color',
+	'name' => _x( 'Background color', 'theme-options', 'the7mk2' ),
+	'type' => 'alpha_color',
+	'std'  => 'rgba(255,255,255,0.3)',
+	'dependency' => array(
+		'field'    => 'header-elements-woocommerce_cart-show_sub_cart',
+		'operator' => '==',
+		'value'    => '1',
+	),
+);
+$new_options['header-elements-woocommerce_cart-sub_cart-font-color'] = array(
+	'id'   => 'header-elements-woocommerce_cart-sub_cart-font-color',
+	'name' => _x( 'Text color', 'theme-options', 'the7mk2' ),
+	'type' => 'color',
+	'std'  => '#000',
+	'dependency' => array(
+		'field'    => 'header-elements-woocommerce_cart-show_sub_cart',
+		'operator' => '==',
+		'value'    => '1',
+	),
+);
+
+
+
+
+
 
 // add new options
 if ( isset( $options ) ) {

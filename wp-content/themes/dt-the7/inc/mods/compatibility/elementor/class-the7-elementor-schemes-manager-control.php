@@ -26,9 +26,10 @@ class The7_Schemes_Manager_Control {
 	const  SETTING_USE_THE7_SCHEME = 'use_the7_schemes';
 
 	public function bootstrap() {
+		add_action( 'optionsframework_options_saved', [ $this, 'update_schemes_css' ] );
+		add_action( 'the7_maybe_regenerate_dynamic_css_done', [ $this, 'update_schemes_css' ] );
 		if ( self::is_the7_scheme_enabled() ) {
 			add_action( 'elementor/init', [ $this, 'replace_elementor_schemes' ] );
-			add_action( 'optionsframework_options_saved', [ $this, 'update_schemes_css' ] );
 			add_filter( 'sanitize_option_' . 'elementor_disable_color_schemes', [ $this, 'prevent_to_enable_option' ] );
 			add_filter( 'sanitize_option_' . 'elementor_disable_typography_schemes', [ $this, 'prevent_to_enable_option' ] );
 		}
@@ -49,6 +50,12 @@ class The7_Schemes_Manager_Control {
 		return 'yes' === get_option( 'elementor_' . self::SETTING_USE_THE7_SCHEME, 'no' );
 	}
 
+	public static function is_elementor_schemes_disabled() {
+		$custom_colors_disabled = get_option( 'elementor_disable_color_schemes' );
+		$typography_schemes_disabled = get_option( 'elementor_disable_typography_schemes' );
+		return $custom_colors_disabled && $typography_schemes_disabled;
+	}
+
 	public function replace_elementor_schemes() {
 		self::load_the7_schemes();
 
@@ -66,24 +73,20 @@ class The7_Schemes_Manager_Control {
 	}
 
 	public static function update_schemes_css() {
-		self::load_the7_schemes();
+        self::load_the7_schemes();
 
 		$schemes_manger = Elementor::instance()->schemes_manager;
 
-		$regenerate_css = false;
 		$scheme_types   = [ The7_Elementor_Color_Scheme::get_type(), The7_Elementor_Typography_Scheme::get_type() ];
 		foreach ( $scheme_types as $scheme_type ) {
 			if ( self::is_scheme_enabled( $schemes_manger, $scheme_type ) ) {
 				$scheme = $schemes_manger->get_scheme( $scheme_type );
 				$scheme->save_scheme( $scheme->get_default_scheme() );
-				$regenerate_css = true;
 			}
 		}
 
-		if ( $regenerate_css ) {
-			$scheme_css_file = Global_CSS::create( 'global.css' );
-			$scheme_css_file->update();
-		}
+        $scheme_css_file = Global_CSS::create( 'global.css' );
+        $scheme_css_file->update();
 	}
 
 	public static function load_the7_schemes() {
@@ -211,4 +214,5 @@ class The7_Schemes_Manager_Control {
 		</script>
 		<?php
 	}
+
 }

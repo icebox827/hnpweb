@@ -269,6 +269,54 @@ $options['header-floating_navigation-active_item-font-gradient'] = array(
 
 $options[] = array( 'type' => 'divider' );
 
+$options[] = array(
+	'name' => _x( 'Floating header microwidgets colors', 'theme-options', 'the7mk2' ),
+	'type' => 'title',
+);
+$options['header-floating_microwidgets-font'] = array(
+	'name'    => _x( 'Font color', 'theme-options', 'the7mk2' ),
+	'id'      => 'header-floating_microwidgets-font',
+	'type'    => 'radio',
+	'std'     => 'default',
+	'options' => array(
+		'default' => _x( 'No change', 'theme-options', 'the7mk2' ),
+		'color'   => _x( 'Custom color', 'theme-options', 'the7mk2' ),
+	),
+);
+$options['header-floating_microwidgets-font-color'] = array(
+	'id'         => 'header-floating_microwidgets-font-color',
+	'name'       => _x( 'Color', 'theme-options', 'the7mk2' ),
+	'type'       => 'color',
+	'std'        => '#ffffff',
+	'dependency' => array(
+		'field'    => 'header-floating_microwidgets-font',
+		'operator' => '==',
+		'value'    => 'color',
+	),
+);
+$options['header-floating_microwidgets-icon'] = array(
+	'name'    => _x( 'Icon color', 'theme-options', 'the7mk2' ),
+	'id'      => 'header-floating_microwidgets-icon',
+	'type'    => 'radio',
+	'std'     => 'default',
+	'options' => array(
+		'default' => _x( 'No change', 'theme-options', 'the7mk2' ),
+		'color'   => _x( 'Custom color', 'theme-options', 'the7mk2' ),
+	),
+);
+$options['header-floating_microwidgets-icon-color'] = array(
+	'id'         => 'header-floating_microwidgets-icon-color',
+	'name'       => _x( 'Color', 'theme-options', 'the7mk2' ),
+	'type'       => 'color',
+	'std'        => '#ffffff',
+	'dependency' => array(
+		'field'    => 'header-floating_microwidgets-icon',
+		'operator' => '==',
+		'value'    => 'color',
+	),
+);
+$options[] = array( 'type' => 'divider' );
+
 $options['header-floating_navigation-top-bar'] = array(
 	'id'   => 'header-floating_navigation-top-bar',
 	'name' => _x( 'Floating top bar ', 'theme-options', 'the7mk2' ),

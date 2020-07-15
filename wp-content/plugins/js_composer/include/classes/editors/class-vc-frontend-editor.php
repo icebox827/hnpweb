@@ -164,7 +164,6 @@ class Vc_Frontend_Editor {
 		if ( 'vc_load_shortcode' === vc_request_param( 'action' ) ) {
 			return;
 		}
-		! defined( 'CONCATENATE_SCRIPTS' ) && define( 'CONCATENATE_SCRIPTS', false );
 		visual_composer()->shared_templates->init();
 		add_filter( 'the_title', array(
 			$this,
@@ -634,7 +633,6 @@ class Vc_Frontend_Editor {
 			$action = vc_post_param( 'action' );
 			if ( 'vc_load_shortcode' === $action ) {
 				$output = '';
-				! defined( 'CONCATENATE_SCRIPTS' ) && define( 'CONCATENATE_SCRIPTS', false );
 				ob_start();
 				$this->setPost();
 				$shortcodes = (array) vc_post_param( 'shortcodes' );

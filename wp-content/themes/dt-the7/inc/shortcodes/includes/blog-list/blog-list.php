@@ -321,7 +321,7 @@ if ( ! class_exists( 'DT_Shortcode_BlogList', false ) ):
 				// Do not output pagination.
 			} else if ( in_array( $loading_mode, array( 'js_more', 'js_lazy_loading' ) ) ) {
 				// JS load more.
-				echo dt_get_next_page_button( 2, 'paginator paginator-more-button' );
+				echo dt_get_next_page_button( 2, 'paginator paginator-more-button', $cur_page = 1 );
 			} else if ( 'js_pagination' == $loading_mode ) {
 				// JS pagination.
 				echo '<div class="paginator" role="navigation"></div>';

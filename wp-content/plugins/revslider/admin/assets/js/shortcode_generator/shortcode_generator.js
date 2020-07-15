@@ -109,8 +109,8 @@ RVS.SC = RVS.SC === undefined ? {} : RVS.SC;
 		
 		
 
-		updateBlockViews : function(show) {
-			if (show===true) jQuery('.rs_optimizer_button_wrapper').closest('.components-panel__body').addClass("rs_component_panel"); else jQuery('.rs_component_panel').removeClass("rs_component_panel");
+		updateBlockViews : function(show) {			
+			if (show===true) jQuery('.rs_optimizer_button_wrapper').closest('.components-panel').addClass("rs_component_panel"); else jQuery('.rs_component_panel').removeClass("rs_component_panel");
 		},
 
 		buildShortCode : function() {
@@ -173,7 +173,7 @@ RVS.SC = RVS.SC === undefined ? {} : RVS.SC;
 					QTags.insertContent(RVS.SC.BLOCK.content);				
 				break;
 				case 'gutenberg':					
-					var obj = {slidertitle: RVS.SC.BLOCK.slidertitle, alias: RVS.SC.BLOCK.alias, modal: RVS.SC.BLOCK.modal ,  content: RVS.SC.BLOCK.content , zindex: RVS.SC.BLOCK.zindex};					
+					var obj = {slidertitle: RVS.SC.BLOCK.slidertitle, alias: RVS.SC.BLOCK.alias, modal: RVS.SC.BLOCK.modal ,  content: RVS.SC.BLOCK.content , zindex: RVS.SC.BLOCK.zindex , wrapperid: RVS.SC.BLOCK.wrapperid};					
 					revslider_react.setState(obj);						
 					revslider_react.props.setAttributes(obj);
 					revslider_react.forceUpdate();
@@ -533,7 +533,7 @@ VISUAL COMPOSER HOOKS
 		/*
 		DEFAULT LISTENERS
 		 */
-		RVS.DOC.on('click','.wp-block.editor-block-list__block[data-type="themepunch/revslider"]',function() {RVS.SC.updateBlockViews(true);});
+		RVS.DOC.on('click','.block-editor-editor-skeleton__content', function() {RVS.SC.updateBlockViews(true);});		
 		RVS.DOC.on('addRevSliderShortcode', function(e, data) {				
 			if(data!==undefined && data.alias !== '-1'){
 				data.size = data.size==="" || data.size===undefined ? "auto" : data.size;				

@@ -38,7 +38,7 @@ if ( $show_avatar ) {
 
 $position = get_post_meta( $post_id, '_dt_testimonial_options_position', true );
 if ( $position ) {
-	$position = '<span class="text-secondary color-secondary">' . esc_html( $position ) . '</span>';
+	$position = '<span class="text-secondary color-secondary">' . wp_kses_post( $position ) . '</span>';
 }
 
 $title = get_the_title();

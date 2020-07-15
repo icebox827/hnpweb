@@ -87,6 +87,10 @@ if ( ! class_exists( 'DT_Shortcode_ProductsMasonry', false ) ):
 			// Loop query.
 			$query = new WP_Query( $this->get_query_args() );
 
+			if ( !$this->display_shortcode_content( $query ) ){
+				return;
+			}
+
 			do_action( 'presscore_before_shortcode_loop', $this->sc_name, $this->atts );
 			add_action( 'dt_wc_loop_start', array( $this, '_setup_config' ), 15 );
             do_action( 'dt_wc_loop_start' );
@@ -112,12 +116,13 @@ if ( ! class_exists( 'DT_Shortcode_ProductsMasonry', false ) ):
 					break;
 			}
 
-			if ( 'disabled' == $loading_mode ) {
-				$data_pagination_mode = 'none';
-			} else if ( in_array( $loading_mode, array( 'js_more', 'js_lazy_loading' ) ) ) {
+			$data_pagination_mode = 'none';
+			if ( in_array( $loading_mode, array( 'js_more', 'js_lazy_loading' ) ) ) {
 				$data_pagination_mode = 'load-more';
-			} else {
+			} elseif ( $loading_mode === 'js_pagination' ) {
 				$data_pagination_mode = 'pages';
+			}elseif ($loading_mode === 'standard' ) {
+		        $data_pagination_mode = 'standard';
 			}
 
 			$data_atts = array(
@@ -187,7 +192,7 @@ if ( ! class_exists( 'DT_Shortcode_ProductsMasonry', false ) ):
 				);
 
 				echo '<div ' . presscore_tpl_masonry_item_wrap_class( $visibility ) . presscore_tpl_masonry_item_wrap_data_attr() . '>';
-				echo '<article ' . $this->post_class( $post_class_array ) . ' >';
+				echo '<article '; wc_product_class( $post_class_array ); echo ' >';
 
 				// Quick fix to prevent errors on page save when YoastSEO is active.
 				if ( ! empty( $GLOBALS['product'] ) ) {
@@ -213,8 +218,7 @@ if ( ! class_exists( 'DT_Shortcode_ProductsMasonry', false ) ):
 			if ( 'disabled' == $loading_mode ) {
 				// Do not output pagination.
 			} else if ( in_array( $loading_mode, array( 'js_more', 'js_lazy_loading' ) ) ) {
-				// JS load more.
-				echo dt_get_next_page_button( 2, 'paginator paginator-more-button' );
+				echo dt_get_next_page_button( 2, 'paginator paginator-more-button', $cur_page = 1 );
 			} else if ( 'js_pagination' == $loading_mode ) {
 				// JS pagination.
 				echo '<div class="paginator" role="navigation"></div>';
@@ -439,6 +443,8 @@ if ( ! class_exists( 'DT_Shortcode_ProductsMasonry', false ) ):
 				$config->set( 'request_display', false );
 			}
 
+			$config->set( 'item_padding', $this->get_att( 'gap_between_posts' ) );
+
 			$config->set( 'template.posts_filter.terms.enabled', $this->get_flag( 'show_categories_filter' ) );
 		}
 
@@ -450,6 +456,11 @@ if ( ! class_exists( 'DT_Shortcode_ProductsMasonry', false ) ):
 		protected function get_less_vars() {
 			$less_vars = the7_get_new_shortcode_less_vars_manager();
 
+			$less_vars = $this->less_vars( $less_vars );
+			return $less_vars->get_vars();
+		}
+
+		protected function less_vars( $less_vars ){
 			$less_vars->add_keyword( 'unique-shortcode-class-name', 'products-shortcode.' . $this->get_unique_class(), '~"%s"' );
 
 			$less_vars->add_keyword( 'post-title-color', $this->get_att( 'custom_title_color', '~""') );
@@ -494,7 +505,7 @@ if ( ! class_exists( 'DT_Shortcode_ProductsMasonry', false ) ):
 			$less_vars->add_keyword( 'shortcode-filter-accent', $this->get_att( 'navigation_accent_color', '~""' ) );
 			$less_vars->add_pixel_number( 'shortcode-filter-gap', $this->get_att( 'gap_below_category_filter', '' ) );
 
-			return $less_vars->get_vars();
+			return $less_vars;
 		}
 
 		/**
@@ -568,7 +579,6 @@ if ( ! class_exists( 'DT_Shortcode_ProductsMasonry', false ) ):
 			$terms_slugs = '';
 			$query_args =  array(
 				'post_type' => 'product',
-        		'post_status'		  => 'publish',
 				'ignore_sticky_posts'  => 1,
 				'posts_per_page' 	   => $posts_total,
 				'orderby' 			  => $orderby,
@@ -672,7 +682,6 @@ if ( ! class_exists( 'DT_Shortcode_ProductsMasonry', false ) ):
 			if ( 'featured_products' === $show_products ) {
 				$posts_query = new WP_Query( array(
 					'post_type'           => 'product',
-					'post_status'         => 'publish',
 					'ignore_sticky_posts' => 1,
 					'fields'              => 'ids',
 					'tax_query'           => WC()->query->get_tax_query( array( array(
@@ -691,7 +700,6 @@ if ( ! class_exists( 'DT_Shortcode_ProductsMasonry', false ) ):
 			if ( 'top_products' === $show_products ) {
 				$posts_query = new WP_Query( array(
 					'post_type'           => 'product',
-					'post_status'         => 'publish',
 					'ignore_sticky_posts' => 1,
 					'fields'              => 'ids',
 					'tax_query'           => WC()->query->get_tax_query(),
@@ -706,7 +714,6 @@ if ( ! class_exists( 'DT_Shortcode_ProductsMasonry', false ) ):
 			if ( 'best_selling_products' === $show_products ) {
 				$posts_query = new WP_Query( array(
 					'post_type'           => 'product',
-					'post_status'         => 'publish',
 					'ignore_sticky_posts' => 1,
 					'fields'              => 'ids',
 					'meta_key'            => 'total_sales',

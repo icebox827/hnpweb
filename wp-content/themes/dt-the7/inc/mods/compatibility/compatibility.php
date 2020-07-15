@@ -51,7 +51,7 @@ if ( defined( 'ULTIMATE_VERSION' ) ) {
 	$ua_adapter->bootstrap();
 }
 
-if ( class_exists( 'Elementor\Plugin' ) ) {
+if ( the7_elementor_is_active() ) {
 	require_once $path . '/elementor/class-the7-elementor-compatibility.php';
 	The7_Elementor_Compatibility::instance();
 }

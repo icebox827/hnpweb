@@ -65,6 +65,10 @@ if ( ! class_exists( 'Ult_Image_Single' ) ) {
 		 */
 		public function get_attachment_url_init() {
 
+			if ( ! current_user_can( 'manage_options' ) ) {
+				return false;
+			}
+
 			check_ajax_referer( 'uavc-get-attachment-url-nonce', 'security' );
 
 			$id    = intval( $_POST['attach_id'] );

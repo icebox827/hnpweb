@@ -116,9 +116,21 @@ if ( ! function_exists( 'dt_woocommerce_body_class' ) ) :
 	 * @return array
 	 */
 	function dt_woocommerce_body_class( $classes ) {
-		if ( is_product() && in_array( presscore_get_config()->get( 'header_title' ), array( 'enabled', 'fancy' ) ) ) {
+		if ( ! is_product() ) {
+			return $classes;
+		}
+
+		$show_product_title = of_get_option( 'woocommerce_show_single_product_title' );
+
+		if ( $show_product_title === 'always' ) {
+			return $classes;
+		}
+
+		$page_title_enabled = in_array( presscore_get_config()->get( 'header_title' ), array( 'enabled', 'fancy' ) );
+		if ( $show_product_title === 'never' || $page_title_enabled ) {
 			$classes[] = 'hide-product-title';
 		}
+
 		return $classes;
 	}
 
@@ -1133,3 +1145,15 @@ function the7_product_visibility_tax_query( $tax_query = array() ) {
 
 	return $tax_query;
 }
+
+if ( ! function_exists( 'dt_woocommerce_remove_product_info' ) ) :
+
+	/**
+	 * Controls product price and rating visibility.
+	 */
+	function dt_woocommerce_remove_product_info() {
+		remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_price', 5 );
+		remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_rating', 10 );
+	}
+
+endif;

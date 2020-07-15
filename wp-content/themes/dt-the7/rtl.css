@@ -76,7 +76,8 @@ http://codex.wordpress.org/Right_to_Left_Language_Support
 .single-product .share-link-description, .woocommerce-Reviews .comment-notes, .shopping-cart-inner, .content th {
 	text-align: right;
 }
-.product table.variations .reset_variations {
+.product table.variations .reset_variations,
+.elementor-widget table.variations .reset_variations {
 	left: 0px;
 	right: auto;
 }

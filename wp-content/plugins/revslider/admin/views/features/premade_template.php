@@ -121,7 +121,6 @@ if(!defined('ABSPATH')) exit();
 										> 
 										</a><!--
 									--></rs-slide>
-								</rs-slides>
-								<rs-progress class="rs-bottom" style="visibility: hidden !important;"></rs-progress>
+								</rs-slides>								
 							</rs-module>
 						</rs-module-wrap>

@@ -32,6 +32,14 @@ function the7_add_admin_notices() {
 			'the7-dashboard-notice notice-warning is-dismissible'
 		);
 	}
+
+	if ( function_exists( 'pro_elements_load_plugin' ) && ! function_exists( 'the7_pro_elements_obsolete' ) && current_user_can( 'update_plugins' ) ) {
+		the7_admin_notices()->add(
+			'the7_pro_elements_obsolete',
+			'the7_notice_about_pro_elements_obsolescence',
+			'the7-dashboard-notice notice-warning'
+		);
+	}
 }
 
 add_action( 'admin_notices', 'the7_add_admin_notices' );
@@ -92,6 +100,22 @@ function the7_suggest_to_turn_on_critical_alerts_notice() {
 	);
 	echo wp_kses_post( sprintf( $msg, $url ) );
 	echo '</p>';
+}
+
+/**
+ * Print admin message about pro elements plugin absoletion.
+ */
+function the7_notice_about_pro_elements_obsolescence() {
+	$message = sprintf(
+		__(
+			'<strong>Important notice</strong>: PRO Elements plugin is obsolete. All its features were transferred into The7 Elements plugin. 
+We recommend you <a href="%s">install and activate</a> The7 Elements and remove the PRO Elements plugin.',
+			'the7mk2'
+		),
+		admin_url( 'admin.php?page=the7-plugins' )
+	);
+
+	echo '<p>' . wp_kses_post( $message ) . '</p>';
 }
 
 /**

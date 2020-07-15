@@ -16,7 +16,7 @@ if(!defined('ABSPATH')) exit();
 	<div class="rb-modal-inner">
 		<div class="rb-modal-content">
 			<div id="rbm_colorskins" class="rb_modal form_inner">
-				<div class="rbm_header"><i class="rbm_symbol material-icons">format_paint</i><span class="rbm_title"><?php _e('Color Skins', 'revslider');?></span><i class="rbm_close material-icons">close</i></div>	
+				<div class="rbm_header"><i class="rbm_symbol material-icons">format_paint</i><span class="rbm_title"><?php _e('Global Color Skin', 'revslider');?></span><i class="rbm_close material-icons">close</i></div>	
 				<div class="rbm_content">
 					<div class="modal_fields_title" style="width:170px;margin-right:10px;"><?php _e('SKIN TITLE', 'revslider');?></div><div class="modal_fields_title"><?php _e('SKIN COLOR', 'revslider');?></div>
 					<div id="module_color_skins"></div>
@@ -764,13 +764,25 @@ if(!defined('ABSPATH')) exit();
 							<label_a><?php _e('Action Type', 'revslider');?></label_a><div class="input_presets_wrap" id="layer_action_type"><div id="layer_action_fake"></div><input type="text" readonly  class="easyinit actioninput" data-r="actions.action.#actionindex#.action" value=""><i class="material-icons input_presets_dropdown">more_vert</i></div>
 							
 							<div class="div20"></div>
+
 							<!-- SIMPLE LINK SETTINGS -->
-							<div id="la_settings_link" class="la_settings">
+							<div id="la_settings_link_menu" class="la_settings" style="margin-bottom:20px !important">
+								<label_a><?php _e('Link to URL', 'revslider');?></label_a><input type="text" class="easyinit actioninput" id="la_menu_link" data-r="actions.action.#actionindex#.menu_link" placeholder="<?php _e('Enter Link', 'revslider');?>" ><span class="linebreak"></span>
+								<label_a><?php _e('Anchor #id at URL', 'revslider');?></label_a><input type="text" class="easyinit actioninput" id="la_menu_link" data-r="actions.action.#actionindex#.menu_anchor" placeholder="<?php _e('Enter Anchor ID', 'revslider');?>" ><span class="linebreak"></span>
+							</div>
+							
+							<!-- SIMPLE LINK SETTINGS -->
+							<div id="la_settings_link_url" class="la_settings">
 								<label_a><?php _e('Link URL', 'revslider');?></label_a><input type="text" class="easyinit actioninput" id="la_image_link" data-r="actions.action.#actionindex#.image_link" placeholder="<?php _e('Enter Link', 'revslider');?>" ><span class="linebreak"></span>
-								<label_a><?php _e('Link Help', 'revslider');?></label_a><select id="la_link_help_in" data-r="actions.action.#actionindex#.link_help_in" class="easyinit actioninput nosearchbox tos2"><option value="http"><?php _e('http://', 'revslider');?></option><option value="https"><?php _e('https://', 'revslider');?></option><option value="auto"><?php _e('Auto http / https', 'revslider');?></option><option value="keep"><?php _e('Keep as it is', 'revslider');?></option></select>
-								<label_a><?php _e('Link Target', 'revslider');?></label_a><select id="la_link_open_in" data-r="actions.action.#actionindex#.link_open_in" class="easyinit actioninput nosearchbox tos2"><option value="_self"><?php _e('Same Window', 'revslider');?></option><option value="_blank"><?php _e('New Window', 'revslider');?></option></select>
-								<label_a><?php _e('Link Type', 'revslider');?></label_a><select id="la_link_type" data-r="actions.action.#actionindex#.link_type" class="easyinit actioninput nosearchbox tos2"></select>
+							</div>
+							<div id="la_settings_link" class="la_settings">
+								<label_a><?php _e('Protocol', 'revslider');?></label_a><select id="la_link_help_in" data-r="actions.action.#actionindex#.link_help_in" class="easyinit actioninput nosearchbox tos2"><option value="http"><?php _e('http://', 'revslider');?></option><option value="https"><?php _e('https://', 'revslider');?></option><option value="auto"><?php _e('Auto http / https', 'revslider');?></option><option value="keep"><?php _e('Keep as it is', 'revslider');?></option></select>
+								<label_a><?php _e('Target', 'revslider');?></label_a><select id="la_link_open_in" data-r="actions.action.#actionindex#.link_open_in" class="easyinit actioninput nosearchbox tos2"><option value="_self"><?php _e('Same Window', 'revslider');?></option><option value="_blank"><?php _e('New Window', 'revslider');?></option></select>
 								<label_a><?php _e('Follow', 'revslider');?></label_a><select id="la_link_follow" data-r="actions.action.#actionindex#.link_follow" class="easyinit actioninput nosearchbox tos2"><option value="follow"><?php _e('Follow Link', 'revslider');?></option><option value="nofollow"><?php _e('No Follow', 'revslider');?></option></select>
+								<span class="linebreak"></span>
+							</div>
+							<div id="la_settings_link_type" class="la_settings">
+								<label_a><?php _e('Type', 'revslider');?></label_a><select id="la_link_type" data-r="actions.action.#actionindex#.link_type" class="easyinit actioninput nosearchbox tos2"></select>								
 								<span class="linebreak"></span>
 							</div>
 

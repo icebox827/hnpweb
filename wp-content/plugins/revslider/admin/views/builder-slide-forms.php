@@ -63,11 +63,9 @@ if ($wpml->wpml_exists()) {
 						<label_a><?php _e('', 'revslider');?></label_a><div data-evt="updateslidebasic" data-evtparam="kenburnupdate" class="basic_action_button  longbutton callEventButton"><i class="material-icons">refresh</i><?php _e('Refresh Source', 'revslider');?></div>
 					</div><!--
 					--><div class="slidebg_solid_settings slide_bg_settings">
-						<label_a><?php _e('BG Color', 'revslider');?></label_a><input type="text" data-evt="updateslidebasic" data-editing="<?php _e('Background Color', 'revslider');?>" name="slide_bg_color" id="s_bg_color" data-visible="true" class="my-color-field slideinput easyinit" data-r="bg.color" value="#fff">
-						<div class="div500"></div>												
+						<label_a><?php _e('BG Color', 'revslider');?></label_a><input type="text" data-evt="updateslidebasic" data-editing="<?php _e('Background Color', 'revslider');?>" name="slide_bg_color" id="s_bg_color" data-visible="true" class="my-color-field slideinput easyinit" data-r="bg.color" value="#fff">																	
 					</div><!--
 					--><div class="slidebg_trans_settings slide_bg_settings">						
-						<div class="div500"></div>												
 					</div><!--
 					--><div class="slidebg_youtube_settings slide_bg_settings">
 						<label_a><?php _e('YouTube ID', 'revslider');?></label_a><input id="s_bg_youtube_src" data-evt="updateslidebasic" class="slideinput easyinit" type="text" data-r="bg.youtube" placeholder="<?php _e('Enter YouTube ID', 'revslider');?>">
@@ -547,7 +545,7 @@ if ($wpml->wpml_exists()) {
 						</select><span class="linebreak"></span>
 						<div class="slidelink_seo_subs" id="slidelink_regular_seo">
 							<label_a><?php _e('URL', 'revslider');?></label_a><input placeholder="Enter URL to link to" id="slide_ls_link" class="slideinput easyinit" type="text" data-r="seo.link"><span class="linebreak"></span>
-							<label_a><?php _e('URL Help', 'revslider');?></label_a><select data-theme="dark" id="slide_ls_url_help" class="slideinput tos2 nosearchbox easyinit"  data-r="seo.linkHelp">
+							<label_a><?php _e('Protocol', 'revslider');?></label_a><select data-theme="dark" id="slide_ls_url_help" class="slideinput tos2 nosearchbox easyinit"  data-r="seo.linkHelp">
 								<option value="http"><?php _e('http://', 'revslider');?></option>
 								<option value="https"><?php _e('https://', 'revslider');?></option>
 								<option value="auto"><?php _e('Auto http / https', 'revslider');?></option>

@@ -90,22 +90,23 @@ article.is-clicked  .post-entry-wrapper {
 		}
 	}
 }
+
 .post-entry-wrapper {
-	.@{unique-shortcode-class-name}.content-rollover-layout-list & {
+	.@{unique-shortcode-class-name}.content-rollover-layout-list.portfolio-carousel-shortcode & {
 		padding: @post-content-padding-top @post-content-padding-right @post-content-padding-bottom @post-content-padding-left;
 	}
-		.@{unique-shortcode-class-name}.content-rollover-layout-list & {
+		.@{unique-shortcode-class-name}.content-rollover-layout-list.portfolio-carousel-shortcode & {
 			bottom: -(@post-meta-margin-bottom);
 		}
-		.@{unique-shortcode-class-name}.content-rollover-layout-list.meta-info-off & {
+		.@{unique-shortcode-class-name}.content-rollover-layout-list.portfolio-carousel-shortcode.meta-info-off & {
 			bottom: -(@post-title-margin-bottom);
 		}
-		.@{unique-shortcode-class-name}.content-rollover-layout-list article:not(.description-off) & {
+		.@{unique-shortcode-class-name}.content-rollover-layout-list.portfolio-carousel-shortcode article:not(.description-off) & {
 			bottom: -(@post-meta-margin-bottom + @post-excerpt-margin-bottom);
 		}
-	
 
-	.@{unique-shortcode-class-name}.content-rollover-layout-list:not(.disable-layout-hover) article:hover & {
+
+	.@{unique-shortcode-class-name}.content-rollover-layout-list.portfolio-carousel-shortcode:not(.disable-layout-hover) article:hover & {
 		bottom: 0;
 	}
 }

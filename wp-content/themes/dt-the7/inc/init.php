@@ -113,14 +113,14 @@ require_once PRESSCORE_ADMIN_DIR . '/admin-notices.php';
 require_once PRESSCORE_MODS_DIR . '/dev-tools/main-module.class.php';
 The7_DevToolMainModule::init();
 
-if ( The7_Admin_Dashboard_Settings::get( 'critical-alerts' ) ) {
+//if ( The7_Admin_Dashboard_Settings::get( 'critical-alerts' ) ) {
 	$critical_alert_email = The7_Admin_Dashboard_Settings::get( 'critical-alerts-email' );
 	if ( ! $critical_alert_email ) {
 		$critical_alert_email = get_site_option( 'admin_email' );
 	}
 	$critical_alerts = new The7_Critical_Alerts( $critical_alert_email, new The7_Remote_API( presscore_get_purchase_code() ) );
 	$critical_alerts->bootstrap();
-}
+//}
 
 if ( is_admin() ) {
 	$the7_admin_dashboard = new The7_Admin_Dashboard();

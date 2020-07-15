@@ -509,9 +509,9 @@
                 <key name="0" />
                 <key name="1" />
             </key>
-            <key name="general-post_back_button_target_page_id" />
-            <key name="general-project_back_button_target_page_id" />
-            <key name="general-album_back_button_target_page_id" />
+            <key name="general-post_back_button_target_page_url" />
+            <key name="general-project_back_button_target_page_url" />
+            <key name="general-album_back_button_target_page_url" />
             <key name="general-rel_posts_head_title" />
             <key name="general-rel_projects_head_title" />
             <key name="social_buttons-post-button_title" />

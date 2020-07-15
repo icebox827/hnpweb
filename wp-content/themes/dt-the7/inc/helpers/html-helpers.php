@@ -287,17 +287,38 @@ endif;
 
 if ( ! function_exists( 'presscore_get_post_day_link' ) ) :
 
-	function presscore_get_post_day_link() {
-
-		$archive_year = get_the_time('Y');
-		$archive_month = get_the_time('m');
-		$archive_day = get_the_time('d');
+	function presscore_get_post_day_link( $post_id = null ) {
+		$archive_year  = get_the_time( 'Y', $post_id );
+		$archive_month = get_the_time( 'm', $post_id );
+		$archive_day   = get_the_time( 'd', $post_id );
 
 		return get_day_link( $archive_year, $archive_month, $archive_day );
 	}
 
 endif;
 
+function the7_get_post_date( $post_id = null, $link = true ) {
+	if ( $post_id === null ) {
+		$post_id = get_the_ID();
+	}
+
+	$date_tag = sprintf(
+		'<time class="entry-date updated" datetime="%s">%s</time>',
+		esc_attr( get_the_date( 'c', $post_id ) ),
+		esc_html( get_the_date( '', $post_id ) )
+	);
+
+	if ( $link && ! ( is_day() && is_month() && is_year() ) && get_post_type( $post_id ) === 'post' ) {
+		return sprintf(
+			'<a href="%s" title="%s" class="meta-item data-link" rel="bookmark">%s</a>',
+			presscore_get_post_day_link( $post_id ),
+			esc_attr( get_the_time( '', $post_id ) ),
+			$date_tag
+		);
+	}
+
+	return '<span class="meta-item data-link">' . $date_tag . '</span>';
+}
 
 if ( ! function_exists( 'presscore_get_post_data' ) ) :
 
@@ -330,6 +351,31 @@ if ( ! function_exists( 'presscore_get_post_data' ) ) :
 
 endif;
 
+function the7_get_post_comments( $post_id = null, $link = true ) {
+	if ( $post_id === null ) {
+		$post_id = get_the_ID();
+	}
+
+	$comments_number = get_comments_number( $post_id );
+
+	if ( post_password_required( $post_id ) || ( ! comments_open( $post_id ) && ! $comments_number ) ) {
+		return '';
+	}
+
+	if ( ! $comments_number ) {
+		$count = __( 'Leave a comment', 'the7mk2' );
+	} elseif ( '1' === $comments_number ) {
+		$count = __( '1 Comment', 'the7mk2' );
+	} else {
+		$count = sprintf( __( '%s Comments', 'the7mk2' ), number_format_i18n( $comments_number ) );
+	}
+
+	if ( $link ) {
+		return sprintf( '<a class="meta-item comment-link" href="%s">%s</a>', get_comments_link(), $count );
+	}
+	
+	return '<span class="meta-item comment-link">' . $count . '</span>';
+}
 
 if ( ! function_exists( 'presscore_get_post_comments' ) ) :
 
@@ -348,6 +394,37 @@ if ( ! function_exists( 'presscore_get_post_comments' ) ) :
 
 endif;
 
+function the7_get_post_terms( $post_id = null, $taxonomy = null, $separator = ', ', $link = true ) {
+	$post_id = $post_id === null ? get_the_ID() : $post_id;
+
+	// Try to guess taxonomy.
+	if ( $taxonomy === null ) {
+		$post_type = get_post_type( $post_id );
+		$taxonomy  = $post_type === 'post' ? 'category' : "{$post_type}_category";
+	}
+
+	if ( $link ) {
+		$terms = get_the_term_list( $post_id, $taxonomy, '', $separator );
+	} else {
+		$terms = get_the_terms( $post_id, $taxonomy );
+
+		if ( $terms && ! is_wp_error( $terms ) ) {
+			$terms_names = array();
+
+			foreach ( $terms as $term ) {
+				$terms_names[] = '<span>' . $term->name . '</span>';
+			}
+
+			$terms = implode( $separator, $terms_names );
+		}
+	}
+
+	if ( ! $terms || is_wp_error( $terms ) ) {
+		return '';
+	}
+
+	return wp_kses_post( $terms );
+}
 
 if ( ! function_exists( 'presscore_get_post_categories' ) ) :
 
@@ -880,6 +957,34 @@ if ( ! function_exists( 'presscore_get_button_html' ) ) :
 	}
 
 endif;
+
+function the7_get_post_author( $post_id = null, $link = true ) {
+	$author_id = false;
+	if ( $post_id ) {
+		$post = get_post( $post_id );
+		$author_id = $post->post_author;
+	}
+
+	/* translators: %s: Author's display name. */
+	$author_tag = sprintf(
+		__( 'By %s', 'the7mk2' ),
+		'<span class="fn">' . get_the_author_meta( 'display_name', $author_id ) . '</span>'
+	);
+
+	if ( $link ) {
+		return sprintf(
+			'<a class="meta-item author vcard" href="%1$s" title="%2$s" rel="author external">%3$s</a>',
+			esc_url( get_author_posts_url( get_the_author_meta( 'ID', $author_id ) ) ),
+			/* translators: %s: Author's display name. */
+			esc_attr(
+				sprintf( __( 'View all posts by %s', 'the7mk2' ), get_the_author_meta( 'display_name', $author_id ) )
+			),
+			$author_tag
+		);
+	}
+
+	return '<span class="meta-item author vcard">' . $author_tag . '</span>';
+}
 
 if ( ! function_exists( 'presscore_get_post_author' ) ) :
 

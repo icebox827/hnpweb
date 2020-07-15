@@ -180,6 +180,22 @@ if ( ! function_exists( 'dt_woocommerce_add_cart_micro_widget_filter' ) ) {
 }
 
 /**
+ * Shortcodes inline css generated on post save, no need to duplicate it.
+ *
+ * @see the7_save_shortcode_inline_css
+ *
+ * @param array $exclude_meta
+ *
+ * @return array
+ */
+function the7_prevent_the7_shortcodes_dynamic_css_meta_duplication_with_product_duplication( $exclude_meta ) {
+	$exclude_meta[] = 'the7_shortcodes_dynamic_css';
+
+	return $exclude_meta;
+}
+add_filter( 'woocommerce_duplicate_product_exclude_meta', 'the7_prevent_the7_shortcodes_dynamic_css_meta_duplication_with_product_duplication' );
+
+/**
  * Add sidebar columns to products on manage_edit page.
  */
 add_filter( 'manage_edit-product_columns', 'presscore_admin_add_sidebars_columns' );

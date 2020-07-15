@@ -30,6 +30,7 @@ remove_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_template_
 remove_action( 'woocommerce_shop_loop_item_title', 'woocommerce_template_loop_product_title', 10 );
 remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_price', 10 );
 remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_rating', 5 );
+
 remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_product_link_close', 5 );
 remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10 );
 
@@ -43,6 +44,7 @@ add_action( 'dt_wc_loop_start', 'dt_woocommerce_set_product_cart_button_position
 
 add_action( 'dt_wc_loop_end', 'dt_woocommerce_remove_masonry_container_filters' );
 add_action( 'dt_wc_loop_end', 'presscore_wc_remove_masonry_lazy_load_attrs' );
+add_action( 'dt_wc_loop_end', 'dt_woocommerce_remove_product_info' );
 
 // change products add to cart text
 add_filter( 'woocommerce_product_add_to_cart_text', 'dt_woocommerce_filter_product_add_to_cart_text', 10, 2 );

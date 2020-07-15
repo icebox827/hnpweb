@@ -13,15 +13,15 @@ class The7_Woocommerce_Compatibility {
 	public function bootstrap() {
 		$mod_dir = dirname( __FILE__ );
 
+
 		// admin scripts
 		require_once "{$mod_dir}/admin/mod-wc-shortcodes.php";
 		require_once "{$mod_dir}/admin/mod-wc-admin-functions.php";
 
-		// frontend scripts
+		//frontend scripts
 		require_once "{$mod_dir}/front/mod-wc-class-template-config.php";
 		require_once "{$mod_dir}/front/mod-wc-template-functions.php";
 		require_once "{$mod_dir}/front/mod-wc-template-config.php";
-		require_once "{$mod_dir}/front/mod-wc-template-hooks.php";
 		require_once "{$mod_dir}/front/class-the7-wc-mini-cart.php";
 
 		// add wooCommerce support
@@ -40,7 +40,16 @@ class The7_Woocommerce_Compatibility {
 		The7_WC_Mini_Cart::init();
 
 		presscore_template_manager()->add_path( 'woocommerce', 'inc/mods/compatibility/woocommerce/front/templates' );
+
+		add_action( 'init', array( $this, 'register_wc_hooks' ), 10); // fix for elementor modules/woocommerce/module.php:335
 	}
+
+	public function register_wc_hooks(){
+		$mod_dir = dirname( __FILE__ );
+		require_once "{$mod_dir}/front/mod-wc-template-hooks.php";
+	}
+
+
 
 	/**
 	 * Hide some admin notices. The less you know, the better.

@@ -30,7 +30,7 @@ if ( ! function_exists( 'presscore_sidebar_html_class' ) ) :
 				break;
 		}
 		if ( presscore_config()->get( 'sidebar.sticky' ) ) {
-			$output[] = 'sticky-sidebar';
+			$output[] = 'dt-sticky-sidebar';
 		}
 
 		if ( in_array( presscore_config()->get( 'sidebar.style' ), array( 'with_bg', 'with_widgets_bg' ) ) ) {

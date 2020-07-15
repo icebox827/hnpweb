@@ -202,6 +202,7 @@ if ( ! function_exists( 'presscore_get_category_list' ) ) :
 			'hash'              => '#!term=%TERM_ID%&amp;page=%PAGE%&amp;orderby=date&amp;order=DESC',
 			'item_class'        => '',
 			'all_class'        	=> 'show-all',
+			'all_text'			=> null,
 			'other_class'		=> '',
 			'class'             => 'filter',
 			'current'           => 'all',
@@ -228,8 +229,12 @@ if ( ! function_exists( 'presscore_get_category_list' ) ) :
 			( ( count( $data['terms'] ) == 1 && !empty( $data['other_count'] ) ) ||
 			count( $data['terms'] ) > 1 )
 		) {
-
+			$data['terms'] = array_values( $data['terms'] );
 			$replace_list = array( '%HREF%', '%CLASS%', '%TERM_DESC%', '%TERM_NICENAME%', '%TERM_SLUG%', '%TERM_ID%', '%COUNT%', '%CATEGORY_ID%' );
+
+			if ( ! $args['all_btn'] && $args['current'] === 'all' ) {
+				$args['current'] = $data['terms'][0]->term_id;
+			}
 
 			$terms_done = array();
 			foreach( $data['terms'] as $term ) {
@@ -296,8 +301,8 @@ if ( ! function_exists( 'presscore_get_category_list' ) ) :
 					array(
 						esc_url( str_replace( array( '%TERM_ID%' ), array( '' ), $args['hash'] ) ),
 						$all_class,
-						__( 'All posts', 'the7mk2' ),
-						__( 'View all', 'the7mk2' ),
+						$args['all_text'] ? $args['all_text'] : __( 'All posts', 'the7mk2' ),
+						$args['all_text'] ? $args['all_text'] : __( 'View all', 'the7mk2' ),
 						'',
 						'',
 						$data['all_count'],
@@ -671,7 +676,6 @@ if ( ! function_exists( 'presscore_get_posts_in_categories' ) ) :
 			'posts_per_page'	=> -1,
 			'post_type'			=> $options['post_type'],
 			'no_found_rows'     => 1,
-			'post_status'       => 'publish',
 			'suppress_filters'  => false,
 			'tax_query'         => array( array(
 				'taxonomy'      => $options['taxonomy'],
@@ -999,8 +1003,8 @@ if ( ! function_exists( 'the7_theme_accent_color' ) ) :
 	 */
 	function the7_theme_accent_color() {
 		if ( 'gradient' === of_get_option( 'general-accent_color_mode' ) ) {
-			$color = of_get_option( 'general-accent_bg_color_gradient' );
-			$color = isset( $color[0] ) ? $color[0] : '#ffffff';
+			$gradient_obj = the7_less_create_gradient_obj( of_get_option( 'general-accent_bg_color_gradient' ) );
+			$color = $gradient_obj->get_color_stop( 1 )->get_color();
 		} else {
 			$color = of_get_option( 'general-accent_bg_color' );
 		}

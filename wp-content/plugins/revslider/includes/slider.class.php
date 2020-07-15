@@ -526,7 +526,7 @@ class RevSliderSlider extends RevSliderFunctions {
 	public function is_stream(){
 		$source = $this->get_param('sourcetype', 'gallery');
 		
-		return (!in_array($source, array('post', 'posts', 'specific_posts', 'specific_post', 'current_post', 'woocommerce', 'gallery'), true)) ? $source : false;
+		return (!in_array($source, array('post', 'posts', 'specific_posts', 'specific_post', 'current_post', 'woocommerce', 'woo', 'gallery'), true)) ? $source : false;
 	}
 	
 	
@@ -537,7 +537,7 @@ class RevSliderSlider extends RevSliderFunctions {
 	public function is_stream_pre60(){
 		$source = $this->get_param('source_type', 'gallery');
 		
-		return (!in_array($source, array('post', 'posts', 'specific_posts', 'specific_post', 'current_post', 'woocommerce', 'gallery'), true)) ? $source : false;
+		return (!in_array($source, array('post', 'posts', 'specific_posts', 'specific_post', 'current_post', 'woocommerce', 'woo', 'gallery'), true)) ? $source : false;
 	}
 	
 	/**
@@ -956,6 +956,7 @@ class RevSliderSlider extends RevSliderFunctions {
 	private function duplicate_slider($title = false, $prefix = false){
 		global $wpdb;
 		
+		$old_slider_id = $this->id;
 		//select a slider and then duplicate it
 		$select = $wpdb->prepare("SELECT title, alias, params, type, settings FROM ". $wpdb->prefix . RevSliderFront::TABLE_SLIDER ." WHERE id = %s", array($this->id));
 		$wpdb->query("INSERT INTO ". $wpdb->prefix . RevSliderFront::TABLE_SLIDER ." (title, alias, params, type, settings) (".$select.")");
@@ -1045,6 +1046,26 @@ class RevSliderSlider extends RevSliderFunctions {
 				$c_slide	= new RevSliderSlide();
 				$c_slide->init_by_data($slide);
 				$layers		= $c_slide->get_layers();
+				
+				//change for WPML the parent IDs if necessary
+				$parent_id	= $this->get_val($c_slide, array('params', 'child', 'parentId'), false);
+				
+				if(!in_array($parent_id, array(false, ''), true) && isset($this->map[$parent_id])){
+					$create = array('params' => $this->get_val($c_slide, 'params', array()));
+					
+					$this->set_val($create, array('params', 'child', 'parentId'), $this->map[$parent_id]);
+					
+					$new_params = json_encode($create['params']);
+					$new_params = (empty($new_params)) ? stripslashes(json_encode($create['params'])) : $new_params;
+					$create['params'] = $new_params;
+					
+					$wpdb->update(
+						$wpdb->prefix . RevSliderFront::TABLE_SLIDES,
+						$create,
+						array('id' => $slide['id'])
+					);
+				}
+				
 				$did_change	= false;
 				if(!empty($layers)){
 					foreach($layers as $key => $value){
@@ -1076,24 +1097,15 @@ class RevSliderSlider extends RevSliderFunctions {
 		}
 		
 		//change the javascript api ID to the correct one
-		$c_slider	= new RevSliderSlider();
+		$c_slider = new RevSliderSliderImport();
 		$c_slider->init_by_id($slider_last_id);
-		$cus_js		= $c_slider->get_param(array('codes', 'javascript'), '');
-		
-		if(strpos($cus_js, 'revapi') !== false){
-			if(preg_match_all('/revapi[0-9]*/', $cus_js, $results)){
-				if(isset($results[0]) && !empty($results[0])){
-					foreach($results[0] as $replace){
-						$cus_js = str_replace($replace, 'revapi'.$slider_last_id, $cus_js);
-					}
-				}
-				
-				$c_slider->update_params(array('codes' => array('javascript' => $cus_js, 'css' => $c_slider->get_param(array('codes', 'css'), ''))));
-			}
-		}
 		
 		$upd = new RevSliderPluginUpdate();
 		$upd->upgrade_slider_to_latest($c_slider);
+		
+		$c_slider->update_css_and_javascript_ids($old_slider_id, $slider_last_id, $this->map);
+		$c_slider->update_color_ids($this->map);
+		
 		
 		return $slider_last_id;
 	}
@@ -2060,9 +2072,10 @@ class RevSliderSlider extends RevSliderFunctions {
 			break;
 			case 'instagram':
 				$instagram	 = new RevSliderInstagram($this->get_param(array('source', 'instagram', 'transient'), '1200'));
-				$posts		 = ($this->get_param(array('source', 'instagram', 'type'), 'user') != 'hash') ? $instagram->get_public_photos($this->get_param(array('source', 'instagram', 'userId')), $this->get_param(array('source', 'instagram', 'count'), '33')) : $instagram->get_tag_photos($this->get_param(array('source', 'instagram', 'hashTag')), $this->get_param(array('source', 'instagram', 'count'), '33'));
+				$posts		 = ($this->get_param(array('source', 'instagram', 'type'), 'user') != 'hash') ? $instagram->get_public_photos($this->get_param(array('source', 'instagram', 'token')), $this->get_param(array('source', 'instagram', 'count'), '33')) : $instagram->get_tag_photos($this->get_param(array('source', 'instagram', 'hashTag')), $this->get_param(array('source', 'instagram', 'count'), '33'));
 				$max_posts	 = $this->get_param(array('source', 'instagram', 'count'), '33');
-				$additions['instagram_user'] = $this->get_param(array('source', 'instagram', 'userId'));
+				$profile = $instagram->get_user_profile($this->get_param(array('source', 'instagram', 'token')));
+				$additions['instagram_user'] = isset($profile['username']) ? $profile['username'] : '';
 				$max_allowed = 33;
 			break;
 			case 'flickr':
@@ -2524,4 +2537,3 @@ class RevSliderSlider extends RevSliderFunctions {
 		return $arr;
 	}
 }
-?>

@@ -164,7 +164,7 @@ class RevSliderAddons extends RevSliderFunctions { //before: Rev_addon_Admin
 		}else{
 			$upload_dir	= wp_upload_dir();
 			$file		= $upload_dir['basedir']. '/revslider/templates/' . $plugin_slug . '.zip';
-			@mkdir(dirname($file));
+			@mkdir(dirname($file), 0777, true);
 			$ret		= @file_put_contents($file, $get['body']);
 
 			WP_Filesystem();

@@ -77,6 +77,18 @@ class RevSliderElementorWidget extends \Elementor\Widget_Shortcode {
 			)
 		);
 
+		$this->add_control(
+			'wrapperid',
+			array(
+				//'type' => \Elementor\Controls_Manager::HIDDEN,
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'label' => __( 'Wrapper ID', 'revslider' ),
+				//'dynamic' => ['active' => true],
+				'placeholder' => '',
+				'default' => '',
+			)
+		);
+
 		// Advanced 		
 		$this->add_control(
 			'select_slider',
@@ -123,6 +135,8 @@ class RevSliderElementorWidget extends \Elementor\Widget_Shortcode {
 	protected function render() {
 		
 		$shortcode = $this->get_settings_for_display( 'shortcode' );
+		$wrapperid = $this->get_settings_for_display( 'wrapperid' );
+		$wrapperid = empty($wrapperid) ? '': 'id="' . $wrapperid . '" ';
 		$shortcode = do_shortcode( shortcode_unautop( $shortcode ) );
 
 		$zindex = $this->get_settings_for_display( 'zindex' );
@@ -142,7 +156,7 @@ class RevSliderElementorWidget extends \Elementor\Widget_Shortcode {
 		}
 		?>
 
-		<div class="wp-block-themepunch-revslider"<?php echo $style;?>><?php echo $shortcode; ?></div>
+		<div <?php echo $wrapperid; ?>class="wp-block-themepunch-revslider"<?php echo $style;?>><?php echo $shortcode; ?></div>
 
 		<?php
 	}

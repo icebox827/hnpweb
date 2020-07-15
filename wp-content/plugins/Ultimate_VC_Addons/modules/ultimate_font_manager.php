@@ -315,6 +315,11 @@ if ( ! class_exists( 'Ultimate_Google_Font_Manager' ) ) {
 		 * @access public
 		 */
 		public function refresh_google_fonts_list() {
+
+			if ( ! current_user_can( 'manage_options' ) ) {
+				return false;
+			}
+
 			check_ajax_referer( 'uavc-google-font-nonce', 'security' );
 
 			$fonts      = array();
@@ -359,6 +364,11 @@ if ( ! class_exists( 'Ultimate_Google_Font_Manager' ) ) {
 		 * @access public
 		 */
 		public function get_google_fonts_list() {
+
+			if ( ! current_user_can( 'manage_options' ) ) {
+				return false;
+			}
+
 			check_ajax_referer( 'uavc-get-google-fonts-nonce', 'security' );
 
 			$google_fonts       = get_option( 'ultimate_google_fonts' );
@@ -426,6 +436,11 @@ if ( ! class_exists( 'Ultimate_Google_Font_Manager' ) ) {
 		 * @access public
 		 */
 		public function add_selected_google_font() {
+
+			if ( ! current_user_can( 'manage_options' ) ) {
+				return false;
+			}
+
 			check_ajax_referer( 'uavc-add-google-fonts-nonce', 'security' );
 
 			$font_family = $_POST['font_family'];
@@ -454,6 +469,11 @@ if ( ! class_exists( 'Ultimate_Google_Font_Manager' ) ) {
 		 * @access public
 		 */
 		public function delete_selected_google_font() {
+
+			if ( ! current_user_can( 'manage_options' ) ) {
+				return false;
+			}
+
 			check_ajax_referer( 'uavc-delete-google-fonts-nonce', 'security' );
 
 			$font_name = $_POST['font_name'];
@@ -475,6 +495,10 @@ if ( ! class_exists( 'Ultimate_Google_Font_Manager' ) ) {
 		 * @access public
 		 */
 		public function update_selected_google_font() {
+
+			if ( ! current_user_can( 'manage_options' ) ) {
+				return false;
+			}
 
 			check_ajax_referer( 'uavc-update-google-fonts-nonce', 'security' );
 
@@ -500,6 +524,11 @@ if ( ! class_exists( 'Ultimate_Google_Font_Manager' ) ) {
 		 * @access public
 		 */
 		public function get_font_variants_callback() {
+
+			if ( ! current_user_can( 'manage_options' ) ) {
+				return false;
+			}
+
 			check_ajax_referer( 'uavc-get-font-variants-nonce', 'security' );
 
 			$font_name              = $_POST['font_name'];

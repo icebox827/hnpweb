@@ -1,3 +1,11 @@
+3.19.5 - 16 June 2020
+- New: Users can now share non-personal usage data to help us test and develop better products. ( <a href="https://store.brainstormforce.com/usage-tracking/?utm_source=changelog&utm_medium=changelog&utm_campaign=usage_tracking" target="_blank" rel="noopener">Know More</a> )
+﻿- Fix: Fixed the flip-box background overlapping issue into firefox.
+﻿- Fix: Fixed the duplicate ID issue into the Counter element.
+﻿﻿﻿﻿- Fix: Fixed the PHP notice issue with the PHP 7.4﻿﻿﻿﻿
+﻿- Fix: Breaking the UI for the video element while using the Vimeo link.
+﻿- Fix: Fixed the PHP notice ﻿trying to access array offset on the value of type bool﻿﻿﻿﻿.﻿
+
 3.19.4 - 12 March 2020
 - Improvement: Updated Dual Color Heading element code for WPML compatibility.
 - Fix: PHP Notice of $icon_img variable is not defined.

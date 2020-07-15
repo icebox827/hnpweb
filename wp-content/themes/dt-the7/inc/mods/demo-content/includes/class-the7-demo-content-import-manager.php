@@ -272,6 +272,11 @@ If the problem persists, please don\'t hesitate to contact our <a href="%s" targ
 		add_filter( 'wp_import_post_meta', array( $this, 'wp_import_post_meta_filter' ) );
 		add_filter( 'wxr_menu_item_args', array( $this, 'menu_item_args_filter' ) );
 
+		// Fix elementor data import alongside with installed wordpress-importer plugin.
+		if ( class_exists( 'Elementor\Compatibility' ) ) {
+			remove_filter( 'wp_import_post_meta', [ 'Elementor\Compatibility', 'on_wp_import_post_meta' ] );
+		}
+
 		$this->importer_obj = new The7_Demo_Content_Import();
 
 		if ( $options['read_processed_data_from_cache'] ) {
@@ -701,6 +706,7 @@ If the problem persists, please don\'t hesitate to contact our <a href="%s" targ
 			'elementor_disable_typography_schemes',
 			'elementor_viewport_lg',
 			'elementor_viewport_md',
+			'elementor_use_the7_schemes',
 		);
 
 		if ( class_exists( 'Elementor\Core\Settings\General\Model' ) ) {

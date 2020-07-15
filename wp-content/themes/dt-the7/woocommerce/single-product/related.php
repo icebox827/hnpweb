@@ -59,8 +59,10 @@ if ( $related_products ) : ?>
                         <span class="price"><?php echo $product->get_price_html(); ?></span>
 
 						<?php
-						echo wc_get_rating_html( $product->get_average_rating() );
-						if(presscore_config()->get( 'product.related.show_cart_btn')){
+						if ( wc_review_ratings_enabled() ) {
+							echo wc_get_rating_html( $product->get_average_rating() );
+						}
+						if ( presscore_config()->get( 'product.related.show_cart_btn' ) ) {
 							echo '<div class="woo-buttons">' . dt_woocommerce_get_product_add_to_cart_icon() . '</div>';
 						}
 						?>

@@ -16,6 +16,7 @@
 
 #rb_the_logo { /*display: inline-block; line-height: 50px;  color: #777c80; font-size: 16px; font-weight: 900; text-align: center*/ width: 50px;height: 50px; background:url(../images/wplogo.png); background-size:30px 30px; background-repeat: no-repeat; background-position: center; cursor: pointer }
 
+.rs_fh_right * {-webkit-user-select: none;-khtml-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;}
 
 ._TPRB_ .div5 { display: block;height: 5px;width: 100%; }
 ._TPRB_ .div7 { display: block;height: 7px;width: 100%; }
@@ -171,7 +172,8 @@
 #rbm_layer_action.inpickermode .rbm_content_left { pointer-events: none !important }
 #rbm_preview { width: 1240px; height: 680px; }
 ._TPRB_ .rbm_preview_sizes,
-._TPRB_ .rbm_subtitle { margin-left: 20px; border-left: 1px solid #323438; padding-left: 20px; display: inline-block; line-height: 50px; width: 140px; }
+._TPRB_ .rbm_subtitle { margin-left: 20px; border-left: 1px solid #323438; padding-left: 20px; display: inline-block; line-height: 50px; width: 140px; overflow: hidden; white-space: nowrap}
+
 ._TPRB_ .rbm_subtitle i.material-icons { color: #026dd2; font-size: 17px; margin-right: 10px; }
 ._TPRB_ .rbm_preview_sizes i.material-icons { color: #777c80; margin-right: 10px; cursor: pointer; font-size: 20px}
 ._TPRB_ .rbm_preview_sizes i.material-icons:hover,
@@ -1058,6 +1060,7 @@ GUTENBERG BLOCK EXTENSION
 .rs_optimizer_button,
 .rs_wp_plg_act_button,
 .rs_optimizer_button.components-button.is-default,
+.rs_optimizer_button.components-button.is-secondary,
 .compose-mode .vc_btn-content i.revslider_vc_material-icons,
 .revslider_vc_material-icons.material-icons {
     margin-right: 0px;
@@ -1085,8 +1088,12 @@ GUTENBERG BLOCK EXTENSION
     background-color: transparent;
     color: #fff;
     vertical-align: top;
+    height: 28px;
 }
 
+
+/* WP 5.4 Changes */
+.rs_optimizer_button_wrapper, .rs_wp_plg_act_wrapper { margin: 20px auto; max-width: 247px; }
 .revslider_vc_material-icons.material-icons { line-height: 16px !important; font-size: 18px; }
 
 .rs_wp_plg_act_button:focus:enabled,

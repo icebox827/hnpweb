@@ -13,7 +13,7 @@ if ( ! class_exists( 'DT_Shortcode_Albums_Jgrid', false ) ) {
 
 	class DT_Shortcode_Albums_Jgrid extends DT_Masonry_Posts_Shortcode {
 
-		protected $shortcode_name = 'dt_albums_jgrid';
+		protected $sc_name = 'dt_albums_jgrid';
 		protected $post_type = 'dt_gallery';
 		protected $taxonomy = 'dt_gallery_category';
 
@@ -146,7 +146,7 @@ if ( ! class_exists( 'DT_Shortcode_Albums_Jgrid', false ) ) {
 				'posts_per_page'              => '-1',
 			);
 
-			$attributes = shortcode_atts( $default_atts, $atts, $this->shortcode_name );
+			$attributes = shortcode_atts( $default_atts, $atts, $this->sc_name );
 
 			// sanitize attributes
 			$attributes['loading_effect'] = sanitize_key( $attributes['loading_effect'] );

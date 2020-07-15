@@ -139,6 +139,9 @@
 .custom-mixin-footer-accent-bg (@customColor, @color-opacity:100%) when (iscolor(@customColor)) {
   background: fade(@customColor, @color-opacity);
 }
+.custom-mixin-floating-color (@customColor) when (iscolor(@customColor)) {
+  color: @customColor;
+}
 
 /*--------------1 - VARIABLES:end--------------*/
 .mixin-width (@a) when (@a = 100%) {
@@ -415,6 +418,10 @@
   text-decoration: none;
   font: @additional-menu-elements-font-style @additional-menu-elements-font-weight @additional-menu-elements-font-size~"/"@additional-menu-elements-font-size + 4 @additional-menu-elements-font-family;
   color: @additional-menu-elements-color;
+  .sticky-on.masthead &,
+  #phantom & {
+    .custom-mixin-floating-color (@floating-microwidgets-color);
+  }
 
   & i {
       margin-right: 5px;
@@ -422,6 +429,10 @@
       color: @additional-menu-elements-icon-color;
       .header-bar & {
         .icon-gap-general (@additional-menu-elements-font-size);
+      }
+      .sticky-on.masthead &,
+      #phantom & {
+        .custom-mixin-floating-color (@floating-microwidgets-icon-color);
       }
     }
     .branding & {
@@ -482,6 +493,10 @@ a.edd-ico-cart:hover {
  
     font: @additional-menu-elements-font-style @additional-menu-elements-font-weight @additional-menu-elements-font-size~"/"@additional-menu-elements-font-size + 4 @additional-menu-elements-font-family;
     .custom-mixin-color-fade (@additional-menu-elements-color);
+    .sticky-on.masthead &,
+    #phantom & {
+      .custom-mixin-floating-color (@floating-microwidgets-color);
+    }
 
     & i {
       .custom-mixin-fade-color (@additional-menu-elements-icon-color, @opacity:70%);

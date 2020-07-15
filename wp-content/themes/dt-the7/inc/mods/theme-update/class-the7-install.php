@@ -182,6 +182,10 @@ class The7_Install {
 			'the7_update_purge_elementor_cache',
 			'the7_update_870_db_version',
 		),
+		'8.9.0' => array(
+			'the7_update_890_elementor_the7_elements',
+			'the7_update_890_db_version',
+		),
 	);
 
     public static function init() {
@@ -194,6 +198,14 @@ class The7_Install {
 		    add_action( 'init', array( __CLASS__, 'show_db_update_notices' ), 20 );
 	    }
     }
+
+    public static function get_updater() {
+    	if (! self::$background_updater) {
+    		self::init_background_updater();
+		}
+
+    	return self::$background_updater;
+	}
 
     public static function check_version() {
 	    $current_db_version = self::get_db_version();

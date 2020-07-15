@@ -483,10 +483,10 @@ if ( ! function_exists( 'presscore_admin_post_scripts' ) ) :
 		wp_localize_script( 'the7-meta-box-magic', 'the7mbImageRatios', $proportions );
 
 		// Localize meta boxes dependencies.
-		global $DT_META_BOXES;
 		$localized_meta_boxes = array();
-		foreach ( $DT_META_BOXES as $meta_box ) {
-			$localized_meta_boxes[ $meta_box['id'] ] = isset($meta_box['only_on'], $meta_box['only_on']['template']) ? (array) $meta_box['only_on']['template'] : array();
+		$meta_boxes = the7_get_meta_boxes_with_template_dependencies();
+		foreach ( $meta_boxes as $meta_box ) {
+			$localized_meta_boxes[] = array( 'id' => $meta_box['id'], 'template' => $meta_box['only_on']['template'] );
 		}
 		wp_localize_script( 'the7-meta-box-magic', 'dtMetaboxes', $localized_meta_boxes );
 

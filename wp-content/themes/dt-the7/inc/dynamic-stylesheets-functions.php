@@ -307,6 +307,7 @@ if ( ! function_exists( 'the7_maybe_regenerate_dynamic_css' ) ) :
 		} catch ( Exception $e ) {
 			// Do nothing.
 		}
+		do_action( 'the7_maybe_regenerate_dynamic_css_done' );
 	}
 
 endif;

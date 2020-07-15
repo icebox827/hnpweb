@@ -122,6 +122,10 @@ if ( ! class_exists( 'DT_Shortcode_Products_Carousel', false ) ) :
 		protected function do_shortcode( $atts, $content = '' ) {
 			$query =  new WP_Query( $this->get_query_args() );
 
+			if ( !$this->display_shortcode_content( $query ) ){
+				return;
+			}
+
 			do_action( 'presscore_before_shortcode_loop', $this->sc_name, $this->atts );
 
 			add_action( 'dt_wc_loop_start', array( $this, '_setup_config' ), 15 );
@@ -351,7 +355,11 @@ if ( ! class_exists( 'DT_Shortcode_Products_Carousel', false ) ) :
 		 */
 		protected function get_less_vars() {
 			$less_vars = the7_get_new_shortcode_less_vars_manager();
+			$less_vars = $this->less_vars( $less_vars );
+			return $less_vars->get_vars();
+		}
 
+		protected function less_vars( $less_vars ){
 			$less_vars->add_keyword( 'unique-shortcode-class-name', 'products-carousel-shortcode.' . $this->get_unique_class(), '~"%s"' );
 			$less_vars->add_keyword( 'post-title-color', $this->get_att( 'custom_title_color', '~""') );
 			$less_vars->add_keyword( 'post-content-color', $this->get_att( 'custom_content_color', '~""' ) );
@@ -382,7 +390,7 @@ if ( ! class_exists( 'DT_Shortcode_Products_Carousel', false ) ) :
 			$less_vars->add_keyword( 'icon-color-hover', $this->get_att( 'arrow_icon_color_hover', '~""' ) );
 			$less_vars->add_keyword( 'arrow-border-color-hover', $this->get_att( 'arrow_border_color_hover', '~""' ) );
 			$less_vars->add_keyword( 'arrow-bg-hover', $this->get_att( 'arrow_bg_color_hover', '~""' ) );
-			
+
 			$less_vars->add_keyword( 'arrow-right-v-position', $this->get_att( 'r_arrow_v_position' ) );
 			$less_vars->add_keyword( 'arrow-right-h-position', $this->get_att( 'r_arrow_h_position' ) );
 			$less_vars->add_pixel_number( 'r-arrow-v-position', $this->get_att( 'r_arrow_v_offset' ) );
@@ -405,9 +413,7 @@ if ( ! class_exists( 'DT_Shortcode_Products_Carousel', false ) ) :
 			$less_vars->add_keyword( 'bullets-h-position', $this->get_att( 'bullets_h_position' ) );
 			$less_vars->add_pixel_number( 'bullet-v-position', $this->get_att( 'bullets_v_offset' ) );
 			$less_vars->add_pixel_number( 'bullet-h-position', $this->get_att( 'bullets_h_offset' ) );
-			
-
-			return $less_vars->get_vars();
+			return  $less_vars;
 		}
 		protected function get_less_file_name() {
 			// @TODO: Remove in production.
@@ -464,7 +470,6 @@ if ( ! class_exists( 'DT_Shortcode_Products_Carousel', false ) ) :
 			}
 			$query_args =  array(
 				'post_type' => 'product',
-        		'post_status'		  => 'publish',
 				'ignore_sticky_posts'  => 1,
 				'posts_per_page' 	   => $post_count,
 				'orderby' 			  => $orderby,

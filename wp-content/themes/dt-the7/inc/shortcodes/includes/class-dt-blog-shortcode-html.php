@@ -43,6 +43,10 @@ class DT_Blog_Shortcode_HTML {
 	 * @param array $class
 	 */
 	public static function display_posts_filter( $terms, $class = array() ) {
+		if ( ! $terms ) {
+			return;
+		}
+
 		if ( ! is_array( $class ) ) {
 			$class = explode( ' ', $class );
 		}

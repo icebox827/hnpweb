@@ -429,6 +429,11 @@ if ( ! class_exists( 'AIO_Icon_Manager' ) ) {
 		 * @access public
 		 */
 		public function add_zipped_font() {
+
+			if ( ! current_user_can( 'manage_options' ) ) {
+				return false;
+			}
+
 			// check if referer is ok.
 			check_ajax_referer( 'smile-add-zipped-fonts-nonce', 'security' );
 
@@ -459,6 +464,10 @@ if ( ! class_exists( 'AIO_Icon_Manager' ) ) {
 		 * @access public
 		 */
 		public function remove_zipped_font() {
+
+			if ( ! current_user_can( 'manage_options' ) ) {
+				return false;
+			}
 
 			check_ajax_referer( 'smile-remove-zipped-fonts-nonce', 'security' );
 

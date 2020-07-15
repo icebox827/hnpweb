@@ -407,6 +407,28 @@ $options['woocommerce-related_btn'] = array(
 	),
 );
 
+$options['woocommerce_show_single_product_title'] = array(
+	'id'      => 'woocommerce_show_single_product_title',
+	'name'    => _x( 'Show product title', 'theme-options', 'the7mk2' ),
+	'type'    => 'images',
+	'std'     => 'default',
+	'class'   => 'wide',
+	'options' => array(
+		'always'  => array(
+			'title' => _x( 'Always', 'theme-options', 'the7mk2' ),
+			'src'   => '/inc/admin/assets/images/woocommerce_show_single_product_title-always.gif',
+		),
+		'never'   => array(
+			'title' => _x( 'Never', 'theme-options', 'the7mk2' ),
+			'src'   => '/inc/admin/assets/images/woocommerce_show_single_product_title-never.gif',
+		),
+		'default' => array(
+			'title' => _x( 'If default page title is hidden', 'theme-options', 'the7mk2' ),
+			'src'   => '/inc/admin/assets/images/woocommerce_show_single_product_title-default.gif',
+		),
+	),
+);
+
 $options['woocommerce_product_img_width'] = array(
 	'name'  => _x( 'Product image width', 'theme-options', 'the7mk2' ),
 	'id'    => 'woocommerce_product_img_width',

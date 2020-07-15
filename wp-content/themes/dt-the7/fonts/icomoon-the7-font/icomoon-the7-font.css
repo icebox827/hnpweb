@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'icomoon-the7-font';
-  src: url('icomoon-the7-font.ttf?wi57p5') format('truetype'), url('icomoon-the7-font.woff?wi57p5') format('woff'), url('icomoon-the7-font.svg?wi57p5#icomoon-the7-font') format('svg');
+  src: url('icomoon-the7-font.ttf?wi57p5') format('truetype'), url('icomoon-the7-font.woff?wi57p5') format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -216,6 +216,15 @@
 }
 .icomoon-the7-font-the7-map-07:before {
   content: "\e407";
+}
+.icomoon-the7-font-the7-heart-empty:before {
+  content: "\e408";
+}
+.icomoon-the7-font-the7-heart-empty-heavy:before {
+  content: "\e409";
+}
+.icomoon-the7-font-the7-heart-filled:before {
+  content: "\e410";
 }
 .icomoon-the7-font-the7-login-00:before {
   content: "\e500";

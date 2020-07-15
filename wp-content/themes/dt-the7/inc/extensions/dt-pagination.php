@@ -16,15 +16,15 @@ if ( !function_exists( 'dt_paginator' ) ) {
 
 		$defaults = array(
 			'wrap'                => '<div class="%CLASS%" role="navigation">%PREV%%LIST%%NEXT%</div>',
-			'item_wrap'           => '<a href="%HREF%" class="page-numbers %ACT_CLASS%" data-page-num="%PAGE_NUM%">%TEXT%</a>',
-			'first_wrap'          => '<a href="%HREF%" class="page-numbers %ACT_CLASS%" data-page-num="%PAGE_NUM%">%FIRST_PAGE%</a>',
-			'last_wrap'           => '<a href="%HREF%" class="page-numbers %ACT_CLASS%" data-page-num="%PAGE_NUM%">%LAST_PAGE%</a>',
+			'item_wrap'           => '<a href="%HREF%" class="%ITEM_CLASS% %ACT_CLASS%" data-page-num="%PAGE_NUM%">%TEXT%</a>',
+			'first_wrap'          => '<a href="%HREF%" class="%ITEM_CLASS% %ACT_CLASS%" data-page-num="%PAGE_NUM%">%FIRST_PAGE%</a>',
+			'last_wrap'           => '<a href="%HREF%" class="%ITEM_CLASS% %ACT_CLASS%" data-page-num="%PAGE_NUM%">%LAST_PAGE%</a>',
 			'pages_wrap'          => '',
 			'next_page_wrap'      => '%LINK%',
 			'prev_page_wrap'      => '%LINK%',
 			'ajaxing'             => false,
 			'class'               => 'paginator',
-			'item_class'          => '',
+			'item_class'          => 'page-numbers',
 			'act_class'           => 'act',
 			'pages_prev_class'    => 'nav-prev',
 			'pages_next_class'    => 'nav-next',
@@ -218,6 +218,7 @@ if ( !function_exists( 'dt_paginator' ) ) {
 					'%ACT_CLASS%',
 					'%CLASS_ACT%',
 					'%PAGE_NUM%',
+					'%ITEM_CLASS%',
 				), array(
 						esc_url( $link ),
 						$opts['first_text'],
@@ -225,6 +226,7 @@ if ( !function_exists( 'dt_paginator' ) ) {
 						$act_class,
 						$class_act,
 						1,
+						$opts['item_class']
 					), $opts['first_wrap'] );
 			}
 
@@ -353,6 +355,7 @@ if ( !function_exists( 'dt_paginator' ) ) {
 					'%ACT_CLASS%',
 					'%CLASS_ACT%',
 					'%PAGE_NUM%',
+					'%ITEM_CLASS%'
 				), array(
 						esc_url( $link ),
 						$opts['last_text'],
@@ -360,6 +363,7 @@ if ( !function_exists( 'dt_paginator' ) ) {
 						$act_class,
 						$class_act,
 						$i,
+						$opts['item_class']
 					), $opts['last_wrap'] );
 			}
 
@@ -486,10 +490,6 @@ function dt_paginator_add_posts_link_attr( $attr, $nextpage = 0 ) {
 function dt_get_next_posts_link( $label = null, $max_page = 0, $attr = '', $base = '', $current = null, $add_args = array() ) {
 	global $paged, $wp_query;
 
-	if ( is_single() ) {
-		return '';
-	}
-
 	$paged_origin = $paged;
 	$paged = $paged ? $paged : 1;
 	$current = $current !== null ? $current : $paged;
@@ -525,10 +525,6 @@ function dt_get_next_posts_link( $label = null, $max_page = 0, $attr = '', $base
  */
 function dt_get_previous_posts_link( $label = null, $attr = '', $base = '', $current = null, $add_args = array() ) {
 	global $paged;
-
-	if ( is_single() ) {
-		return '';
-	}
 
 	$paged_origin = $paged;
 	$paged = $paged ? $paged : 1;

@@ -7,6 +7,7 @@ namespace The7\Adapters\Elementor\Page_Settings;
 
 use Elementor\Controls_Manager;
 use Elementor\Modules\PageTemplates\Module as PageTemplatesModule;
+use LS_Sliders;
 use The7_Elementor_Compatibility;
 
 defined( 'ABSPATH' ) || exit;
@@ -29,9 +30,13 @@ if ( class_exists( 'RevSlider' ) ) {
 	$slideshow_mode_options['revolution'] = array( __( 'Slider Revolution', 'the7mk2' ) );
 }
 
-if ( function_exists( 'lsSliders' ) ) {
-
-	$layerSliders = lsSliders( 9999 );
+if ( function_exists('lsSliders') || class_exists('LS_Sliders') ) {
+	if ( class_exists('LS_Sliders') ) {
+		$layerSliders = LS_Sliders::find( array( 'limit' => 9999, 'orderby' => 'date_m' ) );
+	}
+	else {
+		$layerSliders = lsSliders( 9999 );
+	}
 
 	foreach ( $layerSliders as $lSlide ) {
 

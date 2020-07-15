@@ -15,6 +15,17 @@ if ( ! class_exists( 'DT_Shortcode', false ) ):
 		protected $config_backup;
 
 		/**
+		 * Shortcode name.
+		 *
+		 * @var string
+		 */
+		protected $sc_name;
+
+		public function get_tag() {
+			return $this->sc_name;
+		}
+
+		/**
 		 * @TODO Replace it with Presscore_Query
 		 *
 		 * @param array $instance
@@ -43,7 +54,6 @@ if ( ! class_exists( 'DT_Shortcode', false ) ):
 			$args = array(
 				'posts_per_page'        => isset( $instance['number'] ) ? $instance['number'] : -1,
 				'post_type'             => $this->post_type,
-				'post_status'           => 'publish',
 				'paged'                 => isset( $instance['paged'] ) ? $instance['paged'] : 1,
 				'orderby'               => isset( $instance['orderby'] ) ? $instance['orderby'] : 'date',
 				'order'                 => isset( $instance['order'] ) ? $instance['order'] : 'DESC',

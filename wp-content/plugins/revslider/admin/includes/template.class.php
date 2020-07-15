@@ -659,7 +659,8 @@ class RevSliderTemplate extends RevSliderFunctions {
 					$full_installed = true;
 					foreach($defaults as $k => $ps){
 						if($dk !== $k && isset($ps['package_id']) && $ps['package_id'] === $di['package_id']){ //ignore comparing of the same, as it can never be installed
-							if($this->get_val($ps, 'installed') !== false){
+							//if($this->get_val($ps, 'installed') !== false){
+							if($this->get_val($ps, 'installed') === false){
 								$full_installed = false;
 								break;
 							}
@@ -667,9 +668,10 @@ class RevSliderTemplate extends RevSliderFunctions {
 					}
 					
 					if($full_installed){
-						if($this->get_val($defaults[$dk], 'installed') !== false){
-							unset($defaults[$dk]['installed']);
-						}
+						//if($this->get_val($defaults[$dk], 'installed') !== false){
+							//unset($defaults[$dk]['installed']);
+						//}
+						$defaults[$dk]['installed'] = true;
 					}
 				}
 			}

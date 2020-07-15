@@ -25,6 +25,10 @@
   margin-left: @a*5/14;
 }
 
+.custom-mixin-floating-color (@customColor) when (iscolor(@customColor)) {
+	color: @customColor;
+}
+
 /* #Mini widgets
 ================================================== */
 
@@ -111,71 +115,44 @@ input.field {
 	& i {
 		font-size: @additional-menu-elements-icon-size;
 		color: @additional-menu-elements-icon-color;
-		// .header-bar & {
-		// 	.icon-gap-general (@additional-menu-elements-font-size);
-		// }
+		.sticky-on.masthead &,
+		#phantom & {
+			.custom-mixin-floating-color (@floating-microwidgets-icon-color);
+		}
 	}
-	// &:hover i {
-	// 	.custom-mixin-fade-color (@additional-menu-elements-icon-color, @opacity:70%);
-	// }
 	.branding & {
 		& i {
 			font-size: @additional-logo-elements-icon-size;
 			color: @additional-logo-elements-icon-color;
-			//.icon-gap (@additional-logo-elements-font-size);
 		}
-		// &:hover i {
-		// 	.custom-mixin-fade-color (@additional-logo-elements-icon-color, @opacity:70%);
-		// }
 	}
 	.mixed-header & {
 		& i {
 			font-size: @microwidgets-in-top-line-icon-size;
 			color: @microwidgets-in-top-line-icon-color;
 		}
-
-		// &:hover i {
-		// 	.custom-mixin-fade-color (@microwidgets-in-top-line-icon-color, @opacity:70%);
-		// }
 	}
 	.masthead .top-bar & {
 		& i {
 			font-size: @top-bar-icon-size;
 			color: @top-bar-icon-color;
-			//.icon-gap (@top-bar-font-size);
+			.sticky-on& {
+				.custom-mixin-floating-color (@floating-microwidgets-icon-color);
+			}
 		}
-
-		// &:hover i {
-		// 	.custom-mixin-fade-color (@top-bar-icon-color, @opacity:70%);
-		// }
 	}
 
-	// .mixed-header .header-bar & {
-	// 	& i {
-	// 		.icon-gap (@microwidgets-in-top-line-font-size);
-	// 	}
-	// }
 	.dt-mobile-header & {
 		& i {
 			font-size: @mobile-menu-microwidgets-icon-size;
 			color: @mobile-menu-microwidgets-icon-color;
-			//.icon-gap (@mobile-menu-microwidgets-font-size);
 		}
-
-		// &:hover i {
-		// 	.custom-mixin-fade-color (@mobile-menu-microwidgets-icon-color, @opacity:70%);
-		// }
 	}
 	.mobile-header-bar .mobile-mini-widgets & {
 		& i {
 			font-size: @mobile-microwidgets-icon-size;
 			color: @mobile-microwidgets-icon-color;
-			//.icon-gap (@mobile-microwidgets-font-size);
 		}
-
-		// &:hover i {
-		// 	.custom-mixin-fade-color (@mobile-microwidgets-icon-color, @opacity:70%);
-		// }
 	}
 }
 .overlay-search-microwidget {
@@ -209,40 +186,31 @@ input.field {
 .mini-search .submit {
 	font: @additional-menu-elements-font-style @additional-menu-elements-font-variant @additional-menu-elements-font-weight @additional-menu-elements-font-size~"/"@additional-menu-elements-font-size + 4 @additional-menu-elements-font-family;
 	color: @additional-menu-elements-color;
+	.sticky-on.masthead &,
+	#phantom & {
+		.custom-mixin-floating-color (@floating-microwidgets-color);
+	}
 	&:hover {
 		opacity: 0.7;
-		//.custom-mixin-fade-color (@additional-menu-elements-color, @opacity:70%);
 	}
 
 	
 	.branding & {
 		font: @additional-logo-elements-font-style @additional-logo-elements-font-variant @additional-logo-elements-font-weight @additional-logo-elements-font-size~"/"@additional-logo-elements-font-size + 4 @additional-logo-elements-font-family;
 		color: @additional-logo-elements-color;
-		// &:hover {
-		// 	.custom-mixin-fade-color (@additional-logo-elements-color, @opacity:70%);
-		// }
 	}
 	.mixed-header & {
 		font: @microwidgets-in-top-line-font-style @microwidgets-in-top-line-font-variant @microwidgets-in-top-line-font-weight @microwidgets-in-top-line-font-size~"/"@microwidgets-in-top-line-font-size + 4 @microwidgets-in-top-line-font_family;
 		color: @microwidgets-in-top-line-color;
-		// &:hover {
-		// 	.custom-mixin-fade-color (@microwidgets-in-top-line-color, @opacity:70%);
-		// }
 	}
 	.dt-mobile-header & {
 		font: @mobile-menu-microwidgets-font-style @mobile-menu-microwidgets-font-variant @mobile-menu-microwidgets-font-weight @mobile-menu-microwidgets-font-size~"/"@mobile-menu-microwidgets-font-size+4 @mobile-menu-microwidgets-font-family;
 		text-transform: @mobile-menu-microwidgets-text-transform;
 		color: @mobile-menu-microwidgets-color;
-		// &:hover {
-		// 	.custom-mixin-fade-color (@mobile-menu-microwidgets-color, @opacity:70%);
-		// }
 	}
 	.mobile-header-bar .mobile-mini-widgets & {
 		font: @mobile-microwidgets-font-style @mobile-sub-menu-font-variant @mobile-microwidgets-font-weight @mobile-microwidgets-font-size~"/"@mobile-microwidgets-font-size+4 @mobile-microwidgets-font-family;
 		color: @mobile-microwidgets-color;
-		// &:hover {
-		// 	.custom-mixin-fade-color (@mobile-microwidgets-color, @opacity:70%);
-		// }
 	}
 }
 	.dt-mobile-header .mini-search .popup-search-wrap {
@@ -253,13 +221,16 @@ input.field {
 @mw-search-color-temp: escape(~"@{mw-search-color}");
 	.overlay-search-microwidget .search-icon,
 	.mini-search .search-icon {
-		//min-width: @mw-search-icon-size;
 		color: @mw-search-color;
 	}
 
 	.popup-search .submit.default-icon:before,
 	.overlay-search .submit.default-icon:before {
 		color: @additional-menu-elements-color;
+		.sticky-on.masthead &,
+		#phantom & {
+			.custom-mixin-floating-color (@floating-microwidgets-color);
+		}
 		.branding & {
 			color: @additional-logo-elements-color;
 		}
@@ -295,11 +266,20 @@ input.field {
 .mini-login .submit {
 	font: @additional-menu-elements-font-style @additional-menu-elements-font-variant @additional-menu-elements-font-weight @additional-menu-elements-font-size~"/"@additional-menu-elements-font-size + 4 @additional-menu-elements-font-family;
 	color: @additional-menu-elements-color;
+
+	.sticky-on.masthead &,
+	#phantom & {
+		.custom-mixin-floating-color (@floating-microwidgets-color);
+	}
 	& i {
 		font-size: @additional-menu-elements-icon-size;
 		color: @additional-menu-elements-icon-color;
 		.header-bar & {
 			.icon-gap-general (@additional-menu-elements-font-size);
+		}
+		.sticky-on.masthead &,
+		#phantom & {
+			.custom-mixin-floating-color (@floating-microwidgets-icon-color);
 		}
 	}
 
@@ -322,9 +302,16 @@ input.field {
 	}
 	.masthead .top-bar & {
 		color: @top-color;
+	
+		.sticky-on& {
+			.custom-mixin-floating-color (@floating-microwidgets-color);
+		}
 		& i {
 			font-size: @top-bar-icon-size;
 			color: @top-bar-icon-color;
+			.sticky-on& {
+				.custom-mixin-floating-color (@floating-microwidgets-icon-color);
+			}
 			.icon-gap (@top-bar-font-size);
 		}
 	}
@@ -367,11 +354,19 @@ input.field {
 		text-decoration: none;
 		font: @additional-menu-elements-font-style @additional-menu-elements-font-variant @additional-menu-elements-font-weight @additional-menu-elements-font-size~"/"@additional-menu-elements-font-size + 4 @additional-menu-elements-font-family;
 		color: @additional-menu-elements-color;
+		.sticky-on.masthead &,
+		#phantom & {
+			.custom-mixin-floating-color (@floating-microwidgets-color);
+		}
 		& i {
 			font-size: @additional-menu-elements-icon-size;
 			color: @additional-menu-elements-icon-color;
 			.header-bar & {
 				.icon-gap-general (@additional-menu-elements-font-size);
+			}
+			.sticky-on.masthead &,
+			#phantom & {
+				.custom-mixin-floating-color (@floating-microwidgets-icon-color);
 			}
 		}
 
@@ -399,9 +394,15 @@ input.field {
 		}
 		.masthead .top-bar & {
 			color: @top-color;
+			.sticky-on& {
+				.custom-mixin-floating-color (@floating-microwidgets-color);
+			}
 			& i {
 				font-size: @top-bar-icon-size;
 				color: @top-bar-icon-color;
+				.sticky-on& {
+					.custom-mixin-floating-color (@floating-microwidgets-icon-color);
+				}
 				.icon-gap (@top-bar-font-size);
 			}
 		}
@@ -535,6 +536,10 @@ input.field {
 .text-area {
 	font: @additional-menu-elements-font-style @additional-menu-elements-font-variant @additional-menu-elements-font-weight @additional-menu-elements-font-size~"/"@additional-menu-elements-font-size + 4 @additional-menu-elements-font-family;
 	color: @additional-menu-elements-color;
+	.sticky-on.masthead &,
+	#phantom & {
+		.custom-mixin-floating-color (@floating-microwidgets-color);
+	}
 	
 	.branding & {
 		font: @additional-logo-elements-font-style @additional-logo-elements-font-variant @additional-logo-elements-font-weight @additional-logo-elements-font-size~"/"@additional-logo-elements-font-size + 4 @additional-logo-elements-font-family;
@@ -581,6 +586,10 @@ input.field {
 	.masthead & {
 		font: @additional-menu-elements-font-style @additional-menu-elements-font-variant @additional-menu-elements-font-weight @additional-menu-elements-font-size~"/"@additional-menu-elements-font-size + 4 @additional-menu-elements-font-family;
 		color: @additional-menu-elements-color;
+		.sticky-on.masthead &,
+		#phantom & {
+			.custom-mixin-floating-color (@floating-microwidgets-color);
+		}
 	}
 	
 	.masthead .branding & {
@@ -619,6 +628,10 @@ input.field {
 	.masthead & {
 		font: @additional-menu-elements-font-style @additional-menu-elements-font-variant @additional-menu-elements-font-weight @additional-menu-elements-font-size~"/"@additional-menu-elements-font-size + 4 @additional-menu-elements-font-family;
 		color: @additional-menu-elements-color;
+		.sticky-on&,
+		#phantom& {
+			.custom-mixin-floating-color (@floating-microwidgets-color);
+		}
 	}
 	.branding & {
 		font: @additional-logo-elements-font-style @additional-logo-elements-font-variant @additional-logo-elements-font-weight @additional-logo-elements-font-size~"/"@additional-logo-elements-font-size + 4 @additional-logo-elements-font-family;
@@ -669,6 +682,10 @@ input.field {
 .list-type-menu-second-switch.mini-nav > ul > li > a i {
 	font-size: @additional-menu-elements-icon-size;
 	color: @additional-menu-elements-icon-color;
+	.sticky-on.masthead &,
+	#phantom & {
+		.custom-mixin-floating-color (@floating-microwidgets-icon-color);
+	}
 	.header-bar & {
 		.icon-gap-general (@additional-menu-elements-font-size);
 	}
@@ -691,6 +708,9 @@ input.field {
 		font-size: @top-bar-icon-size;
 		color: @top-bar-icon-color;
 		.icon-gap (@top-bar-font-size);
+		.sticky-on& {
+			.custom-mixin-floating-color (@floating-microwidgets-icon-color);
+		}
 	}
 	.dt-mobile-header & {
 		font-size: @mobile-menu-microwidgets-icon-size;

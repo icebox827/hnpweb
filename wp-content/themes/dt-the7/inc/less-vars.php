@@ -23,6 +23,8 @@ function presscore_action_add_less_vars( The7_Less_Vars_Manager_Interface $less_
 	$less_vars->add_keyword( 'accent-bg-scroller-arrow', $accent_gradient_obj->with_opacity( 90 )->get_string() );
 	$less_vars->add_keyword( 'accent-text-color-2', $accent_gradient_obj->with_angle( 'left' )->get_string() );
 	$less_vars->add_rgba_color( 'accent-bg-2', $last_accent_color );
+	$less_vars->add_rgba_color( 'accent-color', $first_accent_color );
+	$less_vars->add_keyword( 'accent-gradient', $accent_gradient_obj->get_string() );
 
 	// Last color stops.
 	$last_color_stops = array(
@@ -231,6 +233,22 @@ function presscore_action_add_less_vars( The7_Less_Vars_Manager_Interface $less_
 			),
 			'gradient_angle' => 'left',
 		),
+		// array(
+		// 	'vars'      => array( 'floating-microwidgets-color' ),
+		// 	'test_args' => array(
+		// 		'header-floating_microwidgets-font',
+		// 		'header-floating_microwidgets-font-color',
+		// 		null,
+		// 	),
+		// ),
+		// array(
+		// 	'vars'      => array( 'floating-microwidgets-icon-color' ),
+		// 	'test_args' => array(
+		// 		'header-floating_microwidgets-icon',
+		// 		'header-floating_microwidgets-icon-color',
+		// 		null,
+		// 	),
+		// ),
 		array(
 			'vars'      => array( 'menu-click-decor-bg-color', 'menu-click-decor-bg-color-2' ),
 			'test_args' => array(
@@ -481,6 +499,13 @@ function presscore_action_add_less_vars( The7_Less_Vars_Manager_Interface $less_
 			),
 		),
 	);
+
+	if (of_get_option('header-floating_microwidgets-icon') === 'color') {
+		$less_vars->add_rgba_color('floating-microwidgets-icon-color', of_get_option('header-floating_microwidgets-icon-color'));
+	}
+	if (of_get_option('header-floating_microwidgets-font') === 'color') {
+		$less_vars->add_rgba_color('floating-microwidgets-color', of_get_option('header-floating_microwidgets-font-color'));
+	}
 
 	$decor_vars = array( 'menu-decor-color', 'menu-decor-color-2' );
 	$decoration = of_get_option( 'header-menu-decoration-style' );
@@ -1546,6 +1571,7 @@ function presscore_action_add_less_vars( The7_Less_Vars_Manager_Interface $less_
 	$less_vars->add_hex_color( 'base-color', of_get_option( 'content-primary_text_color' ) );
 	$less_vars->add_hex_color( 'secondary-text-color', of_get_option( 'content-secondary_text_color' ) );
 	$less_vars->add_hex_color( 'links-color', of_get_option( 'content-links_color' ) );
+	$less_vars->add_hex_color( 'title-color', of_get_option( 'content-headers_color' ) );
 
 	for ( $id = 1; $id <= 6; $id++ ) {
 		$header_typography = The7_Option_Field_Typography::sanitize( of_get_option( "fonts-h{$id}-typography" ) );

@@ -710,8 +710,10 @@
 
 .revbuilder-cpicker-iris .wp-picker-container {
 	
-	display: inline-block;
-	vertical-align: top;
+	display: inline-block !important;
+	vertical-align: top !important;
+	width: auto !important;
+	margin: 0px !important;
 	
 }
 

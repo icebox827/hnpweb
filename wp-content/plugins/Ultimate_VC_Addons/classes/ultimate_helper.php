@@ -141,7 +141,7 @@ if ( ! function_exists( 'ult_img_single_init' ) ) {
 
 								// Get image URL, If input is string - [thumbnail, medium, large, full].
 								$hasimage  = wp_get_attachment_image_src( $mainarr['id'], $size ); // returns an array.
-								$image_url = $hasimage[0];
+								$image_url = isset( $hasimage[0] ) ? $hasimage[0] : '';
 							}
 
 							if ( isset( $image_url ) && ! empty( $image_url ) ) {

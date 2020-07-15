@@ -36,9 +36,8 @@ class The7_Query {
 			'post_type'		=> $args['post_type'],
 			'order'			=> $args['order'],
 			'no_found_rows'	=> $args['no_found_rows'],
-			'orderby'		=> 'name' == $args['orderby'] ? 'title' : $args['orderby'],
+			'orderby'		=> 'name' === $args['orderby'] ? 'title' : $args['orderby'],
 			'paged'			=> the7_get_paged_var(),
-			'post_status'	=> 'publish',
 			'suppress_filters' => false,
 		);
 
@@ -142,7 +141,6 @@ class The7_Query {
 			'no_found_rows'		=> 1,
 			'posts_per_page'	=> $args['posts_per_page'],
 			'post_type'			=> $args['post_type'],
-			'post_status'		=> 'publish',
 			'post__not_in'		=> $args['post__not_in'],
 			'suppress_filters'  => false,
 			'tax_query'			=> array( array(
@@ -172,7 +170,6 @@ class The7_Query {
 	public function get_posts( $args = array() ) {
 		$defaults = array(
 			'post_type'			=> 'post',
-			'post_status'		=> 'publish' ,
 			'orderby'			=> 'date',
 			'order'				=> 'DESC',
 			'posts_per_page'	=> 10,

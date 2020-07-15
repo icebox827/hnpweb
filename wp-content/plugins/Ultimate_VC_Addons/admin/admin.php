@@ -137,6 +137,10 @@ if ( ! class_exists( 'Ultimate_Admin_Area' ) ) {
 			add_action( 'wp_ajax_update_ultimate_debug_options', array( $this, 'update_debug_settings' ) );
 			add_action( 'wp_ajax_update_ultimate_modules', array( $this, 'update_modules' ) );
 			add_action( 'wp_ajax_update_css_options', array( $this, 'update_css_options' ) );
+
+			if ( ! current_user_can( 'manage_options' ) ) {
+				return false;
+			}
 			add_action( 'wp_ajax_update_dev_notes', array( $this, 'update_dev_notes' ) );
 			add_filter( 'update_footer', array( $this, 'debug_link' ), 999 );
 		}
@@ -562,6 +566,10 @@ if ( ! class_exists( 'Ultimate_Admin_Area' ) ) {
 		 */
 		public function update_modules() {
 
+			if ( ! current_user_can( 'manage_options' ) ) {
+				return false;
+			}
+
 			check_ajax_referer( 'ultimate-modules-setting', 'security' );
 
 			if ( isset( $_POST['ultimate_row'] ) ) {
@@ -615,6 +623,10 @@ if ( ! class_exists( 'Ultimate_Admin_Area' ) ) {
 		 * @access public
 		 */
 		public function update_debug_settings() {
+
+			if ( ! current_user_can( 'manage_options' ) ) {
+				return false;
+			}
 
 			check_ajax_referer( 'ultimate-debug-settings', 'security' );
 
@@ -725,6 +737,10 @@ if ( ! class_exists( 'Ultimate_Admin_Area' ) ) {
 		 */
 		public function update_settings() {
 
+			if ( ! current_user_can( 'manage_options' ) ) {
+				return false;
+			}
+
 			check_ajax_referer( 'smooth-scroll-setting', 'security' );
 
 			if ( isset( $_POST['ultimate_smooth_scroll'] ) ) {
@@ -756,6 +772,10 @@ if ( ! class_exists( 'Ultimate_Admin_Area' ) ) {
 		 * @access public
 		 */
 		public function update_css_options() {
+
+			if ( ! current_user_can( 'manage_options' ) ) {
+				return false;
+			}
 
 			check_ajax_referer( 'css-settings-setting', 'security' );
 

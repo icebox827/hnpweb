@@ -79,12 +79,14 @@ if ( ! class_exists( 'DT_Masonry_Posts_Shortcode', false ) ):
 			// pagination
 			if ( $args['posts_per_page'] > 0 ) {
 
-				dt_paginator( $args['query'], array(
-					'class' => 'paginator iso-paginator',
-					'max_num_pages' => intval( ceil( count( $args['query']->posts ) / $args['posts_per_page'] ) ),
-					'posts_per_page' => $args['posts_per_page'],
-					'paged' => 1
-				) );
+				dt_paginator(
+					$args['query'],
+					array(
+						'class'         => 'paginator iso-paginator',
+						'max_num_pages' => (int) ceil( count( $args['query']->posts ) / $args['posts_per_page'] ),
+						'paged'         => 1,
+					)
+				);
 
 			}
 

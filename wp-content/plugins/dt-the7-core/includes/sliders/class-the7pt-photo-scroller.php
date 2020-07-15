@@ -12,8 +12,10 @@ if ( ! class_exists( 'The7pt_Photo_Scroller', false ) ) {
 	class The7pt_Photo_Scroller extends The7pt_Slider {
 
 		public function get_html() {
-			wp_enqueue_script( 'the7pt-photo-scroller' );
-			wp_enqueue_style( 'the7pt-photo-scroller' );
+		the7_register_style( 'dt-photo-scroller', PRESSCORE_THEME_URI . '/css/photo-scroller' );
+		the7_register_script( 'dt-photo-scroller', PRESSCORE_THEME_URI . '/js/photo-scroller', array(), false, true );
+			wp_enqueue_script( 'dt-photo-scroller' );
+			wp_enqueue_style( 'dt-photo-scroller' );
 			// wrap open
 			$html = '<div ' . $this->wrap_class() . ' ' . $this->wrap_data_attr() . ' ' . $this->wrap_style() . '>';
 

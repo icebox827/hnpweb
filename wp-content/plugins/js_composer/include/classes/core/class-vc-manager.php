@@ -509,12 +509,12 @@ class Vc_Manager {
 	 * Get post types where VC editors are enabled.
 	 *
 	 * @return array
+	 * @throws \Exception
 	 * @since  4.2
 	 * @access public
-	 *
 	 */
 	public function editorPostTypes() {
-		if ( is_null( $this->editor_post_types ) ) {
+		if ( null === $this->editor_post_types ) {
 			$post_types = array_keys( vc_user_access()->part( 'post_types' )->getAllCaps() );
 			$this->editor_post_types = $post_types ? $post_types : $this->editorDefaultPostTypes();
 		}
@@ -838,7 +838,6 @@ class Vc_Manager {
 	 *
 	 */
 	public function updater() {
-
 		if ( ! isset( $this->factory['updater'] ) ) {
 			do_action( 'vc_before_init_updater' );
 			require_once $this->path( 'UPDATERS_DIR', 'class-vc-updater.php' );

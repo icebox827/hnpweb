@@ -28,6 +28,15 @@ if ( ! class_exists( 'Presscore_Modules_ThemeUpdateModule', false ) ) :
 			add_action( 'admin_notices', array( __CLASS__, 'registration_admin_notice' ), 1 );
 			add_filter( 'pre_update_site_option_the7_purchase_code', array( __CLASS__, 'check_for_empty_code' ), 10, 2 );
 
+			if ( ! defined( 'THE7_IGNORE_THEME_DOWNLOAD_REQUIREMENTS' ) || ! THE7_IGNORE_THEME_DOWNLOAD_REQUIREMENTS ) {
+				add_filter(
+					'upgrader_pre_download',
+					array( __CLASS__, 'upgrader_pre_download_theme_requirements_filter' ),
+					10,
+					3
+				);
+			}
+
 			if ( ! class_exists( 'The7_Install', false ) ) {
 				include dirname( __FILE__ ) . '/class-the7-install.php';
 			}
@@ -201,10 +210,12 @@ if ( ! class_exists( 'Presscore_Modules_ThemeUpdateModule', false ) ) :
 			$theme_template = get_template();
 			if ( version_compare( wp_get_theme( $theme_template )->get( 'Version' ), $new_version, '<' ) ) {
 				$transient->response[ $theme_template ] = array(
-					'theme' => $theme_template,
-					'new_version' => $new_version,
-					'url' => presscore_theme_update_get_changelog_url(),
-					'package' => $the7_remote_api->get_theme_download_url( $new_version ),
+					'theme'        => $theme_template,
+					'new_version'  => $new_version,
+					'url'          => presscore_theme_update_get_changelog_url(),
+					'package'      => $the7_remote_api->get_theme_download_url( $new_version ),
+					'requires'     => isset( $response['requires'] ) ? $response['requires'] : '',
+					'requires_php' => isset( $response['requires_php'] ) ? $response['requires_php'] : '',
 				);
 			}
 
@@ -266,6 +277,107 @@ if ( ! class_exists( 'Presscore_Modules_ThemeUpdateModule', false ) ) :
 			}
 
 			include( dirname( __FILE__ ) . '/views/html-notice-registration.php' );
+		}
+
+		/**
+		 * @param mixed          $return
+		 * @param string         $package
+		 * @param Theme_Upgrader $upgrader
+		 *
+		 * @return bool|WP_Error
+		 */
+		public static function upgrader_pre_download_theme_requirements_filter( $return, $package, $upgrader ) {
+			if ( $return !== false ) {
+				return $return;
+			}
+
+			if ( ! is_a( $upgrader, 'Theme_Upgrader' ) ) {
+				return $return;
+			}
+
+			$theme = get_template();
+			$themes_updates = get_site_transient( 'update_themes' );
+			if ( ! isset( $themes_updates->response[ $theme ] ) ) {
+				return $return;
+			}
+
+			$the7_remote_api = new The7_Remote_API( presscore_get_purchase_code() );
+			if ( strpos( $package, $the7_remote_api->get_theme_download_url() ) === false ) {
+				return $return;
+			}
+
+			$validation_result = self::validate_theme_requirements( $themes_updates->response[ $theme ] );
+			if ( is_wp_error( $validation_result ) ) {
+				return $validation_result;
+			}
+
+			return $return;
+		}
+
+		/**
+		 * @param array $the7_update_data
+		 *
+		 * @return bool|WP_Error
+		 */
+		public static function validate_theme_requirements( $the7_update_data ) {
+			$the7_update_data = wp_parse_args(
+				$the7_update_data,
+				array(
+					'requires'     => '',
+					'requires_php' => '',
+				)
+			);
+
+			$wp_is_compatible  = is_wp_version_compatible( $the7_update_data['requires'] );
+			$php_is_compatible = is_php_version_compatible( $the7_update_data['requires_php'] );
+
+			if ( ! $wp_is_compatible && ! $php_is_compatible ) {
+				return new WP_Error(
+					'the7_need_to_update_wp_and_php',
+					sprintf(
+					/* translators: 1: WP version, 2: PHP version */
+						_x(
+							'Error: Current WordPress and PHP versions do not meet minimum requirements for The7. The latest theme version requires WP %1$s and PHP %2$s.',
+							'admin',
+							'the7mk2'
+						),
+						$the7_update_data['requires'],
+						$the7_update_data['requires_php']
+					)
+				);
+			}
+
+			if ( ! $wp_is_compatible ) {
+				return new WP_Error(
+					'the7_requires_wp_upadate',
+					sprintf(
+					/* translators: %s: WP version */
+						_x(
+							'Error: The minimum supported WP version for The7 is %s. Please upgrade.',
+							'admin',
+							'the7mk2'
+						),
+						$the7_update_data['requires']
+					)
+				);
+			}
+
+			if ( ! $php_is_compatible ) {
+				return new WP_Error(
+					'the7_requires_php_upadate',
+					sprintf(
+					/* translators: %s: PHP version */
+						_x(
+							'Error: The minimum supported PHP version for The7 is %s. Please upgrade.',
+							'admin',
+							'the7mk2'
+						),
+						$the7_update_data['requires_php']
+					)
+				);
+			}
+
+			return true;
 		}
 	}
 

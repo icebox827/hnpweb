@@ -572,6 +572,8 @@ class RevSliderFunctionsAdmin extends RevSliderFunctions {
 	 */
 	public function get_javascript_multilanguage(){
 		$lang = array(
+			'previewnotworking' => __('The preview could not be loaded due to some conflict with another WordPress theme or plugin', 'revslider'),
+			'checksystemnotworking' => __('Server connection issues, contact your hosting provider for further assistance', 'revslider'),
 			'editskins' => __('Edit Skin List', 'revslider'),
 			'globalcoloractive' => __('Color Skin Active', 'revslider'),
 			'corejs' => __('Core JavaScript', 'revslider'),
@@ -789,6 +791,7 @@ class RevSliderFunctionsAdmin extends RevSliderFunctions {
 			'layeraction_group_media' => __('Media Actions', 'revslider'),
 			'layeraction_group_fullscreen' => __('Fullscreen Actions', 'revslider'),
 			'layeraction_group_advanced' => __('Advanced Actions', 'revslider'),
+			'layeraction_menu' => __('Menu Link & Scroll', 'revslider'),
 			'layeraction_link' => __('Simple Link', 'revslider'),
 			'layeraction_callback' => __('Call Back', 'revslider'),
 			'layeraction_modal' => __('Open Slider Modal', 'revslider'),
@@ -1034,7 +1037,13 @@ class RevSliderFunctionsAdmin extends RevSliderFunctions {
 			'ihavepurchasecode' => __('I have a Purchase Code', 'revslider'),
 			'ihavelicensekey' => __('I have a License Key', 'revslider'),
 			'enterlicensekey' => __('Enter License Key', 'revslider'),
-			'enterpurchasecode' => __('Enter Purchase Code', 'revslider')
+			'enterpurchasecode' => __('Enter Purchase Code', 'revslider'),
+			'colrskinhas' => __('This Skin use', 'revslider'),
+			'deleteskin' => __('Delete Skin', 'revslider'),
+			'references' => __('References', 'revslider'),
+			'colorwillkept' => __('The References will keep their colors after deleting Skin.', 'revslider'),
+			'areyousuredeleteskin' => __('Are you sure to delete Color Skin?', 'revslider'),
+
 			
 		);
 

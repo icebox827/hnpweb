@@ -37,7 +37,7 @@ class The7_Elementor_Elements_Carousel_Widget extends The7_Elementor_Widget_Base
 	 * @return string
 	 */
 	public function get_title() {
-		return __( 'The7 Carousel', 'the7mk2' );
+		return __( 'Carousel', 'the7mk2' );
 	}
 
 	/**
@@ -46,16 +46,7 @@ class The7_Elementor_Elements_Carousel_Widget extends The7_Elementor_Widget_Base
 	 * @return string
 	 */
 	public function get_icon() {
-		return 'eicon-posts-carousel';
-	}
-
-	/**
-	 * Get widget category.
-	 *
-	 * @return array
-	 */
-	public function get_categories() {
-		return [ 'the7-elements' ];
+		return 'eicon-posts-carousel the7-widget';
 	}
 
 	public function get_script_depends() {
@@ -75,9 +66,9 @@ class The7_Elementor_Elements_Carousel_Widget extends The7_Elementor_Widget_Base
 	}
 
 	public function get_style_depends() {
-		the7_register_style( 'the7-elements-widget', PRESSCORE_THEME_URI . '/css/compatibility/elementor/the7-elements-widget' );
+		the7_register_style( 'the7-carousel-widget', PRESSCORE_THEME_URI . '/css/compatibility/elementor/the7-carousel-widget' );
 
-		return [ 'the7-elements-widget' ];
+		return [ 'the7-carousel-widget' ];
 	}
 
 	/**
@@ -742,7 +733,7 @@ class The7_Elementor_Elements_Carousel_Widget extends The7_Elementor_Widget_Base
 			[
 				'name'           => 'post_title',
 				'label'          => __( 'Typography', 'the7mk2' ),
-				'selector'       => '{{WRAPPER}} .entry-title a',
+				'selector'       => '{{WRAPPER}} .entry-title',
 				'fields_options' => [
 					'font_family' => [
 						'default' => '',
@@ -876,7 +867,7 @@ class The7_Elementor_Elements_Carousel_Widget extends The7_Elementor_Widget_Base
 						],
 					],
 				],
-				'selector'       => '{{WRAPPER}} .entry-meta > a, {{WRAPPER}} .entry-meta > span, {{WRAPPER}} .entry-meta span a',
+				'selector'       => '{{WRAPPER}} .entry-meta, {{WRAPPER}} .entry-meta > span, {{WRAPPER}} .entry-meta',
 			]
 		);
 
@@ -1322,7 +1313,7 @@ class The7_Elementor_Elements_Carousel_Widget extends The7_Elementor_Widget_Base
 				'alpha'       => true,
 				'default'     => '',
 				'selectors'   => [
-					'{{WRAPPER}} .project-links-container a:before' => 'border-color: {{VALUE}}',
+					'{{WRAPPER}} .project-links-container a:before' => 'border-color: {{VALUE}};',
 				],
 				'condition'   => [
 					'show_project_icon_border' => 'y',
@@ -2093,7 +2084,7 @@ class The7_Elementor_Elements_Carousel_Widget extends The7_Elementor_Widget_Base
 		$this->add_control(
 		    'reposition_arrows_mobile_switch_width',
 		    [
-		        'label' => __( 'Reposition arrows if browser width is less then', 'the7mk2' ),
+		        'label' => __( 'Reposition arrows after browser width', 'the7mk2' ),
 		        'type' => Controls_Manager::NUMBER,
 		        'default' => 778,
 				'condition'   => [
@@ -2592,6 +2583,7 @@ class The7_Elementor_Elements_Carousel_Widget extends The7_Elementor_Widget_Base
 					'the7-elements/tpl-layout',
 					$settings['post_layout'],
 					array(
+						'post_title'   => $this->get_post_title( $follow_link ),
 						'post_media'   => $post_media,
 						'post_meta'    => $this->get_post_meta( $post_meta ),
 						'details_btn'  => $details_btn,
@@ -2713,6 +2705,7 @@ class The7_Elementor_Elements_Carousel_Widget extends The7_Elementor_Widget_Base
 	 */
 	protected function container_class( $class = [] ) {
 		$class[] = 'portfolio-shortcode';
+		$class[] = 'the7-elementor-widget';
 
 		// Unique class.
 		$class[] = $this->get_unique_class();
@@ -2890,6 +2883,22 @@ class The7_Elementor_Elements_Carousel_Widget extends The7_Elementor_Widget_Base
 		$dynamic_import_bottom = array();
 
 		return compact( 'dynamic_import_top', 'dynamic_import_bottom' );
+	}
+
+	/**
+	 * @param string $follow_link
+	 * @param string $tag
+	 *
+	 * @return string
+	 */
+	protected function get_post_title( $follow_link, $tag = 'h4' ) {
+		return sprintf(
+			'<h3 class="entry-title %1$s-size"><a href="%2$s" title="%3$s" rel="bookmark">%4$s</a></h3>',
+			$tag,
+			esc_url( $follow_link ),
+			the_title_attribute( 'echo=0' ),
+			get_the_title()
+		);
 	}
 
 	/**

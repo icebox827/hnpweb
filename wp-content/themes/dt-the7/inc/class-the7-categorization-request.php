@@ -42,4 +42,8 @@ class The7_Categorization_Request {
 	public function get_first_term() {
 		return isset( $this->terms[0] ) ? $this->terms[0] : null;
 	}
+
+	public function filter_by_term( $term_id ) {
+		$this->terms = [ $term_id ];
+	}
 }

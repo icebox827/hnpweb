@@ -1,7 +1,6 @@
   /*Breadcrumbs*/
 .elementor-widget-the7-breadcrumb .breadcrumbs {
   margin: 0; 
-  white-space: nowrap;
 }
 .elementor-widget-the7-breadcrumb .breadcrumbs li {
     padding-left: 0;
@@ -15,4 +14,7 @@
     width: auto;
     height: auto;
     margin: 0 5px;
+}
+.elementor-widget-the7-breadcrumb .breadcrumbs li:first-child:before {
+  display: none;
 }

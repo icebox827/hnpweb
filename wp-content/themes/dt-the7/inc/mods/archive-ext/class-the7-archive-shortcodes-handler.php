@@ -35,7 +35,9 @@ class The7_Archive_Shortcodes_Handler extends The7_Orphaned_Shortcodes_Handler {
 		$out['show_filter']            = '';
 		$out['show_orderby']           = '';
 		$out['show_order']             = '';
-		$out['posts_per_page']         = '-1';
+		if ( ! in_array( $shortcode, array( 'dt_portfolio_jgrid', 'dt_albums_jgrid' ) ) ) {
+			$out['posts_per_page']         = '-1';
+		}
 
 		// Ensure that replacement appear only once.
 		remove_filter( 'shortcode_atts_' . $shortcode, array( $this, 'adjust_template_shortcode_atts' ), 10 );
@@ -43,7 +45,7 @@ class The7_Archive_Shortcodes_Handler extends The7_Orphaned_Shortcodes_Handler {
 		return $out;
 	}
 
-	public function add_hooks( DT_Shortcode_With_Inline_Css $shortcode_obj = null ) {
+	public function add_hooks( DT_Shortcode $shortcode_obj = null ) {
 		parent::add_hooks();
 
 		add_filter( 'the7_shortcode_query', array( $this, 'use_global_wp_query' ) );
@@ -55,7 +57,7 @@ class The7_Archive_Shortcodes_Handler extends The7_Orphaned_Shortcodes_Handler {
 		}
 	}
 
-	public function remove_hooks( DT_Shortcode_With_Inline_Css $shortcode_obj = null ) {
+	public function remove_hooks( DT_Shortcode $shortcode_obj = null ) {
 		parent::remove_hooks();
 
 		remove_filter( 'the7_shortcode_query', array( $this, 'use_global_wp_query' ) );

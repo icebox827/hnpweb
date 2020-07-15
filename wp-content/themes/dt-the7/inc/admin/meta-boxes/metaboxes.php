@@ -156,9 +156,12 @@ if ( class_exists('RevSlider') ) {
 	$slideshow_mode_options['revolution'] = array( _x('Slider Revolution', 'backend metabox', 'the7mk2'), array( 'sliderrevolution.gif', 75, 50) );
 }
 
-if ( function_exists('lsSliders') ) {
-
-	$layerSliders = lsSliders( 9999 );
+if ( function_exists('lsSliders') || class_exists('LS_Sliders') ) {
+	if ( class_exists('LS_Sliders') ) {
+		$layerSliders = LS_Sliders::find( array( 'limit' => 9999, 'orderby' => 'date_m' ) );
+	}else {
+		$layerSliders = lsSliders( 9999 );
+	}
 
 	foreach ( $layerSliders as $lSlide ) {
 

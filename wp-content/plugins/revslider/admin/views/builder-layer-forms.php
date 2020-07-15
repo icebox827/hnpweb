@@ -419,7 +419,7 @@ if(!defined('ABSPATH')) exit();
 						<select style="display:none !important" id="layer_pos_halign" data-unselect=".layer_hor_selector" data-select="#layer_hor_*val*" class="layerinput easyinit" data-responsive="true" data-r="position.horizontal.#size#.v" data-triggerinp="#layer_pos_x" data-triggerinpval="0"><option value="left"><?php _e('Left', 'revslider');?></option><option value="center"><?php _e('Center', 'revslider');?></option><option value="right"><?php _e('Right', 'revslider');?></option></select>
 						<select style="display:none !important" id="layer_pos_valign" data-unselect=".layer_ver_selector" data-select="#layer_ver_*val*" class="layerinput easyinit" data-responsive="true" data-r="position.vertical.#size#.v" data-triggerinp="#layer_pos_y" data-triggerinpval="0"><option value="top"><?php _e('Top', 'revslider');?></option><option value="middle"><?php _e('Center', 'revslider');?></option><option value="bottom"><?php _e('Bottom', 'revslider');?></option></select>
 						<row>
-							<onelabel><label_a><?php _e('Aligment', 'revslider');?></label_a></onelabel>
+							<onelabel><label_a><?php _e('Alignment', 'revslider');?></label_a></onelabel>
 							<oneshort><label_icon class="triggerselect ui_leftalign layer_hor_selector" data-select="#layer_pos_halign" data-val="left" id="layer_hor_left"></label_icon><label_icon class="triggerselect ui_centeralign layer_hor_selector" data-select="#layer_pos_halign" data-val="center" id="layer_hor_center"></label_icon><label_icon class="triggerselect ui_rightalign layer_hor_selector" data-select="#layer_pos_halign" data-val="right" id="layer_hor_right"></label_icon></oneshort>
 							<oneshort class="lp10"><label_icon class="triggerselect ui_topalign layer_ver_selector" data-select="#layer_pos_valign" data-val="top" id="layer_ver_top"></label_icon><label_icon class="triggerselect ui_middlealign layer_ver_selector" data-select="#layer_pos_valign" data-val="middle" id="layer_ver_middle"></label_icon><label_icon class="triggerselect ui_bottomalign layer_ver_selector" data-select="#layer_pos_valign" data-val="bottom" id="layer_ver_bottom"></label_icon></oneshort>
 						</row>
@@ -721,7 +721,7 @@ if(!defined('ABSPATH')) exit();
 						<onelong><label_icon class="ui_rotatez"></label_icon><input  class="layerinput valueduekeyboard smallinput easyinit" data-numeric="true" data-allowed="deg" data-r="idle.rotationZ" data-min="-3600" data-max="3600" type="text"></onelong>
 						<oneshort><label_icon class="ui_opacity"></label_icon><input  class="layerinput valueduekeyboard smallinput easyinit" data-numeric="true" data-allowed="" data-r="idle.opacity" data-min="0" data-max="1" data-steps="0.05" type="text"></oneshort>
 					</row>
-
+					
 				</div>
 			</div><!-- END OF BOX SHADOW SETTING -->
 
@@ -1010,7 +1010,7 @@ if(!defined('ABSPATH')) exit();
 						</row>
 						<row class="direktrow">
 							<onelong><label_icon class="ui_origoz"></label_icon><input class="layerinput valueduekeyboard smallinput easyinit" data-numeric="true" data-allowed="px,%" data-r="hover.originZ" data-min="-3600" data-max="3600" type="text"></onelong>
-							<oneshort><label_icon class="ui_perspective"></label_icon><input id="le_frame_hover_perspective" class="layerinput valueduekeyboard smallinput easyinit" data-numeric="true" data-allowed="px" data-r="hover.transformPerspective" type="text"></oneshort>
+							<oneshort><div class="global_perspective_settings global_perspecitve_local_settings"><label_icon class="ui_perspective"></label_icon><input id="le_frame_hover_perspective" class="layerinput valueduekeyboard smallinput easyinit" data-numeric="true" data-allowed="px" data-r="hover.transformPerspective" type="text"></div></oneshort>
 						</row>
 						<label_a><?php _e('Mask', 'revslider');?></label_a><input type="checkbox" id="layer_usehovermask" class="layerinput easyinit" data-r="hover.usehovermask"/>
 					</div>
@@ -1175,12 +1175,12 @@ if(!defined('ABSPATH')) exit();
 							</row>
 						</div>
 
-						<div class="show_on_frame_0">
+						<!--<div class="show_on_frame_0">
 							<row class="direktrow">
 								<onelong><label_a><?php _e('Force Prepare', 'revslider');?></label_a><input class="layerinput smallinput easyinit" type="checkbox" data-r="timeline.forcePrepare"/></onelong>
 								<oneshort></oneshort>
-							</row>
-						</div>
+							</row>								
+						</div>-->
 
 						<div class="show_on_frame_999">
 							<row class="direktrow">
@@ -1218,7 +1218,7 @@ if(!defined('ABSPATH')) exit();
 							</row>
 							<row class="direktrow">
 								<onelong><label_icon class="ui_z"></label_icon><input id="le_frame_z" class="layerinput valueduekeyboard smallinput easyinit input_with_presets" data-numeric="true" data-allowed="px,random,cycle,inherit" data-r="#frame#.transform.z"  data-presets_text="$C$px!$I$Inherit!$R$Random {min,max}!$CY$Cycles [val|val|val]" data-presets_val="50px!inherit!{-100,100}![-50|50]" type="text"></onelong>
-								<oneshort><label_icon class="ui_perspective"></label_icon><input id="le_frame_perspective" class="layerinput valueduekeyboard smallinput easyinit" data-numeric="true" data-allowed="px" data-r="#frame#.transform.transformPerspective" type="text"></oneshort>
+								<oneshort><div class="global_perspective_settings global_perspecitve_local_settings"><label_icon class="ui_perspective"></label_icon><input id="le_frame_perspective" class="layerinput valueduekeyboard smallinput easyinit" data-numeric="true" data-allowed="px" data-r="#frame#.transform.transformPerspective" type="text"></div></oneshort>
 							</row>
 							<div class="div10"></div>
 							<row class="direktrow">

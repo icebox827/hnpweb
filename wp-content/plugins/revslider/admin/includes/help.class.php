@@ -376,7 +376,24 @@ class RevSliderHelp {
 									$d => __("The module will be positioned at the top of the screen at all times.  Useful for creating sticky menus.", 'revsliderhelp'),
 									$a => $u . "module-layout/",
 									$hl => array($m => "#module_settings_trigger, #gst_sl_2", $st => '#form_slider_layout_adv', $f => '*[data-r="layout.position.fixedOnTop"]')
-								)
+								),
+								'theperspective' => array(
+									$t => __("Global 3D Perspective", 'revsliderhelp'),
+									$h => "general.perspectiveType",
+									$k => array("perspective", "isometric", "3D", "3d"),
+									$d => __("Defines the Perspective by the 3D rendering of layers. This can be set globally (3D Uniset) for better and easier handling or individuel (3D Individual) on each single layer frames. We recommend to do this globally.  The Special option Isometric will set the perspective to 0 automatically", 'revsliderhelp'),
+									$a => $u . "module-layout/",
+									$hl => array($m => "#module_settings_trigger, #gst_sl_2", $st => '#form_slider_layout_adv', $f => '*[data-r="layout.general.perspectiveType"]')
+								),
+								'theperspective_value' => array(
+									$t => __("Global 3D Layer Perspective", 'revsliderhelp'),
+									$h => "general.perspective",
+									$k => array("perspective", "isometric", "3D", "3d","layer perspective"),
+									$d => __("Defines the Perspective by the 3D rendering of layers globally.", 'revsliderhelp'),
+									$a => $u . "module-layout/",
+									$hl => array($m => "#module_settings_trigger, #gst_sl_2", $st => '#form_slider_layout_adv', $f => '*[data-r="layout.general.perspective"]')
+								),
+
 							),
 							'slider_wrapper_position' => array(
 								'align' => array(

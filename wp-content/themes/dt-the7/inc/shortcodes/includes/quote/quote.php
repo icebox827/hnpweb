@@ -50,14 +50,13 @@ if ( ! class_exists( 'DT_Shortcode_Quote', false ) ) {
 				$classes[] = presscore_get_shortcode_animation_html_class( $animation );
 			}
 
-			if ( 'blockquote' != $type ) {
+			if ( 'blockquote' !== $type ) {
 				$tag = 'q';
-				$autop = false;
 
 				$classes[] = 'shortcode-pullquote';
 				$classes[] = 'wf-cell';
 
-				if ( 'right' == $layout ) {
+				if ( 'right' === $layout ) {
 					$classes[] = 'align-right';
 				} else {
 					$classes[] = 'align-left';
@@ -72,27 +71,22 @@ if ( ! class_exists( 'DT_Shortcode_Quote', false ) ) {
 
 			} else {
 				$tag = 'blockquote';
-				$autop = true;
 				$classes[] = 'shortcode-blockquote';
 
-				if ( 'fancy' == $background ) {
+				if ( 'fancy' === $background ) {
 					$classes[] = 'block-style-widget';
 				}
 			}
 
-			$classes = implode( ' ', $classes );
-
-			$output = sprintf( '<%1$s class="%2$s">%3$s</%1$s>',
+			return sprintf( '<%1$s class="%2$s">%3$s</%1$s>',
 				$tag,
-				esc_attr( $classes ),
+				esc_attr( implode( ' ', $classes ) ),
 
 				/**
 				 * @see  sanitize-functions.php
 				 */
-				presscore_remove_wpautop( $content, $autop )
+				presscore_remove_wpautop( $content, true )
 			);
-
-			return $output; 
 		}
 
 	}

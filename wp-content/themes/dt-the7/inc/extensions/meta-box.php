@@ -48,7 +48,9 @@ add_action( 'admin_init', 'presscore_register_meta_boxes', 30 );
 
 /**
  * Define default meta boxes for templates
- * 
+ *
+ * @TODO: Delete in the future.
+ *
  * @param  array $hidden Hidden Meta Boxes
  * @param  string|WP_Screen $screen Current screen
  * @param  bool $use_defaults Use default Meta Boxes or not
@@ -56,43 +58,37 @@ add_action( 'admin_init', 'presscore_register_meta_boxes', 30 );
  * @return array Hidden Meta Boxes
  */
 function presscore_hidden_meta_boxes( $hidden, $screen, $use_defaults ) {
-	static $extra_hidden = null;
+	$template   = dt_get_template_name();
+	$meta_boxes = the7_get_meta_boxes_with_template_dependencies();
 
-	// return saved result
-	if ( null !== $extra_hidden ) return $extra_hidden;
+	foreach ( $meta_boxes as $meta_box ) {
+		if ( in_array( $template, (array) $meta_box['only_on']['template'], true ) ) {
+			$meta_box_key_to_show = array_search( $meta_box['id'], $hidden, true );
+			if ( false !== $meta_box_key_to_show ) {
+				unset( $hidden[ $meta_box_key_to_show ] );
+			}
+		} else {
+			$hidden[] = $meta_box['id'];
+		}
+	}
 
+	return array_unique( $hidden );
+}
+//add_filter('hidden_meta_boxes', 'presscore_hidden_meta_boxes', 99, 3);
+
+/**
+ * @return array
+ */
+function the7_get_meta_boxes_with_template_dependencies() {
 	global $DT_META_BOXES;
-	$template = dt_get_template_name();
+
 	$meta_boxes = array();
 
 	foreach ( $DT_META_BOXES as $meta_box ) {
-
-		// if field 'only_on' is empty - show metabox everywhere
-		// if current template in templates list - show metabox
-		if ( 
-			empty($meta_box['only_on']) ||
-			empty($meta_box['only_on']['template']) ||
-			in_array($template, (array) $meta_box['only_on']['template'] )
-		) {
-
-			// find metabox id in hidden list
-			$bad_key = array_search( $meta_box['id'], $hidden );
-
-			// show current metabox
-			if ( false !== $bad_key ) { unset($hidden[ $bad_key ]); }
-
-			continue;
+		if ( isset( $meta_box['only_on']['template'] ) ) {
+			$meta_boxes[] = $meta_box;
 		}
-
-		$meta_boxes[] = $meta_box['id'];
 	}
 
-	// save result
-	$extra_hidden = $hidden;
-	if( !empty($meta_boxes) ) {
-		$extra_hidden = array_unique( array_merge($hidden, $meta_boxes) );
-	}
-
-	return $extra_hidden;
+	return $meta_boxes;
 }
-add_filter('hidden_meta_boxes', 'presscore_hidden_meta_boxes', 99, 3);

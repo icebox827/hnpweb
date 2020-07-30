@@ -471,6 +471,9 @@ if ( ! function_exists( 'presscore_config_logo_options' ) ) :
 		$config->set( 'logo.header.transparent.regular', of_get_option( 'header-style-transparent-logo_regular', array( '', 0 ) ) );
 		$config->set( 'logo.header.transparent.hd', of_get_option( 'header-style-transparent-logo_hd', array( '', 0 ) ) );
 
+		$config->set( 'logo.header.transparent.top.line', of_get_option( 'header-style-mixed-transparent-top_line-logo_regular', array( '', 0 ) ) );
+		$config->set( 'logo.header.transparent.top.line.hd', of_get_option( 'header-style-mixed-transparent-top_line-logo_hd', array( '', 0 ) ) );
+
 		$config->set( 'logo.header.floating.regular', of_get_option( 'header-style-floating-logo_regular', array( '', 0 ) ) );
 		$config->set( 'logo.header.floating.hd', of_get_option( 'header-style-floating-logo_hd', array( '', 0 ) ) );
 

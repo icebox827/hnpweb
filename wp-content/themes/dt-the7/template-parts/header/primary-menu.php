@@ -14,7 +14,7 @@ do_action( 'presscore_before_primary_menu' );
 
 $menu_location = ( isset( $menu_location ) ? $menu_location : 'primary' );
 
-echo '<ul id="' . esc_attr( "{$menu_location}-menu" ) . '" class="' . implode( ' ', presscore_get_primary_menu_class( 'main-nav' ) ) . '" role="navigation">';
+echo '<ul id="' . esc_attr( "{$menu_location}-menu" ) . '" class="' . implode( ' ', presscore_get_primary_menu_class( 'main-nav' ) ) . '" role="menu">';
 
 presscore_primary_nav_menu( $menu_location );
 

@@ -245,10 +245,15 @@ if ( ! function_exists( 'presscore_get_the_mixed_logo' ) ) :
 	 * @return string
 	 */
 	function presscore_get_the_mixed_logo() {
-		if ( presscore_header_is_transparent() && presscore_mixed_header_with_top_line() ) {
-			$config = presscore_config();
-			$logo = $config->get( 'logo.header.transparent.regular' );
-			$hd_logo = $config->get( 'logo.header.transparent.hd' );
+		if ( presscore_header_is_transparent() && presscore_config()->get( 'header.layout' ) === 'top_line' && of_get_option( 'header-style-mixed-transparent-top_line-choose_logo') !== 'main' ) {
+		
+
+			if ( 'none' === of_get_option( 'header-style-mixed-transparent-top_line-choose_logo') ) {
+				return '';
+			}
+
+			$logo = of_get_option( 'header-style-mixed-transparent-top_line-logo_regular', array( '', 0 ) );
+			$hd_logo = of_get_option( 'header-style-mixed-transparent-top_line-logo_hd', array( '', 0 ) );
 		} else {
 			$logo = of_get_option( 'header-style-mixed-logo_regular', array('', 0) );
 			$hd_logo = of_get_option( 'header-style-mixed-logo_hd', array('', 0) );

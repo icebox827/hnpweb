@@ -439,7 +439,7 @@
   display: inline-block;
 }
 .main-nav .dt-mega-menu .sub-nav .dt-mega-parent > a > i,
-.main-nav .dt-mega-menu .sub-nav .dt-mega-parent > a > span > i {
+.main-nav .dt-mega-menu .sub-nav .dt-mega-parent > a > span i {
   font-size: 18px;
   color: #1f365c;
 }

@@ -22,8 +22,13 @@ if ( ! presscore_get_header_elements_list( 'side_top_line' ) ) {
 if ( ! presscore_get_header_elements_list( 'top_line_right' ) ) {
 	$top_line_right_classes = 'empty-widgets';
 }
-?>
 
+if ( $config->get( 'header.mixed.view.top_line.is_sticky' )){
+?>
+<div class="top-line-space"></div>
+<?php 
+}
+?>
 <div <?php presscore_mixed_header_class( 'masthead mixed-header' ); ?> <?php presscore_header_inline_style(); ?> role="banner">
 
 	<?php presscore_get_template_part( 'theme', 'header/top-bar' ); ?>

@@ -194,7 +194,7 @@ $DT_META_BOXES[] = array(
 
 		array(
 			'name' => _x( 'TOP LINE / SIDE LINE / FLOATING MENU BUTTON', 'backend metabox', 'the7mk2' ),
-			'id'   => 'transparent_logo_heading',
+			'id'   => 'mixed_logo_heading',
 			'type' => 'heading',
 		),
 
@@ -224,6 +224,42 @@ $DT_META_BOXES[] = array(
 			'name'             => $logo_hd_field_title,
 			'desc'             => _x( 'Leave empty to hide logo.', 'backend metabox', 'the7mk2' ),
 			'id'               => "{$prefix}mixed_logo_hd",
+			'type'             => 'image_advanced_mk2',
+			'max_file_uploads' => 1,
+		),
+
+		array(
+			'name' => _x( 'TRANSPARENT TOP LINE', 'backend metabox', 'the7mk2' ),
+			'id'   => 'mixed_transparent_logo_heading',
+			'type' => 'heading',
+		),
+
+		array(
+			'name'        => '',
+			'id'          => "{$prefix}mixed_transparent_logo_type",
+			'type'        => 'radio',
+			'std'         => 'default',
+			'options'     => array(
+				'default'  => _x( 'Default', 'backend metabox', 'the7mk2' ),
+				'custom' => _x( 'Custom', 'backend metabox', 'the7mk2' ),
+			),
+			'hide_fields'	=> array(
+				'default'	=> array("{$prefix}mixed_transparent_logo_regular", "{$prefix}mixed_transparent_logo_hd" ),
+			)
+		),
+
+		array(
+			'name'             => $logo_field_title,
+			'desc'             => _x( 'Leave empty to hide logo.', 'backend metabox', 'the7mk2' ),
+			'id'               => "{$prefix}mixed_transparent_logo_regular",
+			'type'             => 'image_advanced_mk2',
+			'max_file_uploads' => 1,
+		),
+
+		array(
+			'name'             => $logo_hd_field_title,
+			'desc'             => _x( 'Leave empty to hide logo.', 'backend metabox', 'the7mk2' ),
+			'id'               => "{$prefix}mixed_transparent_logo_hd",
 			'type'             => 'image_advanced_mk2',
 			'max_file_uploads' => 1,
 		),

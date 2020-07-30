@@ -11,6 +11,8 @@ use Elementor\Plugin;
 use Elementor\Widget_Base;
 use ElementorPro\Modules\GlobalWidget\Widgets\Global_Widget;
 use The7\Adapters\Elementor\QueryControl\The7_Query_Control_Module;
+use The7\Elementor\Modules\The7_Exend_Image_Widget;
+use The7\Elementor\Modules\The7_Lazy_Loading_Support;
 use The7_Elementor_Compatibility;
 
 defined( 'ABSPATH' ) || exit;
@@ -105,6 +107,13 @@ class The7_Elementor_Widgets {
 	 * @throws Exception
 	 */
 	public function load_dependencies() {
+		require_once __DIR__ . '/modules/lazy-loading/class-the7-lazy-loading-support.php';
+		new The7_Lazy_Loading_Support();
+
+		require_once __DIR__ . '/modules/extend-image-widget/class-the7-extend-image-widget.php';
+		new The7_Exend_Image_Widget();
+
+
 		require_once __DIR__ . '/pro/modules/query-contol/class-the7-group-contol-query.php';
 		require_once __DIR__ . '/pro/modules/query-contol/class-the7-control-query.php';
 		require_once __DIR__ . '/pro/modules/query-contol/class-the7-posts-query.php';
@@ -126,7 +135,9 @@ class The7_Elementor_Widgets {
 
 		require_once __DIR__ . '/widgets/class-the7-elementor-style-global-widget.php';
 
-		new The7_Query_Control_Module();
+		require_once __DIR__ . '/widgets/class-the7-elementor-photo-scroller-widget.php';
+		require_once __DIR__ . '/widgets/class-the7-elementor-nav-menu.php';
+
 
 		$terms_selector_mutator = new The7_Elementor_Widget_Terms_Selector_Mutator();
 		$terms_selector_mutator->bootstrap();
@@ -136,6 +147,7 @@ class The7_Elementor_Widgets {
 			'class-the7-elementor-elements-carousel-widget' => ['position' => 'before'],
 			'class-the7-elementor-elements-breadcrumbs-widget'=> ['position' => 'before'],
 			'class-the7-elementor-photo-scroller-widget' => ['position' => 'before'],
+			'class-the7-elementor-nav-menu' => ['position' => 'before'],
 		];
 
 		if ( class_exists( 'DT_Shortcode_Products_Carousel', false ) ) {
@@ -237,5 +249,64 @@ class The7_Elementor_Widgets {
 
 	protected function collection_add_unregister_widget( $widget ) {
 		$this->unregister_widgets_collection[ $widget->get_name() ] = $widget;
+	}
+
+	public static function update_control_fields( $widget, $control_id, array $args ) {
+		$control_data = Plugin::instance()->controls_manager->get_control_from_stack( $widget->get_unique_name(), $control_id );
+		if ( ! is_wp_error( $control_data ) ) {
+			$widget->update_control( $control_id, $args );
+		}
+	}
+
+	public static function update_control_group_fields( Widget_Base $widget, $group_name, $control_data ) {
+		$group = Plugin::$instance->controls_manager->get_control_groups( $group_name );
+		if ( ! $group ) {
+			return;
+		}
+		$fields = $group->get_fields();
+		$control_prefix = $control_data['name'] . "_";
+
+		foreach ( $fields as $field_id => $field ) {
+			$args = [];
+			if ( ! empty( $field['selectors'] ) ) {
+				$args['selectors'] = self::handle_selectors( $field['selectors'], $control_data, $control_prefix );
+			}
+			if ( count( $args ) ) {
+				self::update_control_fields( $widget, $control_prefix . $field_id, $args );
+			}
+		}
+	}
+
+	private static function handle_selectors( $selectors, $args, $controls_prefix ) {
+		$selectors = array_combine( array_map( function ( $key ) use ( $args ) {
+			return str_replace( '{{SELECTOR}}', $args['selector'], $key );
+		}, array_keys( $selectors ) ), $selectors );
+
+		if ( ! $selectors ) {
+			return $selectors;
+		}
+
+		foreach ( $selectors as &$selector ) {
+			$selector = preg_replace_callback( '/\{\{\K(.*?)(?=}})/', function ( $matches ) use ( $controls_prefix ) {
+				return preg_replace_callback( '/[^ ]+(?=\.)/', function ( $sub_matches ) use ( $controls_prefix ) {
+					return $controls_prefix . $sub_matches[0];
+				}, $matches[1] );
+			}, $selector );
+		}
+
+		return $selectors;
+	}
+
+	public static function update_responsive_control_fields( Widget_Base $widget, $control_id, array $args ) {
+		$devices = [
+			$widget::RESPONSIVE_DESKTOP,
+			$widget::RESPONSIVE_TABLET,
+			$widget::RESPONSIVE_MOBILE,
+		];
+
+		foreach ( $devices as $device_name ) {
+			$id_suffix = $widget::RESPONSIVE_DESKTOP === $device_name ? '' : '_' . $device_name;
+			self::update_control_fields( $widget, $control_id . $id_suffix, $args );
+		}
 	}
 }

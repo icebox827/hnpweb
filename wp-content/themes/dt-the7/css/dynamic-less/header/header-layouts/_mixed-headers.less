@@ -79,11 +79,18 @@
 		}
 	}
 }
-.mixed-header .branding > a,
-.mixed-header .branding > img {
+.mixed-header:not(.sticky-top-line-on) .branding > a,
+.mixed-header:not(.sticky-top-line-on) .branding > img {
 	padding: @mixed-logo-top-padding @mixed-logo-right-padding @mixed-logo-bottom-padding @mixed-logo-left-padding;
+	.transparent & {
+		padding: @transparent-mixed-logo-top-padding @transparent-mixed-logo-right-padding @transparent-mixed-logo-bottom-padding @transparent-mixed-logo-left-padding;
+	}
 }
+.mixed-header.sticky-top-line-on .branding > a,
+.mixed-header.sticky-top-line-on .branding > img {
+	padding: @floating-mixed-logo-top-padding @floating-mixed-logo-right-padding @floating-mixed-logo-bottom-padding @floating-mixed-logo-left-padding;
 
+}
 /*Additional background for "Navigation on click" headers*/
 .mixed-header.side-header-h-stroke.line-decoration:not(.masthead-mobile-header) {
 	border-bottom: @navigation-line-decoration-line-size solid @navigation-line-decoration-color;

@@ -59,7 +59,15 @@ class The7_Less_Vars_Value_Color extends The7_Less_Vars_Builder {
 		if ( empty( $this->color ) ) {
 			return $this->default;
 		}
-		return $this->get_wrapped( 'rgba(' . implode( ',', $this->color->getRGB() ) . ',' . $this->opacity . ')' );
+
+		$opacity = $this->opacity;
+		if ( $opacity > 0 && $opacity < 1 ) {
+			$opacity = number_format( (float) $opacity, 2, '.', '' );
+		}
+
+		return $this->get_wrapped(
+			'rgba(' . implode( ',', $this->color->getRGB() ) . ',' . $opacity . ')'
+		);
 	}
 
 	protected function sanitize_opacity( $value ) {

@@ -1306,7 +1306,8 @@ function presscore_action_add_less_vars( The7_Less_Vars_Manager_Interface $less_
 		'transparent-mobile' => 'header-style-transparent-mobile',
 		'bottom'             => 'bottom_bar',
 		'mixed'              => 'header-style-mixed',
-		'floating-top'       => 'header-style-mixed-top_line-floating',
+		'floating-mixed'     => 'header-style-mixed-top_line-floating',
+		'transparent-mixed'     => 'header-style-mixed-transparent-top_line'
 	);
 
 	foreach ( $indention as $var_prefix => $opt_prefix ) {

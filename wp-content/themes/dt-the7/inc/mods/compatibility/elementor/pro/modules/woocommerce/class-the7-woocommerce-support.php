@@ -7,6 +7,7 @@ use Elementor\Plugin;
 use Elementor\Widget_Base;
 use ElementorPro\Modules\Woocommerce\Documents\Product;
 use ElementorPro\Modules\Woocommerce\Widgets\Products_Base;
+use The7\Adapters\Elementor\The7_Elementor_Widgets;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -156,7 +157,7 @@ class Woocommerce_Support {
 				'{{WRAPPER}}.elementor-wc-products ul.products li.product .button' => 'background: {{VALUE}};',
 			],
 		];
-		$this->update_control_fields( $widget, 'button_background_color', $control_data );
+		The7_Elementor_Widgets::update_control_fields( $widget, 'button_background_color', $control_data );
 
 		$control_data = [
 			'options' => [
@@ -169,7 +170,7 @@ class Woocommerce_Support {
 				'groove' => _x( 'Groove', 'Border Control', 'the7mk2' ),
 			],
 		];
-		$this->update_control_fields( $widget, 'button_border_border', $control_data );
+		The7_Elementor_Widgets::update_control_fields( $widget, 'button_border_border', $control_data );
 
 		$control_data = [
 			'condition' => [
@@ -177,22 +178,16 @@ class Woocommerce_Support {
 			],
 		];
 
-		$this->update_control_fields( $widget, 'button_border_width', $control_data );
+		The7_Elementor_Widgets::update_control_fields( $widget, 'button_border_width', $control_data );
 
 		$control_data = [
 			'selectors' => [
 				'{{WRAPPER}}.elementor-wc-products ul.products li.product span.onsale' => 'background: {{VALUE}}',
 			],
 		];
-		$this->update_control_fields( $widget, 'onsale_text_background_color', $control_data );
+		The7_Elementor_Widgets::update_control_fields( $widget, 'onsale_text_background_color', $control_data );
 	}
-
-	public function update_control_fields( $widget, $control_id, array $args ) {
-		$control_data = Plugin::instance()->controls_manager->get_control_from_stack( $widget->get_unique_name(), $control_id );
-		if ( ! is_wp_error( $control_data ) ) {
-			$widget->update_control( $control_id, $args );
-		}
-	}
+ 
 
 	public function fix_pages_widget_preview( $widget_content, Widget_Base $widget ) {
 		if ( Plugin::$instance->editor->is_edit_mode() ) {

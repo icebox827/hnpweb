@@ -1052,3 +1052,56 @@ if ( ! function_exists( 'the7_main_container_wrap_style' ) ) {
 		echo presscore_get_inline_style_attr( $style );
 	}
 }
+
+if ( ! function_exists( 'presscore_post_navigation_controller' ) ) :
+
+	/**
+	 * Post pagination controller.
+	 *
+	 * @deprecated 9.2.0
+	 */
+	function presscore_post_navigation_controller() {
+		if ( ! in_the_loop() ) {
+			return;
+		}
+
+		$show_navigation = presscore_is_post_navigation_enabled();
+
+		if ( $show_navigation ) {
+			presscore_post_navigation();
+		}
+	}
+
+endif;
+
+if ( ! function_exists( 'presscore_post_navigation' ) ) :
+
+	/**
+	 * @deprecated 9.2.0
+	 */
+	function presscore_post_navigation() {
+
+		if ( ! in_the_loop() ) {
+			return '';
+		}
+
+		$config = Presscore_Config::get_instance();
+
+		$output = '';
+
+		if ( $config->get( 'post.navigation.arrows.enabled' ) ) {
+			$output .= presscore_get_previous_post_link( '', 'prev-post', '<a class="prev-post disabled" href="javascript:void(0);"></a>' );
+		}
+
+		if ( $config->get( 'post.navigation.back_button.enabled' ) ) {
+			$output .= presscore_get_post_back_link();
+		}
+
+		if ( $config->get( 'post.navigation.arrows.enabled' ) ) {
+			$output .= presscore_get_next_post_link( '', 'next-post', '<a class="next-post disabled" href="javascript:void(0);"></a>' );
+		}
+
+		return $output;
+	}
+
+endif;

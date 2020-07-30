@@ -118,8 +118,8 @@ class The7_Aq_Resize
 
 		// Get image size after cropping.
 		$dims = image_resize_dimensions( $orig_w, $orig_h, $width, $height, $crop );
-		$dst_w = $dims[4];
-		$dst_h = $dims[5];
+		$dst_w = isset( $dims[4] ) ? $dims[4] : $orig_w;
+		$dst_h = isset( $dims[5] ) ? $dims[5] : $orig_h;
 
 		// Return the original image only if it exactly fits the needed measures.
 		if ( ! $dims && ( ( ( null === $height && $orig_w == $width ) xor ( null === $width && $orig_h == $height ) ) xor ( $height == $orig_h && $width == $orig_w ) ) ) {
@@ -153,6 +153,8 @@ class The7_Aq_Resize
 				if ( ! is_wp_error( $resized_file ) ) {
 					$resized_rel_path = str_replace( $upload_dir, '', $resized_file['path'] );
 					$img_url = $upload_url . $resized_rel_path;
+					$dst_w = $resized_file['width'];
+					$dst_h = $resized_file['height'];
 				} else {
 					return false;
 				}

@@ -40,6 +40,13 @@ class The7Brainstorm extends BundledContent {
 		), 30 );
 
 		if (! defined( 'BSF_UNREG_MENU')) define( 'BSF_UNREG_MENU', true);
+
+		if (defined ('ULTIMATE_THEME_ACT') || defined ('CONVERTPLUS_THEME_ACT') ) {
+			add_action( 'admin_head', array( $this, 'admin_css' ), 100 );
+		}
+
+
+
 	}
 
 	public function isActivatedByTheme() {
@@ -62,6 +69,23 @@ class The7Brainstorm extends BundledContent {
 		$text = 'http://support.dream-theme.com';
 
 		return $text;
+	}
+
+	public function admin_css() {
+		?>
+		<style type="text/css">
+            <?php if (defined ('ULTIMATE_THEME_ACT')) : ?>
+                #the-list > tr[data-slug=the7-ultimate-addons-for-wpbakery-page-builder] .license {
+                    display: none;
+                }
+            <?php endif ?>
+            <?php if (defined ('CONVERTPLUS_THEME_ACT')) : ?>
+                #the-list > tr[data-slug=the7-convert-plus] .license {
+                    display: none;
+                }
+            <?php endif ?>
+		</style>
+		<?php
 	}
 
 

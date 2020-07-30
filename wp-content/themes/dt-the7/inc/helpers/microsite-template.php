@@ -131,6 +131,14 @@ if ( ! function_exists( 'presscore_microsite_theme_options_filter' ) ) :
 				'value_meta_id' => 'mixed_logo_hd',
 				'type_meta_id' => 'mixed_logo_type'
 			),
+			'header-style-mixed-transparent-top_line-logo_regular' => array(
+				'value_meta_id' => 'mixed_transparent_logo_regular',
+				'type_meta_id' => 'mixed_transparent_logo_type'
+			),
+			'header-style-mixed-transparent-top_line-logo_hd' => array(
+				'value_meta_id' => 'mixed_transparent_logo_hd',
+				'type_meta_id' => 'mixed_transparent_logo_type'
+			),
 			'header-style-floating-logo_regular' => array(
 				'value_meta_id' => 'floating_logo_regular',
 				'type_meta_id' => 'floating_logo_type',

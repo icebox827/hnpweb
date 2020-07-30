@@ -81,5 +81,21 @@ return [
 				],
 			],
 		],
+		'the7_document_hide_sidear_on_mobile' => [
+			'meta' => '_dt_sidebar_hide_on_mobile',
+			'args' => [
+				'label'        => __( 'Hide on mobile layout', 'the7mk2' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'default'      => '0',
+				'label_on'     => __( 'Yes', 'the7mk2' ),
+				'label_off'    => __( 'No', 'the7mk2' ),
+				'return_value' => '1',
+				'empty_value'  => '0',
+				'separator'    => 'none',
+				'condition'    => [
+					'the7_document_sidebar_position' => [ 'left', 'right' ],
+				],
+			],
+		],
 	],
 ];

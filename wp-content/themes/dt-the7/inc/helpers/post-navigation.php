@@ -45,35 +45,6 @@ if ( ! function_exists( 'presscore_get_post_back_link' ) ) :
 
 endif;
 
-if ( ! function_exists( 'presscore_post_navigation' ) ) :
-
-	function presscore_post_navigation() {
-
-		if ( ! in_the_loop() ) {
-			return '';
-		}
-
-		$config = Presscore_Config::get_instance();
-
-		$output = '';
-
-		if ( $config->get( 'post.navigation.arrows.enabled' ) ) {
-			$output .= presscore_get_previous_post_link( '', 'prev-post', '<a class="prev-post disabled" href="javascript:void(0);"></a>' );
-		}
-
-		if ( $config->get( 'post.navigation.back_button.enabled' ) ) {
-			$output .= presscore_get_post_back_link();
-		}
-
-		if ( $config->get( 'post.navigation.arrows.enabled' ) ) {
-			$output .= presscore_get_next_post_link( '', 'next-post', '<a class="next-post disabled" href="javascript:void(0);"></a>' );
-		}
-
-		return $output;
-	}
-
-endif;
-
 if ( ! function_exists( 'presscore_new_post_navigation' ) ) :
 
 	function presscore_new_post_navigation( $args = array() ) {
@@ -145,7 +116,16 @@ if ( ! function_exists( 'presscore_new_post_navigation' ) ) :
 		}
 
 		if ( $output ) {
-			$output = '<nav class="navigation post-navigation" role="navigation"><h2 class="screen-reader-text">' . esc_html( $args['screen_reader_text'] ) . '</h2><div class="nav-links">' . $output . '</div></nav>';
+			$nav_class = array(
+				'navigation',
+				'post-navigation',
+			);
+
+			if ( ! $config->get( 'post.navigation.arrows.enabled' ) ) {
+				$nav_class[] = 'disabled-post-navigation';
+			}
+
+			$output = '<nav class="' . esc_attr( implode( ' ', $nav_class ) ) . '" role="navigation"><h2 class="screen-reader-text">' . esc_html( $args['screen_reader_text'] ) . '</h2><div class="nav-links">' . $output . '</div></nav>';
 		}
 
 		return $output;

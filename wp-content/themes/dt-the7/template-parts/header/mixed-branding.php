@@ -17,7 +17,8 @@ defined( 'ABSPATH' ) || exit;
 	$logo .= presscore_get_the_mobile_logo();
 
 	$logo_class = '';
-	if ( presscore_is_floating_transparent_top_line_header() && 'main' === of_get_option( 'header-style-mixed-top_line-floating-choose_logo' ) ) {
+
+	if ( of_get_option( 'header-style-mixed-top_line-floating-choose_logo' ) === 'main' && ( ! presscore_header_is_transparent() || of_get_option( 'header-style-mixed-transparent-top_line-choose_logo') === 'main') && presscore_config()->get('header.layout') === 'top_line' ) {
 		$logo_class = 'same-logo';
 	}
 

@@ -12,6 +12,7 @@ use Elementor\Group_Control_Typography;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Icons_Manager;
+use The7\Adapters\Elementor\With_Post_Excerpt;
 use The7_Query_Builder;
 use The7\Adapters\Elementor\The7_Elementor_Widget_Base;
 use The7\Adapters\Elementor\The7_Elementor_Less_Vars_Decorator_Interface;
@@ -19,6 +20,8 @@ use The7\Adapters\Elementor\The7_Elementor_Less_Vars_Decorator_Interface;
 defined( 'ABSPATH' ) || exit;
 
 class The7_Elementor_Elements_Carousel_Widget extends The7_Elementor_Widget_Base {
+
+	use With_Post_Excerpt;
 
 	/**
 	 * Get element name.
@@ -934,7 +937,7 @@ class The7_Elementor_Elements_Carousel_Widget extends The7_Elementor_Widget_Base
 			'excerpt_words_limit',
 			[
 				'label'       => __( 'Maximum number of words', 'the7mk2' ),
-				'description' => __( 'Leave empty to show full text.', 'the7mk2' ),
+				'description' => __( 'Leave empty to show the entire excerpt.', 'the7mk2' ),
 				'type'        => Controls_Manager::NUMBER,
 				'default'     => '',
 				'condition'   => [
@@ -2578,6 +2581,11 @@ class The7_Elementor_Elements_Carousel_Widget extends The7_Elementor_Widget_Base
 					'comments' => $settings['post_comments'],
 				];
 
+				$post_excerpt = '';
+				if ( $settings['post_content'] !== 'off' ) {
+					$post_excerpt = $this->get_post_excerpt( $settings['excerpt_words_limit'] );
+				}
+
 				presscore_get_template_part(
 					'elementor',
 					'the7-elements/tpl-layout',
@@ -2587,7 +2595,7 @@ class The7_Elementor_Elements_Carousel_Widget extends The7_Elementor_Widget_Base
 						'post_media'   => $post_media,
 						'post_meta'    => $this->get_post_meta( $post_meta ),
 						'details_btn'  => $details_btn,
-						'post_excerpt' => $this->get_post_excerpt(),
+						'post_excerpt' => $post_excerpt,
 						'icons_html'   => $icons_html,
 						'follow_link'  => $follow_link,
 					)
@@ -2622,38 +2630,9 @@ class The7_Elementor_Elements_Carousel_Widget extends The7_Elementor_Widget_Base
 
 		$btn_text    .= '<i class="dt-icon-the7-arrow-03" aria-hidden="true"></i>';
 		$return_class = implode( ' ', $class );
+		$aria_label = esc_attr( the7_get_read_more_aria_label() );
 
-		return '<a class=" ' . $return_class . ' " href=" ' . $btn_link . ' " target="' . $target . '">' . $btn_text . '</a>';
-	}
-
-	/**
-	 * Return post excerpt with $length words.
-	 *
-	 * @return mixed
-	 */
-	protected function get_post_excerpt() {
-		global $post;
-
-		$settings = $this->get_settings_for_display();
-
-		if ( 'off' === $settings['post_content'] ) {
-			return '';
-		}
-
-		$post_back = $post;
-
-		$excerpt = get_the_excerpt();
-
-		if ( $settings['excerpt_words_limit'] ) {
-			$excerpt = wp_trim_words( $excerpt, absint( $settings['excerpt_words_limit'] ) );
-		}
-
-		$excerpt = apply_filters( 'the_excerpt', $excerpt );
-
-		// Restore original post in case some shortcode in the content will change it globally.
-		$post = $post_back;
-
-		return $excerpt;
+		return '<a class=" ' . $return_class . ' " href=" ' . $btn_link . ' " target="' . $target . '" aria-label="' . $aria_label . '" rel="nofollow">' . $btn_text . '</a>';
 	}
 
 	protected function get_post_meta( $required_meta = [] ) {

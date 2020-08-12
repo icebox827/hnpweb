@@ -33,7 +33,7 @@ if ( $show_outside ) {
 		echo $menu_icon;
 	}
 	?>
-	<ul id="mobile-menu" class="mobile-main-nav" role="navigation">
+	<ul id="mobile-menu" class="mobile-main-nav" role="menubar">
 		<?php
 		if ( ! isset( $location ) ) {
 			$location = ( presscore_has_mobile_menu() ? 'mobile' : 'primary' );

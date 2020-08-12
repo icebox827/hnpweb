@@ -333,30 +333,6 @@ if ( ! function_exists( 'presscore_excerpt_more_filter' ) ) :
 
 endif;
 
-if ( ! function_exists( 'presscore_add_more_anchor' ) ) :
-
-	/**
-	 * Add anchor #more-{$post->ID} to href.
-	 *
-	 * @param string $content
-	 *
-	 * @return string
-	 */
-	function presscore_add_more_anchor( $content = '' ) {
-		global $post;
-
-		if ( $post ) {
-			$content = preg_replace( '/href=[\'"]?([^\'" >]+)/', ( 'href="$1#more-' . $post->ID ), $content );
-		}
-
-		// Added in helpers.php:3120+.
-		remove_filter( 'presscore_post_details_link', 'presscore_add_more_anchor', 15 );
-
-		return $content;
-	}
-
-endif;
-
 if ( ! function_exists( 'presscore_return_empty_string' ) ) :
 
 	/**

@@ -42,7 +42,7 @@ class The7_Walker_Nav_Menu extends Walker_Nav_Menu {
 
 		$output .= apply_filters(
 			'presscore_nav_menu_start_lvl',
-			'<ul class="' . esc_attr( $args->submenu_class ) . '">',
+			'<ul class="' . esc_attr( $args->submenu_class ) . '" role="menubar">',
 			$depth,
 			$args
 		);
@@ -86,7 +86,7 @@ class The7_Walker_Nav_Menu extends Walker_Nav_Menu {
 		$el_before   = apply_filters( 'presscore_nav_menu_el_before', '', $item, $args, $depth );
 
 		// li wrap.
-		$output .= $el_before . '<li class="' . implode( ' ', array_filter( $classes ) ) . '">';
+		$output .= $el_before . '<li class="' . implode( ' ', array_filter( $classes ) ) . '" role="presentation">';
 
 		$title       = apply_filters( 'the_title', $item->title, $item->ID );
 		$title       = apply_filters( 'nav_menu_item_title', $title, $item, $args, $depth );
@@ -104,7 +104,7 @@ class The7_Walker_Nav_Menu extends Walker_Nav_Menu {
 
 		$attributes = $this->dt_prepare_atts( $this->dt_get_item_atts( $item, $args, $depth ) );
 		if ( $attributes ) {
-			$item_output = '<a' . $attributes . '>' . $menu_item . '</a>';
+			$item_output = '<a' . $attributes . ' role="menuitem">' . $menu_item . '</a>';
 		} else {
 			$item_output = '<span>' . $menu_item . '</span>';
 		}

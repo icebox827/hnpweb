@@ -219,7 +219,7 @@ if ( ! class_exists( 'Presscore_Modules_TGMPAModule', false ) ) :
 
 			if ( ! is_object( $transient ) ) {
 				$transient           = new stdClass;
-				$transient->response = array();
+				$transient->response = [];
 			}
 
 			foreach ( $the7_tgmpa->plugins as $slug => $plugin ) {
@@ -227,36 +227,53 @@ if ( ! class_exists( 'Presscore_Modules_TGMPAModule', false ) ) :
 					continue;
 				}
 
-				$file_path = $plugin['file_path'];
+				$file_path  = $plugin['file_path'];
+				$item       = [
+					'id'            => $file_path,
+					'slug'          => $slug,
+					'plugin'        => $file_path,
+					'new_version'   => $the7_tgmpa->get_installed_version( $slug ),
+					'url'           => '',
+					'package'       => '',
+					'icons'         => [],
+					'banners'       => [],
+					'banners_rtl'   => [],
+					'tested'        => '',
+					'requires_php'  => '',
+					'compatibility' => new stdClass(),
+				];
+
 				if ( ! $the7_tgmpa->is_plugin_updatetable( $slug ) ) {
 					unset( $transient->response[ $file_path ] );
+					$transient->no_update[ $file_path ] = (object) $item;
 					continue;
 				}
 
-				$plugin_ver = $the7_tgmpa->get_plugin_minimum_version( $slug );
-				$source     = $the7_tgmpa->get_download_url( $slug );
+				$new_version = $the7_tgmpa->get_plugin_minimum_version( $slug );
+				$item['new_version'] = $new_version;
 
-				// Add requested plugin version.
+				$source = $the7_tgmpa->get_download_url( $slug );
 				if ( $the7_tgmpa->plugin_has_multiple_versions( $slug ) ) {
-					$source = $the7_tgmpa->add_plugin_version_query_arg( $source, $slug, $plugin_ver );
+					$source = $the7_tgmpa->add_plugin_version_query_arg( $source, $slug, $new_version );
 				}
-
-				if ( empty( $transient->response[ $file_path ] ) ) {
-					$transient->response[ $file_path ] = new stdClass;
-				}
-
-				$transient->response[ $file_path ]->slug        = $slug;
-				$transient->response[ $file_path ]->plugin      = $file_path;
-				$transient->response[ $file_path ]->new_version = $plugin_ver;
-				$transient->response[ $file_path ]->package     = $source;
+				$item['package'] = $source;
 
 				if ( ! empty( $plugin['external_url'] ) ) {
-					$transient->response[ $file_path ]->url = $plugin['external_url'];
+					$item['url'] = $plugin['external_url'];
 				}
 
-				if ( ! empty( $plugin['icons'] ) ) {
-					$transient->response[ $file_path ]->icons = $plugin['icons'];
+				$optional_fields = [
+					'icons',
+					'tested',
+					'requires_php',
+				];
+				foreach ( $optional_fields as $field ) {
+					if ( isset( $plugin[ $field ] ) ) {
+						$item[ $field ] = $plugin[ $field ];
+					}
 				}
+
+				$transient->response[ $file_path ] = (object) $item;
 			}
 
 			return $transient;

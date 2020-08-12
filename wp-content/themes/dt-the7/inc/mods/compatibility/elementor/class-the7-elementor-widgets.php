@@ -121,6 +121,7 @@ class The7_Elementor_Widgets {
 		require_once __DIR__ . '/pro/modules/query-contol/class-the7-query-control-module.php';
 		require_once __DIR__ . '/class-the7-elementor-widget-terms-selector-mutator.php';
 		require_once __DIR__ . '/trait-with-pagination.php';
+		require_once __DIR__ . '/trait-with-post-excerpt.php';
 		require_once __DIR__ . '/class-the7-elementor-widget-base.php';
 		require_once __DIR__ . '/the7-elementor-less-vars-decorator-interface.php';
 		require_once __DIR__ . '/class-the7-elementor-less-vars-decorator.php';

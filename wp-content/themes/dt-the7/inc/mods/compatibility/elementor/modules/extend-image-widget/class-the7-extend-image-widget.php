@@ -111,6 +111,13 @@ class The7_Exend_Image_Widget {
 				],
 			];
 			The7_Elementor_Widgets::update_responsive_control_fields( $widget, 'image_border_radius', $control_data );
+
+			$control_data = [
+				'selectors' => [
+					'{{WRAPPER}} .elementor-image img, {{WRAPPER}} .elementor-image svg' => 'width: {{SIZE}}{{UNIT}};',
+				],
+			];
+			The7_Elementor_Widgets::update_responsive_control_fields( $widget, 'width', $control_data );
 		}
 		if ( $section_id == 'section_image' ) {
 			$control_params = [

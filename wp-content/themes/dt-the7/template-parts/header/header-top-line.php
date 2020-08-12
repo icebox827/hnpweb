@@ -23,7 +23,7 @@ if ( ! presscore_get_header_elements_list( 'top_line_right' ) ) {
 	$top_line_right_classes = 'empty-widgets';
 }
 
-if ( $config->get( 'header.mixed.view.top_line.is_sticky' )){
+if ( $config->get( 'header.mixed.view.top_line.is_sticky' ) && !presscore_header_is_transparent()){
 ?>
 <div class="top-line-space"></div>
 <?php 

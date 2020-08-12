@@ -16,7 +16,7 @@ $template_condition = [ PageTemplatesModule::TEMPLATE_CANVAS];
 
 return [
 	'args'     => [
-		'label'     => __( 'Footer settings', 'the7mk2' ),
+		'label'     => __( 'Footer Settings', 'the7mk2' ),
 		'tab'       => Controls_Manager::TAB_SETTINGS,
 		'conditions' => [
 			'relation' => 'or',

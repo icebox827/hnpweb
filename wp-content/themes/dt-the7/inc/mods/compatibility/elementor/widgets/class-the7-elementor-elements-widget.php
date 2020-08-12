@@ -21,6 +21,7 @@ use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Icons_Manager;
 use Elementor\Core\Schemes;
+use The7\Adapters\Elementor\With_Post_Excerpt;
 use The7_Query_Builder;
 use The7_Categorization_Request;
 use The7\Adapters\Elementor\The7_Elementor_Widget_Base;
@@ -32,6 +33,7 @@ defined( 'ABSPATH' ) || exit;
 class The7_Elementor_Elements_Widget extends The7_Elementor_Widget_Base {
 
 	use With_Pagination;
+	use With_Post_Excerpt;
 
 	protected $has_img_preload_me_filter = false;
 
@@ -228,6 +230,11 @@ class The7_Elementor_Elements_Widget extends The7_Elementor_Widget_Base {
 					$post_title = $this->get_post_title( $follow_link, $settings['title_tag'] );
 				}
 
+				$post_excerpt = '';
+				if ( $settings['post_content'] === 'show_excerpt' ) {
+					$post_excerpt = $this->get_post_excerpt( $settings['excerpt_words_limit'] );
+				}
+
 				presscore_get_template_part(
 					'elementor',
 					'the7-elements/tpl-layout',
@@ -238,7 +245,7 @@ class The7_Elementor_Elements_Widget extends The7_Elementor_Widget_Base {
 						'post_media'   => $this->get_post_image( $follow_link, $show_image, $is_overlay_post_layout ),
 						'post_meta'    => $this->get_post_meta( $required_post_meta ),
 						'details_btn'  => $details_btn,
-						'post_excerpt' => $this->get_post_excerpt(),
+						'post_excerpt' => $post_excerpt,
 						'icons_html'   => $icons_html,
 						'follow_link'  => $follow_link,
 					]
@@ -390,6 +397,7 @@ class The7_Elementor_Elements_Widget extends The7_Elementor_Widget_Base {
 				'caption'       => $settings['read_more_button_text'],
 				'icon_position' => $settings['read_more_button_icon_position'],
 				'icon'          => $icon,
+				'aria_label'	=> the7_get_read_more_aria_label()
 			]
 		);
 
@@ -401,36 +409,6 @@ class The7_Elementor_Elements_Widget extends The7_Elementor_Widget_Base {
 		Icons_Manager::render_icon( $icon, [ 'aria-hidden' => 'true' ], $tag );
 
 		return ob_get_clean();
-	}
-
-	/**
-	 * Return post excerpt with $length words.
-	 *
-	 * @return mixed
-	 */
-	protected function get_post_excerpt() {
-		global $post;
-
-		$settings = $this->get_settings_for_display();
-
-		if ( $settings['post_content'] !== 'show_excerpt' ) {
-			return '';
-		}
-
-		$post_back = $post;
-
-		$excerpt = get_the_excerpt();
-
-		if ( $settings['excerpt_words_limit'] ) {
-			$excerpt = wp_trim_words( $excerpt, absint( $settings['excerpt_words_limit'] ) );
-		}
-
-		$excerpt = apply_filters( 'the_excerpt', $excerpt );
-
-		// Restore original post in case some shortcode in the content will change it globally.
-		$post = $post_back;
-
-		return $excerpt;
 	}
 
 	protected function get_post_meta( $required_meta = [] ) {
@@ -1545,7 +1523,7 @@ class The7_Elementor_Elements_Widget extends The7_Elementor_Widget_Base {
 			'excerpt_words_limit',
 			[
 				'label'       => __( 'Maximum Number Of Words', 'the7mk2' ),
-				'description' => __( 'Leave empty to show full text.', 'the7mk2' ),
+				'description' => __( 'Leave empty to show the entire excerpt.', 'the7mk2' ),
 				'type'        => Controls_Manager::NUMBER,
 				'default'     => '',
 				'condition'   => [

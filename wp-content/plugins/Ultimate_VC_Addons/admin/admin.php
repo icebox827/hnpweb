@@ -81,30 +81,30 @@ if ( ! function_exists( 'bsf_core_admin_notice' ) ) {
 	 */
 	function bsf_core_admin_notice() {
 		?>
-		<script type="text/javascript">
-		(function($){
-			$(document).ready(function(){
-				$(document).on( "click", ".bsf-notice", function() {
-					var bsf_notice_name = $(this).attr("data-bsf-notice");
-					$.ajax({
-						url: ajaxurl,
-						method: 'POST',
-						data: {
-							action: "bsf_dismiss_notice",
-							security: "<?php echo esc_attr( wp_create_nonce( 'bsf-dismiss-notice-nonce' ) ); ?>",
-							notice: bsf_notice_name
-						},
-						success: function(response) {
-							console.log(response);
-						}
-					})
-				})
-			});
-		})(jQuery);
-		</script>
-		<div class="bsf-notice update-nag notice is-dismissible" data-bsf-notice="hide-bsf-core-notice">
-			<p><?php esc_attr_e( 'License registration and extensions are not part of plugin/theme anymore. Kindly download and install "BSF CORE" plugin to manage your licenses and extensins.', 'bsf' ); ?></p>
-		</div>
+        <script type="text/javascript">
+            (function($){
+                $(document).ready(function(){
+                    $(document).on( "click", ".bsf-notice", function() {
+                        var bsf_notice_name = $(this).attr("data-bsf-notice");
+                        $.ajax({
+                            url: ajaxurl,
+                            method: 'POST',
+                            data: {
+                                action: "bsf_dismiss_notice",
+                                security: "<?php echo esc_attr( wp_create_nonce( 'bsf-dismiss-notice-nonce' ) ); ?>",
+                                notice: bsf_notice_name
+                            },
+                            success: function(response) {
+                                console.log(response);
+                            }
+                        })
+                    })
+                });
+            })(jQuery);
+        </script>
+        <div class="bsf-notice update-nag notice is-dismissible" data-bsf-notice="hide-bsf-core-notice">
+            <p><?php esc_attr_e( 'License registration and extensions are not part of plugin/theme anymore. Kindly download and install "BSF CORE" plugin to manage your licenses and extensins.', 'bsf' ); ?></p>
+        </div>
 		<?php
 	}
 }
@@ -132,8 +132,12 @@ if ( ! class_exists( 'Ultimate_Admin_Area' ) ) {
 			/* add admin menu */
 			add_action( 'admin_menu', array( $this, 'register_brainstorm_menu' ), 99 );
 
+			if (is_admin()) {
+				add_action( 'wp_print_scripts', array( $this, 'fix_jquery_script_localize' ), -1 );
+			}
+
 			add_action( 'admin_enqueue_scripts', array( $this, 'bsf_admin_scripts_updater' ), 1 );
-			add_action( 'wp_ajax_update_ultimate_options', array( $this, 'update_settings' ) );
+			add_action( 'wp_ajax_update_ultimate_options', array( $this, 'update_settings' ), 99);
 			add_action( 'wp_ajax_update_ultimate_debug_options', array( $this, 'update_debug_settings' ) );
 			add_action( 'wp_ajax_update_ultimate_modules', array( $this, 'update_modules' ) );
 			add_action( 'wp_ajax_update_css_options', array( $this, 'update_css_options' ) );
@@ -144,6 +148,12 @@ if ( ! class_exists( 'Ultimate_Admin_Area' ) ) {
 			add_action( 'wp_ajax_update_dev_notes', array( $this, 'update_dev_notes' ) );
 			add_filter( 'update_footer', array( $this, 'debug_link' ), 999 );
 		}
+
+		public function fix_jquery_script_localize() {
+			$wp_sctipts = wp_scripts();
+			$wp_sctipts->add_data( 'jquery', 'data', $wp_sctipts->get_data( 'jquery-core', 'data' ) );
+		}
+
 		/**
 		 * For debug link
 		 *
@@ -244,17 +254,17 @@ if ( ! class_exists( 'Ultimate_Admin_Area' ) ) {
 				</style>
 			";// @codingStandardsIgnoreEnd.
 			if ( 'post.php' == $hook ||
-			'post-new.php' == $hook ||
-				'ultimate_page_about-ultimate' == $hook ||
-				'visual-composer_page_vc-roles' == $hook ||
-				'toplevel_page_about-ultimate' == $hook ||
-				'ultimate_page_ultimate-dashboard' == $hook ||
-				'ultimate_page_ultimate-smoothscroll' == $hook ||
-				'ultimate_page_ultimate-scripts-and-styles' == $hook ||
-				'ultimate_page_ultimate-product-license' == $hook ||
-				'admin_page_ultimate-debug-settings' == $hook ||
-				'ultimate_page_bsf-google-maps' == $hook ||
-				'settings_page_ultimate-product-license' == $hook ) {
+			     'post-new.php' == $hook ||
+			     'ultimate_page_about-ultimate' == $hook ||
+			     'visual-composer_page_vc-roles' == $hook ||
+			     'toplevel_page_about-ultimate' == $hook ||
+			     'ultimate_page_ultimate-dashboard' == $hook ||
+			     'ultimate_page_ultimate-smoothscroll' == $hook ||
+			     'ultimate_page_ultimate-scripts-and-styles' == $hook ||
+			     'ultimate_page_ultimate-product-license' == $hook ||
+			     'admin_page_ultimate-debug-settings' == $hook ||
+			     'ultimate_page_bsf-google-maps' == $hook ||
+			     'settings_page_ultimate-product-license' == $hook ) {
 
 				$css_ext = '.min.css';
 				if ( is_rtl() ) {
@@ -852,28 +862,28 @@ if ( ! class_exists( 'Ultimate_Admin_Area' ) ) {
 
 					if ( ! $hide_notice ) :
 						?>
-						<div class="updated" style="padding: 0; margin: 0; border: none; background: none;">
-							<style type="text/css">
-						.ult_activate{min-width:825px;background: #FFF;border:1px solid #0096A3;padding:5px;margin:15px 0;border-radius:3px;-webkit-border-radius:3px;position:relative;overflow:hidden}
-						.ult_activate .ult_a{position:absolute;top:5px;right:10px;font-size:48px;}
-						.ult_activate .ult_button{font-weight:bold;border:1px solid #029DD6;border-top:1px solid #06B9FD;font-size:15px;text-align:center;padding:9px 0 8px 0;color:#FFF;background:#029DD6;-moz-border-radius:2px;border-radius:2px;-webkit-border-radius:2px}
-						.ult_activate .ult_button:hover{text-decoration:none !important;border:1px solid #029DD6;border-bottom:1px solid #00A8EF;font-size:15px;text-align:center;padding:9px 0 8px 0;color:#F0F8FB;background:#0079B1;-moz-border-radius:2px;border-radius:2px;-webkit-border-radius:2px}
-						.ult_activate .ult_button_border{border:1px solid #0096A3;-moz-border-radius:2px;border-radius:2px;-webkit-border-radius:2px;background:#029DD6;}
-						.ult_activate .ult_button_container{cursor:pointer;display:inline-block; padding:5px;-moz-border-radius:2px;border-radius:2px;-webkit-border-radius:2px;width:215px}
-						.ult_activate .ult_description{position:absolute;top:8px;left:230px;margin-left:25px;color:#0096A3;font-size:15px;z-index:1000}
-						.ult_activate .ult_description strong{color:#0096A3;font-weight:normal}
-							</style>
-								<div class="ult_activate">
-									<div class="ult_a"><img style="width:1em;" src="<?php echo UAVC_URL . 'img/logo-icon.png'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" alt=""></div>
-																		<div class="ult_button_container" onclick="document.location='<?php echo $reg_link; ?>'"> <?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-										<div class="ult_button_border">
-											<div class="ult_button"><span class="dashicons-before dashicons-admin-network" style="padding-right: 6px;"></span><?php __( 'Activate your license', 'ultimate_vc' ); ?></div>
-										</div>
-									</div>
-									<div class="ult_description"><h3 style="margin:0;padding: 2px 0px;"><strong><?php esc_attr_e( 'Almost done!', 'ultimate_vc' ); ?></strong></h3><p style="margin: 0;"><?php rsc_attr_e( 'Please activate your copy of the Ultimate Addons for WPBakery Page Builder to receive automatic updates & get premium support', 'ultimate_vc' ); ?></p></div>
-								</div>
-						</div>
-						<?php
+                        <div class="updated" style="padding: 0; margin: 0; border: none; background: none;">
+                            <style type="text/css">
+                                .ult_activate{min-width:825px;background: #FFF;border:1px solid #0096A3;padding:5px;margin:15px 0;border-radius:3px;-webkit-border-radius:3px;position:relative;overflow:hidden}
+                                .ult_activate .ult_a{position:absolute;top:5px;right:10px;font-size:48px;}
+                                .ult_activate .ult_button{font-weight:bold;border:1px solid #029DD6;border-top:1px solid #06B9FD;font-size:15px;text-align:center;padding:9px 0 8px 0;color:#FFF;background:#029DD6;-moz-border-radius:2px;border-radius:2px;-webkit-border-radius:2px}
+                                .ult_activate .ult_button:hover{text-decoration:none !important;border:1px solid #029DD6;border-bottom:1px solid #00A8EF;font-size:15px;text-align:center;padding:9px 0 8px 0;color:#F0F8FB;background:#0079B1;-moz-border-radius:2px;border-radius:2px;-webkit-border-radius:2px}
+                                .ult_activate .ult_button_border{border:1px solid #0096A3;-moz-border-radius:2px;border-radius:2px;-webkit-border-radius:2px;background:#029DD6;}
+                                .ult_activate .ult_button_container{cursor:pointer;display:inline-block; padding:5px;-moz-border-radius:2px;border-radius:2px;-webkit-border-radius:2px;width:215px}
+                                .ult_activate .ult_description{position:absolute;top:8px;left:230px;margin-left:25px;color:#0096A3;font-size:15px;z-index:1000}
+                                .ult_activate .ult_description strong{color:#0096A3;font-weight:normal}
+                            </style>
+                            <div class="ult_activate">
+                                <div class="ult_a"><img style="width:1em;" src="<?php echo UAVC_URL . 'img/logo-icon.png'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" alt=""></div>
+                                <div class="ult_button_container" onclick="document.location='<?php echo $reg_link; ?>'"> <?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                                    <div class="ult_button_border">
+                                        <div class="ult_button"><span class="dashicons-before dashicons-admin-network" style="padding-right: 6px;"></span><?php __( 'Activate your license', 'ultimate_vc' ); ?></div>
+                                    </div>
+                                </div>
+                                <div class="ult_description"><h3 style="margin:0;padding: 2px 0px;"><strong><?php esc_attr_e( 'Almost done!', 'ultimate_vc' ); ?></strong></h3><p style="margin: 0;"><?php rsc_attr_e( 'Please activate your copy of the Ultimate Addons for WPBakery Page Builder to receive automatic updates & get premium support', 'ultimate_vc' ); ?></p></div>
+                            </div>
+                        </div>
+					<?php
 					endif;
 				} elseif ( 'post-new.php' == $hook_suffix || 'edit.php' == $hook_suffix || 'post.php' == $hook_suffix ) {
 					if ( 'disabled' === $builtin || true === $ultimate_constants['ULTIMATE_NO_EDIT_PAGE_NOTICE'] || ( is_multisite() == true && is_main_site() == false ) ) {
@@ -884,19 +894,19 @@ if ( ! class_exists( 'Ultimate_Admin_Area' ) ) {
 					if ( ! $hide_notice ) :
 						?>
 
-						<div class="updated fade">
+                        <div class="updated fade">
 
-							<p><?php echo esc_attr_e( 'Howdy! Please', 'ultimate_vc' ) . ' <a href="' . $reg_link . '">' . esc_attr__( 'activate your copy', 'ultimate_vc' ) . ' </a> ' . esc_attr__( 'of the Ultimate Addons for WPBakery Page Builder to receive automatic updates & get premium support.', 'ultimate_vc' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-							<span style="float: right; padding: 0px 4px; cursor: pointer;" class="uavc-activation-notice">X</span>
-							</p>
-						</div>
-						<script type="text/javascript">
-						jQuery(".uavc-activation-notice").click(function(){
-							jQuery(this).parents(".updated").fadeOut(800);
-						});
-						</script>
+                            <p><?php echo esc_attr_e( 'Howdy! Please', 'ultimate_vc' ) . ' <a href="' . $reg_link . '">' . esc_attr__( 'activate your copy', 'ultimate_vc' ) . ' </a> ' . esc_attr__( 'of the Ultimate Addons for WPBakery Page Builder to receive automatic updates & get premium support.', 'ultimate_vc' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                                <span style="float: right; padding: 0px 4px; cursor: pointer;" class="uavc-activation-notice">X</span>
+                            </p>
+                        </div>
+                        <script type="text/javascript">
+                            jQuery(".uavc-activation-notice").click(function(){
+                                jQuery(this).parents(".updated").fadeOut(800);
+                            });
+                        </script>
 
-						<?php
+					<?php
 					endif;
 				}
 			}
@@ -913,7 +923,7 @@ if ( ! class_exists( 'Ultimate_Admin_Area' ) ) {
  * @access public
  */
 function ult_generate_rand_id() {
-// @codingStandardsIgnoreStart.
+	// @codingStandardsIgnoreStart.
 	$validCharacters = 'abcdefghijklmnopqrstuvwxyz0123456789';
 	$myKeeper        = '';
 	$length          = 32;
@@ -922,7 +932,7 @@ function ult_generate_rand_id() {
 		$myKeeper      .= $validCharacters[ $whichCharacter ];
 	}
 	return $myKeeper;
-// @codingStandardsIgnoreEnd.
+	// @codingStandardsIgnoreEnd.
 }
 /**
  * Alternative function for wp_remote_get
@@ -932,7 +942,7 @@ function ult_generate_rand_id() {
  * @access public
  */
 function ultimate_remote_get( $path ) {
-// @codingStandardsIgnoreStart.
+	// @codingStandardsIgnoreStart.
 	if ( function_exists( 'curl_init' ) ) {
 		// create curl resource.
 		$ch = curl_init();

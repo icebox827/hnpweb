@@ -15,7 +15,7 @@ $template_option_name = The7_Elementor_Compatibility::instance()->page_settings-
 $template_condition = [ PageTemplatesModule::TEMPLATE_CANVAS, PageTemplatesModule::TEMPLATE_HEADER_FOOTER ];
 return [
 	'args'     => [
-		'label' => __( 'Sidebar settings', 'the7mk2' ),
+		'label' => __( 'Sidebar Settings', 'the7mk2' ),
 		'tab'   => Controls_Manager::TAB_SETTINGS,
 		'conditions' => [
 			'relation' => 'or',

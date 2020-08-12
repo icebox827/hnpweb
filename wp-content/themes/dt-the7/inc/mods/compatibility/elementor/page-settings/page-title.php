@@ -57,7 +57,7 @@ if ( ! empty( $slideshow_mode_options ) ) {
 
 return [
 	'args'     => [
-		'label'      => __( 'Page header settings', 'the7mk2' ),
+		'label'      => __( 'Page Header Settings', 'the7mk2' ),
 		'tab'        => Controls_Manager::TAB_SETTINGS,
 		'conditions' => [
 			'relation' => 'or',

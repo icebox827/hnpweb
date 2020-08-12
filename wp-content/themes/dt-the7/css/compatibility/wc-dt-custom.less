@@ -2038,6 +2038,9 @@ form.lost_reset_password label,
 #order_comments_field label {
 	.text-small;
 }
+.select2-container {
+	z-index: 9999;
+}
 .select2-container--default .select2-selection--single .select2-selection__clear {
 	margin-left: 5px;
 }
@@ -4956,6 +4959,10 @@ form.woocommerce-checkout {
 					vertical-align: middle;
 					margin: -2px .5em 0 .5em;
 				}
+			}
+			.payment_method_stripe img {
+				max-width: 50px;
+				margin: 5px;
 			}
 	form.woocommerce-checkout,
 	.woocommerce-MyAccount-content {

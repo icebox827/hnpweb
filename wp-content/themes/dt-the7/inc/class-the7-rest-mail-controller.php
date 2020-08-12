@@ -49,6 +49,7 @@ class The7_REST_Mail_Controller {
 			array(
 				'methods'  => 'POST',
 				'callback' => array( $this, 'send_mail_endpoint' ),
+				'permission_callback' => '__return_true',
 				'args'     => array(
 					'security_token' => array(
 						'type' => 'string',

@@ -10,8 +10,13 @@ class Products_Current_Query extends Query_Interface {
 		if ( ! is_page( wc_get_page_id( 'shop' ) ) ) {
 			$query_args = $GLOBALS['wp_query']->query_vars;
 		}
-		$post_count = $this->get_att( 'dis_posts_total' );
-		$query_args['posts_per_page'] = intval( $post_count );
+
+		$page = get_query_var( 'paged', 1 );
+
+		if ( 1 < $page ) {
+			$query_args['paged'] = $page;
+		}
+
 		$query_args['post_type'] = 'product';
 
 		// load only id and post types fileds

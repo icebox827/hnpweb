@@ -48,25 +48,25 @@ if ( 'custom' === $show_icon ) {
 	<?php if ( in_array( presscore_config()->get( 'header.elements.search.style' ), array( 'classic', 'animate_width' ) ) ) : ?>
 
 		<input type="text" class="field searchform-s" name="s" value="<?php echo esc_attr( get_search_query() ); ?>" placeholder="<?php echo esc_html( $input_caption ); ?>" title="<?php esc_attr_e( 'Search form', 'the7mk2' ) ?>"/>
-		<a href="#go" class="search-icon"><?php echo $custom_icon; ?></a>
+		<a href="" class="search-icon"><?php echo $custom_icon; ?></a>
 
 	<?php elseif ( presscore_config()->get( 'header.elements.search.style' ) === 'popup' ) : ?>
 
-		<a href="#go" class="submit<?php echo $class; ?>"><?php echo $custom_search_icon . $caption; ?></a>
+		<a href="" class="submit<?php echo $class; ?>"><?php echo $custom_search_icon . $caption; ?></a>
 		<div class="popup-search-wrap">
 			<input type="text" class="field searchform-s" name="s" value="<?php echo esc_attr( get_search_query() ); ?>" placeholder="<?php echo esc_html( $input_caption ); ?>" title="<?php esc_attr_e( 'Search form', 'the7mk2' ) ?>"/>
-			<a href="#go" class="search-icon"><?php echo $custom_icon; ?></a>
+			<a href="" class="search-icon"><?php echo $custom_icon; ?></a>
 		</div>
 
 	<?php else : ?>
 
 		<div class='overlay-search-wrap'>
 			<input type="text" class="field searchform-s" name="s" value="<?php echo esc_attr( get_search_query() ); ?>" placeholder="<?php echo esc_html( $input_caption ); ?>" title="<?php esc_attr_e( 'Search form', 'the7mk2' ) ?>"/>
-			<a href="#go" class="search-icon"><?php echo $custom_icon; ?></a>
+			<a href="" class="search-icon"><?php echo $custom_icon; ?></a>
 		</div>
 
 
-		<a href="#go" class="submit<?php echo $class; ?>"><?php echo $custom_search_icon . $caption; ?></a>
+		<a href="" class="submit<?php echo $class; ?>"><?php echo $custom_search_icon . $caption; ?></a>
 
 		<?php
 	endif;

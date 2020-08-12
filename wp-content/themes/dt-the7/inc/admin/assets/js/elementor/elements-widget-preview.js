@@ -105,25 +105,10 @@
 
     // Make sure you run this code under Elementor.
     $(window).on("elementor/frontend/init", function () {
-        elementorFrontend.hooks.addAction("frontend/element_ready/the7_elements.default", the7ElementsWidgetHandler);
-        elementorFrontend.hooks.addAction("frontend/element_ready/the7-elements-woo-masonry.default", the7ElementsWidgetHandler);
-    });
-
-    function elementorEditorAddOnChangeHandler(widgetType, handler) {
-        widgetType = widgetType ? ":" + widgetType : "";
-        elementor.channels.editor.on("change" + widgetType, handler);
-    }
-
-    $(function () {
         var onEditSettingsTimeout;
 
-        function toggleDefaultImageOverlay(controlView, widgetView) {
-            if (widgetView.model.getSetting("overlay_background_background") || widgetView.model.getSetting("overlay_hover_background_background")) {
-                widgetView.$el.find(".the7-elementor-widget").removeClass("enable-bg-rollover");
-            } else {
-                widgetView.$el.find(".the7-elementor-widget").addClass("enable-bg-rollover");
-            }
-        }
+        elementorFrontend.hooks.addAction("frontend/element_ready/the7_elements.default", the7ElementsWidgetHandler);
+        elementorFrontend.hooks.addAction("frontend/element_ready/the7-elements-woo-masonry.default", the7ElementsWidgetHandler);
 
         elementorEditorAddOnChangeHandler("the7_elements:overlay_background_background", toggleDefaultImageOverlay);
         elementorEditorAddOnChangeHandler("the7_elements:overlay_hover_background_background", toggleDefaultImageOverlay);
@@ -142,5 +127,18 @@
             }, 800);
         });
     });
+
+    function elementorEditorAddOnChangeHandler(widgetType, handler) {
+        widgetType = widgetType ? ":" + widgetType : "";
+        elementor.channels.editor.on("change" + widgetType, handler);
+    }
+
+    function toggleDefaultImageOverlay(controlView, widgetView) {
+        if (widgetView.model.getSetting("overlay_background_background") || widgetView.model.getSetting("overlay_hover_background_background")) {
+            widgetView.$el.find(".the7-elementor-widget").removeClass("enable-bg-rollover");
+        } else {
+            widgetView.$el.find(".the7-elementor-widget").addClass("enable-bg-rollover");
+        }
+    }
 
 })(jQuery);

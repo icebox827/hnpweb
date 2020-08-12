@@ -148,7 +148,7 @@ if ( ! function_exists( 'presscore_nav_menu_list' ) ) :
 		presscore_nav_menu(
 			array(
 				'theme_location'      => $location,
-				'items_wrap'          => '<ul id="' . esc_attr( "{$location}-menu" ) . '">%3$s</ul>',
+				'items_wrap'          => '<ul id="' . esc_attr( "{$location}-menu" ) . '" role="menubar">%3$s</ul>',
 				'submenu_class'       => $args['submenu_class'],
 				'parent_is_clickable' => true,
 				'fallback_cb'         => '',
